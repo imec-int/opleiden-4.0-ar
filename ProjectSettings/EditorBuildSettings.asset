@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Scenes/Main.unity
+    guid: bbc3c6a3eab16064b86c389e1b2de0cb
   m_configObjects:
     com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: c880247334f72ea4995a17af151ef9f5,
       type: 2}
