@@ -12,5 +12,3 @@ mv ./.githooks/post-merge ./.githooks/post-merge.d/git-lfs
 
 cp ./.githooks/multiple-git-hooks ./.githooks/post-checkout
 cp ./.githooks/multiple-git-hooks ./.githooks/post-merge
-
-# Setup Unity SmartMerge
