@@ -131,6 +131,41 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7329085757408858709, guid: 2ba05517fbc9afc4db83915f9508590e,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329085757408858709, guid: 2ba05517fbc9afc4db83915f9508590e,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329085757408858709, guid: 2ba05517fbc9afc4db83915f9508590e,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329085757408858709, guid: 2ba05517fbc9afc4db83915f9508590e,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329085757408858709, guid: 2ba05517fbc9afc4db83915f9508590e,
+        type: 3}
+      propertyPath: m_isRichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329085757408858709, guid: 2ba05517fbc9afc4db83915f9508590e,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329085757408858709, guid: 2ba05517fbc9afc4db83915f9508590e,
+        type: 3}
+      propertyPath: m_parseCtrlCharacters
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ba05517fbc9afc4db83915f9508590e, type: 3}
 --- !u!1 &4180178118189156223 stripped
