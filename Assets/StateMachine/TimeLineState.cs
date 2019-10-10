@@ -8,7 +8,7 @@ public class TimeLineState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        var timeline = animator.GetComponent<StateVariableHolder>()?.TimeLine;
-       Debug.Assert(timeline);
+       Debug.Assert(timeline,"Timeline is not assigned to the state variable holder");
        timeline.SetActive(true);
     }
 
