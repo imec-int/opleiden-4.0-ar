@@ -344,6 +344,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6721093373163077542, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_Name
+      value: Interface
+      objectReference: {fileID: 0}
     - target: {fileID: 7005306265812205554, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -363,11 +368,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6721093373163077542, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_Name
-      value: Interface
       objectReference: {fileID: 0}
     - target: {fileID: 6721093373163077543, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
@@ -794,5 +794,27 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4471082282814532941, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904789147932807683, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 970454219457260932, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_Button
+      value: 
+      objectReference: {fileID: 8071442837557540078, guid: 2883e8daeee000d40a1b752664369956,
+        type: 3}
+    - target: {fileID: 970454219457260932, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: _Button
+      value: 
+      objectReference: {fileID: 8071442837557540078, guid: 2883e8daeee000d40a1b752664369956,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
