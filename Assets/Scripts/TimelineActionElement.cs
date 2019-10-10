@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActionButton : MonoBehaviour
+public class TimelineActionElement : MonoBehaviour
 {
 	[SerializeField]
 	private TextMeshProUGUI _ID;
@@ -11,8 +11,10 @@ public class ActionButton : MonoBehaviour
 	private TextMeshProUGUI _Icon;
 
 	[SerializeField]
-	private Graphic _State;
+	private Graphic _OrderMarker;
 
 	[SerializeField]
 	private TextMeshProUGUI _Label;
+
+
 }
