@@ -485,11 +485,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
+    - target: {fileID: 2666092778484754486, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
-      propertyPath: m_Camera
+      propertyPath: _3DModel
       value: 
-      objectReference: {fileID: 1434262469}
+      objectReference: {fileID: 1043842483}
+    - target: {fileID: 787066051, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
+      propertyPath: _ButtonPrefab
+      value: 
+      objectReference: {fileID: -6595993570529265724, guid: 2883e8daeee000d40a1b752664369956,
+        type: 3}
     - target: {fileID: 3002776645542672260, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -530,10 +535,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2666092778484754486, guid: 37f3ea2b309ce0f4595440007830facd,
+    - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
-      propertyPath: _3DModel
+      propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1043842483}
+      objectReference: {fileID: 1434262469}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
