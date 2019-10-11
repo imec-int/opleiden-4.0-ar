@@ -9,6 +9,9 @@ public class StateVariableHolder : MonoBehaviour
     [SerializeField]
     private GameObject _TimeLine;
 
+    [SerializeField]
+    private UIHighlightContainer _HighlightContainer;
+
     public GameObject LoadingScreen
     {
         get
@@ -22,6 +25,14 @@ public class StateVariableHolder : MonoBehaviour
         get
         {
             return _TimeLine;
+        }
+    }
+
+    public UIHighlightContainer HighlightContainer
+    {
+        get
+        {
+            return _HighlightContainer;
         }
     }
 }

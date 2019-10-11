@@ -12,12 +12,9 @@ public class UIHighlightContainer : MonoBehaviour
     private List<UIHighlight> _UIHighlightInstancesList = new List<UIHighlight>();
 
     // Start is called before the first frame update
-    void Start()
-    {
-        PlaceHighlights(_3DModel);
-        // debug
-        //Reset(_3DModel);
-    }
+    // void Start()
+    // {
+    // }
 
     public void Reset(GameObject newmodel = null)
     {
@@ -29,7 +26,12 @@ public class UIHighlightContainer : MonoBehaviour
         _UIHighlightInstancesList.Clear();
 
         if (newmodel)
+        {
             PlaceHighlights(newmodel);
+            _3DModel = newmodel;
+        }
+        else
+            PlaceHighlights(_3DModel);
     }
 
     public void SetVisibility(bool visibile)
