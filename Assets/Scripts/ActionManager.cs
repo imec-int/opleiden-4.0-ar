@@ -10,9 +10,22 @@ public class ActionManager : MonoBehaviour
 
 	public void AddAction(Action action)
 	{
-		action.Index = (uint)_Actions.Count;
 		_Actions.Add(action);
+		action.Index = (uint)_Actions.Count;
 
 		_TimelineActionsToolbar.AddTimelineAction(action);
+
+		action.Delete += ActionDeleted;
+	}
+
+	private void ActionDeleted(Action action)
+	{
+		_Actions.RemoveAt((int)action.Index - 1);
+
+		for (int i = (int)action.Index - 1; i < _Actions.Count; i++)
+		{
+			_Actions[i].Index = (uint)i + 1;
+			_Actions[i].Update(_Actions[i]);
+		}
 	}
 }

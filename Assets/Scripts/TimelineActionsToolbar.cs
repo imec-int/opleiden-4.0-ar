@@ -29,5 +29,12 @@ public class TimelineActionsToolbar : MonoBehaviour
 
 		// Align the timeline with the last added timeline action
 		_TimelineScrollRect.horizontalNormalizedPosition = 1;
+
+		action.Delete += ActionDeleted;
+	}
+
+	private void ActionDeleted(Action action)
+	{
+		_TimelineActionsElements.RemoveAt((int)action.Index - 1);
 	}
 }

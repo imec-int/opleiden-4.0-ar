@@ -23,7 +23,16 @@ public enum Part
 
 public class Action
 {
-	public uint Index;
-	public Part Part;
-	public Operation Operation;
+	private uint index;
+	private Part part;
+	private Operation operation;
+
+	public delegate void ActionEvent(Action action);
+
+	public ActionEvent Delete;
+	public ActionEvent Update;
+
+	public uint Index { get => index; set => index = value; }
+	public Operation Operation { get => operation; set => operation = value; }
+	public Part Part { get => part; set => part = value; }
 }
