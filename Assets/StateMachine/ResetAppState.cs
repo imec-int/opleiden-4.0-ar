@@ -7,7 +7,7 @@ public class ResetAppState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       var highlightcont = animator.GetComponent<StateVariableHolder>().HighlightContainer;
+       UIHighlightContainer highlightcont = animator.GetComponent<StateVariableHolder>().HighlightContainer;
        highlightcont.Reset();
        highlightcont.SetVisibility(false);
     }

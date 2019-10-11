@@ -14,35 +14,22 @@ public class UIHighlight : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI[] _ActionPositionLabels = new TextMeshProUGUI[4];
 
-    [SerializeField]
-    private float minSize = 0.1f;
-    [SerializeField]
-    private float maxSize = 1.0f;
-
     private RectTransform _RectTransform = null;
-
-    public bool DebugToggleLookat = false;
+    private Camera _MainCamera = null;
 
     // Boilerplate
     void Awake()
     {
         _Button.onClick.AddListener(onButtonClicked);
         _RectTransform = this.GetComponent<RectTransform>();
-        _RectTransform.localScale = Vector3.one*Mathf.Lerp(maxSize,minSize,GetRelativeDepth());
+        _MainCamera = Camera.main;
     }
 
     void Update()
     {
-        _RectTransform.localScale = Vector3.one*Mathf.Lerp(maxSize,minSize,GetRelativeDepth());
-        _RectTransform.rotation = Matrix4x4.LookAt(this.transform.position, Camera.main.transform.position, Vector3.up).rotation;
+        _RectTransform.LookAt(_MainCamera.transform);
     }
-
-    private float GetRelativeDepth()
-    {
-        // Dynamic scaling
-        var cameraSpacePos = Camera.main.worldToCameraMatrix*this.transform.position;
-        return cameraSpacePos.z.RemapValue(Camera.main.nearClipPlane, Camera.main.farClipPlane*-1,0,1);
-    }
+    
     private void onButtonClicked()
     {
         //Show the menu

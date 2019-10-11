@@ -9,21 +9,15 @@ public class UIHighlightContainer : MonoBehaviour
     [SerializeField]
     private UIHighlight _UIHighlightPrefab = null;
 
-    private List<UIHighlight> _UIHighlightInstancesList = new List<UIHighlight>();
-
-    // Start is called before the first frame update
-    // void Start()
-    // {
-    // }
+    private List<UIHighlight> _UIHighlightInstanceList = new List<UIHighlight>();
 
     public void Reset(GameObject newmodel = null)
     {
-        foreach(var highlight in _UIHighlightInstancesList)
+        foreach(var highlight in _UIHighlightInstanceList)
         {
-            highlight.StopAllCoroutines();
             GameObject.Destroy(highlight.gameObject);
         }
-        _UIHighlightInstancesList.Clear();
+        _UIHighlightInstanceList.Clear();
 
         if (newmodel)
         {
@@ -36,7 +30,7 @@ public class UIHighlightContainer : MonoBehaviour
 
     public void SetVisibility(bool visibile)
     {
-        foreach(var highlight in _UIHighlightInstancesList)
+        foreach(var highlight in _UIHighlightInstanceList)
         {
             highlight.gameObject.SetActive(visibile);
         }
@@ -51,7 +45,7 @@ public class UIHighlightContainer : MonoBehaviour
         {
             var newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));
             // TODO: Additional setup from anchor           
-            _UIHighlightInstancesList.Add(newObj);
+            _UIHighlightInstanceList.Add(newObj);
             // Set up new object
             newObj.transform.SetParent(this.transform,true);
         }        
