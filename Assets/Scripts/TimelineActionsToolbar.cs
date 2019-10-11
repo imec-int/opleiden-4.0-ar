@@ -21,6 +21,13 @@ public class TimelineActionsToolbar : MonoBehaviour
 		TimelineActionElement timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionElement>();
 		timelineAction.Setup(action);
 		_TimelineActionsElements.Add(timelineAction);
+
+
+		// Make sure the UI is fully up to date to avoid glitching caused by the layout updating the next frame
 		LayoutRebuilder.ForceRebuildLayoutImmediate(_TimelineScrollRect.content);
+		Canvas.ForceUpdateCanvases();
+
+		// Align the timeline with the last added timeline action
+		_TimelineScrollRect.horizontalNormalizedPosition = 1;
 	}
 }
