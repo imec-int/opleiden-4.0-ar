@@ -10,7 +10,7 @@ public class ActionManager : MonoBehaviour
 
 	public void AddAction(Action action)
 	{
-		action.ID = (uint)_Actions.Count;
+		action.Index = (uint)_Actions.Count;
 		_Actions.Add(action);
 
 		_TimelineActionsToolbar.AddTimelineAction(action);

@@ -19,7 +19,7 @@ public enum Part
 
 public class Action
 {
-	public uint ID;
+	public uint Index;
 	public Part Part;
 	public Handling Handling;
 }
