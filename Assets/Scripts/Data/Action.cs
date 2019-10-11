@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public enum Operation
 {
 	None,
@@ -8,6 +11,7 @@ public enum Operation
 	Stop
 }
 
+[Serializable]
 public enum Part
 {
 	None,
