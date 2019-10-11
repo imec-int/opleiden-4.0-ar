@@ -22,10 +22,7 @@ public class UIHighlight : MonoBehaviour
     private float maxSize = 1.0f;
 
     private RectTransform _RectTransform = null;
-
-    public Vector3 DEBUGPos = Vector3.zero;
-
-
+    
     // Boilerplate
     void Awake()
     {
@@ -36,8 +33,8 @@ public class UIHighlight : MonoBehaviour
     void Update()
     {
         var cameraSpacePos = Camera.main.worldToCameraMatrix*this.transform.position;
-        DEBUGPos = cameraSpacePos;
-        _RectTransform.localScale = Vector3.one*Mathf.Lerp(maxSize,minSize,cameraSpacePos.z);
+        var relativeDepth = cameraSpacePos.z.RemapValue(Camera.main.nearClipPlane, Camera.main.farClipPlane*-1,0,1);
+        _RectTransform.localScale = Vector3.one*Mathf.Lerp(maxSize,minSize,relativeDepth);
     }
 
     private void onButtonClicked()
