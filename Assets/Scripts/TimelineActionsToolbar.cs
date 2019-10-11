@@ -1,16 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class TimelineActionsToolbar : MonoBehaviour
 {
 	[SerializeField]
 	private GameObject _ButtonPrefab;
 
-	void Start()
+	private ScrollRect _TimelineScrollRect;
+
+	private List<TimelineActionElement> _TimelineActionsElements = new List<TimelineActionElement>();
+
+	private void Awake()
 	{
-		for (int i = 0; i < 15; i++)
-		{
-			GameObject.Instantiate(_ButtonPrefab, transform);
-		}
+		_TimelineScrollRect = GetComponent<ScrollRect>();
 	}
 
+	public void AddTimelineAction(Action action)
+	{
+		TimelineActionElement timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionElement>();
+		timelineAction.Setup(action);
+		_TimelineActionsElements.Add(timelineAction);
+		LayoutRebuilder.ForceRebuildLayoutImmediate(_TimelineScrollRect.content);
+	}
 }
