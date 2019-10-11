@@ -7,7 +7,7 @@ public class TimeLineState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       var timeline = animator.GetComponent<StateVariableHolder>()?.TimeLine;
+       GameObject timeline = animator.GetComponent<StateVariableHolder>()?.TimeLine;
        Debug.Assert(timeline,"Timeline is not assigned to the state variable holder");
        timeline.SetActive(true);
 

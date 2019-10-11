@@ -13,7 +13,7 @@ public class UIHighlightContainer : MonoBehaviour
 
     public void Reset(GameObject newmodel = null)
     {
-        foreach(var highlight in _UIHighlightInstanceList)
+        foreach(UIHighlight highlight in _UIHighlightInstanceList)
         {
             GameObject.Destroy(highlight.gameObject);
         }
@@ -30,7 +30,7 @@ public class UIHighlightContainer : MonoBehaviour
 
     public void SetVisibility(bool visibile)
     {
-        foreach(var highlight in _UIHighlightInstanceList)
+        foreach(UIHighlight highlight in _UIHighlightInstanceList)
         {
             highlight.gameObject.SetActive(visibile);
         }
@@ -38,12 +38,12 @@ public class UIHighlightContainer : MonoBehaviour
 
     private void PlaceHighlights(GameObject model)
     {
-        var anchors = model.GetComponentsInChildren<HighlightAnchor>();
+        HighlightAnchor[] anchors = model.GetComponentsInChildren<HighlightAnchor>();
         Debug.Assert(anchors.Length > 0, $"Failed to retrieve anchors for the provided gameobject {model.name}");
 
-        foreach(var anchor in anchors)
+        foreach(HighlightAnchor anchor in anchors)
         {
-            var newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));
+            UIHighlight newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));
             // TODO: Additional setup from anchor           
             _UIHighlightInstanceList.Add(newObj);
             // Set up new object
