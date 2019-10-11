@@ -4,9 +4,8 @@ using UnityEngine.UI;
 
 public class TimelineActionElement : MonoBehaviour
 {
-	public static readonly string[] PartNames = { "Error", "Pomp", "Ventiel", "Oliepeil", "Drukmeter" };
-	public static readonly string[] PartIcon = { "\uE037", "\uE037", "\uE037", "\uE037", "\uE037" };
-	public static readonly string[] HandlingNames = { "Error", "Open", "Sluit", "Check", "Start", "Stop" };
+	[SerializeField]
+	private ActionMetadata _ActionMetadata;
 
 	[SerializeField]
 	private TextMeshProUGUI _Index, _Icon, _Label;
@@ -17,8 +16,8 @@ public class TimelineActionElement : MonoBehaviour
 	public void Setup(Action action)
 	{
 		_Index.text = action.Index.ToString();
-		_Label.text = HandlingNames[(int)action.Handling] + " " + PartNames[(int)action.Part];
+		_Label.text = _ActionMetadata.ActionOperationsInfo[action.Operation].Name + " " + _ActionMetadata.ActionPartsInfo[action.Part].Name;
 		_OrderMarker.color = Color.clear;
-		_Icon.text = PartIcon[(int)action.Part];
+		_Icon.text = _ActionMetadata.ActionPartsInfo[action.Part].Icon;
 	}
 }

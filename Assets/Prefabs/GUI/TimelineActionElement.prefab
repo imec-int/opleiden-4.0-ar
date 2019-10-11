@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5813ca3fd8e5340992a177f8dda7b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ActionMetadata: {fileID: 11400000, guid: b5a78af11a69bca4aa376ea19eecf71b, type: 2}
   _Index: {fileID: 8386937823911535497}
   _Icon: {fileID: 5824089102517835250}
   _Label: {fileID: 870624189191630754}
