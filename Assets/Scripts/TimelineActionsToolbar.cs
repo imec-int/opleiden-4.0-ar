@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class TimelineActionsToolbar : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject _ButtonPrefab;
+	private TimelineActionElement _ButtonPrefab;
 
 	private ScrollRect _TimelineScrollRect;
 
