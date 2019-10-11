@@ -1,4 +1,4 @@
-public enum Handling
+public enum Operation
 {
 	None,
 	Open,
@@ -21,5 +21,5 @@ public class Action
 {
 	public uint Index;
 	public Part Part;
-	public Handling Handling;
+	public Operation Operation;
 }

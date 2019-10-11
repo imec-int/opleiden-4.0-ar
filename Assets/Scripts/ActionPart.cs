@@ -10,9 +10,9 @@ public class ActionPart : MonoBehaviour
 
 	Action _Action = new Action();
 
-	public void AddAction(int handling)
+	public void AddAction(int operation)
 	{
-		_Action.Handling = (Handling)handling;
+		_Action.Operation = (Operation)operation;
 		_Action.Part = _Part;
 		_Manager.AddAction(_Action);
 	}
