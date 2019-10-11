@@ -10,8 +10,6 @@ public class UIHighlight : MonoBehaviour
     // Unity-facing variables
     // Useful children
     [SerializeField]
-    private Image _BGImage = null;
-    [SerializeField]
     private Button _Button = null;
     [SerializeField]
     private TextMeshProUGUI[] _ActionPositionLabels = new TextMeshProUGUI[4];
@@ -22,21 +20,29 @@ public class UIHighlight : MonoBehaviour
     private float maxSize = 1.0f;
 
     private RectTransform _RectTransform = null;
-    
+
+    public bool DebugToggleLookat = false;
+
     // Boilerplate
     void Awake()
     {
         _Button.onClick.AddListener(onButtonClicked);
         _RectTransform = this.GetComponent<RectTransform>();
+        _RectTransform.localScale = Vector3.one*Mathf.Lerp(maxSize,minSize,GetRelativeDepth());
     }
 
     void Update()
     {
-        var cameraSpacePos = Camera.main.worldToCameraMatrix*this.transform.position;
-        var relativeDepth = cameraSpacePos.z.RemapValue(Camera.main.nearClipPlane, Camera.main.farClipPlane*-1,0,1);
-        _RectTransform.localScale = Vector3.one*Mathf.Lerp(maxSize,minSize,relativeDepth);
+        _RectTransform.localScale = Vector3.one*Mathf.Lerp(maxSize,minSize,GetRelativeDepth());
+        _RectTransform.rotation = Matrix4x4.LookAt(this.transform.position, Camera.main.transform.position, Vector3.up).rotation;
     }
 
+    private float GetRelativeDepth()
+    {
+        // Dynamic scaling
+        var cameraSpacePos = Camera.main.worldToCameraMatrix*this.transform.position;
+        return cameraSpacePos.z.RemapValue(Camera.main.nearClipPlane, Camera.main.farClipPlane*-1,0,1);
+    }
     private void onButtonClicked()
     {
         //Show the menu
