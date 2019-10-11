@@ -45,6 +45,7 @@ public class UIHighlightContainer : MonoBehaviour
         {
             UIHighlight newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));
             // TODO: Additional setup from anchor           
+            newObj.Setup(anchor);
             _UIHighlightInstanceList.Add(newObj);
             // Set up new object
             newObj.transform.SetParent(this.transform,true);
