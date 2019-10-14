@@ -23,7 +23,6 @@ public class UIHighlightSecondaryMenu : MonoBehaviour
         {
             UIActionElement elem = CreateNewActionElement();
             elem.Setup(op,part);
-            elem.
         }
         // info button
         UIActionElement infoElem = CreateNewActionElement();
