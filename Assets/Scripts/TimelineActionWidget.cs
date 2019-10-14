@@ -51,6 +51,6 @@ public class TimelineActionWidget : MonoBehaviour
 
 	public void Delete()
 	{
-		_ActionController.ActionDeleted(_Action);
+		_ActionController.DeleteAction(_Action);
 	}
 }

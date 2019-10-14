@@ -23,11 +23,11 @@ public enum Part
 
 public class ActionData
 {
-	private int index;
-	private Part part;
-	private Operation operation;
+	private int _Index;
+	private Part _Part;
+	private Operation _Operation;
 
-	public int Index { get => index; set => index = value; }
-	public Operation Operation { get => operation; set => operation = value; }
-	public Part Part { get => part; set => part = value; }
+	public int Index { get => _Index; set => _Index = value; }
+	public Operation Operation { get => _Operation; set => _Operation = value; }
+	public Part Part { get => _Part; set => _Part = value; }
 }

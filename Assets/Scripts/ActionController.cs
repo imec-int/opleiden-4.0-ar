@@ -16,12 +16,12 @@ public class ActionController : MonoBehaviour
 		_TimelineActionsToolbar.ActionAdded(action);
 	}
 
-	private void ActionUpdated(ActionData action)
+	private void UpdateAction(ActionData action)
 	{
 		_TimelineActionsToolbar.ActionUpdated(action);
 	}
 
-	public void ActionDeleted(ActionData action)
+	public void DeleteAction(ActionData action)
 	{
 		_TimelineActionsToolbar.ActionDeleted(action);
 
@@ -30,7 +30,7 @@ public class ActionController : MonoBehaviour
 		for (int i = action.Index - 1; i < _Actions.Count; i++)
 		{
 			_Actions[i].Index = i + 1;
-			ActionUpdated(_Actions[i]);
+			UpdateAction(_Actions[i]);
 		}
 	}
 }
