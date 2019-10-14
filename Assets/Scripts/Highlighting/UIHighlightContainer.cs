@@ -9,15 +9,26 @@ public class UIHighlightContainer : MonoBehaviour
     private GameObject _3DModel = null;
     [SerializeField]
     private UIHighlight _UIHighlightPrefab = null;
+    [SerializeField]
+    private UIInfoPanel _UIInfoPanel = null;
 
     private List<UIHighlight> _UIHighlightInstanceList = new List<UIHighlight>();
 
+    // Monobehaviour
+    //====================
+    void Awake()
+    {
+        _UIInfoPanel.OnClose += onInfoPanelClosed;
+    }
+
+    // Interface
+    //====================
     public void Reset(GameObject newmodel = null)
     {
         // Clean up
         foreach(UIHighlight highlight in _UIHighlightInstanceList)
         {
-            highlight.OnSelected -= onHighlightSelected;
+            highlight.OnExpanded -= onHighlightSelected;
             GameObject.Destroy(highlight.gameObject);
         }
         _UIHighlightInstanceList.Clear();
@@ -31,14 +42,17 @@ public class UIHighlightContainer : MonoBehaviour
             PlaceHighlights(_3DModel);
     }
 
-    public void SetVisibility(bool visibile)
+    // Enables/Disables visibility of all the highlights
+    public void SetHighlightsVisibility(bool visible)
     {
         foreach(UIHighlight highlight in _UIHighlightInstanceList)
         {
-            highlight.gameObject.SetActive(visibile);
+            highlight.gameObject.SetActive(visible);
         }
     }
 
+    // Methods
+    //=========================
     private void PlaceHighlights(GameObject model)
     {
         HighlightAnchor[] anchors = model.GetComponentsInChildren<HighlightAnchor>();
@@ -47,23 +61,37 @@ public class UIHighlightContainer : MonoBehaviour
         foreach(HighlightAnchor anchor in anchors)
         {
             UIHighlight newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));  
-            newObj.Setup(anchor);
+            newObj.Setup(anchor, onInfoPanelRequested);
             _UIHighlightInstanceList.Add(newObj);
             // Set up new object
             newObj.transform.SetParent(this.transform,true);
-            newObj.OnSelected += this.onHighlightSelected;
+            newObj.OnExpanded += this.onHighlightSelected;
         }        
     }
 
-    private void onHighlightSelected(object sender, EventArgs e)
+    /// Callbacks
+    //=======
+    private void onHighlightSelected(UIHighlight sender)
     {
-        var selectedHighlight = sender as UIHighlight;
+        // Collapse all non-selected highlights
         foreach(UIHighlight highlight in _UIHighlightInstanceList)
         {
-            if(highlight != selectedHighlight)
+            if(highlight != sender)
             {
                 highlight.Collapse();
             }
         }
+    }
+
+    private void onInfoPanelRequested(HighlightInfo info)
+    {
+        SetHighlightsVisibility(false);
+        _UIInfoPanel.Show(info);
+    }
+
+    private void onInfoPanelClosed()
+    {
+        // We assume this can only be called when the highlights were already visible
+        SetHighlightsVisibility(true);
     }
 }

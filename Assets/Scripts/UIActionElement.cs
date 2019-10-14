@@ -10,6 +10,13 @@ public class UIActionElement : MonoBehaviour
 	[SerializeField]
 	private TextMeshProUGUI _Icon, _Label;
 
+	[SerializeField]
+	private Button _AssociatedButton;
+	public Button AssociatedButton
+	{
+		get {return _AssociatedButton;}
+	}
+
 	public void Setup(Operation operation, Part part)
 	{
 		Setup(_ActionMetadata.ActionOperationsInfo[operation].Name + " " + _ActionMetadata.ActionPartsInfo[part].Name,

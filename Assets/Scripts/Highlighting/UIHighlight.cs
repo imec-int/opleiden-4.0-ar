@@ -4,6 +4,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class UIHighlight : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class UIHighlight : MonoBehaviour
     private RectTransform _RectTransform = null;
     private Camera _MainCamera = null;
 
-    public event EventHandler OnSelected;
+    public event System.Action<UIHighlight> OnExpanded;
 
     public HighlightAnchor AssociatedAnchor
     {
@@ -30,10 +31,16 @@ public class UIHighlight : MonoBehaviour
         get; private set;
     }
 
-    public void Setup(HighlightAnchor anchor)
+    public delegate void ShowHighlightInfoFunc(HighlightInfo info);
+
+    public void Setup(HighlightAnchor anchor, ShowHighlightInfoFunc showHighlightInfo)
     {
         AssociatedAnchor = anchor;
-        _SecondaryMenu.Setup(anchor.AvailableOperations,anchor.HighlightedPart);
+        _SecondaryMenu.Setup(anchor.AvailableOperations,anchor.HighlightedPart,
+        () => {
+            showHighlightInfo?.Invoke(anchor.Info);
+        });
+
         _SecondaryMenu.gameObject.SetActive(false);
         _MainButton.onClick.AddListener(onButtonClicked);
     }
@@ -42,7 +49,7 @@ public class UIHighlight : MonoBehaviour
     {
         _SecondaryMenu.gameObject.SetActive(false);        
         Selected = false;
-        // TODO: Color change
+        // TODO: [PLDN-51] Color change
     }
 
     void Awake()
@@ -57,10 +64,11 @@ public class UIHighlight : MonoBehaviour
         _RectTransform.forward *=-1;
     }
     
+    // Event for the main button on this highlight
     private void onButtonClicked()
     {
         Expand();
-        OnSelected?.Invoke(this, new EventArgs());
+        OnExpanded?.Invoke(this);
     }
 
     private void Expand()
