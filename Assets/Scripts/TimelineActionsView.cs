@@ -2,23 +2,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimelineActionsToolbar : MonoBehaviour
+public class TimelineActionsView : MonoBehaviour
 {
 	[SerializeField]
-	private TimelineActionElement _ButtonPrefab;
+	private TimelineActionWidget _ButtonPrefab;
 
 	private ScrollRect _TimelineScrollRect;
 
-	private List<TimelineActionElement> _TimelineActionsElements = new List<TimelineActionElement>();
+	private List<TimelineActionWidget> _TimelineActionsElements = new List<TimelineActionWidget>();
 
 	private void Awake()
 	{
 		_TimelineScrollRect = GetComponent<ScrollRect>();
 	}
 
-	public void AddTimelineAction(Action action)
+	public void AddTimelineAction(ActionData action)
 	{
-		TimelineActionElement timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionElement>();
+		TimelineActionWidget timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionWidget>();
 		timelineAction.Setup(action);
 		_TimelineActionsElements.Add(timelineAction);
 
@@ -33,7 +33,7 @@ public class TimelineActionsToolbar : MonoBehaviour
 		action.Delete += ActionDeleted;
 	}
 
-	private void ActionDeleted(Action action)
+	private void ActionDeleted(ActionData action)
 	{
 		_TimelineActionsElements.RemoveAt((int)action.Index - 1);
 	}

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionManager : MonoBehaviour
+public class ActionController : MonoBehaviour
 {
 	[SerializeField]
-	private TimelineActionsToolbar _TimelineActionsToolbar;
+	private TimelineActionsView _TimelineActionsToolbar;
 
-	private List<Action> _Actions = new List<Action>();
+	private List<ActionData> _Actions = new List<ActionData>();
 
-	public void AddAction(Action action)
+	public void AddAction(ActionData action)
 	{
 		_Actions.Add(action);
 		action.Index = (uint)_Actions.Count;
@@ -18,7 +18,7 @@ public class ActionManager : MonoBehaviour
 		action.Delete += ActionDeleted;
 	}
 
-	private void ActionDeleted(Action action)
+	private void ActionDeleted(ActionData action)
 	{
 		_Actions.RemoveAt((int)action.Index - 1);
 

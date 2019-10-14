@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TimelineActionElement : MonoBehaviour
+public class TimelineActionWidget : MonoBehaviour
 {
 	[SerializeField]
 	private ActionMetadata _ActionMetadata;
@@ -17,9 +17,9 @@ public class TimelineActionElement : MonoBehaviour
 	[SerializeField]
 	private Graphic _OrderMarker;
 
-	private Action _Action;
+	private ActionData _Action;
 
-	public void Setup(Action action)
+	public void Setup(ActionData action)
 	{
 		_Action = action;
 		action.Update += ActionUpdated;
@@ -58,7 +58,7 @@ public class TimelineActionElement : MonoBehaviour
 		_Action.Delete(_Action);
 	}
 
-	private void ActionUpdated(Action action)
+	private void ActionUpdated(ActionData action)
 	{
 		UpdateState();
 	}
