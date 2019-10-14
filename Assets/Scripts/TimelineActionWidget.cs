@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -38,6 +38,7 @@ public class TimelineActionWidget : MonoBehaviour
 
 	private void Update()
 	{
+		// TODO: Input.GetMouseButtonDown(0) does this work on mobile?
 		if (_CloseBtn.activeSelf && Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != _CloseBtn)
 		{
 			SetDeleteBtnActive(false);
