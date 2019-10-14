@@ -12,7 +12,7 @@ public class TimelineActionsView : MonoBehaviour
 
 	private ScrollRect _TimelineScrollRect;
 
-	private List<TimelineActionWidget> _TimelineActionsElements = new List<TimelineActionWidget>();
+	private List<TimelineActionWidget> _TimelineActionWidgets = new List<TimelineActionWidget>();
 
 	private void Awake()
 	{
@@ -23,7 +23,7 @@ public class TimelineActionsView : MonoBehaviour
 	{
 		TimelineActionWidget timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionWidget>();
 		timelineAction.Setup(action, _ActionController);
-		_TimelineActionsElements.Add(timelineAction);
+		_TimelineActionWidgets.Add(timelineAction);
 
 
 		// Make sure the UI is fully up to date to avoid glitching caused by the layout updating the next frame
@@ -36,12 +36,12 @@ public class TimelineActionsView : MonoBehaviour
 
 	public void ActionUpdated(ActionData action)
 	{
-		_TimelineActionsElements[action.Index - 1].UpdateState();
+		_TimelineActionWidgets[action.Index - 1].UpdateState();
 	}
 
 	public void ActionDeleted(ActionData action)
 	{
-		Destroy(_TimelineActionsElements[action.Index - 1].gameObject);
-		_TimelineActionsElements.RemoveAt(action.Index - 1);
+		Destroy(_TimelineActionWidgets[action.Index - 1].gameObject);
+		_TimelineActionWidgets.RemoveAt(action.Index - 1);
 	}
 }
