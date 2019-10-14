@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionController : MonoBehaviour
@@ -8,22 +9,24 @@ public class ActionController : MonoBehaviour
 
 	private List<ActionData> _Actions = new List<ActionData>();
 
+	public event Action<ActionData> ActionAdded, ActionUpdated, ActionDeleted;
+
 	public void AddAction(ActionData action)
 	{
 		_Actions.Add(action);
 		action.Index = _Actions.Count;
 
-		_TimelineActionsToolbar.ActionAdded(action);
+		ActionAdded?.Invoke(action);
 	}
 
 	private void UpdateAction(ActionData action)
 	{
-		_TimelineActionsToolbar.ActionUpdated(action);
+		ActionUpdated?.Invoke(action);
 	}
 
 	public void DeleteAction(ActionData action)
 	{
-		_TimelineActionsToolbar.ActionDeleted(action);
+		ActionDeleted?.Invoke(action);
 
 		_Actions.RemoveAt(action.Index - 1);
 

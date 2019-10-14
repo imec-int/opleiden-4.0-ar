@@ -17,6 +17,10 @@ public class TimelineActionsView : MonoBehaviour
 	private void Awake()
 	{
 		_TimelineScrollRect = GetComponent<ScrollRect>();
+
+		_ActionController.ActionAdded += ActionAdded;
+		_ActionController.ActionUpdated += ActionUpdated;
+		_ActionController.ActionDeleted += ActionDeleted;
 	}
 
 	public void ActionAdded(ActionData action)
