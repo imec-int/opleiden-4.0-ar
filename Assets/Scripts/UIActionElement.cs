@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActionElement : MonoBehaviour
+public class UIActionElement : MonoBehaviour
 {
 	[SerializeField]
 	private ActionMetadata _ActionMetadata;

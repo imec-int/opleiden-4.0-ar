@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIHighlightSecondaryMenu : MonoBehaviour
 {
     [SerializeField]
-    private ActionElement _SecondaryButtonPrefab = null;
+    private UIActionElement _SecondaryButtonPrefab = null;
 
     private RectTransform _RectTransform = null;
 
@@ -21,17 +21,18 @@ public class UIHighlightSecondaryMenu : MonoBehaviour
         // operation buttons
         foreach(Operation op in operations)
         {
-            ActionElement elem = CreateNewActionElement();
+            UIActionElement elem = CreateNewActionElement();
             elem.Setup(op,part);
+            elem.
         }
         // info button
-        ActionElement infoElem = CreateNewActionElement();
+        UIActionElement infoElem = CreateNewActionElement();
         infoElem.Setup("Info","\uE887");
     }
 
-    private ActionElement CreateNewActionElement()
+    private UIActionElement CreateNewActionElement()
     {
-        ActionElement newObj = GameObject.Instantiate(_SecondaryButtonPrefab, _RectTransform);
+        UIActionElement newObj = GameObject.Instantiate(_SecondaryButtonPrefab, _RectTransform);
         newObj.transform.SetParent(this.transform,false);
         return newObj;
     }

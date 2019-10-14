@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UIHighlightContainer : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class UIHighlightContainer : MonoBehaviour
 
     public void Reset(GameObject newmodel = null)
     {
+        // Clean up
         foreach(UIHighlight highlight in _UIHighlightInstanceList)
         {
+            highlight.OnSelected -= onHighlightSelected;
             GameObject.Destroy(highlight.gameObject);
         }
         _UIHighlightInstanceList.Clear();
@@ -43,12 +46,24 @@ public class UIHighlightContainer : MonoBehaviour
 
         foreach(HighlightAnchor anchor in anchors)
         {
-            UIHighlight newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));
-            // TODO: Additional setup from anchor           
+            UIHighlight newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));  
             newObj.Setup(anchor);
             _UIHighlightInstanceList.Add(newObj);
             // Set up new object
             newObj.transform.SetParent(this.transform,true);
+            newObj.OnSelected += this.onHighlightSelected;
         }        
+    }
+
+    private void onHighlightSelected(object sender, EventArgs e)
+    {
+        var selectedHighlight = sender as UIHighlight;
+        foreach(UIHighlight highlight in _UIHighlightInstanceList)
+        {
+            if(highlight != selectedHighlight)
+            {
+                highlight.Collapse();
+            }
+        }
     }
 }

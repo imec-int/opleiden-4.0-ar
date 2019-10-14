@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimelineActionElement : ActionElement
+public class TimelineActionElement : UIActionElement
 {
 	[SerializeField]
 	private TextMeshProUGUI _Index;

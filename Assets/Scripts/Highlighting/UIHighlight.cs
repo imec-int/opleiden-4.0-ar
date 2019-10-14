@@ -19,9 +19,15 @@ public class UIHighlight : MonoBehaviour
     private RectTransform _RectTransform = null;
     private Camera _MainCamera = null;
 
+    public event EventHandler OnSelected;
+
     public HighlightAnchor AssociatedAnchor
     {
         get;private set;
+    }
+    public bool Selected
+    {
+        get; private set;
     }
 
     public void Setup(HighlightAnchor anchor)
@@ -29,12 +35,18 @@ public class UIHighlight : MonoBehaviour
         AssociatedAnchor = anchor;
         _SecondaryMenu.Setup(anchor.AvailableOperations,anchor.HighlightedPart);
         _SecondaryMenu.gameObject.SetActive(false);
+        _MainButton.onClick.AddListener(onButtonClicked);
     }
 
-    // Boilerplate
-    void Awake()
+    public void Collapse()
     {
-        _MainButton.onClick.AddListener(onButtonClicked);
+        _SecondaryMenu.gameObject.SetActive(false);        
+        Selected = false;
+        // TODO: Color change
+    }
+
+    void Awake()
+    {        
         _RectTransform = this.GetComponent<RectTransform>();
         _MainCamera = Camera.main;
     }
@@ -47,7 +59,15 @@ public class UIHighlight : MonoBehaviour
     
     private void onButtonClicked()
     {
+        Expand();
+        OnSelected?.Invoke(this, new EventArgs());
+    }
+
+    private void Expand()
+    {
         //Show the menu
-        _SecondaryMenu.gameObject.SetActive(true);
+        _SecondaryMenu.gameObject.SetActive(true);        
+        Selected = true;
+        // TODO: Color change
     }
 }
