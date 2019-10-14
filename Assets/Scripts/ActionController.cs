@@ -33,4 +33,19 @@ public class ActionController : MonoBehaviour
 			UpdateAction(_Actions[i]);
 		}
 	}
+
+	public void MovedAction(ActionData action, int newIndex)
+	{
+		_Actions.RemoveAt(action.Index - 1);
+		if (newIndex > action.Index) newIndex--;
+		_Actions.Insert(newIndex - 1, action);
+
+		_TimelineActionsToolbar.ActionMoved(action, newIndex);
+
+		for (int i = Mathf.Min(action.Index, newIndex) - 1; i < _Actions.Count; i++)
+		{
+			_Actions[i].Index = i + 1;
+			UpdateAction(_Actions[i]);
+		}
+	}
 }

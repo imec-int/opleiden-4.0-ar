@@ -9,10 +9,10 @@ public class LongPressEventTrigger : UIBehaviour, IPointerDownHandler, IPointerU
 
 	public UnityEvent _OnLongPress = new UnityEvent();
 
-	private bool _IsPointerDown, _LongPressTriggered;
+	protected bool _IsPointerDown, _LongPressTriggered;
 	private float _TimePressed;
 
-	private void Update()
+	protected virtual void Update()
 	{
 		if (_IsPointerDown && !_LongPressTriggered)
 		{
@@ -20,9 +20,7 @@ public class LongPressEventTrigger : UIBehaviour, IPointerDownHandler, IPointerU
 
 			if (_TimePressed > _LongPressThreshold)
 			{
-				_LongPressTriggered = true;
-				_OnLongPress.Invoke();
-				_TimePressed = 0;
+				StartLongPress();
 			}
 		}
 	}
@@ -31,17 +29,27 @@ public class LongPressEventTrigger : UIBehaviour, IPointerDownHandler, IPointerU
 	{
 		_IsPointerDown = true;
 		_LongPressTriggered = false;
+		_TimePressed = 0;
 	}
 
 	public void OnPointerUp(PointerEventData eventData)
 	{
 		_IsPointerDown = false;
 		_LongPressTriggered = false;
+		_TimePressed = 0;
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		_IsPointerDown = false;
 		_LongPressTriggered = false;
+		_TimePressed = 0;
+	}
+
+	protected virtual void StartLongPress()
+	{
+		_LongPressTriggered = true;
+		_OnLongPress.Invoke();
+		_TimePressed = 0;
 	}
 }

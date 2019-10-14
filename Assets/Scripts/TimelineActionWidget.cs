@@ -53,4 +53,9 @@ public class TimelineActionWidget : MonoBehaviour
 	{
 		_ActionController.DeleteAction(_Action);
 	}
+
+	public void Moved(int newIndex)
+	{
+		_ActionController.MovedAction(_Action, newIndex);
+	}
 }

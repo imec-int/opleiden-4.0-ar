@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public class TimelineActionsView : MonoBehaviour
 
 	private ScrollRect _TimelineScrollRect;
 
-	private List<TimelineActionWidget> _TimelineActionsElements = new List<TimelineActionWidget>();
+	private List<TimelineActionWidget> _TimelineActionWidgets = new List<TimelineActionWidget>();
 
 	private void Awake()
 	{
@@ -22,8 +23,9 @@ public class TimelineActionsView : MonoBehaviour
 	public void ActionAdded(ActionData action)
 	{
 		TimelineActionWidget timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionWidget>();
+		timelineAction.gameObject.name = "TimelineActionWidget_" + _TimelineActionWidgets.Count;
 		timelineAction.Setup(action, _ActionController);
-		_TimelineActionsElements.Add(timelineAction);
+		_TimelineActionWidgets.Add(timelineAction);
 
 
 		// Make sure the UI is fully up to date to avoid glitching caused by the layout updating the next frame
@@ -36,12 +38,19 @@ public class TimelineActionsView : MonoBehaviour
 
 	public void ActionUpdated(ActionData action)
 	{
-		_TimelineActionsElements[action.Index - 1].UpdateState();
+		_TimelineActionWidgets[action.Index - 1].UpdateState();
 	}
 
 	public void ActionDeleted(ActionData action)
 	{
-		Destroy(_TimelineActionsElements[action.Index - 1].gameObject);
-		_TimelineActionsElements.RemoveAt(action.Index - 1);
+		Destroy(_TimelineActionWidgets[action.Index - 1].gameObject);
+		_TimelineActionWidgets.RemoveAt(action.Index - 1);
+	}
+
+	public void ActionMoved(ActionData action, int newIndex)
+	{
+		TimelineActionWidget timeLineActionWidget = _TimelineActionWidgets[action.Index - 1];
+		_TimelineActionWidgets.RemoveAt(action.Index - 1);
+		_TimelineActionWidgets.Insert(newIndex - 1, timeLineActionWidget);
 	}
 }
