@@ -11,21 +11,26 @@ public class ActionController : MonoBehaviour
 	public void AddAction(ActionData action)
 	{
 		_Actions.Add(action);
-		action.Index = (uint)_Actions.Count;
+		action.Index = _Actions.Count;
 
-		_TimelineActionsToolbar.AddTimelineAction(action);
-
-		action.Delete += ActionDeleted;
+		_TimelineActionsToolbar.ActionAdded(action);
 	}
 
-	private void ActionDeleted(ActionData action)
+	private void ActionUpdated(ActionData action)
 	{
-		_Actions.RemoveAt((int)action.Index - 1);
+		_TimelineActionsToolbar.ActionUpdated(action);
+	}
 
-		for (int i = (int)action.Index - 1; i < _Actions.Count; i++)
+	public void ActionDeleted(ActionData action)
+	{
+		_TimelineActionsToolbar.ActionDeleted(action);
+
+		_Actions.RemoveAt(action.Index - 1);
+
+		for (int i = action.Index - 1; i < _Actions.Count; i++)
 		{
-			_Actions[i].Index = (uint)i + 1;
-			_Actions[i].Update(_Actions[i]);
+			_Actions[i].Index = i + 1;
+			ActionUpdated(_Actions[i]);
 		}
 	}
 }

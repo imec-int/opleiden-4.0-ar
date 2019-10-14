@@ -7,6 +7,9 @@ public class TimelineActionsView : MonoBehaviour
 	[SerializeField]
 	private TimelineActionWidget _ButtonPrefab;
 
+	[SerializeField]
+	private ActionController _ActionController;
+
 	private ScrollRect _TimelineScrollRect;
 
 	private List<TimelineActionWidget> _TimelineActionsElements = new List<TimelineActionWidget>();
@@ -16,10 +19,10 @@ public class TimelineActionsView : MonoBehaviour
 		_TimelineScrollRect = GetComponent<ScrollRect>();
 	}
 
-	public void AddTimelineAction(ActionData action)
+	public void ActionAdded(ActionData action)
 	{
 		TimelineActionWidget timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionWidget>();
-		timelineAction.Setup(action);
+		timelineAction.Setup(action, _ActionController);
 		_TimelineActionsElements.Add(timelineAction);
 
 
@@ -29,12 +32,16 @@ public class TimelineActionsView : MonoBehaviour
 
 		// Align the timeline with the last added timeline action
 		_TimelineScrollRect.horizontalNormalizedPosition = 1;
-
-		action.Delete += ActionDeleted;
 	}
 
-	private void ActionDeleted(ActionData action)
+	public void ActionUpdated(ActionData action)
 	{
-		_TimelineActionsElements.RemoveAt((int)action.Index - 1);
+		_TimelineActionsElements[action.Index - 1].UpdateState();
+	}
+
+	public void ActionDeleted(ActionData action)
+	{
+		Destroy(_TimelineActionsElements[action.Index - 1].gameObject);
+		_TimelineActionsElements.RemoveAt(action.Index - 1);
 	}
 }

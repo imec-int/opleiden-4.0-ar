@@ -18,16 +18,17 @@ public class TimelineActionWidget : MonoBehaviour
 	private Graphic _OrderMarker;
 
 	private ActionData _Action;
+	private ActionController _ActionController;
 
-	public void Setup(ActionData action)
+	public void Setup(ActionData action, ActionController controller)
 	{
+		_ActionController = controller;
 		_Action = action;
-		action.Update += ActionUpdated;
 
 		UpdateState();
 	}
 
-	private void UpdateState()
+	public void UpdateState()
 	{
 		_Index.text = _Action.Index.ToString();
 		_Label.text = _ActionMetadata.ActionOperationsInfo[_Action.Operation].Name + " " + _ActionMetadata.ActionPartsInfo[_Action.Part].Name;
@@ -48,18 +49,8 @@ public class TimelineActionWidget : MonoBehaviour
 		_CloseBtn.SetActive(state);
 	}
 
-	public void Destroy()
+	public void Delete()
 	{
-		Destroy(gameObject);
-	}
-
-	private void OnDestroy()
-	{
-		_Action.Delete(_Action);
-	}
-
-	private void ActionUpdated(ActionData action)
-	{
-		UpdateState();
+		_ActionController.ActionDeleted(_Action);
 	}
 }
