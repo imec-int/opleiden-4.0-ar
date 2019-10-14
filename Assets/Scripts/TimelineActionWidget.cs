@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -40,11 +40,11 @@ public class TimelineActionWidget : MonoBehaviour
 	{
 		if (_CloseBtn.activeSelf && Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != _CloseBtn)
 		{
-			SetDelete(false);
+			SetDeleteBtnActive(false);
 		}
 	}
 
-	public void SetDelete(bool state)
+	public void SetDeleteBtnActive(bool state)
 	{
 		_CloseBtn.SetActive(state);
 	}
