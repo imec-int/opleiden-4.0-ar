@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -69,26 +69,17 @@ public class TimelineActionsView : MonoBehaviour
 
 	public void OnWidgetDrag(PointerEventData eventData)
 	{
-		Rect rect = RectTransformToScreenSpace(GetComponent<RectTransform>());
+		Rect screenRect = GetComponent<RectTransform>().RectTransformToScreenSpace();
 
-		if (eventData.position.x < rect.center.x)
+		if (eventData.position.x < screenRect.center.x)
 		{
-			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(rect.xMin + rect.width * _FollowPerc, rect.xMin, 0, 1));
+			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(screenRect.xMin + screenRect.width * _FollowPerc, screenRect.xMin, 0, 1));
 			_TimelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_TimelineScrollRect.horizontalNormalizedPosition - _FollowSpeed * speedLerp * Time.deltaTime);
 		}
 		else
 		{
-			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(rect.center.x + rect.width * _FollowPerc, rect.xMax, 0, 1));
+			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(screenRect.center.x + screenRect.width * _FollowPerc, screenRect.xMax, 0, 1));
 			_TimelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_TimelineScrollRect.horizontalNormalizedPosition + _FollowSpeed * speedLerp * Time.deltaTime);
 		}
-	}
-
-	public static Rect RectTransformToScreenSpace(RectTransform transform)
-	{
-		Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
-		Rect rect = new Rect(transform.position.x, Screen.height - transform.position.y, size.x, size.y);
-		rect.x -= (transform.pivot.x * size.x);
-		rect.y -= ((1.0f - transform.pivot.y) * size.y);
-		return rect;
 	}
 }
