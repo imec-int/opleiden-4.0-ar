@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +24,7 @@ public class TimelineActionsView : MonoBehaviour
 		_ActionController.ActionDeleted += ActionDeleted;
 	}
 
-	public void ActionAdded(ActionData action)
+	private void ActionAdded(ActionData action)
 	{
 		TimelineActionWidget timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionWidget>();
 		timelineAction.gameObject.name = "TimelineActionWidget_" + _TimelineActionWidgets.Count;
@@ -40,12 +40,12 @@ public class TimelineActionsView : MonoBehaviour
 		_TimelineScrollRect.horizontalNormalizedPosition = 1;
 	}
 
-	public void ActionUpdated(ActionData action)
+	private void ActionUpdated(ActionData action)
 	{
 		_TimelineActionWidgets[action.Index - 1].UpdateState();
 	}
 
-	public void ActionDeleted(ActionData action)
+	private void ActionDeleted(ActionData action)
 	{
 		Destroy(_TimelineActionWidgets[action.Index - 1].gameObject);
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);
