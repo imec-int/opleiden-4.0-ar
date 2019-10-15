@@ -4,10 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class IntEvent : UnityEvent<int>
-{
-}
-
+public class UnityIntEvent : UnityEvent<int> { }
 
 public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -15,11 +12,11 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 	private ScrollRect _ScrollRect;
 	private GameObject _Spacer;
 
-	public IntEvent _OnIndexChanged = new IntEvent();
+	public UnityIntEvent _OnIndexChanged = new UnityIntEvent();
 
 	private int _SiblingIndex;
 
-	private bool isDragging = false;
+	private bool _IsDragging = false;
 
 	protected override void Awake()
 	{
@@ -30,7 +27,7 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		if (isDragging)
+		if (_IsDragging)
 		{
 			GetComponent<RectTransform>().position = eventData.position;
 			float sizeX = GetComponent<RectTransform>().sizeDelta.x;
@@ -47,9 +44,9 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		if (isDragging)
+		if (_IsDragging)
 		{
-			isDragging = false;
+			_IsDragging = false;
 			transform.SetParent(_Parent);
 			transform.SetSiblingIndex(_Spacer.transform.GetSiblingIndex());
 			Destroy(_Spacer);
@@ -67,9 +64,9 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		if (_IsPointerDown && _LongPressTriggered)
+		if (_LongPressTriggered)
 		{
-			isDragging = true;
+			_IsDragging = true;
 			_SiblingIndex = transform.GetSiblingIndex();
 			_Spacer = new GameObject("Spacer");
 			_Spacer.transform.SetParent(_Parent);
