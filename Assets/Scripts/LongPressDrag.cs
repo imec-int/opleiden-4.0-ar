@@ -54,7 +54,9 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 			_RectTransform.SetParent(_ScrollRect.transform);
 			_Spacer = GameObject.Instantiate(_SpacerPrefab, _ParentRT).GetComponent<RectTransform>();
 			_Spacer.SetSiblingIndex(_SiblingIndex);
-			Canvas.ForceUpdateCanvases();
+
+			// Update content layout to avoid scrollrect resetting position
+			LayoutRebuilder.ForceRebuildLayoutImmediate(_ParentRT);
 		}
 		else
 		{
@@ -73,7 +75,9 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 			float result = offsetX / sizeX;
 			_Spacer.SetSiblingIndex((int)result);
 			_LastDragEventData = eventData;
-			Canvas.ForceUpdateCanvases();
+
+			// Update content layout to avoid scrollrect resetting position
+			LayoutRebuilder.ForceRebuildLayoutImmediate(_ParentRT);
 		}
 		else
 		{
