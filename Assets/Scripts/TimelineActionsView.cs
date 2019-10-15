@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -38,7 +38,7 @@ public class TimelineActionsView : MonoBehaviour
 		timelineAction.Setup(action, _ActionController);
 		_TimelineActionWidgets.Add(timelineAction);
 
-		timelineAction.GetComponentInChildren<LongPressDrag>()._OnDrag.AddListener(OnWidgetDrag);
+		timelineAction.GetComponent<LongPressDrag>()._OnDrag.AddListener(OnWidgetDrag);
 
 
 		// Make sure the UI is fully up to date to avoid glitching caused by the layout updating the next frame
