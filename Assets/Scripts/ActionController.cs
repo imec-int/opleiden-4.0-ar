@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionController : MonoBehaviour
 {
-	[SerializeField]
-	private TimelineActionsView _TimelineActionsToolbar;
 
 	private List<ActionData> _Actions = new List<ActionData>();
 
