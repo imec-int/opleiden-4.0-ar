@@ -6,14 +6,16 @@ public class ActionPart : MonoBehaviour
 	private Part _Part;
 
 	[SerializeField]
-	private ActionManager _Manager;
+	private ActionController _Manager;
 
-	Action _Action = new Action();
+
 
 	public void AddAction(int operation)
 	{
-		_Action.Operation = (Operation)operation;
-		_Action.Part = _Part;
-		_Manager.AddAction(_Action);
+		ActionData action = new ActionData();
+
+		action.Operation = (Operation)operation;
+		action.Part = _Part;
+		_Manager.AddAction(action);
 	}
 }

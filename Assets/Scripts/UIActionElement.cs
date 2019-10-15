@@ -5,13 +5,14 @@ using UnityEngine.UI;
 public class UIActionElement : MonoBehaviour
 {
 	[SerializeField]
-	private ActionMetadata _ActionMetadata;
+	protected ActionMetadata _ActionMetadata;
 
 	[SerializeField]
-	private TextMeshProUGUI _Icon, _Label;
+	protected TextMeshProUGUI _Icon, _Label;
 
 	[SerializeField]
-	private Button _AssociatedButton;
+	protected Button _AssociatedButton;
+	
 	public Button AssociatedButton
 	{
 		get {return _AssociatedButton;}
