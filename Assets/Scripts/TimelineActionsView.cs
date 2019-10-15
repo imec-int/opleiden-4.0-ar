@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TimelineActionsView : MonoBehaviour
@@ -9,6 +10,12 @@ public class TimelineActionsView : MonoBehaviour
 
 	[SerializeField]
 	private ActionController _ActionController;
+
+	[SerializeField]
+	private float _FollowPerc = 0.25f;
+
+	[SerializeField]
+	private float _FollowSpeed = 0.5f;
 
 	private ScrollRect _TimelineScrollRect;
 
@@ -30,6 +37,8 @@ public class TimelineActionsView : MonoBehaviour
 		timelineAction.gameObject.name = "TimelineActionWidget_" + _TimelineActionWidgets.Count;
 		timelineAction.Setup(action, _ActionController);
 		_TimelineActionWidgets.Add(timelineAction);
+
+		timelineAction.GetComponentInChildren<LongPressDrag>()._OnDrag.AddListener(OnWidgetDrag);
 
 
 		// Make sure the UI is fully up to date to avoid glitching caused by the layout updating the next frame
@@ -56,5 +65,30 @@ public class TimelineActionsView : MonoBehaviour
 		TimelineActionWidget timeLineActionWidget = _TimelineActionWidgets[action.Index - 1];
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);
 		_TimelineActionWidgets.Insert(newIndex - 1, timeLineActionWidget);
+	}
+
+	public void OnWidgetDrag(PointerEventData eventData)
+	{
+		Rect rect = RectTransformToScreenSpace(GetComponent<RectTransform>());
+
+		if (eventData.position.x < rect.center.x)
+		{
+			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(rect.xMin + rect.width * _FollowPerc, rect.xMin, 0, 1));
+			_TimelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_TimelineScrollRect.horizontalNormalizedPosition - _FollowSpeed * speedLerp * Time.deltaTime);
+		}
+		else
+		{
+			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(rect.center.x + rect.width * _FollowPerc, rect.xMax, 0, 1));
+			_TimelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_TimelineScrollRect.horizontalNormalizedPosition + _FollowSpeed * speedLerp * Time.deltaTime);
+		}
+	}
+
+	public static Rect RectTransformToScreenSpace(RectTransform transform)
+	{
+		Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
+		Rect rect = new Rect(transform.position.x, Screen.height - transform.position.y, size.x, size.y);
+		rect.x -= (transform.pivot.x * size.x);
+		rect.y -= ((1.0f - transform.pivot.y) * size.y);
+		return rect;
 	}
 }

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 [System.Serializable]
 public class UnityIntEvent : UnityEvent<int> { }
 
+[System.Serializable]
+public class UnityPointerDragEvent : UnityEvent<PointerEventData> { }
+
 public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	[SerializeField]
@@ -15,6 +18,10 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 	private ScrollRect _ScrollRect;
 
 	public UnityIntEvent _OnIndexChanged = new UnityIntEvent();
+	public UnityPointerDragEvent _OnDrag = new UnityPointerDragEvent();
+
+	[SerializeField]
+	private PointerEventData _LastDragEventData;
 
 	private int _SiblingIndex;
 
@@ -28,15 +35,26 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 		_ScrollRect = _RectTransform.GetComponentInParent<ScrollRect>();
 	}
 
+	protected override void Update()
+	{
+		base.Update();
+
+		if (_IsDragging)
+		{
+			_OnDrag.Invoke(_LastDragEventData);
+		}
+	}
+
 	public void OnBeginDrag(PointerEventData eventData)
 	{
 		if (_LongPressTriggered)
 		{
 			_IsDragging = true;
 			_SiblingIndex = _RectTransform.GetSiblingIndex();
+			_RectTransform.SetParent(_ScrollRect.transform);
 			_Spacer = GameObject.Instantiate(_SpacerPrefab, _ParentRT).GetComponent<RectTransform>();
 			_Spacer.SetSiblingIndex(_SiblingIndex);
-			_RectTransform.SetParent(_ScrollRect.transform);
+			Canvas.ForceUpdateCanvases();
 		}
 		else
 		{
@@ -49,11 +67,13 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 		if (_IsDragging)
 		{
 			_RectTransform.position = eventData.position;
-			float sizeX = _RectTransform.sizeDelta.x;
-			float offsetX = _RectTransform.anchoredPosition.x - sizeX / 2;
+			float sizeX = _RectTransform.sizeDelta.x + 6;
+			float offsetX = -(_ParentRT.anchoredPosition.x + _ParentRT.parent.GetComponent<RectTransform>().rect.width) + _RectTransform.anchoredPosition.x - sizeX / 2;
 
 			float result = offsetX / sizeX;
 			_Spacer.SetSiblingIndex((int)result);
+			_LastDragEventData = eventData;
+			Canvas.ForceUpdateCanvases();
 		}
 		else
 		{
