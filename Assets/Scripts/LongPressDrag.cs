@@ -8,9 +8,11 @@ public class UnityIntEvent : UnityEvent<int> { }
 
 public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-	private Transform _Parent;
+	[SerializeField]
+	private GameObject _SpacerPrefab;
+
+	private RectTransform _ParentRT, _RectTransform, _Spacer;
 	private ScrollRect _ScrollRect;
-	private GameObject _Spacer;
 
 	public UnityIntEvent _OnIndexChanged = new UnityIntEvent();
 
@@ -21,20 +23,37 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 	protected override void Awake()
 	{
 		base.Awake();
-		_Parent = transform.parent;
-		_ScrollRect = transform.GetComponentInParent<ScrollRect>();
+		_RectTransform = transform.GetComponent<RectTransform>();
+		_ParentRT = _RectTransform.parent.GetComponent<RectTransform>();
+		_ScrollRect = _RectTransform.GetComponentInParent<ScrollRect>();
+	}
+
+	public void OnBeginDrag(PointerEventData eventData)
+	{
+		if (_LongPressTriggered)
+		{
+			_IsDragging = true;
+			_SiblingIndex = _RectTransform.GetSiblingIndex();
+			_Spacer = GameObject.Instantiate(_SpacerPrefab, _ParentRT).GetComponent<RectTransform>();
+			_Spacer.SetSiblingIndex(_SiblingIndex);
+			_RectTransform.SetParent(_ScrollRect.transform);
+		}
+		else
+		{
+			_ScrollRect.SendMessage("OnBeginDrag", eventData);
+		}
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
 		if (_IsDragging)
 		{
-			GetComponent<RectTransform>().position = eventData.position;
-			float sizeX = GetComponent<RectTransform>().sizeDelta.x;
-			float offsetX = GetComponent<RectTransform>().anchoredPosition.x - sizeX / 2;
+			_RectTransform.position = eventData.position;
+			float sizeX = _RectTransform.sizeDelta.x;
+			float offsetX = _RectTransform.anchoredPosition.x - sizeX / 2;
 
 			float result = offsetX / sizeX;
-			_Spacer.transform.SetSiblingIndex((int)result);
+			_Spacer.SetSiblingIndex((int)result);
 		}
 		else
 		{
@@ -47,36 +66,18 @@ public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHand
 		if (_IsDragging)
 		{
 			_IsDragging = false;
-			transform.SetParent(_Parent);
-			transform.SetSiblingIndex(_Spacer.transform.GetSiblingIndex());
-			Destroy(_Spacer);
+			_RectTransform.SetParent(_ParentRT);
+			_RectTransform.SetSiblingIndex(_Spacer.GetSiblingIndex());
+			Destroy(_Spacer.gameObject);
 
-			if (_SiblingIndex != transform.GetSiblingIndex())
+			if (_SiblingIndex != _RectTransform.GetSiblingIndex())
 			{
-				_OnIndexChanged.Invoke(transform.GetSiblingIndex());
+				_OnIndexChanged.Invoke(_RectTransform.GetSiblingIndex());
 			}
 		}
 		else
 		{
 			_ScrollRect.SendMessage("OnEndDrag", eventData);
-		}
-	}
-
-	public void OnBeginDrag(PointerEventData eventData)
-	{
-		if (_LongPressTriggered)
-		{
-			_IsDragging = true;
-			_SiblingIndex = transform.GetSiblingIndex();
-			_Spacer = new GameObject("Spacer");
-			_Spacer.transform.SetParent(_Parent);
-			_Spacer.AddComponent<AspectRatioFitter>().aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
-			_Spacer.transform.SetSiblingIndex(_SiblingIndex);
-			transform.SetParent(_ScrollRect.transform);
-		}
-		else
-		{
-			_ScrollRect.SendMessage("OnBeginDrag", eventData);
 		}
 	}
 }

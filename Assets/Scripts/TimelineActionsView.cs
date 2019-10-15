@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +22,7 @@ public class TimelineActionsView : MonoBehaviour
 		_ActionController.ActionAdded += ActionAdded;
 		_ActionController.ActionUpdated += ActionUpdated;
 		_ActionController.ActionDeleted += ActionDeleted;
+		_ActionController.ActionMoved += GetActionMoved;
 	}
 
 	private void ActionAdded(ActionData action)
@@ -51,10 +52,11 @@ public class TimelineActionsView : MonoBehaviour
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);
 	}
 
-	public void ActionMoved(ActionData action, int newIndex)
+	private void GetActionMoved(ActionData action, int newIndex)
 	{
 		TimelineActionWidget timeLineActionWidget = _TimelineActionWidgets[action.Index - 1];
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);
+		if (newIndex > action.Index) newIndex--;
 		_TimelineActionWidgets.Insert(newIndex - 1, timeLineActionWidget);
 	}
 }
