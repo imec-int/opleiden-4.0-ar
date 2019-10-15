@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -422,41 +422,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176420001634358687, guid: 647cbf57d4ef0bf4fbadff1479910081,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176420001634358687, guid: 647cbf57d4ef0bf4fbadff1479910081,
-        type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679826281186761552, guid: 647cbf57d4ef0bf4fbadff1479910081,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679826281186761552, guid: 647cbf57d4ef0bf4fbadff1479910081,
-        type: 3}
-      propertyPath: m_UseRelativeTransform
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5572763670539955024, guid: 647cbf57d4ef0bf4fbadff1479910081,
-        type: 3}
-      propertyPath: m_LightEstimationMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4545125555129532725, guid: 647cbf57d4ef0bf4fbadff1479910081,
-        type: 3}
-      propertyPath: m_UseCustomMaterial
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4545125555129532725, guid: 647cbf57d4ef0bf4fbadff1479910081,
-        type: 3}
-      propertyPath: m_UseCustomRendererAsset
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 647cbf57d4ef0bf4fbadff1479910081, type: 3}
