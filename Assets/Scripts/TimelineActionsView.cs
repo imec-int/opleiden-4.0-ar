@@ -38,7 +38,7 @@ public class TimelineActionsView : MonoBehaviour
 		timelineAction.Setup(action, _ActionController);
 		_TimelineActionWidgets.Add(timelineAction);
 
-		timelineAction.GetComponent<LongPressDrag>()._OnDrag.AddListener(OnWidgetDrag);
+		timelineAction.GetComponent<LongPressDragAndDrop>()._OnDrag.AddListener(OnWidgetDrag);
 
 
 		// Make sure the UI is fully up to date to avoid glitching caused by the layout updating the next frame

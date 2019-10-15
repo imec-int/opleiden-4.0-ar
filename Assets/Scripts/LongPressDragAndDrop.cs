@@ -9,7 +9,7 @@ public class UnityIntEvent : UnityEvent<int> { }
 [System.Serializable]
 public class UnityPointerDragEvent : UnityEvent<PointerEventData> { }
 
-public class LongPressDrag : LongPressEventTrigger, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	[SerializeField]
 	private GameObject _SpacerPrefab;
