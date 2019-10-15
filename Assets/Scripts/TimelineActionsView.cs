@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,7 +55,6 @@ public class TimelineActionsView : MonoBehaviour
 	{
 		TimelineActionWidget timeLineActionWidget = _TimelineActionWidgets[action.Index - 1];
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);
-		if (newIndex > action.Index) newIndex--;
 		_TimelineActionWidgets.Insert(newIndex - 1, timeLineActionWidget);
 	}
 }
