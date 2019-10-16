@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6538d8b4334d242869c652eb5c6bcb, type: 3}
+  m_Name: DummyHighlightInfo
+  m_EditorClassIdentifier: 
+  _Header: Lorem Ipsum
+  _Body: Nam rutrum, ligula id rhoncus viverra, dui elit convallis ante, et scelerisque
+    augue sapien a erat. Duis congue orci orci, sit amet luctus ligula rhoncus vel.
+    Duis laoreet ante ac tempor vehicula. Duis mi sapien, condimentum et rutrum sed,
+    ullamcorper nec diam. Cras viverra lorem ac dui vehicula lacinia. Quisque placerat
+    bibendum urna, a commodo tortor ultricies sed. Phasellus varius fringilla magna,
+    at scelerisque sapien rutrum ut. Morbi molestie felis enim, dapibus mattis felis
+    suscipit sit amet. Morbi eu iaculis sapien. Etiam dictum ut velit sed eleifend.
+    Nullam nec nisl ac orci facilisis bibendum. Vivamus in tempor libero. Etiam sagittis
+    enim vitae felis porttitor bibendum. Aenean nec lacus nibh. Nunc finibus nisi
+    eros.  Donec vitae tortor pellentesque, consequat nisl porttitor, tincidunt nibh.
+    Aliquam interdum eu metus eget sodales. Aenean et laoreet velit. Etiam ipsum tortor,
+    luctus non elit non, blandit commodo quam. Mauris consequat libero non dui accumsan,
+    nec commodo nisi ultricies. Donec aliquet faucibus velit, ut gravida mauris varius
+    et. Mauris varius ullamcorper magna, sed dapibus enim euismod quis. In sed nisi
+    ut felis commodo sagittis. Nullam eu aliquet nibh. Fusce sed tempus lectus, a
+    dapibus tellus.  Pellentesque lacinia justo nec justo maximus mollis. Fusce feugiat
+    finibus mi, eget condimentum metus tempus ut. Ut non molestie leo. Quisque aliquam
+    dapibus arcu sit amet pulvinar. In non dolor ante. Donec condimentum, metus at
+    sodales ultrices, ante dui sodales odio, a dapibus enim sapien non diam. Interdum
+    et malesuada fames ac ante ipsum primis in faucibus. Nullam purus metus, sodales
+    ac euismod vel, vulputate non neque. Morbi luctus, erat vitae imperdiet auctor,
+    tortor sapien tempus nunc, ut iaculis enim mauris quis ex.

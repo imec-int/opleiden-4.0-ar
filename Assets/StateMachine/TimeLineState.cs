@@ -11,7 +11,7 @@ public class TimeLineState : StateMachineBehaviour
        Debug.Assert(timeline,"Timeline is not assigned to the state variable holder");
        timeline.SetActive(true);
 
-       animator.GetComponent<StateVariableHolder>().HighlightContainer.SetVisibility(true);
+       animator.GetComponent<StateVariableHolder>().HighlightContainer.SetHighlightsVisibility(true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
