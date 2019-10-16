@@ -9,7 +9,7 @@ public class ResetAppState : StateMachineBehaviour
     {
        UIHighlightContainer highlightcont = animator.GetComponent<StateVariableHolder>().HighlightContainer;
        highlightcont.Reset();
-       highlightcont.SetVisibility(false);
+       highlightcont.SetHighlightsVisibility(false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
