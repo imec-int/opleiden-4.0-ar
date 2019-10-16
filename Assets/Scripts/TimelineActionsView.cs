@@ -18,12 +18,14 @@ public class TimelineActionsView : MonoBehaviour
 	private float _FollowSpeed = 0.5f;
 
 	private ScrollRect _TimelineScrollRect;
+	private Rect _TimelineRect;
 
 	private List<TimelineActionWidget> _TimelineActionWidgets = new List<TimelineActionWidget>();
 
 	private void Awake()
 	{
 		_TimelineScrollRect = GetComponent<ScrollRect>();
+		_TimelineRect = GetComponent<RectTransform>().RectTransformToScreenSpace();
 
 		_ActionController.ActionAdded += ActionAdded;
 		_ActionController.ActionUpdated += ActionUpdated;
@@ -69,16 +71,14 @@ public class TimelineActionsView : MonoBehaviour
 
 	public void OnWidgetDrag(PointerEventData eventData)
 	{
-		Rect screenRect = GetComponent<RectTransform>().RectTransformToScreenSpace();
-
-		if (eventData.position.x < screenRect.center.x)
+		if (eventData.position.x < _TimelineRect.center.x)
 		{
-			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(screenRect.xMin + screenRect.width * _FollowPerc, screenRect.xMin, 0, 1));
+			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(_TimelineRect.xMin + _TimelineRect.width * _FollowPerc, _TimelineRect.xMin, 0, 1));
 			_TimelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_TimelineScrollRect.horizontalNormalizedPosition - _FollowSpeed * speedLerp * Time.deltaTime);
 		}
 		else
 		{
-			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(screenRect.center.x + screenRect.width * _FollowPerc, screenRect.xMax, 0, 1));
+			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(_TimelineRect.center.x + _TimelineRect.width * _FollowPerc, _TimelineRect.xMax, 0, 1));
 			_TimelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_TimelineScrollRect.horizontalNormalizedPosition + _FollowSpeed * speedLerp * Time.deltaTime);
 		}
 	}

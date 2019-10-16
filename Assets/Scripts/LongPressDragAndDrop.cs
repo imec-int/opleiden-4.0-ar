@@ -14,17 +14,17 @@ public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, ID
 	[SerializeField]
 	private GameObject _SpacerPrefab;
 
-	private RectTransform _ParentRT, _RectTransform, _Spacer;
-	private ScrollRect _ScrollRect;
+	[SerializeField]
+	private PointerEventData _LastDragEventData;
 
 	public UnityIntEvent _OnIndexChanged = new UnityIntEvent();
 	public UnityPointerDragEvent _OnDrag = new UnityPointerDragEvent();
 
-	[SerializeField]
-	private PointerEventData _LastDragEventData;
+	private RectTransform _ParentRT, _RectTransform, _SpacerRT;
+	private ScrollRect _ScrollRect;
 
-	private int _SiblingIndex;
-
+	private int _StartingIndex;
+	private float _Spacing;
 	private bool _IsDragging = false;
 
 	protected override void Awake()
@@ -32,7 +32,9 @@ public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, ID
 		base.Awake();
 		_RectTransform = transform.GetComponent<RectTransform>();
 		_ParentRT = _RectTransform.parent.GetComponent<RectTransform>();
-		_ScrollRect = _RectTransform.GetComponentInParent<ScrollRect>();
+		_ScrollRect = _ParentRT.GetComponentInParent<ScrollRect>();
+
+		_Spacing = _ParentRT.GetComponent<HorizontalOrVerticalLayoutGroup>().spacing;
 	}
 
 	protected override void Update()
@@ -50,10 +52,10 @@ public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, ID
 		if (_LongPressTriggered)
 		{
 			_IsDragging = true;
-			_SiblingIndex = _RectTransform.GetSiblingIndex();
+			_StartingIndex = _RectTransform.GetSiblingIndex();
 			_RectTransform.SetParent(_ScrollRect.transform);
-			_Spacer = GameObject.Instantiate(_SpacerPrefab, _ParentRT).GetComponent<RectTransform>();
-			_Spacer.SetSiblingIndex(_SiblingIndex);
+			_SpacerRT = GameObject.Instantiate(_SpacerPrefab, _ParentRT).GetComponent<RectTransform>();
+			_SpacerRT.SetSiblingIndex(_StartingIndex);
 
 			// Update content layout to avoid scrollrect resetting position
 			LayoutRebuilder.ForceRebuildLayoutImmediate(_ParentRT);
@@ -69,11 +71,11 @@ public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, ID
 		if (_IsDragging)
 		{
 			_RectTransform.position = eventData.position;
-			float sizeX = _RectTransform.sizeDelta.x + 6;
+			float sizeX = _RectTransform.sizeDelta.x + _Spacing;
 			float offsetX = -(_ParentRT.anchoredPosition.x + _ParentRT.parent.GetComponent<RectTransform>().rect.width) + _RectTransform.anchoredPosition.x - sizeX / 2;
 
 			float result = offsetX / sizeX;
-			_Spacer.SetSiblingIndex((int)result);
+			_SpacerRT.SetSiblingIndex((int)result);
 			_LastDragEventData = eventData;
 
 			// Update content layout to avoid scrollrect resetting position
@@ -90,13 +92,14 @@ public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, ID
 		if (_IsDragging)
 		{
 			_IsDragging = false;
+			int newIndex = _SpacerRT.GetSiblingIndex();
+			Destroy(_SpacerRT.gameObject);
 			_RectTransform.SetParent(_ParentRT);
-			_RectTransform.SetSiblingIndex(_Spacer.GetSiblingIndex());
-			Destroy(_Spacer.gameObject);
+			_RectTransform.SetSiblingIndex(newIndex);
 
-			if (_SiblingIndex != _RectTransform.GetSiblingIndex())
+			if (_StartingIndex != newIndex)
 			{
-				_OnIndexChanged.Invoke(_RectTransform.GetSiblingIndex());
+				_OnIndexChanged.Invoke(newIndex);
 			}
 		}
 		else
