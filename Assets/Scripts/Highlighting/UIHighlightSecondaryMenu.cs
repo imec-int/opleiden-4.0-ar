@@ -8,11 +8,13 @@ public class UIHighlightSecondaryMenu : MonoBehaviour
 {
     [SerializeField]
     private UIActionElement _SecondaryButtonPrefab = null;
+
+    #region Members
     private RectTransform _RectTransform = null;
     private HighlightInfo _HighlightInfo = null;
-    [SerializeField]
     private ActionController _ActionController = null;
     private UIHighlight _HighlightParent = null;
+    #endregion
 
     private void Awake()
 	{
