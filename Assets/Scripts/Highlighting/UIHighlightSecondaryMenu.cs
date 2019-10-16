@@ -10,14 +10,19 @@ public class UIHighlightSecondaryMenu : MonoBehaviour
     private UIActionElement _SecondaryButtonPrefab = null;
     private RectTransform _RectTransform = null;
     private HighlightInfo _HighlightInfo = null;
+    [SerializeField]
+    private ActionController _ActionController = null;
+    private UIHighlight _HighlightParent = null;
 
     private void Awake()
 	{
 		_RectTransform = GetComponent<RectTransform>();
 	}
 
-    public void Setup(Operation[] operations, Part part, UnityAction infoButtonListener)
+    public void Setup(Operation[] operations, Part part, UnityAction infoButtonListener, ActionController controller, UIHighlight parent)
     {
+        _ActionController = controller;
+        _HighlightParent = parent;
         // operation buttons
         foreach(Operation op in operations)
         {
@@ -47,5 +52,7 @@ public class UIHighlightSecondaryMenu : MonoBehaviour
     {
         Debug.Log($"Clicked {action.Operation}, {action.Part}");
         // TODO: Add to action manager
+        _ActionController.AddAction(action);
+        _HighlightParent.Collapse();
     }
 }

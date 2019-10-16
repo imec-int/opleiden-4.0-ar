@@ -11,6 +11,8 @@ public class UIHighlightContainer : MonoBehaviour
     private UIHighlight _UIHighlightPrefab = null;
     [SerializeField]
     private UIInfoPanel _UIInfoPanel = null;
+    [SerializeField]
+    private ActionController _ActionController = null;
 
     private List<UIHighlight> _UIHighlightInstanceList = new List<UIHighlight>();
 
@@ -62,7 +64,7 @@ public class UIHighlightContainer : MonoBehaviour
         foreach(HighlightAnchor anchor in anchors)
         {
             UIHighlight newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));  
-            newObj.Setup(anchor, OnInfoPanelRequested);
+            newObj.Setup(anchor, OnInfoPanelRequested, _ActionController);
             _UIHighlightInstanceList.Add(newObj);
             // Set up new object
             newObj.transform.SetParent(this.transform,true);

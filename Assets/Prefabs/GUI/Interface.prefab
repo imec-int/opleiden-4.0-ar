@@ -997,16 +997,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6721093374647068507}
     m_Modifications:
-    - target: {fileID: 7402301714548561075, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
-        type: 3}
-      propertyPath: m_Name
-      value: Timeline
-      objectReference: {fileID: 0}
-    - target: {fileID: 7402301714548561075, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5796393666585019821, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1110,6 +1100,16 @@ PrefabInstance:
     - target: {fileID: 5796393666585019821, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402301714548561075, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
+        type: 3}
+      propertyPath: m_Name
+      value: Timeline
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402301714548561075, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4311959031983044810, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
@@ -1234,11 +1234,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1817796479686687728}
     m_Modifications:
-    - target: {fileID: 2029257454702774209, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
+    - target: {fileID: 8777031888906600513, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
         type: 3}
-      propertyPath: m_Name
-      value: HighlightContainer
-      objectReference: {fileID: 0}
+      propertyPath: _UIInfoPanel
+      value: 
+      objectReference: {fileID: 1950468293398802120}
+    - target: {fileID: 8777031888906600513, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
+        type: 3}
+      propertyPath: _ActionController
+      value: 
+      objectReference: {fileID: 6114815636725928999}
     - target: {fileID: 8403035424732504051, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1344,11 +1349,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8777031888906600513, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
+    - target: {fileID: 2029257454702774209, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
         type: 3}
-      propertyPath: _UIInfoPanel
-      value: 
-      objectReference: {fileID: 1950468293398802120}
+      propertyPath: m_Name
+      value: HighlightContainer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2, type: 3}
 --- !u!114 &2666092778484754486 stripped
