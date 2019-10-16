@@ -3,13 +3,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TimelineActionWidget : MonoBehaviour
+public class TimelineActionWidget : UIActionElement
 {
 	[SerializeField]
-	private ActionMetadata _ActionMetadata;
-
-	[SerializeField]
-	private TextMeshProUGUI _Index, _Icon, _Label;
+	private TextMeshProUGUI _Index;
 
 	[SerializeField]
 	private GameObject _CloseBtn;
