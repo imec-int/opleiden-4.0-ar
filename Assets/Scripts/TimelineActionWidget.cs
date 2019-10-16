@@ -28,9 +28,8 @@ public class TimelineActionWidget : UIActionElement
 	public void UpdateState()
 	{
 		_Index.text = _Action.Index.ToString();
-		_Label.text = _ActionMetadata.ActionOperationsInfo[_Action.Operation].Name + " " + _ActionMetadata.ActionPartsInfo[_Action.Part].Name;
 		_OrderMarker.color = Color.clear;
-		_Icon.text = _ActionMetadata.ActionPartsInfo[_Action.Part].Icon;
+		base.Setup(_Action.Operation,_Action.Part);
 	}
 
 	private void Update()
