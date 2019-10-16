@@ -32,13 +32,13 @@ public class UIHighlight : MonoBehaviour
     }
 
 
-    public void Setup(HighlightAnchor anchor, Action<HighlightInfo> showHighlightInfo)
+    public void Setup(HighlightAnchor anchor, Action<HighlightInfo> showHighlightInfo, ActionController controller)
     {
         AssociatedAnchor = anchor;
         _SecondaryMenu.Setup(anchor.AvailableOperations,anchor.HighlightedPart,
         () => {
             showHighlightInfo?.Invoke(anchor.Info);
-        });
+        },controller, this);
 
         _SecondaryMenu.gameObject.SetActive(false);
         _MainButton.onClick.AddListener(OnButtonClicked);
