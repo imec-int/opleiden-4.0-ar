@@ -41,7 +41,7 @@ public class ActionController : MonoBehaviour
 		// newIndex starts from 0, increment to match action indexes
 		newIndex++;
 
-		ActionMoved.Invoke(action, newIndex);
+		ActionMoved?.Invoke(action, newIndex);
 
 		// Swap Action position in array
 		_Actions.RemoveAt(action.Index - 1);

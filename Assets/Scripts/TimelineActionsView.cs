@@ -25,12 +25,12 @@ public class TimelineActionsView : MonoBehaviour
 	private void Awake()
 	{
 		_TimelineScrollRect = GetComponent<ScrollRect>();
-		_TimelineRect = GetComponent<RectTransform>().RectTransformToScreenSpace();
+		_TimelineRect = GetComponent<RectTransform>().ToScreenSpace();
 
 		_ActionController.ActionAdded += ActionAdded;
 		_ActionController.ActionUpdated += ActionUpdated;
 		_ActionController.ActionDeleted += ActionDeleted;
-		_ActionController.ActionMoved += GetActionMoved;
+		_ActionController.ActionMoved += ActionMoved;
 	}
 
 	private void ActionAdded(ActionData action)
@@ -62,7 +62,7 @@ public class TimelineActionsView : MonoBehaviour
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);
 	}
 
-	private void GetActionMoved(ActionData action, int newIndex)
+	private void ActionMoved(ActionData action, int newIndex)
 	{
 		TimelineActionWidget timeLineActionWidget = _TimelineActionWidgets[action.Index - 1];
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);

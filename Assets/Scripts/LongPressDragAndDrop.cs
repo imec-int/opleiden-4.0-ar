@@ -18,7 +18,9 @@ public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, ID
 	private PointerEventData _LastDragEventData;
 
 	public UnityIntEvent _OnIndexChanged = new UnityIntEvent();
+	public UnityPointerDragEvent _OnBeginDrag = new UnityPointerDragEvent();
 	public UnityPointerDragEvent _OnDrag = new UnityPointerDragEvent();
+	public UnityPointerDragEvent _OnEndDrag = new UnityPointerDragEvent();
 
 	private RectTransform _ParentRT, _RectTransform, _SpacerRT;
 	private ScrollRect _ScrollRect;
@@ -56,6 +58,8 @@ public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, ID
 			_RectTransform.SetParent(_ScrollRect.transform);
 			_SpacerRT = GameObject.Instantiate(_SpacerPrefab, _ParentRT).GetComponent<RectTransform>();
 			_SpacerRT.SetSiblingIndex(_StartingIndex);
+
+			_OnBeginDrag.Invoke(eventData);
 
 			// Update content layout to avoid scrollrect resetting position
 			LayoutRebuilder.ForceRebuildLayoutImmediate(_ParentRT);
@@ -101,6 +105,8 @@ public class LongPressDragAndDrop : LongPressEventTrigger, IBeginDragHandler, ID
 			{
 				_OnIndexChanged.Invoke(newIndex);
 			}
+
+			_OnEndDrag.Invoke(eventData);
 		}
 		else
 		{
