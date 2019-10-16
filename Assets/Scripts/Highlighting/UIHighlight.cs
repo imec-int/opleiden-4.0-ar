@@ -31,9 +31,8 @@ public class UIHighlight : MonoBehaviour
         get; private set;
     }
 
-    public delegate void ShowHighlightInfoFunc(HighlightInfo info);
 
-    public void Setup(HighlightAnchor anchor, ShowHighlightInfoFunc showHighlightInfo)
+    public void Setup(HighlightAnchor anchor, Action<HighlightInfo> showHighlightInfo)
     {
         AssociatedAnchor = anchor;
         _SecondaryMenu.Setup(anchor.AvailableOperations,anchor.HighlightedPart,
@@ -42,7 +41,7 @@ public class UIHighlight : MonoBehaviour
         });
 
         _SecondaryMenu.gameObject.SetActive(false);
-        _MainButton.onClick.AddListener(onButtonClicked);
+        _MainButton.onClick.AddListener(OnButtonClicked);
     }
 
     public void Collapse()
@@ -65,7 +64,7 @@ public class UIHighlight : MonoBehaviour
     }
     
     // Event for the main button on this highlight
-    private void onButtonClicked()
+    private void OnButtonClicked()
     {
         Expand();
         OnExpanded?.Invoke(this);

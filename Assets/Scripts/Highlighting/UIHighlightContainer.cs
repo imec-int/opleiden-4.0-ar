@@ -14,15 +14,16 @@ public class UIHighlightContainer : MonoBehaviour
 
     private List<UIHighlight> _UIHighlightInstanceList = new List<UIHighlight>();
 
+#region Monobehaviour
     // Monobehaviour
     //====================
     void Awake()
     {
-        _UIInfoPanel.OnClose += onInfoPanelClosed;
+        _UIInfoPanel.OnClose += OnInfoPanelClosed;
     }
+#endregion
 
-    // Interface
-    //====================
+#region Interface
     public void Reset(GameObject newmodel = null)
     {
         // Clean up
@@ -50,9 +51,9 @@ public class UIHighlightContainer : MonoBehaviour
             highlight.gameObject.SetActive(visible);
         }
     }
+#endregion
 
-    // Methods
-    //=========================
+#region Methods
     private void PlaceHighlights(GameObject model)
     {
         HighlightAnchor[] anchors = model.GetComponentsInChildren<HighlightAnchor>();
@@ -61,16 +62,16 @@ public class UIHighlightContainer : MonoBehaviour
         foreach(HighlightAnchor anchor in anchors)
         {
             UIHighlight newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0,0,0));  
-            newObj.Setup(anchor, onInfoPanelRequested);
+            newObj.Setup(anchor, OnInfoPanelRequested);
             _UIHighlightInstanceList.Add(newObj);
             // Set up new object
             newObj.transform.SetParent(this.transform,true);
             newObj.OnExpanded += this.onHighlightSelected;
         }        
     }
+#endregion
 
-    /// Callbacks
-    //=======
+#region Callbacks
     private void onHighlightSelected(UIHighlight sender)
     {
         // Collapse all non-selected highlights
@@ -83,15 +84,17 @@ public class UIHighlightContainer : MonoBehaviour
         }
     }
 
-    private void onInfoPanelRequested(HighlightInfo info)
+    private void OnInfoPanelRequested(HighlightInfo info)
     {
         SetHighlightsVisibility(false);
         _UIInfoPanel.Show(info);
     }
 
-    private void onInfoPanelClosed()
+    private void OnInfoPanelClosed()
     {
         // We assume this can only be called when the highlights were already visible
         SetHighlightsVisibility(true);
     }
+#endregion
+
 }
