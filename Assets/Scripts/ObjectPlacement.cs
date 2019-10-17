@@ -4,23 +4,35 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
+[RequireComponent(typeof(ARSessionOrigin))]
+[RequireComponent(typeof(ARRaycastManager))]
 public class ObjectPlacement : MonoBehaviour
 {
-    [SerializeField]
-    ARRaycastManager _RaycastManager;
-    [SerializeField]
-    GameObject _Pump;
-    
+	[SerializeField]
+	private ARRaycastManager _RaycastManager;
 
-    // Start is called before the first frame update
-    void Update()
-    {
-        List<ARRaycastHit> hits = new List<ARRaycastHit>();
-        bool success = _RaycastManager.Raycast(Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f)),hits,TrackableType.Planes);
-        if (success)
-        {
-            _Pump.transform.position = hits[0].pose.position;
-        }
-    }
+	[SerializeField]
+	private ARSessionOrigin _SessionOrigin;
+
+	[SerializeField]
+	private Transform _Installation;
+
+	// Start is called before the first frame update
+	void Update()
+	{
+		if (Input.touchCount == 0 || _Installation == null)
+			return;
+
+		List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+
+		if (_RaycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
+		{
+			_Installation.gameObject.SetActive(true);
+			//_SessionOrigin.MakeContentAppearAt(_Installation, hits[0].pose.position);
+
+			_Installation.position = hits[0].pose.position;
+		}
+	}
 
 }
