@@ -25,13 +25,17 @@ public class ObjectPlacement : MonoBehaviour
 
 		List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
+		Vector3 pos = Camera.main.WorldToViewportPoint(_Installation.position);
 
-		if (_RaycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
+		if (pos.x < 0 || pos.x > 1 || pos.y < 0 || pos.y > 1 || pos.z < 0 || _Installation.gameObject.activeSelf == false)
 		{
-			_Installation.gameObject.SetActive(true);
-			//_SessionOrigin.MakeContentAppearAt(_Installation, hits[0].pose.position);
+			if (_RaycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
+			{
+				_Installation.gameObject.SetActive(true);
+				//_SessionOrigin.MakeContentAppearAt(_Installation, hits[0].pose.position);
 
-			_Installation.position = hits[0].pose.position;
+				_Installation.position = hits[0].pose.position;
+			}
 		}
 	}
 
