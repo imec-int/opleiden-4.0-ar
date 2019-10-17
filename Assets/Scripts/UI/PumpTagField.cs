@@ -25,6 +25,15 @@ namespace UI
 
 		private void OnEnable()
 		{
+			// Focuses inputfield on activation inside coroutine because Unity still has to activate the inputfield.
+			StartCoroutine(FocusInputField());
+		}
+
+		IEnumerator FocusInputField()
+		{
+			// We should only read the screen buffer after rendering is complete
+			yield return new WaitForEndOfFrame();
+
 			_inputField.Select();
 		}
 
