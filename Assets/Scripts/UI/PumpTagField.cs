@@ -42,7 +42,7 @@ namespace UI
 			if (_inputField.text == _pumpAnchor.PumpID)
 			{
 				_inputField.interactable = false;
-				_inputField.GetComponent<Image>().color = Color.green;
+				_inputField.GetComponent<Image>().CrossFadeColor(Color.green, 0.5f, false, false);
 				_animator.SetTrigger("PumpTaggedComplete");
 
 			}
