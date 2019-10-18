@@ -8,14 +8,17 @@ using UnityEngine.XR.ARSubsystems;
 [RequireComponent(typeof(ARRaycastManager))]
 public class ObjectPlacement : MonoBehaviour
 {
-	[SerializeField]
 	private ARRaycastManager _RaycastManager;
-
-	[SerializeField]
 	private ARSessionOrigin _SessionOrigin;
 
 	[SerializeField]
 	private Transform _Installation;
+
+	private void Awake()
+	{
+		_SessionOrigin = GetComponent<ARSessionOrigin>();
+		_RaycastManager = GetComponent<ARRaycastManager>();
+	}
 
 	// Start is called before the first frame update
 	void Update()
