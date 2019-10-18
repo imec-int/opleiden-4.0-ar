@@ -43,7 +43,7 @@ namespace UI
 			{
 				_inputField.interactable = false;
 				_inputField.GetComponent<Image>().CrossFadeColor(Color.green, 0.5f, false, false);
-				_animator.SetTrigger("PumpTaggedComplete");
+				_animator.SetTrigger("PumpTagged");
 
 			}
 		}

@@ -207,7 +207,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: PumpTaggedComplete
+    m_ConditionEvent: PumpTagged
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 609452268901341124}
@@ -237,6 +237,7 @@ AnimatorState:
   - {fileID: 2145844153763619427}
   m_StateMachineBehaviours:
   - {fileID: -3017780054068417803}
+  - {fileID: 6541545728159715876}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -291,6 +292,20 @@ MonoBehaviour:
   _widget: 3
   _deactivateOnEnter: 1
   _activateOnExit: 0
+--- !u!114 &-2247511266882745641
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee72c50ea4b69b4186d15713247a449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeTimer: 2
+  _triggerName: WaitComplete
 --- !u!1101 &-2089356548435953298
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -330,7 +345,7 @@ AnimatorStateMachine:
     m_Position: {x: 210, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6443659282705495742}
-    m_Position: {x: 1430, y: 130, z: 0}
+    m_Position: {x: 1430, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6047863441273858307}
     m_Position: {x: -50, y: 120, z: 0}
@@ -431,13 +446,19 @@ AnimatorController:
   m_Name: AppFlow
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: ShowLoadingScreen
+  - m_Name: ResetRequested
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: ResetRequested
+  - m_Name: ResetSuccessful
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 1
+    m_Controller: {fileID: 0}
+  - m_Name: ShowLoadingScreen
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -449,7 +470,13 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: PumpTaggedComplete
+  - m_Name: CalibrationComplete
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 1
+    m_Controller: {fileID: 0}
+  - m_Name: PumpTagged
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -473,17 +500,11 @@ AnimatorController:
     m_DefaultInt: 10
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: AppResetSuccessful
+  - m_Name: WaitComplete
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
-    m_Controller: {fileID: 0}
-  - m_Name: ARCalibrationComplete
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
@@ -505,7 +526,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: WaitComplete
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6443659282705495742}
   m_Solo: 0
@@ -515,7 +539,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -549,6 +573,7 @@ AnimatorState:
   - {fileID: 350645246388183631}
   m_StateMachineBehaviours:
   - {fileID: 5873754988418329603}
+  - {fileID: -2247511266882745641}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -657,7 +682,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: AppResetSuccessful
+    m_ConditionEvent: ResetSuccessful
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1458504256687794637}
@@ -810,6 +835,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &6541545728159715876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0f20a0817608a45b98f79455f98ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _widget: 1
+  _deactivateOnEnter: 1
+  _activateOnExit: 0
 --- !u!1101 &6756595861741826143
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -819,7 +859,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: ARCalibrationComplete
+    m_ConditionEvent: CalibrationComplete
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6785603729658502080}
@@ -908,3 +948,18 @@ MonoBehaviour:
   _activateOnEnter: 1
   _deactivateOnExit: 0
   _AssociatedWidget: {fileID: 0}
+--- !u!114 &8212871400991115248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0f20a0817608a45b98f79455f98ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _widget: 0
+  _deactivateOnEnter: 1
+  _activateOnExit: 1

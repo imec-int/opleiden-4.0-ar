@@ -10,8 +10,7 @@ public class PumpAnchor : MonoBehaviour
 #if UNITY_EDITOR
 	void Awake()
 	{
-		bool assertion = PumpID.Length == 0;
-		Debug.Assert(!assertion, $"{name}: is not set up correctly");
+		Debug.Assert(!string.IsNullOrWhiteSpace(_pumpID), $"{name}: is not set up correctly");
 	}
 #endif
 }
