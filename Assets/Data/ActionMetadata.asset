@@ -39,15 +39,15 @@ MonoBehaviour:
     _keys: 0000000001000000020000000300000004000000
     _values:
     - Name: Error
-      Icon: \uE037
+      Icon: E037
     - Name: Pomp
-      Icon: \uE037
+      Icon: E039
     - Name: Ventiel
-      Icon: \uE037
+      Icon: E40D
     - Name: Oliepeil
-      Icon: \uE037
+      Icon: E412
     - Name: Drukmeter
-      Icon: \uE037
+      Icon: E406
   _ActionOperationsInfo:
     reorderableList:
       canAdd: 1

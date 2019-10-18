@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public static class ExtensionMethods
 {
@@ -14,5 +15,20 @@ public static class ExtensionMethods
 		rect.x -= (transform.pivot.x * size.x);
 		rect.y -= ((1.0f - transform.pivot.y) * size.y);
 		return rect;
+	}
+
+	public static string ToUnicodeForTMPro(this string iconUnicode)
+	{
+		iconUnicode = iconUnicode.Replace(@"\u", "");
+		try
+		{
+			int unicode = int.Parse(iconUnicode, System.Globalization.NumberStyles.HexNumber);
+			return char.ConvertFromUtf32(unicode);
+		}
+		catch (FormatException e)
+		{
+			Debug.LogWarning($"Failed to parse {iconUnicode} for TMPro: {e}");
+		}
+		return iconUnicode;
 	}
 }
