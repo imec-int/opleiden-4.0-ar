@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 804246379}
   - component: {fileID: 1512352691}
   - component: {fileID: 1512352697}
+  - component: {fileID: 1434262470}
   m_Layer: 0
   m_Name: ARSessionOrigin
   m_TagString: Untagged
@@ -247,3 +248,18 @@ MonoBehaviour:
   _startPosition: {x: -0.69, y: 0.28, z: -1.07}
   _startRotation: {x: 0, y: 26.27, z: 0}
   _installation: {fileID: 0}
+--- !u!114 &1434262470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459947032632425698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f07ca66ce5514fb7a26ab1e51e9bfec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ReferenceLibrary: {fileID: 11400000, guid: e0d953e402aa81b4496c2940e56a0441, type: 2}
+  m_TrackedObjectPrefab: {fileID: 3999884373305559600, guid: ff1ad683bdb61cc4f811cd5a43dbe9b4,
+    type: 3}
