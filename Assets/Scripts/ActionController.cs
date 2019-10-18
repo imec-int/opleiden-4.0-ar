@@ -137,14 +137,6 @@ public class ActionController : MonoBehaviour
 		ValidationCompleted?.Invoke(ValidationReport);
 		Debug.Log(ValidationReport);
 	}
-
-    private ValidationResult CheckPrimaryFailure(int index)
-    {
-		ActionData actionToValidate = _Actions[index];
-		ActionData actionToCheckAgainst = _ValidationRuleSet.ActionsInOrderList.ElementAtOrDefault(index);
-		return actionToValidate.ValidateAgainst(actionToCheckAgainst);
-    }
-
 	private ValidationResult CheckWithinTolerance(int index, List<ValidationResult> otherResults)
 	{
 		ValidationResult result = otherResults[index];
