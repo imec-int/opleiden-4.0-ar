@@ -11,6 +11,9 @@ public class ValidationRuleSet: ScriptableObject
     [SerializeField]
     private int _PositionTolerance = 2;
 
+    [SerializeField]
+    private bool _CheckDisplacement = true;
+
     public List<ActionData> ActionsInOrderList
     {
         get => _ActionsInOrder;

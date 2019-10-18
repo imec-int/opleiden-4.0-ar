@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using TimeLineValidation;
 
 [Serializable]
 public enum Operation
@@ -34,6 +35,24 @@ public class ActionData: IEquatable<ActionData>
 	public int Index { get => _Index; set => _Index = value; }
 	public Operation Operation { get => _Operation; set => _Operation = value; }
 	public Part Part { get => _Part; set => _Part = value; }
+
+	public ValidationResult ValidateAgainst(ActionData other)
+	{
+		if (other == null)
+			return ValidationResult.Unnecessary;
+
+		if(this == other)
+			return ValidationResult.Correct;
+
+		if(Part == other.Part && Operation == other.Operation)
+			return ValidationResult.IncorrectIndex;
+		if (Part == other.Part && Operation != other.Operation)
+			return ValidationResult.IncorrectOperation;
+		if (Part != other.Part && Operation == other.Operation)
+			return ValidationResult.IncorrectPart;
+					
+		return ValidationResult.CompletelyIncorrect;
+	}
 
 #region Equality implementation
     public bool Equals(ActionData other)

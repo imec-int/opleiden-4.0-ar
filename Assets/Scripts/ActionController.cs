@@ -2,38 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System.Collections;
-
-public enum ValidationResult
-{
-	None = 0,
-	Correct,
-	IncorrectPart,
-	IncorrectOperation,
-	IncorrectIndex,
-	CompletelyIncorrect,
-	Unnecessary,
-	Missing,
-}
-public class ValidationInfo
-{
-	public bool Succeeded;
-	public List<ValidationResult> ValidationResultList;
-	public int AmountOfErrors
-	{
-		get
-		{
-			return ValidationResultList.Count(result => result != ValidationResult.Correct);
-		}
-	}
-
-	public override string ToString()
-	{
-		var results = ValidationResultList.Select(result => Enum.GetName(typeof(ValidationResult),result));
-		var resultsAsString = string.Join(",", results);
-		return $"Amount of errors: {AmountOfErrors}; Results list: {resultsAsString} ";
-	}
-}
+using TimeLineValidation;
 
 public class ActionController : MonoBehaviour
 {
@@ -117,31 +86,47 @@ public class ActionController : MonoBehaviour
 		List<ValidationResult> results = new List<ValidationResult>();
 		List<ActionData> checkList = _ValidationRuleSet.ActionsInOrderList;
 
-		// First Pass: Missing/Unnecesarry/Operation/Part/Correct
+		// First Pass: Missing/Unnecesarry/Operation/Part/Correct/Displaced
+		int errorCount = 0;
 		for(int i = 0; i < Math.Max(_Actions.Count,checkList.Count); ++i)
 		{
 			var result = ValidationResult.None;
-			// Past action count
+			// Over action count
 			if(i >= _Actions.Count)
 			{
 				result = ValidationResult.Missing;
 			}
-			else if (i >= checkList.Count)
+			ActionData actionToValidate = _Actions.ElementAtOrDefault(i);
+			ActionData actionToCheckAgainst = _ValidationRuleSet.ActionsInOrderList.ElementAtOrDefault(i-errorCount);
+
+			if (actionToValidate != null)
 			{
-				result =ValidationResult.Unnecessary;
-			}			
-			else
-				result = CheckPrimaryFailure(i);
-
+				result = actionToValidate.ValidateAgainst(actionToCheckAgainst);
+				// Check for displacement
+				if (result == ValidationResult.IncorrectIndex && errorCount > 0)
+				{
+					result = ValidationResult.Displaced;
+				}
+				
+				if (result == ValidationResult.CompletelyIncorrect)
+					++errorCount;
+			}
 			results.Add(result);
-		}
+		}	
 
+		/* 
 		// Second Pass: Tolerance for positions
 		for(int i = 0; i < results.Count; ++i)
 		{
-			if(results[i] == ValidationResult.Correct)
+			ValidationResult currResult = results[i];
+			if(currResult == ValidationResult.Correct
+				|| currResult == ValidationResult.Missing
+				|| currResult == ValidationResult.Unnecessary)
 				continue;
+
+			results[i] = CheckWithinTolerance(i,results);
 		}
+		*/
 
 		// Set results
 		ValidationReport = new ValidationInfo()
@@ -157,21 +142,30 @@ public class ActionController : MonoBehaviour
     {
 		ActionData actionToValidate = _Actions[index];
 		ActionData actionToCheckAgainst = _ValidationRuleSet.ActionsInOrderList.ElementAtOrDefault(index);
-		if (actionToValidate == actionToCheckAgainst)
-		{
-			return ValidationResult.Correct;
-		}
-		else
-		{
-			if (actionToValidate.Part == actionToCheckAgainst?.Part)
-			{
-				return ValidationResult.IncorrectOperation;
-			}
-			else if (actionToValidate.Operation == actionToCheckAgainst?.Operation)
-				return ValidationResult.IncorrectPart;
-			else
-				return ValidationResult.CompletelyIncorrect;
-		}
+		return actionToValidate.ValidateAgainst(actionToCheckAgainst);
     }
+
+	private ValidationResult CheckWithinTolerance(int index, List<ValidationResult> otherResults)
+	{
+		ValidationResult result = otherResults[index];
+		var toleranceRange = Enumerable.Range(Math.Max(index-_ValidationRuleSet.PositionTolerance,0),_ValidationRuleSet.PositionTolerance*2);
+		foreach (int i in toleranceRange)
+		{
+			if (i == index)
+				continue;
+			if (i > otherResults.Count)
+				break;
+
+			ValidationResult checkAgainst = otherResults[i];
+			// Ignore results that are already correct
+			if (checkAgainst == ValidationResult.Correct)
+				continue;
+
+			if (_Actions[index].ValidateAgainst(_ValidationRuleSet.ActionsInOrderList[i]) == ValidationResult.IncorrectIndex)
+				return ValidationResult.IncorrectIndex;
+			
+		}
+		return result;
+	}
     #endregion
 }
