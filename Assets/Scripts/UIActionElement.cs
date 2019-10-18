@@ -13,25 +13,6 @@ public class UIActionElement : MonoBehaviour
 
 	[SerializeField]
 	protected Button _AssociatedButton;
-
-	private static string GetUnicodeForTMPro(string iconUnicode)
-	{
-		if (iconUnicode.Contains(@"\u"))
-			return iconUnicode;
-
-		string result = "\uE037";
-		try
-		{
-			int unicode = int.Parse(iconUnicode, System.Globalization.NumberStyles.HexNumber);
-			result = char.ConvertFromUtf32(unicode);
-		}
-		catch(FormatException e)
-		{
-			result = iconUnicode;
-			Debug.LogWarning($"Failed to parse {iconUnicode} for TMPro");
-		}	
-		return result;
-	}
 	
 	public Button AssociatedButton
 	{
@@ -47,6 +28,6 @@ public class UIActionElement : MonoBehaviour
 	public void Setup(string label, string icon)
 	{
 		_Label.text = label;
-		_Icon.text = GetUnicodeForTMPro(icon);
+		_Icon.text = icon.ToUnicodeForTMPro();
 	}
 }
