@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee72c50ea4b69b4186d15713247a449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _FadeTimer: 2
+  _fadeTimer: 2
   _triggerName: StartCalibration
 --- !u!1102 &-6785603729658502080
 AnimatorState:
@@ -236,7 +236,6 @@ AnimatorState:
   m_Transitions:
   - {fileID: 2145844153763619427}
   m_StateMachineBehaviours:
-  - {fileID: -347426512794703007}
   - {fileID: -3017780054068417803}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0

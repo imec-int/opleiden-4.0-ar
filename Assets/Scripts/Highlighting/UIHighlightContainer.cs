@@ -21,6 +21,11 @@ public class UIHighlightContainer : MonoBehaviour
 	{
 		_UIInfoPanel.OnClose += OnInfoPanelClosed;
 	}
+
+	private void OnEnable()
+	{
+		Reset();
+	}
 	#endregion
 
 	#region Interface
@@ -30,7 +35,7 @@ public class UIHighlightContainer : MonoBehaviour
 		foreach (UIHighlight highlight in _UIHighlightInstanceList)
 		{
 			highlight.OnExpanded -= onHighlightSelected;
-			GameObject.Destroy(highlight.gameObject);
+			Destroy(highlight.gameObject);
 		}
 		_UIHighlightInstanceList.Clear();
 
@@ -58,12 +63,12 @@ public class UIHighlightContainer : MonoBehaviour
 
 		foreach (HighlightAnchor anchor in anchors)
 		{
-			UIHighlight newObj = GameObject.Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0));
+			UIHighlight newObj = Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0));
 			newObj.Setup(anchor, OnInfoPanelRequested, _ActionController);
 			_UIHighlightInstanceList.Add(newObj);
 			// Set up new object
-			newObj.transform.SetParent(this.transform, true);
-			newObj.OnExpanded += this.onHighlightSelected;
+			newObj.transform.SetParent(transform, true);
+			newObj.OnExpanded += onHighlightSelected;
 		}
 	}
 	#endregion
