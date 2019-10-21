@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,14 +14,29 @@ namespace UI
 		private Animator _animator;
 
 		[SerializeField]
+		private HighlightInfo _SerialInfo;
+
+		[SerializeField]
 		private PumpAnchor _pumpAnchor;
 
 		[SerializeField]
 		private TMP_InputField _inputField;
 
+		[SerializeField]
+		private InfoPanel _infoPanel;
+
 		private void Awake()
 		{
 			_inputField.characterLimit = _pumpAnchor.PumpID.Length;
+		}
+
+		private void OnInfoPanelClosed()
+		{
+			foreach(Transform child in transform)
+			{
+				child.gameObject.SetActive(true);
+			}
+			_infoPanel.OnClose -= OnInfoPanelClosed;
 		}
 
 		private void OnEnable()
@@ -44,8 +60,18 @@ namespace UI
 				_inputField.interactable = false;
 				_inputField.GetComponent<Image>().CrossFadeColor(Color.green, 0.5f, false, false);
 				_animator.SetTrigger("PumpTagged");
-
 			}
 		}
+
+		public void ShowAdditionalInfo()
+		{
+			// Hide children
+			foreach(Transform child in transform)
+			{
+				child.gameObject.SetActive(false);
+			}
+			_infoPanel.Show(_SerialInfo);
+			_infoPanel.OnClose += OnInfoPanelClosed;
+		}	
 	}
 }
