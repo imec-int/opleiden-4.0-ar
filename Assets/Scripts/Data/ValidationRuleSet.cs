@@ -105,7 +105,7 @@ public class ValidationRuleSet : ScriptableObject
 		{
 			--_actionPhaseIndex;
 			_subStepIndex = 0;
-			// default: wrong position
+			// default: wrong position // We already checked whether it's unnecessary
 			return ValidationResult.IncorrectPosition;
 		}
 		if (currentActionPhase.SubstepUIDList.Contains(action.UID))

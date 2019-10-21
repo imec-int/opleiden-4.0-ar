@@ -34,7 +34,7 @@ public class ActionData
 	public Operation Operation { get => _Operation; set => _Operation = value; }
 	public Part Part { get => _Part; set => _Part = value; }
 
-	// because a low operation + high part can give same numbers as high part + low operation, we need to offset one
+	// because two different enum combinations can give the same numbers, we need to offset one
 	private const int magicoffset= 100;
 	public int UID
 	{
