@@ -12,7 +12,7 @@ public class ActionPart : MonoBehaviour
 
 	public void AddAction(int operation)
 	{
-		ActionData action = new ActionData();
+		IndexedActionData action = new IndexedActionData();
 
 		action.Operation = (Operation)operation;
 		action.Part = _Part;

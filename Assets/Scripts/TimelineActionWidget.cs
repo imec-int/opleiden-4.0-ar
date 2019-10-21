@@ -14,10 +14,10 @@ public class TimelineActionWidget : UIActionElement
 	[SerializeField]
 	private Graphic _OrderMarker;
 
-	private ActionData _Action;
+	private IndexedActionData _Action;
 	private ActionController _ActionController;
 
-	public void Setup(ActionData action, ActionController controller)
+	public void Setup(IndexedActionData action, ActionController controller)
 	{
 		_ActionController = controller;
 		_Action = action;

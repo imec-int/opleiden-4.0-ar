@@ -12,11 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b0dbe561151ab40ab67f9b0a06ba92, type: 3}
   m_Name: DummyValidation
   m_EditorClassIdentifier: 
-  _ActionsInOrder:
-  - _Part: 2
-    _Operation: 1
-  - _Part: 3
-    _Operation: 3
-  - _Part: 1
-    _Operation: 4
-  _PositionTolerance: 1
+  _actionPhaseList:
+  - _name: Check Environ
+    _subStepOrderMatters: 0
+    _subSteps:
+    - _Part: 3
+      _Operation: 3
+    - _Part: 1
+      _Operation: 3
+  - _name: Valve
+    _subStepOrderMatters: 0
+    _subSteps:
+    - _Part: 2
+      _Operation: 2
+  - _name: Pump
+    _subStepOrderMatters: 1
+    _subSteps:
+    - _Part: 1
+      _Operation: 4
+    - _Part: 4
+      _Operation: 3
