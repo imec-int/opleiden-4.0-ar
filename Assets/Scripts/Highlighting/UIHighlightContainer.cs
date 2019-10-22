@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UI;
 
 public class UIHighlightContainer : MonoBehaviour
 {
@@ -10,18 +11,13 @@ public class UIHighlightContainer : MonoBehaviour
 	[SerializeField]
 	private UIHighlight _UIHighlightPrefab = null;
 	[SerializeField]
-	private UIInfoPanel _UIInfoPanel = null;
+	private InfoPanel _UIInfoPanel = null;
 	[SerializeField]
 	private ActionController _ActionController = null;
 
 	private List<UIHighlight> _UIHighlightInstanceList = new List<UIHighlight>();
 
 	#region Monobehaviour
-	void Awake()
-	{
-		_UIInfoPanel.OnClose += OnInfoPanelClosed;
-	}
-
 	private void OnEnable()
 	{
 		Reset();
@@ -90,12 +86,13 @@ public class UIHighlightContainer : MonoBehaviour
 	{
 		SetHighlightsVisibility(false);
 		_UIInfoPanel.Show(info);
+		_UIInfoPanel.OnClose += OnInfoPanelClosed;
 	}
 
 	private void OnInfoPanelClosed()
 	{
-		// We assume this can only be called when the highlights were already visible
 		SetHighlightsVisibility(true);
+		_UIInfoPanel.OnClose -= OnInfoPanelClosed;
 	}
 	#endregion
 
