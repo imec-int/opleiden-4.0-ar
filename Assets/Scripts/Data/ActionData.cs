@@ -40,7 +40,7 @@ public class ActionData
 	{
 		get
 		{
-			return this.GetHashCode();
+			return (_Operation.GetHashCode()*magicoffset) + _Part.GetHashCode();
 		}
 	}
 }
