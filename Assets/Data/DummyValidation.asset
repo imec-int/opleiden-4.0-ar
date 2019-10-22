@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b0dbe561151ab40ab67f9b0a06ba92, type: 3}
   m_Name: DummyValidation
   m_EditorClassIdentifier: 
+  _name: Dummy Validation
   _actionPhaseList:
   - _name: Check Environ
     _subStepOrderMatters: 0

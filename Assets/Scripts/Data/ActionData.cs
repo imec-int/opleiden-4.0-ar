@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using TimeLineValidation;
 
 [Serializable]
 public enum Operation
@@ -23,6 +22,7 @@ public enum Part
 	Barometer
 }
 
+// Base class describing an action
 [Serializable()]
 public class ActionData
 {
@@ -51,53 +51,4 @@ public class IndexedActionData: ActionData
 {
 	private int _Index;
 	public int Index { get => _Index; set => _Index = value; }
-
-/*
-	public ValidationResult ValidateAgainst(ActionData other)
-	{
-		if (other == null)
-			return ValidationResult.Unnecessary;
-
-		if(this == other)
-			return ValidationResult.Correct;
-
-		if(Part == other.Part && Operation == other.Operation)
-			return ValidationResult.IncorrectIndex;
-		if (Part == other.Part && Operation != other.Operation)
-			return ValidationResult.IncorrectOperation;
-		if (Part != other.Part && Operation == other.Operation)
-			return ValidationResult.IncorrectPart;
-					
-		return ValidationResult.CompletelyIncorrect;
-	}
-
-#region Equality implementation
-    public bool Equals(ActionData other)
-    {
-        if (other == null)
-			return false;
-
-		return (Index == other.Index 
-		&& Operation == other.Operation
-		&& Part == other.Part);
-    }
-
-	public override int GetHashCode()
-	{
-		return Part.GetHashCode() ^ Operation.GetHashCode() ^ Index.GetHashCode();
-	}
-
-	public static bool operator == (ActionData data1, ActionData data2)
-	{
-		if ((object)data1 == null)
-            return (object)data2 == null;
-		return data1.Equals(data2);
-	}
-
-	public static bool operator != (ActionData data1, ActionData data2)
-	{
-		return !(data1==data2);
-	}
-#endregion
-*/
 }
