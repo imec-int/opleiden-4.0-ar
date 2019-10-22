@@ -35,7 +35,7 @@ public class TimelineActionsView : MonoBehaviour
 		_ActionController.ActionMoved += ActionMoved;
 	}
 
-	private void ActionAdded(ActionData action)
+	private void ActionAdded(IndexedActionData action)
 	{
 		TimelineActionWidget timelineAction = GameObject.Instantiate(_ButtonPrefab, _TimelineScrollRect.content).GetComponent<TimelineActionWidget>();
 		timelineAction.gameObject.name = "TimelineActionWidget_" + _TimelineActionWidgets.Count;
@@ -53,18 +53,18 @@ public class TimelineActionsView : MonoBehaviour
 		_TimelineScrollRect.horizontalNormalizedPosition = 1;
 	}
 
-	private void ActionUpdated(ActionData action)
+	private void ActionUpdated(IndexedActionData action)
 	{
 		_TimelineActionWidgets[action.Index - 1].UpdateState();
 	}
 
-	private void ActionDeleted(ActionData action)
+	private void ActionDeleted(IndexedActionData action)
 	{
 		Destroy(_TimelineActionWidgets[action.Index - 1].gameObject);
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);
 	}
 
-	private void ActionMoved(ActionData action, int newIndex)
+	private void ActionMoved(IndexedActionData action, int newIndex)
 	{
 		TimelineActionWidget timeLineActionWidget = _TimelineActionWidgets[action.Index - 1];
 		_TimelineActionWidgets.RemoveAt(action.Index - 1);

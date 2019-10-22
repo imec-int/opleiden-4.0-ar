@@ -1,29 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using TimeLineValidation;
 
 public class ActionController : MonoBehaviour
 {
+	private List<IndexedActionData> _Actions = new List<IndexedActionData>();
 
-	private List<ActionData> _Actions = new List<ActionData>();
+	[SerializeField]
+	private ValidationRuleSet _ValidationRuleSet;
 
-	public event Action<ActionData> ActionAdded, ActionUpdated, ActionDeleted;
-	public event Action<ActionData, int> ActionMoved;
+	public ValidationInfo ValidationReport
+	{
+		get; private set;
+	}
 
-	public void AddAction(ActionData action)
+	public event Action<IndexedActionData> ActionAdded, ActionUpdated, ActionDeleted;
+	public event Action<IndexedActionData, int> ActionMoved;
+	public event Action<ValidationInfo> ValidationCompleted;
+
+#region Monobehaviour
+	void Awake()
+	{
+		bool rulesetCorrect = _ValidationRuleSet.Initialize();
+		Debug.Assert(rulesetCorrect, "Current Validation Ruleset contains invalid substeps!!");
+		ValidationReport = new ValidationInfo();
+	}
+#endregion
+
+#region Action Manipulation
+	public void AddAction(IndexedActionData action)
 	{
 		_Actions.Add(action);
 		action.Index = _Actions.Count;
 
 		ActionAdded?.Invoke(action);
+
+		// TODO: REMOVE TEMPORARY CODE
+		ValidateActions();
 	}
 
-	private void UpdateAction(ActionData action)
+	private void UpdateAction(IndexedActionData action)
 	{
 		ActionUpdated?.Invoke(action);
 	}
 
-	public void DeleteAction(ActionData action)
+	public void DeleteAction(IndexedActionData action)
 	{
 		ActionDeleted?.Invoke(action);
 
@@ -34,9 +57,12 @@ public class ActionController : MonoBehaviour
 			_Actions[i].Index = i + 1;
 			UpdateAction(_Actions[i]);
 		}
+
+		// TODO: REMOVE TEMPORARY CODE
+		ValidateActions();
 	}
 
-	public void MovedAction(ActionData action, int newIndex)
+	public void MovedAction(IndexedActionData action, int newIndex)
 	{
 		// newIndex starts from 0, increment to match action indexes
 		newIndex++;
@@ -53,5 +79,21 @@ public class ActionController : MonoBehaviour
 			_Actions[i].Index = i + 1;
 			UpdateAction(_Actions[i]);
 		}
+
+		// TODO: REMOVE TEMPORARY CODE
+		ValidateActions();
 	}
+#endregion
+
+#region Action Validation
+	public void ValidateActions()
+	{
+		ValidationInfo reportCard;
+		_ValidationRuleSet.Validate(_Actions.Select(action => action as ActionData).ToList(), out reportCard);
+		// report on the report
+		ValidationReport = reportCard;
+		ValidationCompleted?.Invoke(ValidationReport);
+		Debug.Log(ValidationReport);
+	}
+    #endregion
 }
