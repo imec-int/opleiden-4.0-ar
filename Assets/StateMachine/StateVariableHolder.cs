@@ -1,38 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 
-public class StateVariableHolder : MonoBehaviour
+namespace StateMachine
 {
-    [SerializeField]
-    private GameObject _LoadingScreen;
-    [SerializeField]
-    private GameObject _TimeLine;
+	public enum Widget
+	{
+		LoadingScreen,
+		TimeLine,
+		PumpTag,
+		HighlightContainer
+	}
 
-    [SerializeField]
-    private UIHighlightContainer _HighlightContainer;
+	public class StateVariableHolder : MonoBehaviour
+	{
+		[Serializable] public class WidgetDictionary : SerializableDictionaryBase<Widget, GameObject> { }
 
-    public GameObject LoadingScreen
-    {
-        get
-        {
-            return _LoadingScreen;
-        }
-    }
+		[SerializeField]
+		private WidgetDictionary _widgets;
 
-    public GameObject TimeLine
-    {
-        get
-        {
-            return _TimeLine;
-        }
-    }
-
-    public UIHighlightContainer HighlightContainer
-    {
-        get
-        {
-            return _HighlightContainer;
-        }
-    }
+		public WidgetDictionary Widgets { get => _widgets; }
+	}
 }

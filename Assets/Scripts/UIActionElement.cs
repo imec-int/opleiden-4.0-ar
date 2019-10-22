@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,6 @@ public class UIActionElement : MonoBehaviour
 	public void Setup(string label, string icon)
 	{
 		_Label.text = label;
-		_Icon.text = icon;
+		_Icon.text = icon.ToUnicodeForTMPro();
 	}
 }
