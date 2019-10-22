@@ -14,7 +14,7 @@ namespace UI
 		private Animator _animator;
 
 		[SerializeField]
-		private HighlightInfo _SerialInfo;
+		private HighlightInfo _serialInfo;
 
 		[SerializeField]
 		private PumpAnchor _pumpAnchor;
@@ -32,10 +32,7 @@ namespace UI
 
 		private void OnInfoPanelClosed()
 		{
-			foreach(Transform child in transform)
-			{
-				child.gameObject.SetActive(true);
-			}
+			this.gameObject.SetActive(true);
 			_infoPanel.OnClose -= OnInfoPanelClosed;
 		}
 
@@ -65,12 +62,8 @@ namespace UI
 
 		public void ShowAdditionalInfo()
 		{
-			// Hide children
-			foreach(Transform child in transform)
-			{
-				child.gameObject.SetActive(false);
-			}
-			_infoPanel.Show(_SerialInfo);
+			this.gameObject.SetActive(false);
+			_infoPanel.Show(_serialInfo);
 			_infoPanel.OnClose += OnInfoPanelClosed;
 		}	
 	}

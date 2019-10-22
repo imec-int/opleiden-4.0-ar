@@ -790,7 +790,6 @@ GameObject:
   m_Component:
   - component: {fileID: 123977882525620948}
   - component: {fileID: 2893418555187912843}
-  - component: {fileID: 688622551387159739}
   - component: {fileID: 3157387314845301888}
   m_Layer: 5
   m_Name: PumpTagField
@@ -833,18 +832,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
-  _SerialInfo: {fileID: 11400000, guid: 79c3ceebd3f544340a1d422a297a30e5, type: 2}
+  _serialInfo: {fileID: 11400000, guid: 79c3ceebd3f544340a1d422a297a30e5, type: 2}
   _pumpAnchor: {fileID: 0}
   _inputField: {fileID: 0}
   _infoPanel: {fileID: 0}
---- !u!222 &688622551387159739
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5761425681690076486}
-  m_CullTransparentMesh: 0
 --- !u!114 &3157387314845301888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,6 +1033,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 792172450983222779}
     m_Modifications:
+    - target: {fileID: 6943012132054698867, guid: 01dd9f19694486447862fc83a5ee86eb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943012132054698867, guid: 01dd9f19694486447862fc83a5ee86eb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5204844214099885560, guid: 01dd9f19694486447862fc83a5ee86eb,
         type: 3}
       propertyPath: m_Name
@@ -1334,16 +1335,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6943012132054698867, guid: 01dd9f19694486447862fc83a5ee86eb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6943012132054698867, guid: 01dd9f19694486447862fc83a5ee86eb,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7747289362333182648, guid: 01dd9f19694486447862fc83a5ee86eb,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -1356,6 +1347,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01dd9f19694486447862fc83a5ee86eb, type: 3}
+--- !u!1 &2366207165049511556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5204844214099885560, guid: 01dd9f19694486447862fc83a5ee86eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7560742081084859260}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8469289995817853926 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2118328706577924250, guid: 01dd9f19694486447862fc83a5ee86eb,
@@ -1380,9 +1377,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2366207165049511556 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5204844214099885560, guid: 01dd9f19694486447862fc83a5ee86eb,
-    type: 3}
-  m_PrefabInstance: {fileID: 7560742081084859260}
-  m_PrefabAsset: {fileID: 0}
