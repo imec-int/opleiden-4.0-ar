@@ -23,7 +23,6 @@ namespace TimeLineValidation
 		{
 			get
 			{
-				// todo: cache
 				return _subSteps.Select(action => action.UID).ToList();
 			}
 		}
