@@ -23,7 +23,7 @@ public enum Part
 }
 
 // Base class describing an action
-[Serializable()]
+[Serializable]
 public class ActionData
 {
 	[SerializeField]
@@ -46,7 +46,7 @@ public class ActionData
 }
 
 // Class to be used for anything related to actions on the timeline
-[Serializable()]
+[Serializable]
 public class IndexedActionData: ActionData
 {
 	private int _Index;

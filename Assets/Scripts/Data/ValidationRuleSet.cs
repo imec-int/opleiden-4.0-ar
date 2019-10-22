@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace TimeLineValidation
 {
-	[Serializable()]
+	[Serializable]
 	public class ActionPhase
 	{
 		[SerializeField]
@@ -65,6 +65,8 @@ namespace TimeLineValidation
 					// Check if action is correct
 					if (step.Operation == Operation.None || step.Part == Part.None)
 					{
+						// We do not want this to fail to build a list of valid actions
+						// this is intended for programmers to handle the error in the setup
 						result = false;
 						continue;
 					}
@@ -98,7 +100,7 @@ namespace TimeLineValidation
 				// Add result to list
 				outValidationInfo.ValidationResultList.Add(result);
 			}
-			outValidationInfo.Succeeded = succeeded;
+			outValidationInfo.Succeeded = succeeded && TotalStepCount == allTimelineActions.Count;
 		}
 		private ValidationResult RecursivelyPhaseCheck(ActionData action)
 		{
@@ -148,12 +150,10 @@ namespace TimeLineValidation
 			result = RecursivelyPhaseCheck(action);
 
 			// Too many of the same UID check
+			var count = IncreaseUsageForUID(_UIDUsageInTimelineDict, action.UID);
+			if (count > _UIDUsageInRulesetDict[action.UID])
 			{
-				var count = IncreaseUsageForUID(_UIDUsageInTimelineDict, action.UID);
-				if (count > _UIDUsageInRulesetDict[action.UID])
-				{
-					return ValidationResult.Incorrect;
-				}
+				return ValidationResult.Incorrect;
 			}
 			return result;
 		}
