@@ -1,17 +1,16 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
 using UnityEditor;
-using UnityEngine;
 
 namespace Editor.imec.Roslyn
 {
 	[InitializeOnLoad]
 	public class RulesetConfig : AssetPostprocessor
 	{
-        public RulesetConfig()
-        {
-            OnGeneratedCSProjectFiles();
-        }
+		public RulesetConfig()
+		{
+			OnGeneratedCSProjectFiles();
+		}
 
 		private static void OnGeneratedCSProjectFiles()
 		{
