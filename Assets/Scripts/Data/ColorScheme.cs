@@ -7,6 +7,13 @@ using UnityEngine.UI;
 namespace Data
 {
 	[Serializable] public class ValidationColorsDictionary : SerializableDictionaryBase<ValidationResult,ColorBlock> {}
+	[Serializable] public class UIColorsDictionary: SerializableDictionaryBase<ColorStyleables, ColorBlock>{};
+
+	public enum ColorStyleables
+	{
+		None,
+		Button
+	}
 
 	// Class to assing colors to other values
 	[CreateAssetMenu(fileName="ColorData", menuName="opleiden-4.0-ar/ColorScheme")]
@@ -16,9 +23,11 @@ namespace Data
 		private ValidationColorsDictionary _validationColorDictionary = new ValidationColorsDictionary();
 
 		[SerializeField]
-		private Color _neutralColor = Color.white;
+		// Using another dictionary, otherwise Unity just dumps a color block with no indication what it is for
+		private UIColorsDictionary _uiColorsDictionary = new UIColorsDictionary();
 
-		private ColorBlock _defaultButtonColors = ColorBlock.defaultColorBlock;
+		[SerializeField]
+		private Color _neutralColor = Color.white;
 
 		// Default constructor with some dummy data for validation results
 		public ColorScheme()
@@ -26,10 +35,12 @@ namespace Data
 			ValidationColorDictionary.Add(ValidationResult.Correct,new ColorBlock());
 			ValidationColorDictionary.Add(ValidationResult.Incorrect, new ColorBlock());
 			ValidationColorDictionary.Add(ValidationResult.IncorrectPosition, new ColorBlock());
+
+			_uiColorsDictionary.Add(ColorStyleables.Button,ColorBlock.defaultColorBlock);
 		}
 
-		public ValidationColorsDictionary ValidationColorDictionary { get => _validationColorDictionary; set => _validationColorDictionary = value; }
-		public Color NeutralColor { get => _neutralColor; set => _neutralColor = value; }
-		public ColorBlock DefaultButtonColors { get => _defaultButtonColors; set => _defaultButtonColors = value; }
-	}
+        public ValidationColorsDictionary ValidationColorDictionary => _validationColorDictionary;
+        public Color NeutralColor => _neutralColor;
+		public UIColorsDictionary UIColorsDictionary => _uiColorsDictionary;
+    }
 }

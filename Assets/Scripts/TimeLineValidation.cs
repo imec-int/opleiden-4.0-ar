@@ -16,6 +16,7 @@ namespace TimeLineValidation
 	{
 		public bool Succeeded {get;set;}
 		public List<ValidationResult> ValidationResultList {get;set;}
+		public List<int> ValidatedUIDs {get;set;}
 		public ValidationRuleSet UsedRuleSet {get;set;}
 		public int AmountOfErrors
 		{

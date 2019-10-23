@@ -1204,6 +1204,11 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 258
       objectReference: {fileID: 0}
+    - target: {fileID: 5712442245957090945, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
+        type: 3}
+      propertyPath: _controller
+      value: 
+      objectReference: {fileID: 6114815636725928999}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e331d67ffd9fbc41a153a18d637eb6f, type: 3}
 --- !u!114 &4613035565144895174 stripped

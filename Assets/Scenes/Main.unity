@@ -607,6 +607,11 @@ PrefabInstance:
       propertyPath: _3DModel
       value: 
       objectReference: {fileID: 1838250088}
+    - target: {fileID: 2666092778484754486, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: _actionController
+      value: 
+      objectReference: {fileID: 24813404}
     - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_Camera
@@ -644,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 4142869059531553064, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1014.25244
+      value: -1014.25
       objectReference: {fileID: 0}
     - target: {fileID: 7237425207466318600, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
@@ -658,10 +663,5 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1957994235519538369, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: _controller
-      value: 
-      objectReference: {fileID: 24813404}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}

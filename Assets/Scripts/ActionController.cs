@@ -6,17 +6,16 @@ using TimeLineValidation;
 
 public class ActionController : MonoBehaviour
 {
-	private List<IndexedActionData> _actions = new List<IndexedActionData>();
-
-	[SerializeField]
+    [SerializeField]
 	private ValidationRuleSet _validationRuleSet;
 
 	public ValidationInfo ValidationReport
 	{
 		get; private set;
 	}
+    public List<IndexedActionData> Actions { get; } = new List<IndexedActionData>();
 
-	public event Action<IndexedActionData> ActionAdded, ActionUpdated, ActionDeleted;
+    public event Action<IndexedActionData> ActionAdded, ActionUpdated, ActionDeleted;
 	public event Action<IndexedActionData, int> ActionMoved;
 	public event Action<ValidationInfo> ValidationCompleted;
 
@@ -32,8 +31,8 @@ public class ActionController : MonoBehaviour
 #region Action Manipulation
 	public void AddAction(IndexedActionData action)
 	{
-		_actions.Add(action);
-		action.Index = _actions.Count;
+		Actions.Add(action);
+		action.Index = Actions.Count;
 
 		ActionAdded?.Invoke(action);
 		//ValidateActions();
@@ -48,12 +47,12 @@ public class ActionController : MonoBehaviour
 	{
 		ActionDeleted?.Invoke(action);
 
-		_actions.RemoveAt(action.Index - 1);
+		Actions.RemoveAt(action.Index - 1);
 
-		for (int i = action.Index - 1; i < _actions.Count; i++)
+		for (int i = action.Index - 1; i < Actions.Count; i++)
 		{
-			_actions[i].Index = i + 1;
-			UpdateAction(_actions[i]);
+			Actions[i].Index = i + 1;
+			UpdateAction(Actions[i]);
 		}
 		//ValidateActions();
 	}
@@ -66,14 +65,14 @@ public class ActionController : MonoBehaviour
 		ActionMoved?.Invoke(action, newIndex);
 
 		// Swap Action position in array
-		_actions.RemoveAt(action.Index - 1);
-		_actions.Insert(newIndex - 1, action);
+		Actions.RemoveAt(action.Index - 1);
+		Actions.Insert(newIndex - 1, action);
 
 		// Update all action indexes after the original or the new index
-		for (int i = Mathf.Min(action.Index, newIndex) - 1; i < _actions.Count; i++)
+		for (int i = Mathf.Min(action.Index, newIndex) - 1; i < Actions.Count; i++)
 		{
-			_actions[i].Index = i + 1;
-			UpdateAction(_actions[i]);
+			Actions[i].Index = i + 1;
+			UpdateAction(Actions[i]);
 		}
 		//ValidateActions();
 	}
@@ -82,7 +81,7 @@ public class ActionController : MonoBehaviour
 #region Action Validation
 	public void ValidateActions()
 	{
-		_validationRuleSet.Validate(_actions.Select(action => action as ActionData).ToList(), out ValidationInfo reportCard);
+		_validationRuleSet.Validate(Actions.Select(action => action as ActionData).ToList(), out ValidationInfo reportCard);
 		// report on the report
 		ValidationReport = reportCard;
 		ValidationCompleted?.Invoke(ValidationReport);
