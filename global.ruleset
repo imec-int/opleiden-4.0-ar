@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="roslynator.ruleset" ToolsVersion="16.0">
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.Features" RuleNamespace="Microsoft.CodeAnalysis.CSharp.Features">
+    <Rule Id="IDE0044" Action="None" />
+    <Rule Id="IDE0045" Action="None" />
+    <Rule Id="IDE0046" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="Roslynator.CSharp.Analyzers" RuleNamespace="Roslynator.CSharp.Analyzers">
+    <Rule Id="RCS1008" Action="Info" />
+    <Rule Id="RCS1169" Action="None" />
+    <Rule Id="RCS1085" Action="None" />
+    <Rule Id="RCS1213" Action="None" />
+    <Rule Id="RCS1221" Action="None" />
+    <Rule Id="RCS1045" Action="Info" />
+  </Rules>
+</RuleSet>
