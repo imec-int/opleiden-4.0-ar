@@ -120,6 +120,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &24813404 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6114815636725928999, guid: 37f3ea2b309ce0f4595440007830facd,
+    type: 3}
+  m_PrefabInstance: {fileID: 6721093372950041152}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1b92f268f13b642ad7765bd48fc88b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &81847342
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,5 +611,20 @@ PrefabInstance:
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 1608517850}
+    - target: {fileID: 6114815636725928999, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: _validationRuleSet
+      value: 
+      objectReference: {fileID: 11400000, guid: fa4626eb1972f1f498dfb9a8982c0c52,
+        type: 2}
+    - target: {fileID: 787066051, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
+      propertyPath: _buttonPrefab
+      value: 
+      objectReference: {fileID: 3849095624689843142, guid: 2883e8daeee000d40a1b752664369956,
+        type: 3}
+    - target: {fileID: 787066051, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
+      propertyPath: _actionController
+      value: 
+      objectReference: {fileID: 24813404}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}

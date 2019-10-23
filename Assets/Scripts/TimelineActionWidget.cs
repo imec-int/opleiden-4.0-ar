@@ -1,41 +1,74 @@
-﻿using TMPro;
+﻿using System;
+using System.Collections;
+using Data;
+using TimeLineValidation;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
+[RequireComponent(typeof(Button))]
 public class TimelineActionWidget : UIActionElement
 {
 	[SerializeField]
-	private TextMeshProUGUI _Index;
+	private TextMeshProUGUI _index;
 
 	[SerializeField]
-	private GameObject _CloseBtn;
+	private GameObject _closeBtn;
 
 	[SerializeField]
-	private Graphic _OrderMarker;
+	private Graphic _orderMarker;
 
-	private IndexedActionData _Action;
-	private ActionController _ActionController;
+	[SerializeField]
+	private ColorScheme _colorScheme;
+
+	private IndexedActionData _action;
+	private ActionController _actionController;
+	private Button _btnObj;
+	private Image _bgImage;
+
+	private void Awake()
+	{
+		_btnObj = this.GetComponent<Button>();
+		_bgImage = this.GetComponent<Image>();
+	}
 
 	public void Setup(IndexedActionData action, ActionController controller)
 	{
-		_ActionController = controller;
-		_Action = action;
-
+		_actionController = controller;
+		_actionController.ValidationCompleted += VisualizeValidation;
+		_action = action;
 		UpdateState();
+	}
+
+	private void VisualizeValidation(ValidationInfo info)
+	{
+		// Get result for this instance
+		ValidationResult result = info.ValidationResultList[_action.Index-1];
+
+		Debug.Assert(_colorScheme.ValidationColorDictionary.TryGetValue(result,out ColorBlock requiredColors));
+		// Set the visuals
+		SetBGColor(requiredColors);
+	}
+
+	private void SetBGColor(ColorBlock requiredColors)
+	{
+		_btnObj.colors = requiredColors;
+		_bgImage.CrossFadeColor(requiredColors.normalColor, 0.5f, true, true);
 	}
 
 	public void UpdateState()
 	{
-		_Index.text = _Action.Index.ToString();
-		_OrderMarker.color = Color.clear;
-		base.Setup(_Action.Operation,_Action.Part);
+		_index.text = _action.Index.ToString();
+		_orderMarker.color = Color.clear;
+		base.Setup(_action.Operation,_action.Part);
 	}
 
 	private void Update()
 	{
 		// TODO: Input.GetMouseButtonDown(0) does this work on mobile?
-		if (_CloseBtn.activeSelf && Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != _CloseBtn)
+		if (_closeBtn.activeSelf && Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != _closeBtn)
 		{
 			SetDeleteBtnActive(false);
 		}
@@ -43,16 +76,17 @@ public class TimelineActionWidget : UIActionElement
 
 	public void SetDeleteBtnActive(bool state)
 	{
-		_CloseBtn.SetActive(state);
+		_closeBtn.SetActive(state);
 	}
 
 	public void Delete()
 	{
-		_ActionController.DeleteAction(_Action);
+		_actionController.ValidationCompleted -= VisualizeValidation;
+		_actionController.DeleteAction(_action);
 	}
 
 	public void Moved(int newIndex)
 	{
-		_ActionController.MovedAction(_Action, newIndex);
+		_actionController.MovedAction(_action, newIndex);
 	}
 }

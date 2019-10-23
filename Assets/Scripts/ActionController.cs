@@ -6,10 +6,10 @@ using TimeLineValidation;
 
 public class ActionController : MonoBehaviour
 {
-	private List<IndexedActionData> _Actions = new List<IndexedActionData>();
+	private List<IndexedActionData> _actions = new List<IndexedActionData>();
 
 	[SerializeField]
-	private ValidationRuleSet _ValidationRuleSet;
+	private ValidationRuleSet _validationRuleSet;
 
 	public ValidationInfo ValidationReport
 	{
@@ -23,7 +23,7 @@ public class ActionController : MonoBehaviour
 #region Monobehaviour
 	void Awake()
 	{
-		bool rulesetCorrect = _ValidationRuleSet.Initialize();
+		bool rulesetCorrect = _validationRuleSet.Initialize();
 		Debug.Assert(rulesetCorrect, "Current Validation Ruleset contains invalid substeps!!");
 		ValidationReport = new ValidationInfo();
 	}
@@ -32,8 +32,8 @@ public class ActionController : MonoBehaviour
 #region Action Manipulation
 	public void AddAction(IndexedActionData action)
 	{
-		_Actions.Add(action);
-		action.Index = _Actions.Count;
+		_actions.Add(action);
+		action.Index = _actions.Count;
 
 		ActionAdded?.Invoke(action);
 
@@ -50,12 +50,12 @@ public class ActionController : MonoBehaviour
 	{
 		ActionDeleted?.Invoke(action);
 
-		_Actions.RemoveAt(action.Index - 1);
+		_actions.RemoveAt(action.Index - 1);
 
-		for (int i = action.Index - 1; i < _Actions.Count; i++)
+		for (int i = action.Index - 1; i < _actions.Count; i++)
 		{
-			_Actions[i].Index = i + 1;
-			UpdateAction(_Actions[i]);
+			_actions[i].Index = i + 1;
+			UpdateAction(_actions[i]);
 		}
 
 		// TODO: REMOVE TEMPORARY CODE
@@ -70,14 +70,14 @@ public class ActionController : MonoBehaviour
 		ActionMoved?.Invoke(action, newIndex);
 
 		// Swap Action position in array
-		_Actions.RemoveAt(action.Index - 1);
-		_Actions.Insert(newIndex - 1, action);
+		_actions.RemoveAt(action.Index - 1);
+		_actions.Insert(newIndex - 1, action);
 
 		// Update all action indexes after the original or the new index
-		for (int i = Mathf.Min(action.Index, newIndex) - 1; i < _Actions.Count; i++)
+		for (int i = Mathf.Min(action.Index, newIndex) - 1; i < _actions.Count; i++)
 		{
-			_Actions[i].Index = i + 1;
-			UpdateAction(_Actions[i]);
+			_actions[i].Index = i + 1;
+			UpdateAction(_actions[i]);
 		}
 
 		// TODO: REMOVE TEMPORARY CODE
@@ -88,12 +88,11 @@ public class ActionController : MonoBehaviour
 #region Action Validation
 	public void ValidateActions()
 	{
-		ValidationInfo reportCard;
-		_ValidationRuleSet.Validate(_Actions.Select(action => action as ActionData).ToList(), out reportCard);
+		_validationRuleSet.Validate(_actions.Select(action => action as ActionData).ToList(), out ValidationInfo reportCard);
 		// report on the report
 		ValidationReport = reportCard;
 		ValidationCompleted?.Invoke(ValidationReport);
 		Debug.Log(ValidationReport);
 	}
-    #endregion
+#endregion
 }
