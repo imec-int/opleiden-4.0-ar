@@ -16,12 +16,6 @@ public class ActionController : MonoBehaviour
 		get; private set;
 	}
 
-	public bool ValidatingActions
-	{
-		get;
-		set;
-	}
-
 	public event Action<IndexedActionData> ActionAdded, ActionUpdated, ActionDeleted;
 	public event Action<IndexedActionData, int> ActionMoved;
 	public event Action<ValidationInfo> ValidationCompleted;
