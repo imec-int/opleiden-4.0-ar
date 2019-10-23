@@ -17,10 +17,13 @@ public class TimelineActionsView : MonoBehaviour
 	[SerializeField]
 	private float _followSpeed = 0.5f;
 
+	[SerializeField]
+	private Button _btnTimelineValidation;
+
 	private ScrollRect _timelineScrollRect;
 	private Rect _timelineRect;
 
-	private List<TimelineActionWidget> _timelineActionWidgets = new List<TimelineActionWidget>();
+	private readonly List<TimelineActionWidget> _timelineActionWidgets = new List<TimelineActionWidget>();
 
 	private void Awake()
 	{
@@ -33,6 +36,8 @@ public class TimelineActionsView : MonoBehaviour
 		_actionController.ActionUpdated += ActionUpdated;
 		_actionController.ActionDeleted += ActionDeleted;
 		_actionController.ActionMoved += ActionMoved;
+
+		_btnTimelineValidation.onClick.AddListener(() => _actionController.ValidateActions());
 	}
 
 	private void ActionAdded(IndexedActionData action)

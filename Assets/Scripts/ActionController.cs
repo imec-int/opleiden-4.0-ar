@@ -16,6 +16,12 @@ public class ActionController : MonoBehaviour
 		get; private set;
 	}
 
+	public bool ValidatingActions
+	{
+		get;
+		set;
+	}
+
 	public event Action<IndexedActionData> ActionAdded, ActionUpdated, ActionDeleted;
 	public event Action<IndexedActionData, int> ActionMoved;
 	public event Action<ValidationInfo> ValidationCompleted;
@@ -36,9 +42,7 @@ public class ActionController : MonoBehaviour
 		action.Index = _actions.Count;
 
 		ActionAdded?.Invoke(action);
-
-		// TODO: REMOVE TEMPORARY CODE
-		ValidateActions();
+		//ValidateActions();
 	}
 
 	private void UpdateAction(IndexedActionData action)
@@ -57,9 +61,7 @@ public class ActionController : MonoBehaviour
 			_actions[i].Index = i + 1;
 			UpdateAction(_actions[i]);
 		}
-
-		// TODO: REMOVE TEMPORARY CODE
-		ValidateActions();
+		//ValidateActions();
 	}
 
 	public void MovedAction(IndexedActionData action, int newIndex)
@@ -79,9 +81,7 @@ public class ActionController : MonoBehaviour
 			_actions[i].Index = i + 1;
 			UpdateAction(_actions[i]);
 		}
-
-		// TODO: REMOVE TEMPORARY CODE
-		ValidateActions();
+		//ValidateActions();
 	}
 #endregion
 
