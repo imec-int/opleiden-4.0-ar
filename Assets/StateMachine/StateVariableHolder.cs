@@ -12,13 +12,25 @@ namespace StateMachine
 		HighlightContainer
 	}
 
+	public enum Component
+	{
+		TrackedObjectManager
+	}
+
 	public class StateVariableHolder : MonoBehaviour
 	{
 		[Serializable] public class WidgetDictionary : SerializableDictionaryBase<Widget, GameObject> { }
+
+		[Serializable] public class ComponentDictionary : SerializableDictionaryBase<Component, MonoBehaviour> { }
 
 		[SerializeField]
 		private WidgetDictionary _widgets;
 
 		public WidgetDictionary Widgets { get => _widgets; }
+
+		[SerializeField]
+		private ComponentDictionary _components;
+
+		public ComponentDictionary Components { get => _components; }
 	}
 }
