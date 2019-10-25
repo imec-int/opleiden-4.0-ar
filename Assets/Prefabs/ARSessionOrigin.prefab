@@ -229,8 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9027ed49b7cf1e74196ae50454e730df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RaycastManager: {fileID: 804246376}
-  _SessionOrigin: {fileID: 8167808860052763591}
   _Installation: {fileID: 0}
 --- !u!114 &1434262470
 MonoBehaviour:
@@ -239,7 +237,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2459947032632425698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f07ca66ce5514fb7a26ab1e51e9bfec, type: 3}
   m_Name: 
