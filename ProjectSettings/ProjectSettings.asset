@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: imec
-  productName: opleiden-4.0-ar
+  productName: Opleiden4 AR
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -164,9 +164,9 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: be.imec.opleiden-4.0-ar
-    Standalone: be.imec.opleiden-4.0-ar
-    iPhone: be.imec.opleiden-4.0-ar
+    Android: be.imec.opleiden4.ar
+    Standalone: be.imec.opleiden4.ar
+    iPhone: be.imec.opleiden4.ar
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 24
