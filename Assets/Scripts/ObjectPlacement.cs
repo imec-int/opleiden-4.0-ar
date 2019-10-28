@@ -17,10 +17,17 @@ public class ObjectPlacement : MonoBehaviour
 	[SerializeField]
 	private float _installationScale = 1;
 
+	[SerializeField]
+	private Canvas _worldCanvas;
+
+	private Vector3 _originalWorldCanvasScale;
+
 	private void Awake()
 	{
 		_sessionOrigin = GetComponent<ARSessionOrigin>();
 		_raycastManager = GetComponent<ARRaycastManager>();
+
+		_originalWorldCanvasScale = _worldCanvas.transform.localScale;
 	}
 
 	// Start is called before the first frame update
@@ -41,7 +48,8 @@ public class ObjectPlacement : MonoBehaviour
 				//_SessionOrigin.MakeContentAppearAt(_Installation, hits[0].pose.position);
 
 				_installation.position = hits[0].pose.position;
-				_installation.localScale = new Vector3(_installationScale, _installationScale, _installationScale);
+				_installation.localScale = _originalWorldCanvasScale * _installationScale;
+				_worldCanvas.transform.localScale = new Vector3(_installationScale, _installationScale, _installationScale);
 			}
 		}
 	}
