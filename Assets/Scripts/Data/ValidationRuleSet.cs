@@ -83,6 +83,7 @@ namespace TimeLineValidation
 			// Set up validation info
 			outValidationInfo = new ValidationInfo();
 			outValidationInfo.ValidationResultList = new List<ValidationResult>();
+			outValidationInfo.ValidatedUIDs = new List<int>();
 			outValidationInfo.UsedRuleSet = this;
 
 			// Reset
@@ -99,6 +100,7 @@ namespace TimeLineValidation
 					succeeded = false;
 				// Add result to list
 				outValidationInfo.ValidationResultList.Add(result);
+				outValidationInfo.ValidatedUIDs.Add(action.UID);
 			}
 			outValidationInfo.Succeeded = succeeded && TotalStepCount == allTimelineActions.Count;
 		}

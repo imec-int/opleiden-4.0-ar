@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using TimeLineValidation;
 public class TimelineActionsView : MonoBehaviour
 {
 	[SerializeField]
@@ -18,19 +18,24 @@ public class TimelineActionsView : MonoBehaviour
 	[SerializeField]
 	private float _followSpeed = 0.5f;
 
+	[SerializeField]
+	private Button _btnTimelineValidation;
+
 	private ScrollRect _timelineScrollRect;
 	private Rect _timelineRect;
 
-	private List<TimelineActionWidget> _timelineActionWidgets = new List<TimelineActionWidget>();
+	private readonly List<TimelineActionWidget> _timelineActionWidgets = new List<TimelineActionWidget>();
 
 	private void Awake()
 	{
 		_timelineScrollRect = GetComponent<ScrollRect>();
-
+		
 		_actionController.ActionAdded += ActionAdded;
 		_actionController.ActionUpdated += ActionUpdated;
 		_actionController.ActionDeleted += ActionDeleted;
 		_actionController.ActionMoved += ActionMoved;
+
+		_btnTimelineValidation.onClick.AddListener(() => _actionController.ValidateActions());
 	}
 
 	private void OnEnable()

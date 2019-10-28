@@ -36,11 +36,15 @@ public class ActionData
 
 	// because two different enum combinations can give the same numbers, we need to offset one
 	private const int magicoffset= 100;
+	public static int CalculateUID(Operation operation, Part part)
+	{
+		return (operation.GetHashCode()*magicoffset) + part.GetHashCode();
+	}
 	public int UID
 	{
 		get
 		{
-			return (_Operation.GetHashCode()*magicoffset) + _Part.GetHashCode();
+			return CalculateUID(_Operation,_Part);
 		}
 	}
 }
