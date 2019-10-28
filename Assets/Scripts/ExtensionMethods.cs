@@ -10,11 +10,14 @@ public static class ExtensionMethods
 
 	public static Rect ToScreenSpace(this RectTransform transform)
 	{
-		Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
-		Rect rect = new Rect(transform.position.x, Screen.height - transform.position.y, size.x, size.y);
-		rect.x -= (transform.pivot.x * size.x);
-		rect.y -= ((1.0f - transform.pivot.y) * size.y);
-		return rect;
+		var worldCorners = new Vector3[4];
+		transform.GetWorldCorners(worldCorners);
+
+		return new Rect(
+			worldCorners[0].x,
+			worldCorners[0].y,
+			worldCorners[2].x - worldCorners[0].x,
+			worldCorners[2].y - worldCorners[0].y);
 	}
 
 	public static string ToUnicodeForTMPro(this string iconUnicode)

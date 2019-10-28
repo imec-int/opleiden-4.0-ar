@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -40,6 +41,25 @@ public class TimelineActionsView : MonoBehaviour
 		_btnTimelineValidation.onClick.AddListener(() => _actionController.ValidateActions());
 	}
 
+	private void OnEnable()
+	{
+		OnRectTransformChanged();
+	}
+
+	public void OnRectTransformChanged()
+	{
+		if (gameObject.activeInHierarchy)
+		{
+			StartCoroutine(UpdateTransforms());
+		}
+	}
+
+	private IEnumerator UpdateTransforms()
+	{
+		yield return 0;
+		_timelineRect = GetComponent<RectTransform>().ToScreenSpace();
+	}
+
 	private void ActionAdded(IndexedActionData action)
 	{
 		TimelineActionWidget timelineAction = GameObject.Instantiate(_buttonPrefab, _timelineScrollRect.content).GetComponent<TimelineActionWidget>();
@@ -79,13 +99,13 @@ public class TimelineActionsView : MonoBehaviour
 	{
 		if (eventData.position.x < _timelineRect.center.x)
 		{
-			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(_timelineRect.xMin + _timelineRect.width * _followPerc, _timelineRect.xMin, 0, 1));
-			_timelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_timelineScrollRect.horizontalNormalizedPosition - _followSpeed * speedLerp * Time.deltaTime);
+			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(_timelineRect.xMin + (_timelineRect.width * _followPerc), _timelineRect.xMin, 0, 1));
+			_timelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_timelineScrollRect.horizontalNormalizedPosition - (_followSpeed * speedLerp * Time.deltaTime));
 		}
 		else
 		{
-			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(_timelineRect.center.x + _timelineRect.width * _followPerc, _timelineRect.xMax, 0, 1));
-			_timelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_timelineScrollRect.horizontalNormalizedPosition + _followSpeed * speedLerp * Time.deltaTime);
+			float speedLerp = Mathf.Clamp01(eventData.position.x.RemapValue(_timelineRect.center.x + (_timelineRect.width * _followPerc), _timelineRect.xMax, 0, 1));
+			_timelineScrollRect.horizontalNormalizedPosition = Mathf.Clamp01(_timelineScrollRect.horizontalNormalizedPosition + (_followSpeed * speedLerp * Time.deltaTime));
 		}
 	}
 }
