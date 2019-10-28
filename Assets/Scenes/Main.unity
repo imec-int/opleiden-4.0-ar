@@ -120,18 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &24813404 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6114815636725928999, guid: 37f3ea2b309ce0f4595440007830facd,
-    type: 3}
-  m_PrefabInstance: {fileID: 6721093372950041152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c1b92f268f13b642ad7765bd48fc88b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &81847342
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,12 +306,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff1ad683bdb61cc4f811cd5a43dbe9b4, type: 3}
---- !u!95 &1022734044 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5858642453276488568, guid: 37f3ea2b309ce0f4595440007830facd,
-    type: 3}
-  m_PrefabInstance: {fileID: 6721093372950041152}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1147530190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3963417625360667136, guid: 647cbf57d4ef0bf4fbadff1479910081,
@@ -542,11 +524,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interface
       objectReference: {fileID: 0}
-    - target: {fileID: 6721093373163077542, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6721093373163077543, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -607,11 +584,6 @@ PrefabInstance:
       propertyPath: _3DModel
       value: 
       objectReference: {fileID: 1838250088}
-    - target: {fileID: 2666092778484754486, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: _actionController
-      value: 
-      objectReference: {fileID: 24813404}
     - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_Camera
@@ -627,15 +599,6 @@ PrefabInstance:
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 1608517850}
-    - target: {fileID: 787066051, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
-      propertyPath: _animator
-      value: 
-      objectReference: {fileID: 1022734044}
-    - target: {fileID: 3661664706168225523, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8695940863363037953, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -645,23 +608,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4142869059531553064, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -1017.24994
-      objectReference: {fileID: 0}
-    - target: {fileID: 7237425207466318600, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_text
-      value: 'Actions Needed <color=#FF0000> blala</color>
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 5477286304136935902, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
