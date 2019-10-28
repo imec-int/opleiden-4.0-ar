@@ -9,7 +9,8 @@ namespace StateMachine
 		LoadingScreen,
 		TimeLine,
 		PumpTag,
-		HighlightContainer
+		HighlightContainer,
+		TimelineTopper,
 	}
 
 	public class StateVariableHolder : MonoBehaviour

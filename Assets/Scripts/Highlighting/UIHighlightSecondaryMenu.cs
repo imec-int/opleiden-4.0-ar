@@ -52,8 +52,7 @@ public class UIHighlightSecondaryMenu : MonoBehaviour
 
     private void OnOperationButtonClicked(IndexedActionData action)
     {
-        Debug.Log($"Clicked {action.Operation}, {action.Part}");
-        // TODO: Add to action manager
+        // Debug.Log($"Clicked {action.Operation}, {action.Part}");
         _ActionController.AddAction(action);
         _HighlightParent.Collapse();
     }

@@ -13,7 +13,7 @@ public class UIHighlightContainer : MonoBehaviour
 	[SerializeField]
 	private InfoPanel _UIInfoPanel = null;
 	[SerializeField]
-	private ActionController _ActionController = null;
+	private ActionController _actionController = null;
 
 	private List<UIHighlight> _UIHighlightInstanceList = new List<UIHighlight>();
 
@@ -30,7 +30,7 @@ public class UIHighlightContainer : MonoBehaviour
 		// Clean up
 		foreach (UIHighlight highlight in _UIHighlightInstanceList)
 		{
-			highlight.OnExpanded -= onHighlightSelected;
+			highlight.OnExpanded -= OnHighlightSelected;
 			Destroy(highlight.gameObject);
 		}
 		_UIHighlightInstanceList.Clear();
@@ -60,17 +60,17 @@ public class UIHighlightContainer : MonoBehaviour
 		foreach (HighlightAnchor anchor in anchors)
 		{
 			UIHighlight newObj = Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0));
-			newObj.Setup(anchor, OnInfoPanelRequested, _ActionController);
+			newObj.Setup(anchor, OnInfoPanelRequested, _actionController);
 			_UIHighlightInstanceList.Add(newObj);
 			// Set up new object
 			newObj.transform.SetParent(transform, true);
-			newObj.OnExpanded += onHighlightSelected;
+			newObj.OnExpanded += OnHighlightSelected;
 		}
 	}
 	#endregion
 
 	#region Callbacks
-	private void onHighlightSelected(UIHighlight sender)
+	private void OnHighlightSelected(UIHighlight sender)
 	{
 		// Collapse all non-selected highlights
 		foreach (UIHighlight highlight in _UIHighlightInstanceList)
