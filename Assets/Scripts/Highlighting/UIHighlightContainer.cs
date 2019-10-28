@@ -59,11 +59,10 @@ public class UIHighlightContainer : MonoBehaviour
 
 		foreach (HighlightAnchor anchor in anchors)
 		{
-			UIHighlight newObj = Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0));
+			UIHighlight newObj = Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0),this.transform);
 			newObj.Setup(anchor, OnInfoPanelRequested, _actionController);
 			_UIHighlightInstanceList.Add(newObj);
 			// Set up new object
-			newObj.transform.SetParent(transform, true);
 			newObj.OnExpanded += OnHighlightSelected;
 		}
 	}
