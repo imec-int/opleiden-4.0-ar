@@ -34,10 +34,4 @@ public static class ExtensionMethods
 		}
 		return iconUnicode;
 	}
-
-	public static string ToHexCodeString(this Color color)
-	{
-        var colorBase255 = new Vector3(color.r, color.g, color.b) * 255;
-        return $"#{(int)colorBase255.x:X2}{(int)colorBase255.y:X2}{(int)colorBase255.z:X2}";
-	}
 }

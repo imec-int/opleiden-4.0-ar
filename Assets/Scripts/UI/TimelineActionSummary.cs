@@ -8,7 +8,7 @@ using Data;
 
 namespace UI
 {
-	public class TimelineTopper : MonoBehaviour
+	public class TimelineActionSummary : MonoBehaviour
 	{
 		[SerializeField]
 		private TextMeshProUGUI _actionText;
@@ -21,10 +21,10 @@ namespace UI
 
 		void Awake()
 		{
-			_controller.ValidationCompleted += UpdateTopper;
+			_controller.ValidationCompleted += UpdateText;
 		}
 
-		private void UpdateTopper(ValidationInfo info)
+		private void UpdateText(ValidationInfo info)
 		{
 			// Ensure visibility; It's turned on/off in reset state
 			this.gameObject.SetActive(true);
@@ -33,8 +33,8 @@ namespace UI
 			uint needed = info.UsedRuleSet.TotalStepCount;
 			var result = placed == needed ? ValidationResult.Correct: ValidationResult.Incorrect;
 
-			string hex = _colorScheme.ValidationColorDictionary[result].normalColor.ToHexCodeString();
-			_actionText.text = $"Acties: <color={hex}>{placed}</color>/{needed}";
+			string hex = ColorUtility.ToHtmlStringRGB(_colorScheme.ValidationColorDictionary[result].normalColor);
+			_actionText.text = $"Acties: <color=#{hex}>{placed}</color>/{needed}";
 		}
 	}
 }

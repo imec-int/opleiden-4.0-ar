@@ -50,15 +50,15 @@ public class UIHighlight : MonoBehaviour
 		_mainButton.onClick.AddListener(OnButtonClicked);
 
 		// Get some possible UIDs we need to watch out for post validation
-		foreach(Operation operation in anchor.AvailableOperations)
+		foreach (Operation operation in anchor.AvailableOperations)
 		{
 			_possibleUIDList.Add(ActionData.CalculateUID(operation, anchor.HighlightedPart));
 		}
 		controller.ValidationCompleted += PostValidationVisualisation;
 	}
 
-    private void PostValidationVisualisation(ValidationInfo info)
-    {
+	private void PostValidationVisualisation(ValidationInfo info)
+	{
 		// default color
 		var colors = _colorScheme.UIColorsDictionary[ColorStyleables.Button];
 		var worstResult = ValidationResult.None;
@@ -66,7 +66,7 @@ public class UIHighlight : MonoBehaviour
 		// Pick worst colour to display
 		for (int i = 0; i < info.ValidationResultList.Count; ++i)
 		{
-			if(!_possibleUIDList.Contains(info.ValidatedUIDs[i]))
+			if (!_possibleUIDList.Contains(info.ValidatedUIDs[i]))
 				continue;
 
 			var matchingResult = info.ValidationResultList[i];
@@ -77,14 +77,13 @@ public class UIHighlight : MonoBehaviour
 				break;
 		}
 
-		if (worstResult != ValidationResult.None)
-			colors = _colorScheme.ValidationColorDictionary[worstResult];
+		colors = _colorScheme.ValidationColorDictionary[worstResult];
 
 		if (_mainButton != null)
 			_mainButton.colors = colors;
-    }
-#region Submenu handling
-    public void Collapse()
+	}
+	#region Submenu handling
+	public void Collapse()
 	{
 		_secondaryMenu.gameObject.SetActive(false);
 		Selected = false;
@@ -105,5 +104,5 @@ public class UIHighlight : MonoBehaviour
 		Selected = true;
 		// TODO: Color change
 	}
-#endregion
+	#endregion
 }

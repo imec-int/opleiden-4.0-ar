@@ -85,7 +85,7 @@ public class ActionController : MonoBehaviour
 		// report on the report
 		ValidationReport = reportCard;
 		ValidationCompleted?.Invoke(ValidationReport);
-		Debug.Log(ValidationReport);
+		//Debug.Log(ValidationReport);
 	}
 #endregion
 }

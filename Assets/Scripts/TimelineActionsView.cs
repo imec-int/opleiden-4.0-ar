@@ -29,10 +29,7 @@ public class TimelineActionsView : MonoBehaviour
 	private void Awake()
 	{
 		_timelineScrollRect = GetComponent<ScrollRect>();
-
-		//TODO [PLDN-55]: Recalculate rect when device rotation changes
-		_timelineRect = GetComponent<RectTransform>().ToScreenSpace();
-
+		
 		_actionController.ActionAdded += ActionAdded;
 		_actionController.ActionUpdated += ActionUpdated;
 		_actionController.ActionDeleted += ActionDeleted;

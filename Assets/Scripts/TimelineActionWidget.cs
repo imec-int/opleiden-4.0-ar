@@ -46,8 +46,8 @@ public class TimelineActionWidget : UIActionElement
 	{
 		// Get result for this instance
 		ValidationResult result = info.ValidationResultList[_action.Index-1];
-
-		Debug.Assert(_colorScheme.ValidationColorDictionary.TryGetValue(result,out ColorBlock requiredColors));
+		bool valid = _colorScheme.ValidationColorDictionary.TryGetValue(result,out ColorBlock requiredColors);
+		Debug.Assert(valid, $"Missing a color in color scheme for {result}");
 		// Set the visuals
 		SetBGColor(requiredColors);
 	}
