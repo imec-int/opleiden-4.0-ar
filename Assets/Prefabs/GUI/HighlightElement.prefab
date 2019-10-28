@@ -496,13 +496,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fce5a5c38b2cfe48b563b00b03fdf7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MainButton: {fileID: 8061404064127690948}
-  _SecondaryMenu: {fileID: 3240657591621614382}
-  _ActionPositionLabels:
+  _mainButton: {fileID: 8061404064127690948}
+  _secondaryMenu: {fileID: 3240657591621614382}
+  _actionPositionLabels:
   - {fileID: 6648895926685013183}
   - {fileID: 8504224375983321586}
   - {fileID: 7625976583620302235}
   - {fileID: 2682341049999237132}
+  _colorScheme: {fileID: 11400000, guid: 174c90b4204b02141946f1e7cb6a5d50, type: 2}
 --- !u!114 &7641505998931797592
 MonoBehaviour:
   m_ObjectHideFlags: 0

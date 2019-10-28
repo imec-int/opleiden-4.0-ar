@@ -33,7 +33,7 @@ public class UIHighlightSecondaryMenu : MonoBehaviour
             elem.AssociatedButton.onClick.AddListener(
                 ()=>
                 {
-                    OnOperationButtonClicked(new ActionData{Operation=op, Part=part});
+                    OnOperationButtonClicked(new IndexedActionData{Operation=op, Part=part});
                 });
         }
 
@@ -50,10 +50,9 @@ public class UIHighlightSecondaryMenu : MonoBehaviour
         return newObj;
     }
 
-    private void OnOperationButtonClicked(ActionData action)
+    private void OnOperationButtonClicked(IndexedActionData action)
     {
-        Debug.Log($"Clicked {action.Operation}, {action.Part}");
-        // TODO: Add to action manager
+        // Debug.Log($"Clicked {action.Operation}, {action.Part}");
         _ActionController.AddAction(action);
         _HighlightParent.Collapse();
     }
