@@ -16,6 +16,8 @@ public class UIHighlight : MonoBehaviour
 	[SerializeField]
 	private Button _mainButton = null;
 	[SerializeField]
+	private GameObject _colorSphere = null;
+	[SerializeField]
 	private UIHighlightSecondaryMenu _secondaryMenu = null;
 	[SerializeField]
 	private TextMeshProUGUI[] _actionPositionLabels = new TextMeshProUGUI[4];
@@ -35,6 +37,7 @@ public class UIHighlight : MonoBehaviour
 	}
 
 	private readonly List<int> _possibleUIDList = new List<int>();
+	private int _colorShaderID;
 
 	public void Setup(HighlightAnchor anchor, Action<HighlightInfo> showHighlightInfo, ActionController controller)
 	{
@@ -55,6 +58,8 @@ public class UIHighlight : MonoBehaviour
 			_possibleUIDList.Add(ActionData.CalculateUID(operation, anchor.HighlightedPart));
 		}
 		controller.ValidationCompleted += PostValidationVisualisation;
+
+		_colorShaderID = Shader.PropertyToID("_MainColor");
 	}
 
 	private void PostValidationVisualisation(ValidationInfo info)
@@ -103,6 +108,12 @@ public class UIHighlight : MonoBehaviour
 		_secondaryMenu.gameObject.SetActive(true);
 		Selected = true;
 		// TODO: Color change
+	}
+
+	void Update()
+	{
+		var color = _mainButton.image.color;
+		_colorSphere.GetComponent<Renderer>().material.SetColor(_colorShaderID,color);
 	}
 	#endregion
 }

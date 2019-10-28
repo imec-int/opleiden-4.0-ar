@@ -654,6 +654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainButton: {fileID: 8061404064127690948}
+  _colorSphere: {fileID: 4825208535226643986}
   _secondaryMenu: {fileID: 3240657591621614382}
   _actionPositionLabels:
   - {fileID: 6648895926685013183}
@@ -889,7 +890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.44705883}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
