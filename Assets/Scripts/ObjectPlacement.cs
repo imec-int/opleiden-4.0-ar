@@ -38,6 +38,7 @@ public class ObjectPlacement : MonoBehaviour
 				//_SessionOrigin.MakeContentAppearAt(_Installation, hits[0].pose.position);
 
 				_Installation.position = hits[0].pose.position;
+				_Installation.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 			}
 		}
 	}

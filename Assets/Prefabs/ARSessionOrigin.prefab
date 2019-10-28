@@ -245,5 +245,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ReferenceLibrary: {fileID: 11400000, guid: e0d953e402aa81b4496c2940e56a0441, type: 2}
-  m_TrackedObjectPrefab: {fileID: 3999884373305559600, guid: ff1ad683bdb61cc4f811cd5a43dbe9b4,
-    type: 3}
+  m_TrackedObjectPrefab: {fileID: 0}
