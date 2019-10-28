@@ -50,7 +50,6 @@ public class TimelineActionsView : MonoBehaviour
 	{
 		yield return 0;
 		_timelineRect = GetComponent<RectTransform>().ToScreenSpace();
-		Debug.Log(_timelineRect);
 	}
 
 	private void ActionAdded(IndexedActionData action)
