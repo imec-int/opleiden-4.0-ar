@@ -17,9 +17,9 @@ MonoBehaviour:
   m_ReferenceObjects:
   - m_GuidLow: 5063550293786954003
     m_GuidHigh: 18247556932000309155
-    m_Name: Pump
+    m_Name: Headset
     m_Entries:
-    - {fileID: -6831329414088302235, guid: 0d97eb5e5ed109147b1ee39730e7893b, type: 3}
+    - {fileID: -6831329414088302235, guid: 85295348b4753644d97e54e0729314ee, type: 3}
   - m_GuidLow: 4873018367796669653
     m_GuidHigh: 2333607978560609957
     m_Name: NerveGun
