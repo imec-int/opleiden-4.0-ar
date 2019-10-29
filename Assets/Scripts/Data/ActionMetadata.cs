@@ -2,30 +2,33 @@
 using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 
-[Serializable] public class PartInfoDictionary : SerializableDictionaryBase<Part, ActionPartInfo> { }
-[Serializable] public class OperationInfoDictionary : SerializableDictionaryBase<Operation, ActionOperationInfo> { }
-
-[CreateAssetMenu(fileName = "ActionMetadata", menuName = "opleiden-4.0-ar/ActionMetadata", order = 0)]
-public class ActionMetadata : ScriptableObject
+namespace Data
 {
-	[SerializeField]
-	private PartInfoDictionary _ActionPartsInfo = new PartInfoDictionary();
+	[Serializable] public class PartInfoDictionary : SerializableDictionaryBase<Part, ActionPartInfo> { }
+	[Serializable] public class OperationInfoDictionary : SerializableDictionaryBase<Operation, ActionOperationInfo> { }
 
-	[SerializeField]
-	private OperationInfoDictionary _ActionOperationsInfo = new OperationInfoDictionary();
+	[CreateAssetMenu(fileName = "ActionMetadata", menuName = "opleiden-4.0-ar/ActionMetadata", order = 0)]
+	public class ActionMetadata : ScriptableObject
+	{
+		[SerializeField]
+		private PartInfoDictionary _ActionPartsInfo = new PartInfoDictionary();
 
-	public PartInfoDictionary ActionPartsInfo { get => _ActionPartsInfo; }
-	public OperationInfoDictionary ActionOperationsInfo { get => _ActionOperationsInfo; }
-}
+		[SerializeField]
+		private OperationInfoDictionary _ActionOperationsInfo = new OperationInfoDictionary();
 
-[Serializable]
-public struct ActionPartInfo
-{
-	public string Name, Icon;
-}
+		public PartInfoDictionary ActionPartsInfo { get => _ActionPartsInfo; }
+		public OperationInfoDictionary ActionOperationsInfo { get => _ActionOperationsInfo; }
+	}
 
-[Serializable]
-public struct ActionOperationInfo
-{
-	public string Name;
+	[Serializable]
+	public struct ActionPartInfo
+	{
+		public string Name, Icon;
+	}
+
+	[Serializable]
+	public struct ActionOperationInfo
+	{
+		public string Name;
+	}
 }
