@@ -230,8 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _installation: {fileID: 0}
-  _installationScale: 0.15
-  _worldCanvas: {fileID: 0}
+  _installationScale: 0.2
 --- !u!114 &1434262470
 MonoBehaviour:
   m_ObjectHideFlags: 0

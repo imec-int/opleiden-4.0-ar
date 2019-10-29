@@ -17,17 +17,10 @@ public class ObjectPlacement : MonoBehaviour
 	[SerializeField]
 	private float _installationScale = 1;
 
-	[SerializeField]
-	private Canvas _worldCanvas;
-
-	private Vector3 _originalWorldCanvasScale;
-
 	private void Awake()
 	{
 		_sessionOrigin = GetComponent<ARSessionOrigin>();
 		_raycastManager = GetComponent<ARRaycastManager>();
-
-		_originalWorldCanvasScale = _worldCanvas.transform.localScale;
 	}
 
 	// Start is called before the first frame update
@@ -40,16 +33,14 @@ public class ObjectPlacement : MonoBehaviour
 
 		Vector3 pos = Camera.main.WorldToViewportPoint(_installation.position);
 
-		if (pos.x < 0 || pos.x > 1 || pos.y < 0 || pos.y > 1 || pos.z < 0 || _installation.gameObject.activeSelf == false)
+		if (pos.x < 0 || pos.x > 1 || pos.y < 0 || pos.y > 1 || pos.z < 0 || !_installation.gameObject.activeSelf)
 		{
-			if (_raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
+			if (Input.GetTouch(0).phase == TouchPhase.Began && _raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
 			{
 				_installation.gameObject.SetActive(true);
-				//_SessionOrigin.MakeContentAppearAt(_Installation, hits[0].pose.position);
+				_sessionOrigin.MakeContentAppearAt(_installation, hits[0].pose.position);
 
-				_installation.position = hits[0].pose.position;
-				_installation.localScale = _originalWorldCanvasScale * _installationScale;
-				_worldCanvas.transform.localScale = new Vector3(_installationScale, _installationScale, _installationScale);
+				transform.localScale = new Vector3(1 / _installationScale, 1 / _installationScale, 1 / _installationScale);
 			}
 		}
 	}

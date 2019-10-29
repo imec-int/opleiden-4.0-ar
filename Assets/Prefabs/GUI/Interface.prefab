@@ -741,6 +741,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
+        type: 3}
+      propertyPath: m_CaretColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
+        type: 3}
+      propertyPath: m_CustomCaretColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
+        type: 3}
+      propertyPath: m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 123977882525620948, guid: b6e83801d3ce97242ad351def9835d89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -861,41 +896,6 @@ PrefabInstance:
       propertyPath: _infoPanel
       value: 
       objectReference: {fileID: 1950468293398802120}
-    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_ContentType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_KeyboardType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_CharacterValidation
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_CaretColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_CustomCaretColor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100624550446261579, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_RichText
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7772856328671117558, guid: b6e83801d3ce97242ad351def9835d89,
         type: 3}
       propertyPath: m_fontStyle
@@ -951,11 +951,6 @@ PrefabInstance:
       propertyPath: m_Padding.m_Bottom
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 277092072224962193, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6e83801d3ce97242ad351def9835d89, type: 3}
 --- !u!1 &572699200487484010 stripped
@@ -989,11 +984,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6721093374647068507}
     m_Modifications:
-    - target: {fileID: 7402301714548561075, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
-        type: 3}
-      propertyPath: m_Name
-      value: Timeline
-      objectReference: {fileID: 0}
     - target: {fileID: 5796393666585019821, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1098,6 +1088,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402301714548561075, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
+        type: 3}
+      propertyPath: m_Name
+      value: Timeline
       objectReference: {fileID: 0}
     - target: {fileID: 4311959031983044810, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
@@ -1281,21 +1276,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1817796479686687728}
     m_Modifications:
-    - target: {fileID: 2029257454702774209, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
-        type: 3}
-      propertyPath: m_Name
-      value: HighlightContainer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8777031888906600513, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
-        type: 3}
-      propertyPath: _UIInfoPanel
-      value: 
-      objectReference: {fileID: 1950468293398802120}
-    - target: {fileID: 8777031888906600513, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
-        type: 3}
-      propertyPath: _actionController
-      value: 
-      objectReference: {fileID: 6114815636725928999}
     - target: {fileID: 8403035424732504051, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1413,7 +1393,7 @@ PrefabInstance:
       objectReference: {fileID: 1950468293398802120}
     - target: {fileID: 8777031888906600513, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
         type: 3}
-      propertyPath: _ActionController
+      propertyPath: _actionController
       value: 
       objectReference: {fileID: 6114815636725928999}
     - target: {fileID: 9166239476103174487, guid: 9fd7afce4ed9e7a48af9089fc9c0eee2,
