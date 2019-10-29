@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_Sun: {fileID: 1392717391}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -50,8 +50,8 @@ LightmapSettings:
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
-    m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnvironmentLightingMode: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 12
@@ -96,7 +96,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: facdb477bd19dda46bbde520de330993,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -237,12 +238,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!223 &582023124 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
-    type: 3}
-  m_PrefabInstance: {fileID: 6721093372950041152}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1147530190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3963417625360667136, guid: 647cbf57d4ef0bf4fbadff1479910081,
@@ -417,10 +412,6 @@ PrefabInstance:
       propertyPath: _installation
       value: 
       objectReference: {fileID: 1383729350996829304}
-    - target: {fileID: 1512352691, guid: 647cbf57d4ef0bf4fbadff1479910081, type: 3}
-      propertyPath: _worldCanvas
-      value: 
-      objectReference: {fileID: 582023124}
     - target: {fileID: 1434262470, guid: 647cbf57d4ef0bf4fbadff1479910081, type: 3}
       propertyPath: m_TrackedObjectPrefab
       value: 
@@ -538,6 +529,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interface
       objectReference: {fileID: 0}
+    - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1257989552}
     - target: {fileID: 6721093373163077543, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -598,11 +594,6 @@ PrefabInstance:
       propertyPath: _3DModel
       value: 
       objectReference: {fileID: 2695588388427552363}
-    - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1257989552}
     - target: {fileID: 6926936561816186791, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: _pumpAnchor
