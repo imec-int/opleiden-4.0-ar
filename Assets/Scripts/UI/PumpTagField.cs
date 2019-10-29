@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using Data;
+using Develop;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 namespace UI
 {
@@ -42,7 +43,7 @@ namespace UI
 			StartCoroutine(FocusInputField());
 		}
 
-		IEnumerator FocusInputField()
+		private IEnumerator FocusInputField()
 		{
 			// We should only read the screen buffer after rendering is complete
 			yield return new WaitForEndOfFrame();
@@ -65,6 +66,6 @@ namespace UI
 			this.gameObject.SetActive(false);
 			_infoPanel.Show(_serialInfo);
 			_infoPanel.OnClose += OnInfoPanelClosed;
-		}	
+		}
 	}
 }

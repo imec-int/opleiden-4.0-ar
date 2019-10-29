@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -12,12 +11,14 @@ namespace TimeLineValidation
 		IncorrectPosition,
 		Incorrect, // Not in the list of all validation steps 
 	}
+
 	public class ValidationInfo
 	{
-		public bool Succeeded {get;set;}
-		public List<ValidationResult> ValidationResultList {get;set;}
-		public List<int> ValidatedUIDs {get;set;}
-		public ValidationRuleSet UsedRuleSet {get;set;}
+		public bool Succeeded { get; set; }
+		public List<ValidationResult> ValidationResultList { get; set; }
+		public List<int> ValidatedUIDs { get; set; }
+		public ValidationRuleSet UsedRuleSet { get; set; }
+
 		public int AmountOfErrors
 		{
 			get
@@ -28,8 +29,8 @@ namespace TimeLineValidation
 
 		public override string ToString()
 		{
-			var results = ValidationResultList.Select(result => Enum.GetName(typeof(ValidationResult), result));
-			var resultsAsString = string.Join(",", results);
+			IEnumerable<string> results = ValidationResultList.Select(result => Enum.GetName(typeof(ValidationResult), result));
+			string resultsAsString = string.Join(",", results);
 			return $"Actions: {ValidationResultList.Count}/{UsedRuleSet.TotalStepCount};Amount of errors: {AmountOfErrors}; Results list: {resultsAsString} ";
 		}
 	}

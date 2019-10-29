@@ -3,89 +3,94 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TimeLineValidation;
+using Data;
 
-public class ActionController : MonoBehaviour
+namespace Core
 {
-    [SerializeField]
-	private ValidationRuleSet _validationRuleSet;
-
-	public ValidationInfo ValidationReport
+	public class ActionController : MonoBehaviour
 	{
-		get; private set;
-	}
-    public List<IndexedActionData> Actions { get; } = new List<IndexedActionData>();
+		[SerializeField]
+		private ValidationRuleSet _validationRuleSet;
 
-    public event Action<IndexedActionData> ActionAdded, ActionUpdated, ActionDeleted;
-	public event Action<IndexedActionData, int> ActionMoved;
-	public event Action<ValidationInfo> ValidationCompleted;
-
-#region Monobehaviour
-	void Awake()
-	{
-		bool rulesetCorrect = _validationRuleSet.Initialize();
-		Debug.Assert(rulesetCorrect, "Current Validation Ruleset contains invalid substeps!!");
-		ValidationReport = new ValidationInfo();
-	}
-#endregion
-
-#region Action Manipulation
-	public void AddAction(IndexedActionData action)
-	{
-		Actions.Add(action);
-		action.Index = Actions.Count;
-
-		ActionAdded?.Invoke(action);
-		//ValidateActions();
-	}
-
-	private void UpdateAction(IndexedActionData action)
-	{
-		ActionUpdated?.Invoke(action);
-	}
-
-	public void DeleteAction(IndexedActionData action)
-	{
-		ActionDeleted?.Invoke(action);
-
-		Actions.RemoveAt(action.Index - 1);
-
-		for (int i = action.Index - 1; i < Actions.Count; i++)
+		public ValidationInfo ValidationReport
 		{
-			Actions[i].Index = i + 1;
-			UpdateAction(Actions[i]);
+			get; private set;
 		}
-		//ValidateActions();
-	}
 
-	public void MovedAction(IndexedActionData action, int newIndex)
-	{
-		// newIndex starts from 0, increment to match action indexes
-		newIndex++;
+		public List<IndexedActionData> Actions { get; } = new List<IndexedActionData>();
 
-		ActionMoved?.Invoke(action, newIndex);
+		public event Action<IndexedActionData> ActionAdded, ActionUpdated, ActionDeleted;
+		public event Action<IndexedActionData, int> ActionMoved;
+		public event Action<ValidationInfo> ValidationCompleted;
 
-		// Swap Action position in array
-		Actions.RemoveAt(action.Index - 1);
-		Actions.Insert(newIndex - 1, action);
-
-		// Update all action indexes after the original or the new index
-		for (int i = Mathf.Min(action.Index, newIndex) - 1; i < Actions.Count; i++)
+		#region Monobehaviour
+		private void Awake()
 		{
-			Actions[i].Index = i + 1;
-			UpdateAction(Actions[i]);
+			bool rulesetCorrect = _validationRuleSet.Initialize();
+			Debug.Assert(rulesetCorrect, "Current Validation Ruleset contains invalid substeps!!");
+			ValidationReport = new ValidationInfo();
 		}
-		//ValidateActions();
-	}
-#endregion
+		#endregion
 
-#region Action Validation
-	public void ValidateActions()
-	{
-		_validationRuleSet.Validate(Actions.Select(action => action as ActionData).ToList(), out ValidationInfo reportCard);
-		// report on the report
-		ValidationReport = reportCard;
-		ValidationCompleted?.Invoke(ValidationReport);
-		//Debug.Log(ValidationReport);
+		#region Action Manipulation
+		public void AddAction(IndexedActionData action)
+		{
+			Actions.Add(action);
+			action.Index = Actions.Count;
+
+			ActionAdded?.Invoke(action);
+			//ValidateActions();
+		}
+
+		private void UpdateAction(IndexedActionData action)
+		{
+			ActionUpdated?.Invoke(action);
+		}
+
+		public void DeleteAction(IndexedActionData action)
+		{
+			ActionDeleted?.Invoke(action);
+
+			Actions.RemoveAt(action.Index - 1);
+
+			for (int i = action.Index - 1; i < Actions.Count; i++)
+			{
+				Actions[i].Index = i + 1;
+				UpdateAction(Actions[i]);
+			}
+			//ValidateActions();
+		}
+
+		public void MovedAction(IndexedActionData action, int newIndex)
+		{
+			// newIndex starts from 0, increment to match action indexes
+			newIndex++;
+
+			ActionMoved?.Invoke(action, newIndex);
+
+			// Swap Action position in array
+			Actions.RemoveAt(action.Index - 1);
+			Actions.Insert(newIndex - 1, action);
+
+			// Update all action indexes after the original or the new index
+			for (int i = Mathf.Min(action.Index, newIndex) - 1; i < Actions.Count; i++)
+			{
+				Actions[i].Index = i + 1;
+				UpdateAction(Actions[i]);
+			}
+			//ValidateActions();
+		}
+		#endregion
+
+		#region Action Validation
+		public void ValidateActions()
+		{
+			_validationRuleSet.Validate(Actions.Select(action => action as ActionData).ToList(), out ValidationInfo reportCard);
+			// report on the report
+			ValidationReport = reportCard;
+			ValidationCompleted?.Invoke(ValidationReport);
+			//Debug.Log(ValidationReport);
+		}
+		#endregion
 	}
-#endregion
 }

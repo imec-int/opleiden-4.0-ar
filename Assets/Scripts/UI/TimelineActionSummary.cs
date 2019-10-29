@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
-using System;
 using TimeLineValidation;
 using Data;
+using Core;
 
 namespace UI
 {
@@ -19,7 +17,7 @@ namespace UI
 		[SerializeField]
 		private ColorScheme _colorScheme;
 
-		void Awake()
+		private void Awake()
 		{
 			_controller.ValidationCompleted += UpdateText;
 		}
@@ -29,9 +27,9 @@ namespace UI
 			// Ensure visibility; It's turned on/off in reset state
 			this.gameObject.SetActive(true);
 
-			int placed = info.ValidationResultList.Count-info.AmountOfErrors;
+			int placed = info.ValidationResultList.Count - info.AmountOfErrors;
 			uint needed = info.UsedRuleSet.TotalStepCount;
-			var result = placed == needed ? ValidationResult.Correct: ValidationResult.Incorrect;
+			ValidationResult result = placed == needed ? ValidationResult.Correct : ValidationResult.Incorrect;
 
 			string hex = ColorUtility.ToHtmlStringRGB(_colorScheme.ValidationColorDictionary[result].normalColor);
 			_actionText.text = $"Acties: <color=#{hex}>{placed}</color>/{needed}";
