@@ -24,28 +24,28 @@ namespace UI.Utilities
 		public UnityPointerDragEvent _OnDrag = new UnityPointerDragEvent();
 		public UnityPointerDragEvent _OnEndDrag = new UnityPointerDragEvent();
 
-		private RectTransform _ParentRT, _RectTransform, _SpacerRT;
-		private ScrollRect _ScrollRect;
+		private RectTransform _parentRT, _rectTransform, _spacerRT;
+		private ScrollRect _scrollRect;
 
-		private int _StartingIndex;
-		private float _Spacing;
-		private bool _IsDragging = false;
+		private int _startingIndex;
+		private float _spacing;
+		private bool _isDragging = false;
 
 		protected override void Awake()
 		{
 			base.Awake();
-			_RectTransform = transform.GetComponent<RectTransform>();
-			_ParentRT = _RectTransform.parent.GetComponent<RectTransform>();
-			_ScrollRect = _ParentRT.GetComponentInParent<ScrollRect>();
+			_rectTransform = transform.GetComponent<RectTransform>();
+			_parentRT = _rectTransform.parent.GetComponent<RectTransform>();
+			_scrollRect = _parentRT.GetComponentInParent<ScrollRect>();
 
-			_Spacing = _ParentRT.GetComponent<HorizontalOrVerticalLayoutGroup>().spacing;
+			_spacing = _parentRT.GetComponent<HorizontalOrVerticalLayoutGroup>().spacing;
 		}
 
 		protected override void Update()
 		{
 			base.Update();
 
-			if (_IsDragging)
+			if (_isDragging)
 			{
 				_OnDrag.Invoke(_LastDragEventData);
 			}
@@ -55,55 +55,55 @@ namespace UI.Utilities
 		{
 			if (_LongPressTriggered)
 			{
-				_IsDragging = true;
-				_StartingIndex = _RectTransform.GetSiblingIndex();
-				_RectTransform.SetParent(_ScrollRect.transform);
-				_SpacerRT = GameObject.Instantiate(_SpacerPrefab, _ParentRT).GetComponent<RectTransform>();
-				_SpacerRT.SetSiblingIndex(_StartingIndex);
+				_isDragging = true;
+				_startingIndex = _rectTransform.GetSiblingIndex();
+				_rectTransform.SetParent(_scrollRect.transform);
+				_spacerRT = GameObject.Instantiate(_SpacerPrefab, _parentRT).GetComponent<RectTransform>();
+				_spacerRT.SetSiblingIndex(_startingIndex);
 
 				_OnBeginDrag.Invoke(eventData);
 
 				// Update content layout to avoid scrollrect resetting position
-				LayoutRebuilder.ForceRebuildLayoutImmediate(_ParentRT);
+				LayoutRebuilder.ForceRebuildLayoutImmediate(_parentRT);
 			}
 			else
 			{
-				_ScrollRect.SendMessage("OnBeginDrag", eventData);
+				_scrollRect.SendMessage("OnBeginDrag", eventData);
 			}
 		}
 
 		public void OnDrag(PointerEventData eventData)
 		{
-			if (_IsDragging)
+			if (_isDragging)
 			{
-				_RectTransform.position = eventData.position;
-				float sizeX = _RectTransform.sizeDelta.x + _Spacing;
-				float offsetX = -(_ParentRT.anchoredPosition.x + _ParentRT.parent.GetComponent<RectTransform>().rect.width) + _RectTransform.anchoredPosition.x - (sizeX / 2);
+				_rectTransform.position = eventData.position;
+				float sizeX = _rectTransform.sizeDelta.x + _spacing;
+				float offsetX = -(_parentRT.anchoredPosition.x + _parentRT.parent.GetComponent<RectTransform>().rect.width) + _rectTransform.anchoredPosition.x - (sizeX / 2);
 
 				float result = offsetX / sizeX;
-				_SpacerRT.SetSiblingIndex((int)result);
+				_spacerRT.SetSiblingIndex((int)result);
 				_LastDragEventData = eventData;
 
 				// Update content layout to avoid scrollrect resetting position
-				LayoutRebuilder.ForceRebuildLayoutImmediate(_ParentRT);
+				LayoutRebuilder.ForceRebuildLayoutImmediate(_parentRT);
 			}
 			else
 			{
-				_ScrollRect.SendMessage("OnDrag", eventData);
+				_scrollRect.SendMessage("OnDrag", eventData);
 			}
 		}
 
 		public void OnEndDrag(PointerEventData eventData)
 		{
-			if (_IsDragging)
+			if (_isDragging)
 			{
-				_IsDragging = false;
-				int newIndex = _SpacerRT.GetSiblingIndex();
-				Destroy(_SpacerRT.gameObject);
-				_RectTransform.SetParent(_ParentRT);
-				_RectTransform.SetSiblingIndex(newIndex);
+				_isDragging = false;
+				int newIndex = _spacerRT.GetSiblingIndex();
+				Destroy(_spacerRT.gameObject);
+				_rectTransform.SetParent(_parentRT);
+				_rectTransform.SetSiblingIndex(newIndex);
 
-				if (_StartingIndex != newIndex)
+				if (_startingIndex != newIndex)
 				{
 					_OnIndexChanged.Invoke(newIndex);
 				}
@@ -112,7 +112,7 @@ namespace UI.Utilities
 			}
 			else
 			{
-				_ScrollRect.SendMessage("OnEndDrag", eventData);
+				_scrollRect.SendMessage("OnEndDrag", eventData);
 			}
 		}
 	}

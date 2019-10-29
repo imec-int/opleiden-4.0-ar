@@ -19,7 +19,7 @@ namespace UI.Highlighting
 		[SerializeField]
 		private ActionController _actionController = null;
 
-		private List<Highlight> _UIHighlightInstanceList = new List<Highlight>();
+		private List<Highlight> _uiHighlightInstanceList = new List<Highlight>();
 
 		#region Monobehaviour
 		private void OnEnable()
@@ -32,12 +32,12 @@ namespace UI.Highlighting
 		public void Reset(GameObject newmodel = null)
 		{
 			// Clean up
-			foreach (Highlight highlight in _UIHighlightInstanceList)
+			foreach (Highlight highlight in _uiHighlightInstanceList)
 			{
 				highlight.OnExpanded -= OnHighlightSelected;
 				Destroy(highlight.gameObject);
 			}
-			_UIHighlightInstanceList.Clear();
+			_uiHighlightInstanceList.Clear();
 
 			if (newmodel)
 			{
@@ -65,7 +65,7 @@ namespace UI.Highlighting
 			{
 				Highlight newObj = Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0), this.transform);
 				newObj.Setup(anchor, OnInfoPanelRequested, _actionController);
-				_UIHighlightInstanceList.Add(newObj);
+				_uiHighlightInstanceList.Add(newObj);
 				// Set up new object
 				newObj.OnExpanded += OnHighlightSelected;
 			}
@@ -76,7 +76,7 @@ namespace UI.Highlighting
 		private void OnHighlightSelected(Highlight sender)
 		{
 			// Collapse all non-selected highlights
-			foreach (Highlight highlight in _UIHighlightInstanceList)
+			foreach (Highlight highlight in _uiHighlightInstanceList)
 			{
 				if (highlight != sender)
 				{
