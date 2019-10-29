@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Data;
 
 namespace TimeLineValidation
 {
@@ -10,15 +11,19 @@ namespace TimeLineValidation
 	{
 		[SerializeField]
 		private string _name;
+
 		[SerializeField]
 		private bool _subStepOrderMatters = true;
+
 		[SerializeField]
-		List<ActionData> _subSteps = new List<ActionData>();
+		private List<ActionData> _subSteps = new List<ActionData>();
+
 		public int Index
 		{
 			get;
 			set;
 		}
+
 		public List<int> SubstepUIDList
 		{
 			get
@@ -37,17 +42,18 @@ namespace TimeLineValidation
 		#region Unity Facing
 		[SerializeField]
 		private string _name;
+
 		[SerializeField]
 		private List<ActionPhase> _actionPhaseList;
 		#endregion
 
 		#region Internals for validation check
 		#region Generated
-		private Dictionary<int, int> _UIDUsageInRulesetDict = new Dictionary<int, int>();
+		private Dictionary<int, int> _uidUsageInRulesetDict = new Dictionary<int, int>();
 		public uint TotalStepCount { get; private set; }
 		#endregion
 		#region State management
-		private Dictionary<int, int> _UIDUsageInTimelineDict = new Dictionary<int, int>();
+		private Dictionary<int, int> _uidUsageInTimelineDict = new Dictionary<int, int>();
 		private int _actionPhaseIndex;
 		private int _subStepIndex;
 		#endregion
@@ -70,7 +76,7 @@ namespace TimeLineValidation
 						result = false;
 						continue;
 					}
-					IncreaseUsageForUID(_UIDUsageInRulesetDict, step.UID);
+					IncreaseUsageForUID(_uidUsageInRulesetDict, step.UID);
 					++TotalStepCount;
 				}
 			}
@@ -81,12 +87,15 @@ namespace TimeLineValidation
 		public void Validate(List<ActionData> allTimelineActions, out ValidationInfo outValidationInfo)
 		{
 			// Set up validation info
-			outValidationInfo = new ValidationInfo();
-			outValidationInfo.ValidationResultList = new List<ValidationResult>();
-			outValidationInfo.UsedRuleSet = this;
+			outValidationInfo = new ValidationInfo
+			{
+				ValidationResultList = new List<ValidationResult>(),
+				ValidatedUIDs = new List<int>(),
+				UsedRuleSet = this
+			};
 
 			// Reset
-			_UIDUsageInTimelineDict.Clear();
+			_uidUsageInTimelineDict.Clear();
 			_actionPhaseIndex = 0;
 			_subStepIndex = 0;
 
@@ -94,14 +103,16 @@ namespace TimeLineValidation
 			// Go through all time line actions
 			foreach (ActionData action in allTimelineActions)
 			{
-				var result = ValidateAction(action);
+				ValidationResult result = ValidateAction(action);
 				if (result != ValidationResult.Correct)
 					succeeded = false;
 				// Add result to list
 				outValidationInfo.ValidationResultList.Add(result);
+				outValidationInfo.ValidatedUIDs.Add(action.UID);
 			}
 			outValidationInfo.Succeeded = succeeded && TotalStepCount == allTimelineActions.Count;
 		}
+
 		private ValidationResult RecursivelyPhaseCheck(ActionData action)
 		{
 			ActionPhase currentActionPhase = _actionPhaseList.ElementAtOrDefault(_actionPhaseIndex);
@@ -118,7 +129,7 @@ namespace TimeLineValidation
 			{
 				if (currentActionPhase.SubStepOrderMatters)
 				{
-					var currentStep = currentActionPhase.SubSteps.ElementAtOrDefault(_subStepIndex);
+					ActionData currentStep = currentActionPhase.SubSteps.ElementAtOrDefault(_subStepIndex);
 					Debug.Assert(currentStep != null);
 					// Increase substep
 					++_subStepIndex;
@@ -139,31 +150,28 @@ namespace TimeLineValidation
 
 		private ValidationResult ValidateAction(ActionData action)
 		{
-			var result = ValidationResult.None;
-
 			// Check unnecessary
-			if (!_UIDUsageInRulesetDict.ContainsKey(action.UID))
+			if (!_uidUsageInRulesetDict.ContainsKey(action.UID))
 			{
 				return ValidationResult.Incorrect;
 			}
 			// Check incorrect placement
-			result = RecursivelyPhaseCheck(action);
+			ValidationResult result = RecursivelyPhaseCheck(action);
 
 			// Too many of the same UID check
-			var count = IncreaseUsageForUID(_UIDUsageInTimelineDict, action.UID);
-			if (count > _UIDUsageInRulesetDict[action.UID])
+			int count = IncreaseUsageForUID(_uidUsageInTimelineDict, action.UID);
+			if (count > _uidUsageInRulesetDict[action.UID])
 			{
 				return ValidationResult.Incorrect;
 			}
 			return result;
 		}
 		#endregion
-		
+
 		#region Helpers
 		private int IncreaseUsageForUID(Dictionary<int, int> dict, int UID)
 		{
-			int usage;
-			if (dict.TryGetValue(UID, out usage))
+			if (dict.TryGetValue(UID, out int usage))
 			{
 				dict[UID] = ++usage;
 			}

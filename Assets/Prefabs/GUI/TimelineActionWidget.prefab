@@ -388,9 +388,10 @@ MonoBehaviour:
   _Icon: {fileID: 5824089102517835250}
   _Label: {fileID: 870624189191630754}
   _AssociatedButton: {fileID: 8800392641628902247}
-  _Index: {fileID: 8386937823911535497}
-  _CloseBtn: {fileID: 4086114602898856136}
-  _OrderMarker: {fileID: 1179818559202348747}
+  _index: {fileID: 8386937823911535497}
+  _closeBtn: {fileID: 4086114602898856136}
+  _orderMarker: {fileID: 1179818559202348747}
+  _colorScheme: {fileID: 11400000, guid: 174c90b4204b02141946f1e7cb6a5d50, type: 2}
 --- !u!114 &8235482150385480253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,6 +660,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -4574801101015592294, guid: 9df9c1df493303140a571bc29573f4e1,
         type: 2}
+    - target: {fileID: 962673219061142542, guid: d70d1d21a2ecef3499b03247c55d8af0,
+        type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 5687592472985161484}
     - target: {fileID: 3888543210318922185, guid: d70d1d21a2ecef3499b03247c55d8af0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -775,11 +781,11 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 962673219061142542, guid: d70d1d21a2ecef3499b03247c55d8af0,
+    - target: {fileID: 4148729441735673957, guid: d70d1d21a2ecef3499b03247c55d8af0,
         type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 5687592472985161484}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8310452975393593221, guid: d70d1d21a2ecef3499b03247c55d8af0,
         type: 3}
       propertyPath: m_SizeDelta.y
