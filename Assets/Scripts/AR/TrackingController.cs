@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.XR.ARFoundation;
 
 namespace AR
@@ -11,12 +13,19 @@ namespace AR
 		private ObjectPlacement _objectPlacement;
 		private ARTrackedObjectManager _arTrackedObjectManager;
 
+		[SerializeField]
+		private Animator _animator;
+
 		protected void Awake()
 		{
+			Assert.IsNotNull(_animator, "Animator is not filled in.");
+
 			_arPlaneManager = GetComponent<ARPlaneManager>();
 			_arPointCloudManager = GetComponent<ARPointCloudManager>();
 			_objectPlacement = GetComponent<ObjectPlacement>();
 			_arTrackedObjectManager = GetComponent<ARTrackedObjectManager>();
+
+			_arTrackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
 
 			switch (Application.platform)
 			{
@@ -29,6 +38,14 @@ namespace AR
 				default:
 					UnsupportedPlatform();
 					break;
+			}
+		}
+
+		private void OnTrackedObjectsChanged(ARTrackedObjectsChangedEventArgs changedTrackedObjects)
+		{
+			if (changedTrackedObjects.added.Count > 0)
+			{
+				TrackingCompleted();
 			}
 		}
 
@@ -56,6 +73,12 @@ namespace AR
 			_arPointCloudManager.enabled = false;
 			_objectPlacement.enabled = false;
 			_arTrackedObjectManager.enabled = false;
+			TrackingCompleted();
+		}
+
+		public void TrackingCompleted()
+		{
+			_animator.SetTrigger("CalibrationComplete");
 		}
 	}
 }

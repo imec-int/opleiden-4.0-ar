@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -9,6 +10,8 @@ namespace AR
 	[RequireComponent(typeof(ARRaycastManager))]
 	public class ObjectPlacement : MonoBehaviour
 	{
+		public UnityEvent ObjectPlaced;
+
 		private ARRaycastManager _raycastManager;
 		private ARSessionOrigin _sessionOrigin;
 
@@ -38,6 +41,7 @@ namespace AR
 			{
 				if ((Input.GetTouch(0).tapCount == 2 || !_installation.gameObject.activeSelf) && Input.GetTouch(0).phase == TouchPhase.Began && _raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
 				{
+					if (!_installation.gameObject.activeSelf) ObjectPlaced.Invoke();
 					_installation.gameObject.SetActive(true);
 					_sessionOrigin.MakeContentAppearAt(_installation, hits[0].pose.position);
 
