@@ -16,9 +16,6 @@ namespace UI.Highlighting
 		// Unity-facing variables
 		// Useful children
 		[SerializeField]
-		private Button _mainButton = null;
-
-		[SerializeField]
 		private SphereButton _sphereButton = null;
 
 		[SerializeField]
@@ -31,6 +28,7 @@ namespace UI.Highlighting
 		private ColorScheme _colorScheme;
 
 		public event Action<Highlight> OnExpanded;
+		public event Action<Highlight> OnCollapsed;
 
 		public HighlightAnchor AssociatedAnchor
 		{
@@ -82,10 +80,6 @@ namespace UI.Highlighting
 			}
 
 			ColorBlock colors = _colorScheme.ValidationColorDictionary[worstResult];
-
-			if (_mainButton != null)
-				_mainButton.colors = colors;
-
 			_sphereButton.Colors = colors;
 		}
 		#region Submenu handling
@@ -93,7 +87,8 @@ namespace UI.Highlighting
 		{
 			_secondaryMenu.gameObject.SetActive(false);
 			Selected = false;
-			_sphereButton.Unselect();
+			OnCollapsed?.Invoke(this);
+			_sphereButton.Deselect();
 		}
 
 		// Event for the main button on this highlight

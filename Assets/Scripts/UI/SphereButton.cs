@@ -43,7 +43,7 @@ namespace UI
 
 		private float _elapsedTime;
 
-		private float _alphaModulator;
+		private float _alphaModulator = 1.0f;
 
 		public ColorBlock Colors
 		{
@@ -65,6 +65,13 @@ namespace UI
 		public event Action OnTweenFinished;
 
 #region Monobehaviour
+
+		public void Deselect()
+		{
+			if(Selected)
+				SetState(ButtonState.Normal);
+		}
+
 		protected void Awake()
 		{
 			_colorShaderID = Shader.PropertyToID("_MainColor");
@@ -113,14 +120,6 @@ namespace UI
 		}
 #endregion
 
-		public void Unselect()
-		{
-			if(Selected)
-			{
-				SetState(ButtonState.Normal);
-			}
-		}
-
 		private void SetState(ButtonState newState)
 		{
 			_currentState = newState;
@@ -149,8 +148,8 @@ namespace UI
 		{
 			StartColorTween(_colorsDictionary[_currentState], duration);
 		}
-		
-		private void StartColorTween(Color targetColor, float duration)
+
+		public void StartColorTween(Color targetColor, float duration)
 		{
 			_wantedColor = targetColor;
 			_tweenDuration = duration;

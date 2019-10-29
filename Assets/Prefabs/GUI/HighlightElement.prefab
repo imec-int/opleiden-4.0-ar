@@ -695,7 +695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fce5a5c38b2cfe48b563b00b03fdf7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainButton: {fileID: 8061404064127690948}
   _sphereButton: {fileID: 5746962855246064439}
   _secondaryMenu: {fileID: 3240657591621614382}
   _actionPositionLabels:
