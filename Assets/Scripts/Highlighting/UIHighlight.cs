@@ -112,7 +112,7 @@ public class UIHighlight : MonoBehaviour
 
 	void Update()
 	{
-		var color = _mainButton.image.color;
+		var color = _mainButton.targetGraphic.color;
 		_colorSphere.GetComponent<Renderer>().material.SetColor(_colorShaderID,color);
 	}
 	#endregion
