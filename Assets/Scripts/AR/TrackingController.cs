@@ -46,6 +46,7 @@ namespace AR
 			if (changedTrackedObjects.added.Count > 0)
 			{
 				TrackingCompleted();
+				_arTrackedObjectManager.trackedObjectPrefab.SetActive(true);
 			}
 		}
 
