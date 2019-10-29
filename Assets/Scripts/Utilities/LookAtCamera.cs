@@ -4,19 +4,19 @@ namespace Utilities
 {
 	public class LookAtCamera : MonoBehaviour
 	{
-		private RectTransform _RectTransform = null;
-		private Camera _MainCamera = null;
+		private RectTransform _rectTransform = null;
+		private Camera _mainCamera = null;
 
 		private void Awake()
 		{
-			_RectTransform = this.GetComponent<RectTransform>();
-			_MainCamera = Camera.main;
+			_rectTransform = this.GetComponent<RectTransform>();
+			_mainCamera = Camera.main;
 		}
 
 		private void Update()
 		{
-			_RectTransform.LookAt(_MainCamera.transform);
-			_RectTransform.forward *= -1;
+			_rectTransform.LookAt(_mainCamera.transform);
+			_rectTransform.forward *= -1;
 		}
 	}
 }

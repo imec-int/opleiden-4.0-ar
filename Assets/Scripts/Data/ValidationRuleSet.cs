@@ -49,11 +49,11 @@ namespace TimeLineValidation
 
 		#region Internals for validation check
 		#region Generated
-		private Dictionary<int, int> _UIDUsageInRulesetDict = new Dictionary<int, int>();
+		private Dictionary<int, int> _uidUsageInRulesetDict = new Dictionary<int, int>();
 		public uint TotalStepCount { get; private set; }
 		#endregion
 		#region State management
-		private Dictionary<int, int> _UIDUsageInTimelineDict = new Dictionary<int, int>();
+		private Dictionary<int, int> _uidUsageInTimelineDict = new Dictionary<int, int>();
 		private int _actionPhaseIndex;
 		private int _subStepIndex;
 		#endregion
@@ -76,7 +76,7 @@ namespace TimeLineValidation
 						result = false;
 						continue;
 					}
-					IncreaseUsageForUID(_UIDUsageInRulesetDict, step.UID);
+					IncreaseUsageForUID(_uidUsageInRulesetDict, step.UID);
 					++TotalStepCount;
 				}
 			}
@@ -95,7 +95,7 @@ namespace TimeLineValidation
 			};
 
 			// Reset
-			_UIDUsageInTimelineDict.Clear();
+			_uidUsageInTimelineDict.Clear();
 			_actionPhaseIndex = 0;
 			_subStepIndex = 0;
 
@@ -151,7 +151,7 @@ namespace TimeLineValidation
 		private ValidationResult ValidateAction(ActionData action)
 		{
 			// Check unnecessary
-			if (!_UIDUsageInRulesetDict.ContainsKey(action.UID))
+			if (!_uidUsageInRulesetDict.ContainsKey(action.UID))
 			{
 				return ValidationResult.Incorrect;
 			}
@@ -159,8 +159,8 @@ namespace TimeLineValidation
 			ValidationResult result = RecursivelyPhaseCheck(action);
 
 			// Too many of the same UID check
-			int count = IncreaseUsageForUID(_UIDUsageInTimelineDict, action.UID);
-			if (count > _UIDUsageInRulesetDict[action.UID])
+			int count = IncreaseUsageForUID(_uidUsageInTimelineDict, action.UID);
+			if (count > _uidUsageInRulesetDict[action.UID])
 			{
 				return ValidationResult.Incorrect;
 			}

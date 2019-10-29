@@ -12,15 +12,15 @@ namespace UI.Utilities
 		public UnityEvent _OnLongPress = new UnityEvent();
 
 		protected bool _IsPointerDown, _LongPressTriggered;
-		private float _TimePressed;
+		private float _timePressed;
 
 		protected virtual void Update()
 		{
 			if (_IsPointerDown && !_LongPressTriggered)
 			{
-				_TimePressed += Time.deltaTime;
+				_timePressed += Time.deltaTime;
 
-				if (_TimePressed > _LongPressThreshold)
+				if (_timePressed > _LongPressThreshold)
 				{
 					StartLongPress();
 				}
@@ -31,28 +31,28 @@ namespace UI.Utilities
 		{
 			_IsPointerDown = true;
 			_LongPressTriggered = false;
-			_TimePressed = 0;
+			_timePressed = 0;
 		}
 
 		public void OnPointerUp(PointerEventData eventData)
 		{
 			_IsPointerDown = false;
 			_LongPressTriggered = false;
-			_TimePressed = 0;
+			_timePressed = 0;
 		}
 
 		public void OnPointerExit(PointerEventData eventData)
 		{
 			_IsPointerDown = false;
 			_LongPressTriggered = false;
-			_TimePressed = 0;
+			_timePressed = 0;
 		}
 
 		protected virtual void StartLongPress()
 		{
 			_LongPressTriggered = true;
 			_OnLongPress.Invoke();
-			_TimePressed = 0;
+			_timePressed = 0;
 		}
 	}
 }

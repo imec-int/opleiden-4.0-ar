@@ -36,7 +36,7 @@ namespace AR
 
 			if (pos.x < 0 || pos.x > 1 || pos.y < 0 || pos.y > 1 || pos.z < 0 || !_installation.gameObject.activeSelf)
 			{
-				if (Input.GetTouch(0).phase == TouchPhase.Began && _raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
+				if ((Input.GetTouch(0).tapCount == 2 || !_installation.gameObject.activeSelf) && Input.GetTouch(0).phase == TouchPhase.Began && _raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
 				{
 					_installation.gameObject.SetActive(true);
 					_sessionOrigin.MakeContentAppearAt(_installation, hits[0].pose.position);

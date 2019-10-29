@@ -11,21 +11,21 @@ namespace UI.Highlighting
 		private ActionWidget _SecondaryButtonPrefab = null;
 
 		#region Members
-		private RectTransform _RectTransform = null;
-		private HighlightInfo _HighlightInfo = null;
-		private ActionController _ActionController = null;
-		private Highlight _HighlightParent = null;
+		private RectTransform _rectTransform = null;
+		private HighlightInfo _highlightInfo = null;
+		private ActionController _actionController = null;
+		private Highlight _highlightParent = null;
 		#endregion
 
 		private void Awake()
 		{
-			_RectTransform = GetComponent<RectTransform>();
+			_rectTransform = GetComponent<RectTransform>();
 		}
 
 		public void Setup(Operation[] operations, Part part, UnityAction infoButtonListener, ActionController controller, Highlight parent)
 		{
-			_ActionController = controller;
-			_HighlightParent = parent;
+			_actionController = controller;
+			_highlightParent = parent;
 			// operation buttons
 			foreach (Operation op in operations)
 			{
@@ -43,7 +43,7 @@ namespace UI.Highlighting
 
 		private ActionWidget CreateNewActionElement()
 		{
-			ActionWidget newObj = GameObject.Instantiate(_SecondaryButtonPrefab, _RectTransform);
+			ActionWidget newObj = GameObject.Instantiate(_SecondaryButtonPrefab, _rectTransform);
 			newObj.transform.SetParent(this.transform, false);
 			return newObj;
 		}
@@ -51,8 +51,8 @@ namespace UI.Highlighting
 		private void OnOperationButtonClicked(IndexedActionData action)
 		{
 			// Debug.Log($"Clicked {action.Operation}, {action.Part}");
-			_ActionController.AddAction(action);
-			_HighlightParent.Collapse();
+			_actionController.AddAction(action);
+			_highlightParent.Collapse();
 		}
 	}
 }

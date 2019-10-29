@@ -18,4 +18,10 @@ MonoBehaviour:
   - m_GuidLow: 5063550293786954003
     m_GuidHigh: 18247556932000309155
     m_Name: Pump
-    m_Entries: []
+    m_Entries:
+    - {fileID: -6831329414088302235, guid: 0d97eb5e5ed109147b1ee39730e7893b, type: 3}
+  - m_GuidLow: 4873018367796669653
+    m_GuidHigh: 2333607978560609957
+    m_Name: NerveGun
+    m_Entries:
+    - {fileID: -6831329414088302235, guid: 010356748437d44428cf04c9728ebed1, type: 3}
