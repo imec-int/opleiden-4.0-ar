@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Data;
 
 namespace UI
 {
@@ -14,8 +13,10 @@ namespace UI
 
 		[SerializeField]
 		private TextMeshProUGUI _HeaderLabel;
+
 		[SerializeField]
 		private TextMeshProUGUI _BodyLabel;
+
 		[SerializeField]
 		private Button _CloseButton;
 

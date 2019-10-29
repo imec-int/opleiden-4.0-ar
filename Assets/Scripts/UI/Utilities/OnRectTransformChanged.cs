@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace UI
+namespace UI.Utilities
 {
 	public class OnRectTransformChanged : UIBehaviour
 	{
