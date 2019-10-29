@@ -26,9 +26,12 @@ namespace UI
 		[SerializeField]
 		private InfoPanel _infoPanel;
 
+		private TouchScreenKeyboard _touchScreenKeyboard;
+
 		private void Awake()
 		{
 			_inputField.characterLimit = _pumpAnchor.PumpID.Length;
+			_touchScreenKeyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.ASCIICapable, false, false, false, false, "Pump ID", 20);
 		}
 
 		private void OnInfoPanelClosed()
@@ -58,6 +61,7 @@ namespace UI
 				_inputField.interactable = false;
 				_inputField.GetComponent<Image>().CrossFadeColor(Color.green, 0.5f, false, false);
 				_animator.SetTrigger("PumpTagged");
+				_touchScreenKeyboard.active = false;
 			}
 		}
 
