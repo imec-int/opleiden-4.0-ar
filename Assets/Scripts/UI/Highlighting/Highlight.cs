@@ -19,6 +19,9 @@ namespace UI.Highlighting
 		private Button _mainButton = null;
 
 		[SerializeField]
+		private SphereButton _sphereButton = null;
+
+		[SerializeField]
 		private HighlightSecondaryMenu _secondaryMenu = null;
 
 		[SerializeField]
@@ -49,7 +52,7 @@ namespace UI.Highlighting
 			() => showHighlightInfo?.Invoke(anchor.Info), controller, this);
 
 			_secondaryMenu.gameObject.SetActive(false);
-			_mainButton.onClick.AddListener(OnButtonClicked);
+			_sphereButton.onClick.AddListener(OnButtonClicked);
 
 			// Get some possible UIDs we need to watch out for post validation
 			foreach (var operation in anchor.AvailableOperations)
@@ -82,13 +85,15 @@ namespace UI.Highlighting
 
 			if (_mainButton != null)
 				_mainButton.colors = colors;
+
+			_sphereButton.Colors = colors;
 		}
 		#region Submenu handling
 		public void Collapse()
 		{
 			_secondaryMenu.gameObject.SetActive(false);
 			Selected = false;
-			// TODO: [PLDN-51] Color change
+			_sphereButton.Unselect();
 		}
 
 		// Event for the main button on this highlight
@@ -103,7 +108,6 @@ namespace UI.Highlighting
 			//Show the menu
 			_secondaryMenu.gameObject.SetActive(true);
 			Selected = true;
-			// TODO: Color change
 		}
 		#endregion
 	}

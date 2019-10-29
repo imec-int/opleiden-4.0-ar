@@ -533,8 +533,9 @@ GameObject:
   - component: {fileID: 8403555445872049447}
   - component: {fileID: 4582369037677942979}
   - component: {fileID: 282017240796479348}
+  - component: {fileID: 5746962855246064439}
   m_Layer: 0
-  m_Name: Outer Sphere
+  m_Name: Sphere Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,6 +615,33 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5746962855246064439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5510185353047993543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ff0b5c9fd1cf941b5ec024ae1a5302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meshesToColor:
+  - {fileID: 4582369037677942979}
+  - {fileID: 4380348666986716855}
+  _colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.08018869, g: 1, b: 0.97182584, a: 1}
+    m_PressedColor: {r: 0.41037738, g: 0.48205703, b: 1, a: 1}
+    m_SelectedColor: {r: 0.6839622, g: 0.9003183, b: 1, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.5
+  _clickFadeDuration: 0.1
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6648895926302225459
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainButton: {fileID: 8061404064127690948}
-  _colorSphere: {fileID: 4825208535226643986}
+  _sphereButton: {fileID: 5746962855246064439}
   _secondaryMenu: {fileID: 3240657591621614382}
   _actionPositionLabels:
   - {fileID: 6648895926685013183}
@@ -857,7 +885,6 @@ GameObject:
   - component: {fileID: 6648895926757964339}
   - component: {fileID: 6648895926757964338}
   - component: {fileID: 8061404064127690948}
-  - component: {fileID: 7348804221876405690}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -899,12 +926,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6648895926757964336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 728ccd969180069468184587ad9e4a73, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.7607843}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -927,7 +954,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6648895926757964336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -963,19 +990,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7348804221876405690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6648895926757964336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ff0b5c9fd1cf941b5ec024ae1a5302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Test: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8039650424276425856
 GameObject:
   m_ObjectHideFlags: 0
