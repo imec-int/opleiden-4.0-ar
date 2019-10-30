@@ -96,6 +96,7 @@ namespace UI.Highlighting
 		{
 			Expand();
 			OnExpanded?.Invoke(this);
+			//_sphereButton.Select();
 		}
 
 		private void Expand()

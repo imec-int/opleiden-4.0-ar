@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Utilities;
+using UnityEngine.EventSystems;
 
 namespace UI
 {
 	[RequireComponent(typeof(SphereCollider))]
-	public class SphereButton : MonoBehaviour
+	public class SphereButton : MonoBehaviour, IPointerClickHandler
 	{
 		private enum ButtonState
 		{
@@ -28,7 +29,10 @@ namespace UI
 
 		[SerializeField]
 		private float _clickFadeDuration = 0.2f;
-		
+
+		[SerializeField]
+		private bool _selectAfterPress = true;
+
 		private Dictionary<ButtonState, Color> _colorsDictionary;
 
 		private int _colorShaderID;
@@ -42,8 +46,6 @@ namespace UI
 		private float _tweenDuration;
 
 		private float _elapsedTime;
-
-		private float _alphaModulator = 1.0f;
 
 		public ColorBlock Colors
 		{
@@ -59,71 +61,57 @@ namespace UI
 			}
 		}
 
-		public bool Selected { get => _currentState == ButtonState.Pressed || _currentState == ButtonState.Selected;} 
+		public bool Selected { get => _currentState == ButtonState.Pressed || _currentState == ButtonState.Selected; }
 
 		public UnityEvent onClick;
 		public event Action OnTweenFinished;
 
-#region Monobehaviour
-
-		public void Deselect()
-		{
-			if(Selected)
-				SetState(ButtonState.Normal);
-		}
-
+		#region Monobehaviour
 		protected void Awake()
 		{
 			_colorShaderID = Shader.PropertyToID("_MainColor");
 			FillColorsDictionary();
 			_currentState = ButtonState.Normal;
-			OnTweenFinished += TweenFinished;
+			if (_selectAfterPress)
+				OnTweenFinished += SelectAfterPress;
 		}
-
-		private void TweenFinished()
-		{
-			if (_currentState == ButtonState.Pressed)
-			{
-				SetState(ButtonState.Selected);
-			}
-		}
-
-		protected void OnMouseEnter()
-		{
-			if(_currentState == ButtonState.Normal)
-			{
-				SetState(ButtonState.Highlighted);
-			}
-		}
-
-		protected void OnMouseDown()
-		{
-			if (_currentState == ButtonState.Highlighted)
-			{
-				_currentState = ButtonState.Pressed;
-				StartColorTween(_clickFadeDuration);
-				onClick.Invoke();
-			}
-		}
-
-		protected void OnMouseExit()
-		{
-			if (_currentState == ButtonState.Highlighted)
-			{
-				SetState(ButtonState.Normal);
-			}	
-		}
-
 		protected void Update()
 		{
 			TweenColor();
 		}
-#endregion
+		#endregion
+
+		public void Deselect()
+		{
+			if (Selected)
+				SetState(ButtonState.Normal);
+		}
+
+		public void Select()
+		{
+			if (!Selected)
+				SetState(ButtonState.Selected);
+		}
+
+		public void OnPointerClick(PointerEventData eventData)
+		{
+			if (_currentState == ButtonState.Normal)
+			{
+				SetState(ButtonState.Pressed, _clickFadeDuration);
+				onClick.Invoke();
+			}
+		}
 
 		private void SetState(ButtonState newState)
 		{
 			_currentState = newState;
 			StartColorTween();
+		}
+
+		private void SetState(ButtonState newState, float tweenDuration)
+		{
+			_currentState = newState;
+			StartColorTween(tweenDuration);
 		}
 
 		private void FillColorsDictionary()
@@ -138,7 +126,7 @@ namespace UI
 			};
 		}
 
-#region Tweening
+		#region Tweening
 		private void StartColorTween()
 		{
 			StartColorTween(_colorsDictionary[_currentState], _colors.fadeDuration);
@@ -163,15 +151,23 @@ namespace UI
 				OnTweenFinished?.Invoke();
 				return;
 			}
-			float lerpVal = _elapsedTime.RemapValue(0,_tweenDuration,0,1);
+			float lerpVal = _elapsedTime.RemapValue(0, _tweenDuration, 0, 1);
 			_currentColor = Color.Lerp(_currentColor, _wantedColor, lerpVal);
 			_elapsedTime += Time.deltaTime;
 
-			foreach(var renderer in _meshesToColor)
+			foreach (var renderer in _meshesToColor)
 			{
-				renderer.material.SetColor(_colorShaderID,_currentColor);
+				renderer.material.SetColor(_colorShaderID, _currentColor);
 			}
 		}
-#endregion
+
+		private void SelectAfterPress()
+		{
+			if (_currentState == ButtonState.Pressed)
+			{
+				SetState(ButtonState.Selected);
+			}
+		}
+		#endregion
 	}
 }
