@@ -156,6 +156,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-6618102066033555542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0f20a0817608a45b98f79455f98ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _widget: 2
+  _deactivateOnEnter: 1
+  _activateOnExit: 0
 --- !u!1102 &-6443659282705495742
 AnimatorState:
   serializedVersion: 5
@@ -238,6 +253,8 @@ AnimatorState:
   - {fileID: -3017780054068417803}
   - {fileID: 6541545728159715876}
   - {fileID: 6131841432017742617}
+  - {fileID: -6618102066033555542}
+  - {fileID: 3184737422385157249}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -410,7 +427,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: ShowLoadingScreen
     m_Type: 9
@@ -428,7 +445,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: PumpTagged
     m_Type: 9
@@ -621,6 +638,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &3184737422385157249
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cb6a866cdf60247b47478ada4fdfd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3815996903390414018
 MonoBehaviour:
   m_ObjectHideFlags: 1
