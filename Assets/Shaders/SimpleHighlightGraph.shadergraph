@@ -4,7 +4,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.ColorShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"MainColor\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"6d1e683f-952f-493e-871d-fc05685a8352\"\n    },\n    \"m_DefaultReferenceName\": \"Color_775668DD\",\n    \"m_OverrideReferenceName\": \"_MainColor\",\n    \"m_Precision\": 0,\n    \"m_Value\": {\n        \"r\": 0.7075471878051758,\n        \"g\": 0.7042096853256226,\n        \"b\": 0.7042096853256226,\n        \"a\": 1.0\n    },\n    \"m_ColorMode\": 0,\n    \"m_Hidden\": false\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"MainColor\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"6d1e683f-952f-493e-871d-fc05685a8352\"\n    },\n    \"m_DefaultReferenceName\": \"Color_775668DD\",\n    \"m_OverrideReferenceName\": \"_Color\",\n    \"m_Precision\": 0,\n    \"m_Value\": {\n        \"r\": 0.7075471878051758,\n        \"g\": 0.7042096853256226,\n        \"b\": 0.7042096853256226,\n        \"a\": 1.0\n    },\n    \"m_ColorMode\": 0,\n    \"m_Hidden\": false\n}"
         },
         {
             "typeInfo": {

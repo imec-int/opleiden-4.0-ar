@@ -33,10 +33,6 @@ namespace UI
 		[SerializeField]
 		private bool _selectAfterPress = true;
 
-		private Dictionary<ButtonState, Color> _colorsDictionary;
-
-		private int _colorShaderID;
-
 		private ButtonState _currentState;
 
 		private Color _wantedColor = Color.white;
@@ -56,7 +52,6 @@ namespace UI
 			set
 			{
 				_colors = value;
-				FillColorsDictionary();
 				StartColorTween();
 			}
 		}
@@ -64,13 +59,11 @@ namespace UI
 		public bool Selected { get => _currentState == ButtonState.Pressed || _currentState == ButtonState.Selected; }
 
 		public UnityEvent onClick;
-		public event Action OnTweenFinished;
+		protected event Action OnTweenFinished;
 
 		#region Monobehaviour
 		protected void Awake()
 		{
-			_colorShaderID = Shader.PropertyToID("_MainColor");
-			FillColorsDictionary();
 			_currentState = ButtonState.Normal;
 			if (_selectAfterPress)
 				OnTweenFinished += SelectAfterPress;
@@ -114,27 +107,35 @@ namespace UI
 			StartColorTween(tweenDuration);
 		}
 
-		private void FillColorsDictionary()
+		private Color GetColorForState(ButtonState state)
 		{
-			_colorsDictionary = new Dictionary<ButtonState, Color>
+			switch (state)
 			{
-				[ButtonState.Normal] = _colors.normalColor,
-				[ButtonState.Highlighted] = _colors.highlightedColor,
-				[ButtonState.Pressed] = _colors.pressedColor,
-				[ButtonState.Selected] = _colors.selectedColor,
-				[ButtonState.Disabled] = _colors.disabledColor,
-			};
+				case ButtonState.Normal:
+					return _colors.normalColor;
+				case ButtonState.Highlighted:
+					return _colors.highlightedColor;
+				case ButtonState.Pressed:
+					return _colors.pressedColor;
+				case ButtonState.Selected:
+					return _colors.selectedColor;
+				case ButtonState.Disabled:
+					return _colors.disabledColor;
+				default:
+					break;
+			}
+			// Failure colour, make obvious
+			return Color.magenta;
 		}
-
 		#region Tweening
 		private void StartColorTween()
 		{
-			StartColorTween(_colorsDictionary[_currentState], _colors.fadeDuration);
+			StartColorTween(GetColorForState(_currentState), _colors.fadeDuration);
 		}
 
 		private void StartColorTween(float duration)
 		{
-			StartColorTween(_colorsDictionary[_currentState], duration);
+			StartColorTween(GetColorForState(_currentState), duration);
 		}
 
 		public void StartColorTween(Color targetColor, float duration)
@@ -151,13 +152,13 @@ namespace UI
 				OnTweenFinished?.Invoke();
 				return;
 			}
-			float lerpVal = _elapsedTime.RemapValue(0, _tweenDuration, 0, 1);
+			float lerpVal = _elapsedTime / _tweenDuration;
 			_currentColor = Color.Lerp(_currentColor, _wantedColor, lerpVal);
 			_elapsedTime += Time.deltaTime;
 
 			foreach (var renderer in _meshesToColor)
 			{
-				renderer.material.SetColor(_colorShaderID, _currentColor);
+				renderer.material.color = _currentColor;
 			}
 		}
 
