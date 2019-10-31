@@ -623,43 +623,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TimelineActionWidget
       objectReference: {fileID: 0}
-    - target: {fileID: 8892437025442654411, guid: d70d1d21a2ecef3499b03247c55d8af0,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8892437025442654411, guid: d70d1d21a2ecef3499b03247c55d8af0,
-        type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4286874756
-      objectReference: {fileID: 0}
     - target: {fileID: 2859238638223872667, guid: d70d1d21a2ecef3499b03247c55d8af0,
         type: 3}
-      propertyPath: m_firstOverflowCharacterIndex
-      value: -1
+      propertyPath: m_fontSize
+      value: 59
       objectReference: {fileID: 0}
-    - target: {fileID: 2859238638223872667, guid: d70d1d21a2ecef3499b03247c55d8af0,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2859238638223872667, guid: d70d1d21a2ecef3499b03247c55d8af0,
-        type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4286874756
-      objectReference: {fileID: 0}
-    - target: {fileID: 2859238638223872667, guid: d70d1d21a2ecef3499b03247c55d8af0,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 9df9c1df493303140a571bc29573f4e1,
-        type: 2}
-    - target: {fileID: 2859238638223872667, guid: d70d1d21a2ecef3499b03247c55d8af0,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -4574801101015592294, guid: 9df9c1df493303140a571bc29573f4e1,
-        type: 2}
     - target: {fileID: 962673219061142542, guid: d70d1d21a2ecef3499b03247c55d8af0,
         type: 3}
       propertyPath: m_TargetGraphic
@@ -786,14 +754,8 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8310452975393593221, guid: d70d1d21a2ecef3499b03247c55d8af0,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8310452975393593221, guid: d70d1d21a2ecef3499b03247c55d8af0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
