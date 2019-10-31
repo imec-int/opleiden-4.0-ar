@@ -7,7 +7,6 @@ namespace UI.Highlighting
 {
 	public class HighlightContainer : MonoBehaviour
 	{
-		[SerializeField]
 		private GameObject _3DModel = null;
 
 		[SerializeField]
@@ -24,7 +23,7 @@ namespace UI.Highlighting
 		#region Monobehaviour
 		private void OnEnable()
 		{
-			_3DModel = GameObject.Find("Installation");
+			_3DModel = GameObject.FindGameObjectWithTag("Installation");
 			Reset();
 		}
 		#endregion

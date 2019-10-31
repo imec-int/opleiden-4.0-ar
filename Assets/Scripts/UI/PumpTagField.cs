@@ -17,7 +17,6 @@ namespace UI
 		[SerializeField]
 		private HighlightInfo _serialInfo;
 
-		[SerializeField]
 		private PumpAnchor _pumpAnchor;
 
 		[SerializeField]
@@ -30,6 +29,8 @@ namespace UI
 
 		private void Awake()
 		{
+			_pumpAnchor = GameObject.FindGameObjectWithTag("Installation").GetComponentInChildren<PumpAnchor>();
+			transform.position = _pumpAnchor.transform.position;
 			_inputField.characterLimit = _pumpAnchor.PumpID.Length;
 			_touchScreenKeyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.ASCIICapable, false, false, false, false, "Pump ID", 20);
 		}
@@ -43,7 +44,7 @@ namespace UI
 		private void OnEnable()
 		{
 			// Focuses inputfield on activation inside coroutine because Unity still has to activate the inputfield.
-			_pumpAnchor = GameObject.Find("Installation").GetComponentInChildren<PumpAnchor>();
+
 			StartCoroutine(FocusInputField());
 		}
 

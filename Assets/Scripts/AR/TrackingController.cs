@@ -19,6 +19,9 @@ namespace AR
 		[SerializeField]
 		private ARSessionOrigin _sessionOrigin;
 
+		[SerializeField]
+		private GameObject _installationPrefab;
+
 		protected void Awake()
 		{
 			Assert.IsNotNull(_animator, "Animator is not filled in.");
@@ -79,6 +82,8 @@ namespace AR
 			_arPointCloudManager.enabled = false;
 			_objectPlacement.enabled = false;
 			_arTrackedObjectManager.enabled = false;
+
+			Instantiate(_installationPrefab).name = _installationPrefab.name;
 			TrackingCompleted();
 		}
 

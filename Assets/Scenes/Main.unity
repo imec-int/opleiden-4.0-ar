@@ -403,6 +403,11 @@ PrefabInstance:
       propertyPath: _installation
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1512352691, guid: 647cbf57d4ef0bf4fbadff1479910081, type: 3}
+      propertyPath: _installationPrefab
+      value: 
+      objectReference: {fileID: 6921251692644192717, guid: 3e729d79c03d3994f84029cd15c7c8e9,
+        type: 3}
     - target: {fileID: 1434262470, guid: 647cbf57d4ef0bf4fbadff1479910081, type: 3}
       propertyPath: m_TrackedObjectPrefab
       value: 
@@ -416,6 +421,11 @@ PrefabInstance:
       propertyPath: _sessionOrigin
       value: 
       objectReference: {fileID: 1434262470}
+    - target: {fileID: 1434262471, guid: 647cbf57d4ef0bf4fbadff1479910081, type: 3}
+      propertyPath: _installationPrefab
+      value: 
+      objectReference: {fileID: 6921251692644192717, guid: 3e729d79c03d3994f84029cd15c7c8e9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 647cbf57d4ef0bf4fbadff1479910081, type: 3}
 --- !u!114 &1434262469 stripped
@@ -554,5 +564,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -173.875
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6721093372950041154, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
