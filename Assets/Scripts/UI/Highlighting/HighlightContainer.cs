@@ -24,6 +24,7 @@ namespace UI.Highlighting
 		#region Monobehaviour
 		private void OnEnable()
 		{
+			_3DModel = GameObject.Find("Installation");
 			Reset();
 		}
 		#endregion

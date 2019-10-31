@@ -43,6 +43,7 @@ namespace UI
 		private void OnEnable()
 		{
 			// Focuses inputfield on activation inside coroutine because Unity still has to activate the inputfield.
+			_pumpAnchor = GameObject.Find("Installation").GetComponentInChildren<PumpAnchor>();
 			StartCoroutine(FocusInputField());
 		}
 

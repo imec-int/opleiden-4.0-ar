@@ -50,8 +50,8 @@ namespace AR
 			if (changedTrackedObjects.added.Count > 0)
 			{
 				TrackingCompleted();
-				_arTrackedObjectManager.trackedObjectPrefab.SetActive(true);
-				_sessionOrigin.MakeContentAppearAt(_arTrackedObjectManager.trackedObjectPrefab.transform, Quaternion.Euler(-90, -90, 0));
+				//_arTrackedObjectManager.trackedObjectPrefab.SetActive(true);
+				//_sessionOrigin.MakeContentAppearAt(_arTrackedObjectManager.trackedObjectPrefab.transform, Quaternion.Euler(-90, -90, 0));
 			}
 		}
 
