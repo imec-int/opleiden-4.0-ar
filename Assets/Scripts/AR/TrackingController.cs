@@ -16,6 +16,9 @@ namespace AR
 		[SerializeField]
 		private Animator _animator;
 
+		[SerializeField]
+		private ARSessionOrigin _sessionOrigin;
+
 		protected void Awake()
 		{
 			Assert.IsNotNull(_animator, "Animator is not filled in.");
@@ -23,6 +26,7 @@ namespace AR
 			_arPlaneManager = GetComponent<ARPlaneManager>();
 			_arPointCloudManager = GetComponent<ARPointCloudManager>();
 			_objectPlacement = GetComponent<ObjectPlacement>();
+
 			_arTrackedObjectManager = GetComponent<ARTrackedObjectManager>();
 
 			_arTrackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
@@ -47,6 +51,7 @@ namespace AR
 			{
 				TrackingCompleted();
 				_arTrackedObjectManager.trackedObjectPrefab.SetActive(true);
+				_sessionOrigin.MakeContentAppearAt(_arTrackedObjectManager.trackedObjectPrefab.transform, Quaternion.identity);
 			}
 		}
 
