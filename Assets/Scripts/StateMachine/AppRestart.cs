@@ -8,7 +8,7 @@ namespace StateMachine
 {
 	public class AppRestart : StateMachineBehaviour
 	{
-		bool _shouldRun = true;
+		private bool _shouldRun = true;
 
 		override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
