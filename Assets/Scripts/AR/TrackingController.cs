@@ -51,7 +51,7 @@ namespace AR
 			{
 				TrackingCompleted();
 				_arTrackedObjectManager.trackedObjectPrefab.SetActive(true);
-				_sessionOrigin.MakeContentAppearAt(_arTrackedObjectManager.trackedObjectPrefab.transform, Quaternion.identity);
+				_sessionOrigin.MakeContentAppearAt(_arTrackedObjectManager.trackedObjectPrefab.transform, Quaternion.Euler(-90, -90, 0));
 			}
 		}
 
