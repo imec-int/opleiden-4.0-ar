@@ -5,7 +5,8 @@ using UnityEngine.XR.ARFoundation;
 
 namespace AR
 {
-	[RequireComponent(typeof(ARPlaneManager), typeof(ARPointCloudManager), typeof(ObjectPlacement), typeof(ARTrackedObjectManager))]
+	[RequireComponent(typeof(ARPlaneManager), typeof(ARPointCloudManager), typeof(ObjectPlacement))]
+	[RequireComponent(typeof(ARTrackedObjectManager))]
 	public class TrackingController : MonoBehaviour
 	{
 		private ARPlaneManager _arPlaneManager;
@@ -15,9 +16,6 @@ namespace AR
 
 		[SerializeField]
 		private Animator _animator;
-
-		[SerializeField]
-		private ARSessionOrigin _sessionOrigin;
 
 		[SerializeField]
 		private GameObject _installationPrefab;
@@ -53,8 +51,6 @@ namespace AR
 			if (changedTrackedObjects.added.Count > 0)
 			{
 				TrackingCompleted();
-				//_arTrackedObjectManager.trackedObjectPrefab.SetActive(true);
-				//_sessionOrigin.MakeContentAppearAt(_arTrackedObjectManager.trackedObjectPrefab.transform, Quaternion.Euler(-90, -90, 0));
 			}
 		}
 

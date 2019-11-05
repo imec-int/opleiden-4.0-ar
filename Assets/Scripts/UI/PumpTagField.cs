@@ -27,7 +27,7 @@ namespace UI
 
 		private TouchScreenKeyboard _touchScreenKeyboard;
 
-		private void Awake()
+		protected void Awake()
 		{
 			_pumpAnchor = GameObject.FindGameObjectWithTag("Installation").GetComponentInChildren<PumpAnchor>();
 			transform.position = _pumpAnchor.transform.position;
@@ -41,7 +41,7 @@ namespace UI
 			_infoPanel.OnClose -= OnInfoPanelClosed;
 		}
 
-		private void OnEnable()
+		protected void OnEnable()
 		{
 			// Focuses inputfield on activation inside coroutine because Unity still has to activate the inputfield.
 

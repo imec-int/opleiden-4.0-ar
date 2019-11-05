@@ -7,13 +7,13 @@ namespace UI.Highlighting
 {
 	public class HighlightContainer : MonoBehaviour
 	{
-		private GameObject _3DModel = null;
+		private GameObject _3DModel;
 
 		[SerializeField]
-		private Highlight _UIHighlightPrefab = null;
+		private Highlight _uiHighlightPrefab = null;
 
 		[SerializeField]
-		private InfoPanel _UIInfoPanel = null;
+		private InfoPanel _uiInfoPanel = null;
 
 		[SerializeField]
 		private ActionController _actionController = null;
@@ -21,7 +21,7 @@ namespace UI.Highlighting
 		private List<Highlight> _uiHighlightInstanceList = new List<Highlight>();
 
 		#region Monobehaviour
-		private void OnEnable()
+		protected void OnEnable()
 		{
 			_3DModel = GameObject.FindGameObjectWithTag("Installation");
 			Reset();
@@ -63,7 +63,7 @@ namespace UI.Highlighting
 
 			foreach (HighlightAnchor anchor in anchors)
 			{
-				Highlight newObj = Instantiate(_UIHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0), this.transform);
+				Highlight newObj = Instantiate(_uiHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0), this.transform);
 				newObj.Setup(anchor, OnInfoPanelRequested, _actionController);
 				_uiHighlightInstanceList.Add(newObj);
 				// Set up new object
@@ -88,14 +88,14 @@ namespace UI.Highlighting
 		private void OnInfoPanelRequested(HighlightInfo info)
 		{
 			SetHighlightsVisibility(false);
-			_UIInfoPanel.Show(info);
-			_UIInfoPanel.OnClose += OnInfoPanelClosed;
+			_uiInfoPanel.Show(info);
+			_uiInfoPanel.OnClose += OnInfoPanelClosed;
 		}
 
 		private void OnInfoPanelClosed()
 		{
 			SetHighlightsVisibility(true);
-			_UIInfoPanel.OnClose -= OnInfoPanelClosed;
+			_uiInfoPanel.OnClose -= OnInfoPanelClosed;
 		}
 		#endregion
 

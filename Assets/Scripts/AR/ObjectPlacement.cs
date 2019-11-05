@@ -6,8 +6,7 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace AR
 {
-	[RequireComponent(typeof(ARSessionOrigin))]
-	[RequireComponent(typeof(ARRaycastManager))]
+	[RequireComponent(typeof(ARSessionOrigin), typeof(ARRaycastManager))]
 	public class ObjectPlacement : MonoBehaviour
 	{
 		public UnityEvent ObjectPlaced;
@@ -23,14 +22,13 @@ namespace AR
 		[SerializeField]
 		private float _installationScale = 1;
 
-		private void Awake()
+		protected void Awake()
 		{
 			_sessionOrigin = GetComponent<ARSessionOrigin>();
 			_raycastManager = GetComponent<ARRaycastManager>();
 		}
 
-		// Start is called before the first frame update
-		private void Update()
+		protected void Update()
 		{
 			if (Input.touchCount == 0)
 				return;

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea10812aef6a4b84d84bc0c6d767970e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _UIHighlightPrefab: {fileID: 8723860789654182612, guid: ca7806737597466438a7acc751021527,
+  _uiHighlightPrefab: {fileID: 8723860789654182612, guid: ca7806737597466438a7acc751021527,
     type: 3}
-  _UIInfoPanel: {fileID: 0}
+  _uiInfoPanel: {fileID: 0}
   _actionController: {fileID: 0}
