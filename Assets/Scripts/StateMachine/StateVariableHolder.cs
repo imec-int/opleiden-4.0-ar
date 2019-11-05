@@ -15,7 +15,7 @@ namespace StateMachine
 
 	public enum Component
 	{
-		TrackedObjectManager
+		TrackingController
 	}
 
 	public class StateVariableHolder : MonoBehaviour

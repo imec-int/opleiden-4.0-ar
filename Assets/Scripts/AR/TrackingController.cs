@@ -27,9 +27,11 @@ namespace AR
 			_arPlaneManager = GetComponent<ARPlaneManager>();
 			_arPointCloudManager = GetComponent<ARPointCloudManager>();
 			_objectPlacement = GetComponent<ObjectPlacement>();
-
 			_arTrackedObjectManager = GetComponent<ARTrackedObjectManager>();
+		}
 
+		protected void OnEnable()
+		{
 			_arTrackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
 
 			switch (Application.platform)
@@ -44,6 +46,16 @@ namespace AR
 					UnsupportedPlatform();
 					break;
 			}
+		}
+
+		protected void OnDisable()
+		{
+			_arTrackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
+
+			_arTrackedObjectManager.enabled = false;
+			_objectPlacement.enabled = false;
+			_arPlaneManager.enabled = false;
+			_arPointCloudManager.enabled = false;
 		}
 
 		private void OnTrackedObjectsChanged(ARTrackedObjectsChangedEventArgs changedTrackedObjects)
