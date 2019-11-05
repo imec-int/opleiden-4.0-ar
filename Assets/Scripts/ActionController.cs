@@ -32,7 +32,7 @@ namespace Core
 		}
 
 		#region Monobehaviour
-		private void Awake()
+		protected void Awake()
 		{
 			bool rulesetCorrect = _validationRuleSet.Initialize();
 			Debug.Assert(rulesetCorrect, "Current Validation Ruleset contains invalid substeps!!");

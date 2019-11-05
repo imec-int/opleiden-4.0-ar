@@ -17,7 +17,6 @@ namespace UI
 		[SerializeField]
 		private HighlightInfo _serialInfo;
 
-		[SerializeField]
 		private PumpAnchor _pumpAnchor;
 
 		[SerializeField]
@@ -26,9 +25,14 @@ namespace UI
 		[SerializeField]
 		private InfoPanel _infoPanel;
 
-		private void Awake()
+		private TouchScreenKeyboard _touchScreenKeyboard;
+
+		protected void Awake()
 		{
+			_pumpAnchor = GameObject.FindGameObjectWithTag("Installation").GetComponentInChildren<PumpAnchor>();
+			transform.position = _pumpAnchor.transform.position;
 			_inputField.characterLimit = _pumpAnchor.PumpID.Length;
+			_touchScreenKeyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.ASCIICapable, false, false, false, false, "Pump ID", 20);
 		}
 
 		private void OnInfoPanelClosed()
@@ -37,9 +41,10 @@ namespace UI
 			_infoPanel.OnClose -= OnInfoPanelClosed;
 		}
 
-		private void OnEnable()
+		protected void OnEnable()
 		{
 			// Focuses inputfield on activation inside coroutine because Unity still has to activate the inputfield.
+
 			StartCoroutine(FocusInputField());
 		}
 
@@ -58,6 +63,7 @@ namespace UI
 				_inputField.interactable = false;
 				_inputField.GetComponent<Image>().CrossFadeColor(Color.green, 0.5f, false, false);
 				_animator.SetTrigger("PumpTagged");
+				_touchScreenKeyboard.active = false;
 			}
 		}
 

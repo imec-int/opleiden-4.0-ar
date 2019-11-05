@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 804246379}
   - component: {fileID: 1512352691}
   - component: {fileID: 1434262470}
+  - component: {fileID: 1434262471}
   m_Layer: 0
   m_Name: ARSessionOrigin
   m_TagString: Untagged
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2459947032632425698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2459947032632425698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
@@ -241,12 +242,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2459947032632425698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9027ed49b7cf1e74196ae50454e730df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _installation: {fileID: 0}
+  ObjectPlaced:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1434262471}
+        m_MethodName: TrackingCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _installationPrefab: {fileID: 6921251692644192717, guid: 3e729d79c03d3994f84029cd15c7c8e9,
+    type: 3}
   _installationScale: 0.2
 --- !u!114 &1434262470
 MonoBehaviour:
@@ -255,10 +271,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2459947032632425698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f07ca66ce5514fb7a26ab1e51e9bfec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ReferenceLibrary: {fileID: 11400000, guid: e0d953e402aa81b4496c2940e56a0441, type: 2}
-  m_TrackedObjectPrefab: {fileID: 0}
+  m_TrackedObjectPrefab: {fileID: 6921251692644192717, guid: 3e729d79c03d3994f84029cd15c7c8e9,
+    type: 3}
+--- !u!114 &1434262471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459947032632425698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01f0b3ae0fe4a943a8c901e378ebfd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
+  _sessionOrigin: {fileID: 8167808860052763591}
+  _installationPrefab: {fileID: 6921251692644192717, guid: 3e729d79c03d3994f84029cd15c7c8e9,
+    type: 3}
