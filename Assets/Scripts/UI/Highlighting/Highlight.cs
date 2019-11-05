@@ -42,6 +42,8 @@ namespace UI.Highlighting
 
 		private readonly List<int> _possibleUIDList = new List<int>();
 
+		private ActionController _actionController;
+
 		public void Setup(HighlightAnchor anchor, Action<HighlightInfo> showHighlightInfo, ActionController controller)
 		{
 			AssociatedAnchor = anchor;
@@ -57,7 +59,13 @@ namespace UI.Highlighting
 			{
 				_possibleUIDList.Add(ActionData.CalculateUID(operation, anchor.HighlightedPart));
 			}
-			controller.ValidationCompleted += PostValidationVisualisation;
+			_actionController = controller;
+			_actionController.ValidationCompleted += PostValidationVisualisation;
+		}
+
+		protected void OnDestroy()
+		{
+			_actionController.ValidationCompleted -= PostValidationVisualisation;
 		}
 
 		private void PostValidationVisualisation(ValidationInfo info)

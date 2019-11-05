@@ -29,7 +29,7 @@ namespace UI
 		private Button _btnObj;
 		private Image _bgImage;
 
-		private void Awake()
+		protected void Awake()
 		{
 			_btnObj = this.GetComponent<Button>();
 			_bgImage = this.GetComponent<Image>();
@@ -41,6 +41,11 @@ namespace UI
 			_actionController.ValidationCompleted += VisualizeValidation;
 			_action = action;
 			UpdateState();
+		}
+
+		protected void OnDestroy()
+		{
+			_actionController.ValidationCompleted -= VisualizeValidation;
 		}
 
 		private void VisualizeValidation(ValidationInfo info)
@@ -66,7 +71,7 @@ namespace UI
 			base.Setup(_action.Operation, _action.Part);
 		}
 
-		private void Update()
+		protected void Update()
 		{
 			// TODO: Input.GetMouseButtonDown(0) does this work on mobile?
 			if (_closeBtn.activeSelf && Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != _closeBtn)
