@@ -43,6 +43,11 @@ namespace UI
 			UpdateState();
 		}
 
+		protected void OnDestroy()
+		{
+			_actionController.ValidationCompleted -= VisualizeValidation;
+		}
+
 		private void VisualizeValidation(ValidationInfo info)
 		{
 			// Get result for this instance
