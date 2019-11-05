@@ -7,6 +7,7 @@ using Data;
 using UI.Utilities;
 using Utilities;
 using Core;
+using System;
 
 namespace UI
 {
@@ -40,8 +41,18 @@ namespace UI
 			_actionController.ActionUpdated += ActionUpdated;
 			_actionController.ActionDeleted += ActionDeleted;
 			_actionController.ActionMoved += ActionMoved;
+			_actionController.PostReset += ActionsReset;
 
 			_btnTimelineValidation.onClick.AddListener(() => _actionController.ValidateActions());
+		}
+
+		private void ActionsReset()
+		{
+			foreach (TimelineActionWidget widget in _timelineActionWidgets)
+			{
+				Destroy(widget.gameObject);
+			}
+			_timelineActionWidgets.Clear();
 		}
 
 		private void OnEnable()

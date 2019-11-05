@@ -23,6 +23,14 @@ namespace Core
 		public event Action<IndexedActionData, int> ActionMoved;
 		public event Action<ValidationInfo> ValidationCompleted;
 
+		public event Action PostReset;
+
+		public void Reset()
+		{
+			Actions.Clear();
+			PostReset?.Invoke();
+		}
+
 		#region Monobehaviour
 		private void Awake()
 		{
@@ -39,7 +47,6 @@ namespace Core
 			action.Index = Actions.Count;
 
 			ActionAdded?.Invoke(action);
-			//ValidateActions();
 		}
 
 		private void UpdateAction(IndexedActionData action)

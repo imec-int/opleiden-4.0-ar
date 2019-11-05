@@ -52,7 +52,7 @@ namespace UI
 		{
 			// We should only read the screen buffer after rendering is complete
 			yield return new WaitForEndOfFrame();
-
+			_inputField.interactable = true;
 			_inputField.Select();
 		}
 
@@ -72,6 +72,11 @@ namespace UI
 			this.gameObject.SetActive(false);
 			_infoPanel.Show(_serialInfo);
 			_infoPanel.OnClose += OnInfoPanelClosed;
+		}
+
+		public void Reset()
+		{
+			_inputField.text = string.Empty;
 		}
 	}
 }
