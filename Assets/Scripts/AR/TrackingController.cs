@@ -5,7 +5,7 @@ using UnityEngine.XR.ARFoundation;
 
 namespace AR
 {
-	[RequireComponent(typeof(ARPlaneManager), typeof(ARPointCloudManager))]
+	[RequireComponent(typeof(ARPlaneManager), typeof(ARPointCloudManager), typeof(ObjectPlacement), typeof(ARTrackedObjectManager))]
 	public class TrackingController : MonoBehaviour
 	{
 		private ARPlaneManager _arPlaneManager;
