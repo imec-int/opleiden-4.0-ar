@@ -8,7 +8,7 @@ namespace StateMachine
 		private Component _component;
 
 		[SerializeField]
-		private bool _activateOnEnter = true, _deactivateOnExit = true;
+		private bool _deactivateOnEnter = true, _activateOnExit = true;
 
 		private MonoBehaviour _associatedComponent;
 
@@ -19,13 +19,13 @@ namespace StateMachine
 
 			Debug.Assert(_associatedComponent, $"{_component} widget was not found");
 
-			if (_activateOnEnter) _associatedComponent.enabled = true;
+			if (_deactivateOnEnter) _associatedComponent.enabled = false;
 		}
 
 		// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 		override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
-			if (_deactivateOnExit) _associatedComponent.enabled = false;
+			if (_activateOnExit) _associatedComponent.enabled = true;
 		}
 	}
 }
