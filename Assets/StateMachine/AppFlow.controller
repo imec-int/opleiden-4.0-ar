@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0eaa1d4b63144eb0e0070a88032f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _widget: 0
+  _widget: 5
   _activateOnEnter: 1
   _deactivateOnExit: 1
 --- !u!114 &3184737422385157249

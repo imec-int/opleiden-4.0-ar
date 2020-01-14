@@ -1093,7 +1093,7 @@ PrefabInstance:
     - target: {fileID: 7860179805642609512, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1402
+      value: -1485.9995
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e331d67ffd9fbc41a153a18d637eb6f, type: 3}
@@ -1393,10 +1393,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6721093374647068507}
     m_Modifications:
+    - target: {fileID: 2537342150107277306, guid: b24c284b2a5e11f4e8492f42de24df1b,
+        type: 3}
+      propertyPath: _stateMachineAnimator
+      value: 
+      objectReference: {fileID: 5858642453276488568}
     - target: {fileID: 8062072848687816360, guid: b24c284b2a5e11f4e8492f42de24df1b,
         type: 3}
       propertyPath: m_Name
-      value: ARModeSwitcher
+      value: ARModeToggler
       objectReference: {fileID: 0}
     - target: {fileID: 8062072848687816361, guid: b24c284b2a5e11f4e8492f42de24df1b,
         type: 3}

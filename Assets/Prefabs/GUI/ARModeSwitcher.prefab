@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8062072848687816361}
+  - component: {fileID: 2537342150107277306}
   m_Layer: 5
   m_Name: ARModeSwitcher
   m_TagString: Untagged
@@ -36,6 +37,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2537342150107277306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062072848687816360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a205fe66acd76ad48be97e7e86b9346c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectTrackingButton: {fileID: 8062072849797120237}
+  _planeTrackingButton: {fileID: 8062072849819628042}
+  _stateMachineAnimator: {fileID: 0}
+  _trackingController: {fileID: 0}
 --- !u!1 &8062072848805747384
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 500}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8062072849893313654
