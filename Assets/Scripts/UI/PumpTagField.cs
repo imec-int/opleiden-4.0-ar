@@ -27,7 +27,7 @@ namespace UI
 
 		private TouchScreenKeyboard _touchScreenKeyboard;
 
-		protected void Start()
+		protected void Awake()
 		{
 			_pumpAnchor = GameObject.FindGameObjectWithTag("Installation").GetComponentInChildren<PumpAnchor>();
 			transform.position = _pumpAnchor.transform.position;
