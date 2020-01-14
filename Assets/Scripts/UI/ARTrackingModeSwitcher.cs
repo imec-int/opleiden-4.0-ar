@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using AR;
+using Data;
+using System;
 
 namespace UI
 {
@@ -15,10 +17,19 @@ namespace UI
 		private Button _planeTrackingButton;
 
 		[SerializeField]
+		private Button _infoButton;
+
+		[SerializeField]
+		private InfoPanel _infoPanel;
+
+		[SerializeField]
 		private Animator _stateMachineAnimator;
 
 		[SerializeField]
 		private TrackingController _trackingController;
+
+		[SerializeField]
+		private HighlightInfo _highlightInfo;
 
 		protected readonly static string _stateTrigger = "StartCalibration";
 
@@ -26,6 +37,19 @@ namespace UI
 		{
 			_objectTrackingButton.onClick.AddListener(OnObjTrackingClicked);
 			_planeTrackingButton.onClick.AddListener(OnPlaneTrackingClicked);
+			_infoButton.onClick.AddListener(OnInfoRequested);
+			_infoPanel.OnClose += OnInfoPanelClosed;
+		}
+
+		public void OnInfoPanelClosed()
+		{
+			this.gameObject.SetActive(true);
+		}
+
+		protected void OnInfoRequested()
+		{
+			_infoPanel.Show(_highlightInfo);
+			this.gameObject.SetActive(false);
 		}
 
 		protected void OnObjTrackingClicked()
