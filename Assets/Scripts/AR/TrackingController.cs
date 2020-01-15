@@ -33,22 +33,24 @@ namespace AR
 		protected void OnEnable()
 		{
 			_arTrackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
+            EnablePlaneTracking();
+            //UnsupportedPlatform();
+            //switch (Application.platform)
+            //{
+            //	//case RuntimePlatform.Android:
+            //	//	EnablePlaneTracking();
+            //	//	break;
+            //	//case RuntimePlatform.IPhonePlayer:
+            //	//	EnableObjectTracking();
+            //	//	break;
+            //	default:
+            //                 EnablePlaneTracking();
+            //                 //UnsupportedPlatform();
+            //                 break;
+            //}
+        }
 
-			switch (Application.platform)
-			{
-				case RuntimePlatform.Android:
-					EnablePlaneTracking();
-					break;
-				case RuntimePlatform.IPhonePlayer:
-					EnableObjectTracking();
-					break;
-				default:
-					UnsupportedPlatform();
-					break;
-			}
-		}
-
-		protected void OnDisable()
+        protected void OnDisable()
 		{
 			_arTrackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
 
