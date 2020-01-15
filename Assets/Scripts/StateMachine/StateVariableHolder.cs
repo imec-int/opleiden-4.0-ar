@@ -11,6 +11,7 @@ namespace StateMachine
 		PumpTag,
 		HighlightContainer,
 		TimelineTopper,
+		ARModeSelectionMenu
 	}
 
 	public enum Component
