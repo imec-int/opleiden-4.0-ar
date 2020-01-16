@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6538d8b4334d242869c652eb5c6bcb, type: 3}
+  m_Name: TrackingOptionsInfo
+  m_EditorClassIdentifier: 
+  _Header: Wat betekenen deze opties
+  _Body: <b><size=25>Ik ben bij ACTA:</size></b> Kies deze optie als je bij de pomp
+    installatie bij ACTA staat. De applicatie zal object tracking gebruiken. Dit betekent
+    dat informatie op de echte pomp geplaatst zal worden op de contextueel juiste
+    plaatsen.<br><b><size=25>Ik ben elders:</size></b> Kies deze optie als je geen
+    toegang hebt tot de pomp in ACTA. Je zal in je huidige ruimte zelf een virtuele,
+    driedimensionele miniatuur versie van de pomp moeten plaatsen<br><br>Beide opties
+    geven je dezelfde pomp, contextuele informatie en oefening omtrent de opstartprocedure.

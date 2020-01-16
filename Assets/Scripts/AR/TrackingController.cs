@@ -5,6 +5,13 @@ using UnityEngine.XR.ARFoundation;
 
 namespace AR
 {
+	public enum TrackingType
+	{
+		None = 0,
+		Object,
+		Plane
+	}
+
 	[RequireComponent(typeof(ARPlaneManager), typeof(ARPointCloudManager), typeof(ObjectPlacement))]
 	[RequireComponent(typeof(ARTrackedObjectManager))]
 	public class TrackingController : MonoBehaviour
@@ -19,6 +26,8 @@ namespace AR
 
 		[SerializeField]
 		private GameObject _installationPrefab;
+
+		public TrackingType TrackingType { get; set; }
 
 		protected void Awake()
 		{
@@ -40,7 +49,15 @@ namespace AR
 					EnablePlaneTracking();
 					break;
 				case RuntimePlatform.IPhonePlayer:
-					EnableObjectTracking();
+					switch (TrackingType)
+					{
+						case TrackingType.Plane:
+							EnablePlaneTracking();
+							break;
+						default:
+							EnableObjectTracking();
+							break;
+					}
 					break;
 				default:
 					UnsupportedPlatform();
