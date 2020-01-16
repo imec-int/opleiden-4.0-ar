@@ -65,8 +65,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19, type: 2}
+  m_sharedMaterial: {fileID: -8562737215636637767, guid: 71b256af08621fdd38031d6396cb5c19,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -162,20 +163,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4180178118189156223, guid: c503c050ea11e4749af64da76a240371,
+    - target: {fileID: 355534363176025245, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
-      propertyPath: m_Name
-      value: SquareIconButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467835338280067318, guid: c503c050ea11e4749af64da76a240371,
-        type: 3}
-      propertyPath: m_TargetGraphic
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2859238638223872667}
-    - target: {fileID: 2052182125791454552, guid: c503c050ea11e4749af64da76a240371,
+      objectReference: {fileID: 0}
+    - target: {fileID: 355534363176025245, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 1
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 615518284384580913, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
@@ -282,15 +278,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 355534363176025245, guid: c503c050ea11e4749af64da76a240371,
+    - target: {fileID: 1230373667452711362, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
-      propertyPath: m_Sprite
-      value: 
+      propertyPath: m_AnchoredPosition.y
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 355534363176025245, guid: c503c050ea11e4749af64da76a240371,
+    - target: {fileID: 1230373667452711362, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
-      propertyPath: m_Color.a
-      value: 0
+      propertyPath: m_SizeDelta.y
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
@@ -384,15 +380,20 @@ PrefabInstance:
       propertyPath: m_enableAutoSizing
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1230373667452711362, guid: c503c050ea11e4749af64da76a240371,
+    - target: {fileID: 2052182125791454552, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 7
+      propertyPath: m_CullTransparentMesh
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1230373667452711362, guid: c503c050ea11e4749af64da76a240371,
+    - target: {fileID: 3467835338280067318, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -22
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 2859238638223872667}
+    - target: {fileID: 4180178118189156223, guid: c503c050ea11e4749af64da76a240371,
+        type: 3}
+      propertyPath: m_Name
+      value: SquareIconButton
       objectReference: {fileID: 0}
     - target: {fileID: 9031416682397503342, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
