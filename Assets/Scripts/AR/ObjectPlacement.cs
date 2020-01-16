@@ -22,7 +22,6 @@ namespace AR
 
 		[SerializeField]
 		private float _installationScale = 1;
-		private MyDebug myDebug;
 
 		private bool isPumpPlaced;
 		protected void Awake()
@@ -30,7 +29,6 @@ namespace AR
 			_sessionOrigin = GetComponent<ARSessionOrigin>();
 			_raycastManager = GetComponent<ARRaycastManager>();
 
-			myDebug = GameObject.Find("DebugField").GetComponent<MyDebug>();
 		}
 
 
@@ -49,13 +47,10 @@ namespace AR
 		}
 
 		void PlacePump(List<ARRaycastHit> hits) {
-			ObjectPlaced.Invoke();
 			_installation = Instantiate(_installationPrefab).transform;
 			_sessionOrigin.MakeContentAppearAt(_installation, hits[0].pose.position);
 			isPumpPlaced = true;
-
-			myDebug.Debug("PlacePump func");
-			//transform.localScale = new Vector3(1 / _installationScale, 1 / _installationScale, 1 / _installationScale);
+			ObjectPlaced.Invoke();
 		}
 
 	}
