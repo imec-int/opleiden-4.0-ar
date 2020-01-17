@@ -799,7 +799,7 @@ PositionConstraint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5761425681690076486}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffset: {x: 0, y: 0, z: 0}
@@ -1192,15 +1192,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8469289995817853926 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2118328706577924250, guid: 01dd9f19694486447862fc83a5ee86eb,
-    type: 3}
-  m_PrefabInstance: {fileID: 7560742081084859260}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2366207165049511556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5204844214099885560, guid: 01dd9f19694486447862fc83a5ee86eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7560742081084859260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8469289995817853926 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2118328706577924250, guid: 01dd9f19694486447862fc83a5ee86eb,
     type: 3}
   m_PrefabInstance: {fileID: 7560742081084859260}
   m_PrefabAsset: {fileID: 0}

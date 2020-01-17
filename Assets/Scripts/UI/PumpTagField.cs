@@ -37,7 +37,7 @@ namespace UI
 
 		private void OnInfoPanelClosed()
 		{
-			this.gameObject.SetActive(true);
+			this.gameObject.SetActive(false);
 			_infoPanel.OnClose -= OnInfoPanelClosed;
 		}
 
