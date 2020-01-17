@@ -23,7 +23,7 @@ namespace AR
 		[SerializeField]
 		private float _installationScale = 1;
 
-		private bool isPumpPlaced;
+		private bool _isPumpPlaced;
 		protected void Awake()
 		{
 			_sessionOrigin = GetComponent<ARSessionOrigin>();
@@ -41,7 +41,7 @@ namespace AR
   
 			if (Input.touchCount == 1 && _raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
 			{
-                if(!isPumpPlaced)
+                if(!_isPumpPlaced)
 				PlacePump(hits);
 			}
 		}
@@ -49,7 +49,7 @@ namespace AR
 		void PlacePump(List<ARRaycastHit> hits) {
 			_installation = Instantiate(_installationPrefab).transform;
 			_sessionOrigin.MakeContentAppearAt(_installation, hits[0].pose.position);
-			isPumpPlaced = true;
+			_isPumpPlaced = true;
 			ObjectPlaced.Invoke();
 		}
 
