@@ -3,104 +3,118 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.XR.ARFoundation;
 
-namespace AR {
-  public enum TrackingType {
-    None = 0,
-    Object,
-    Plane
-  }
+namespace AR
+{
+	public enum TrackingType
+	{
+		None = 0,
+		Object,
+		Plane
+	}
 
-  [RequireComponent (typeof (ARPlaneManager), typeof (ARPointCloudManager), typeof (ObjectPlacement))]
-  [RequireComponent (typeof (ARTrackedObjectManager))]
-  public class TrackingController : MonoBehaviour {
-    private ARPlaneManager _arPlaneManager;
-    private ARPointCloudManager _arPointCloudManager;
-    private ObjectPlacement _objectPlacement;
-    private ARTrackedObjectManager _arTrackedObjectManager;
+	[RequireComponent(typeof(ARPlaneManager), typeof(ARPointCloudManager), typeof(ObjectPlacement))]
+	[RequireComponent(typeof(ARTrackedObjectManager))]
+	public class TrackingController : MonoBehaviour
+	{
+		private ARPlaneManager _arPlaneManager;
+		private ARPointCloudManager _arPointCloudManager;
+		private ObjectPlacement _objectPlacement;
+		private ARTrackedObjectManager _arTrackedObjectManager;
 
-    [SerializeField]
-    private Animator _animator;
+		[SerializeField]
+		private Animator _animator;
 
-    [SerializeField]
-    private GameObject _installationPrefab;
+		[SerializeField]
+		private GameObject _installationPrefab;
 
-    public TrackingType TrackingType { get; set; }
+		public TrackingType TrackingType { get; set; }
 
-    protected void Awake () {
-      Assert.IsNotNull (_animator, "Animator is not filled in.");
+		protected void Awake()
+		{
+			Assert.IsNotNull(_animator, "Animator is not filled in.");
 
-      _arPlaneManager = GetComponent<ARPlaneManager> ();
-      _arPointCloudManager = GetComponent<ARPointCloudManager> ();
-      _objectPlacement = GetComponent<ObjectPlacement> ();
-      _arTrackedObjectManager = GetComponent<ARTrackedObjectManager> ();
-    }
+			_arPlaneManager = GetComponent<ARPlaneManager>();
+			_arPointCloudManager = GetComponent<ARPointCloudManager>();
+			_objectPlacement = GetComponent<ObjectPlacement>();
+			_arTrackedObjectManager = GetComponent<ARTrackedObjectManager>();
+		}
 
-    protected void OnEnable () {
-      _arTrackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
+		protected void OnEnable()
+		{
+			_arTrackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
 
-      switch (Application.platform) {
-        case RuntimePlatform.Android:
-          EnablePlaneTracking ();
-          break;
-        case RuntimePlatform.IPhonePlayer:
-          switch (TrackingType) {
-            case TrackingType.Plane:
-              EnablePlaneTracking ();
-              break;
-            default:
-              EnableObjectTracking ();
-              break;
-          }
-          break;
-        default:
-          UnsupportedPlatform ();
-          break;
-      }
-    }
+			switch (Application.platform)
+			{
+				case RuntimePlatform.Android:
+					EnablePlaneTracking();
+					break;
+				case RuntimePlatform.IPhonePlayer:
+					switch (TrackingType)
+					{
+						case TrackingType.Plane:
+							EnablePlaneTracking();
+							break;
+						default:
+							EnableObjectTracking();
+							break;
+					}
+					break;
+				default:
+					UnsupportedPlatform();
+					break;
+			}
+		}
 
-    protected void OnDisable () {
-      _arTrackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
+		protected void OnDisable()
+		{
+			_arTrackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
 
-      _arTrackedObjectManager.enabled = false;
-      _objectPlacement.enabled = false;
-      _arPlaneManager.enabled = false;
-      _arPointCloudManager.enabled = false;
-    }
+			_arTrackedObjectManager.enabled = false;
+			_objectPlacement.enabled = false;
+			_arPlaneManager.enabled = false;
+			_arPointCloudManager.enabled = false;
+		}
 
-    private void OnTrackedObjectsChanged (ARTrackedObjectsChangedEventArgs changedTrackedObjects) {
-      if (changedTrackedObjects.added.Count > 0) {
-        TrackingCompleted ();
-      }
-    }
+		private void OnTrackedObjectsChanged(ARTrackedObjectsChangedEventArgs changedTrackedObjects)
+		{
+			if (changedTrackedObjects.added.Count > 0)
+			{
+				TrackingCompleted();
+			}
+		}
 
-    private void EnablePlaneTracking () {
-      _arTrackedObjectManager.enabled = false;
+		private void EnablePlaneTracking()
+		{
+			_arTrackedObjectManager.enabled = false;
 
-      _objectPlacement.enabled = true;
-      _arPlaneManager.enabled = true;
-      _arPointCloudManager.enabled = true;
-    }
+			_objectPlacement.enabled = true;
+			_arPlaneManager.enabled = true;
+			_arPointCloudManager.enabled = true;
+		}
 
-    private void EnableObjectTracking () {
-      _objectPlacement.enabled = false;
-      _arPlaneManager.enabled = false;
-      _arPointCloudManager.enabled = false;
+		private void EnableObjectTracking()
+		{
+			_objectPlacement.enabled = false;
+			_arPlaneManager.enabled = false;
+			_arPointCloudManager.enabled = false;
 
-      _arTrackedObjectManager.enabled = true;
-    }
+			_arTrackedObjectManager.enabled = true;
+		}
 
-    private void UnsupportedPlatform () {
-      _arPlaneManager.enabled = false;
-      _arPointCloudManager.enabled = false;
-      _objectPlacement.enabled = false;
-      _arTrackedObjectManager.enabled = false;
+		private void UnsupportedPlatform()
+		{
+			_arPlaneManager.enabled = false;
+			_arPointCloudManager.enabled = false;
+			_objectPlacement.enabled = false;
+			_arTrackedObjectManager.enabled = false;
 
-      Instantiate (_installationPrefab).name = _installationPrefab.name;
-      TrackingCompleted ();
-    }
+			Instantiate(_installationPrefab).name = _installationPrefab.name;
+			TrackingCompleted();
+		}
 
-    public void TrackingCompleted () {
-      _animator.SetTrigger ("CalibrationComplete");
-    }
-  }
+		public void TrackingCompleted()
+		{
+			_animator.SetTrigger("CalibrationComplete");
+		}
+	}
 }
