@@ -35,8 +35,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 0000000001000000020000000300000004000000
-    _keys: 0000000001000000020000000300000004000000
+    _keyValues: 000000000100000002000000030000000400000005000000060000000700000008000000
+    _keys: 000000000100000002000000030000000400000005000000060000000700000008000000
     _values:
     - Name: Error
       Icon: E037
@@ -47,6 +47,14 @@ MonoBehaviour:
     - Name: Oliepeil
       Icon: E412
     - Name: Drukmeter
+      Icon: E406
+    - Name: Beschermingskap
+      Icon: E406
+    - Name: Veiligheidsschakelaar
+      Icon: E406
+    - Name: Ventilatierooster
+      Icon: E406
+    - Name: Driewegklep
       Icon: E406
   _ActionOperationsInfo:
     reorderableList:
@@ -71,12 +79,15 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 000000000100000002000000030000000400000005000000
-    _keys: 000000000100000002000000030000000400000005000000
+    _keyValues: 000000000100000002000000030000000400000005000000060000000700000008000000
+    _keys: 000000000100000002000000030000000400000005000000060000000700000008000000
     _values:
-    - Name: Error
+    - Name: Richting Blind
     - Name: Open
     - Name: Sluit
     - Name: Check
-    - Name: Start
-    - Name: Stop
+    - Name: Check Blindflens
+    - Name: Aan
+    - Name: Uit
+    - Name: Richting Pomp
+    - Name: Richting Blind

@@ -18,11 +18,11 @@ namespace UI.Highlighting
 		public HighlightInfo Info { get => _Info; }
 		public Part HighlightedPart { get => _HighlightedPart; }
 
+
 #if UNITY_EDITOR
 		private void Awake()
 		{
-			bool assertion = _AvailableOperations.Length > 0
-			&& _Info && _HighlightedPart != Part.None;
+			bool assertion = _Info != null && _HighlightedPart != Part.None;
 			Debug.Assert(assertion, $"HighlightAnchor: {this.name} is not set up correctly");
 		}
 #endif
