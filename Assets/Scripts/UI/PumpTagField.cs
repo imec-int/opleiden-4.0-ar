@@ -58,7 +58,7 @@ namespace UI
 
 		public void OnValueChanged()
 		{
-			if (_inputField.text == _pumpAnchor.PumpID)
+			if (_inputField.text.ToLower() == _pumpAnchor.PumpID.ToLower())
 			{
 				_inputField.interactable = false;
 				_inputField.GetComponent<Image>().CrossFadeColor(Color.green, 0.5f, false, false);
