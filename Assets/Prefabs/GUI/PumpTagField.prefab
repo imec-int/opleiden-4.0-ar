@@ -408,7 +408,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter pump serial number
+  m_text: Geef het nummer van de pomp in
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19, type: 2}
   m_sharedMaterial: {fileID: -8562737215636637767, guid: 71b256af08621fdd38031d6396cb5c19,
@@ -501,7 +501,7 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2881017345606363618
+--- !u!114 &4726112042440844294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -514,9 +514,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 10
+  m_MinWidth: 8.5
   m_MinHeight: -1
-  m_PreferredWidth: 10
+  m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -1097,19 +1097,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6901479448528401763, guid: 01dd9f19694486447862fc83a5ee86eb,
         type: 3}
-      propertyPath: m_fontSizeMin
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6901479448528401763, guid: 01dd9f19694486447862fc83a5ee86eb,
-        type: 3}
-      propertyPath: m_fontSizeMax
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6901479448528401763, guid: 01dd9f19694486447862fc83a5ee86eb,
-        type: 3}
       propertyPath: m_subTextObjects.Array.data[1]
       value: 
       objectReference: {fileID: 4387719850506570742}
+    - target: {fileID: 6943012132054698867, guid: 01dd9f19694486447862fc83a5ee86eb,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6943012132054698867, guid: 01dd9f19694486447862fc83a5ee86eb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1118,17 +1113,7 @@ PrefabInstance:
     - target: {fileID: 6943012132054698867, guid: 01dd9f19694486447862fc83a5ee86eb,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7747289362333182648, guid: 01dd9f19694486447862fc83a5ee86eb,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.035999298
-      objectReference: {fileID: 0}
-    - target: {fileID: 7747289362333182648, guid: 01dd9f19694486447862fc83a5ee86eb,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.12
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7836261180039320771, guid: 01dd9f19694486447862fc83a5ee86eb,
         type: 3}
@@ -1139,18 +1124,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7836261180039320771, guid: 01dd9f19694486447862fc83a5ee86eb,
         type: 3}
-      propertyPath: m_fontSize
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7836261180039320771, guid: 01dd9f19694486447862fc83a5ee86eb,
-        type: 3}
       propertyPath: m_fontSizeBase
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7836261180039320771, guid: 01dd9f19694486447862fc83a5ee86eb,
-        type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7836261180039320771, guid: 01dd9f19694486447862fc83a5ee86eb,
         type: 3}
@@ -1192,15 +1167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2366207165049511556 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5204844214099885560, guid: 01dd9f19694486447862fc83a5ee86eb,
-    type: 3}
-  m_PrefabInstance: {fileID: 7560742081084859260}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8469289995817853926 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2118328706577924250, guid: 01dd9f19694486447862fc83a5ee86eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7560742081084859260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2366207165049511556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5204844214099885560, guid: 01dd9f19694486447862fc83a5ee86eb,
     type: 3}
   m_PrefabInstance: {fileID: 7560742081084859260}
   m_PrefabAsset: {fileID: 0}

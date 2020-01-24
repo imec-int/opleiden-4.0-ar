@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Actions Needed <color=#FF0000> blala</color>
+  m_text: 'Vereiste acties <color=#FF0000> blala</color>
 
 '
   m_isRightToLeft: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3466335165250253128}
-    characterCount: 22
+    characterCount: 23
     spriteCount: 0
     spaceCount: 4
     wordCount: 3

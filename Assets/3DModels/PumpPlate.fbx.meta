@@ -1,39 +1,9 @@
 fileFormatVersion: 2
-guid: dbd1813cad2cb404bac56bb73d58c4b6
+guid: 69d71bea80c2d0fe2954e666db9b91bd
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Blue
-    second: {fileID: 2100000, guid: f4ebc4c6453f60149b22784ec8521ceb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BrushedMetal
-    second: {fileID: 2100000, guid: 50fcb66ef96881e63ae54e10bbc12a56, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Green
-    second: {fileID: 2100000, guid: 4581d5be3152c2bb9b8df59835699258, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Grey
-    second: {fileID: 2100000, guid: ee38eac973891c14488da139b57b81dd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Orange
-    second: {fileID: 2100000, guid: 60efe76cd346f3534a0946058b7dc4c6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: RedPaint
-    second: {fileID: 2100000, guid: 8c67a596c0ad5e191bd25dd79d032308, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
