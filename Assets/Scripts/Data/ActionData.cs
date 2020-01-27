@@ -10,8 +10,11 @@ namespace Data
 		Open,
 		Close,
 		Check,
+		CheckBlind,
 		Start,
-		Stop
+		Stop,
+		TowardsPump,
+		TowardsBlind
 	}
 
 	[Serializable]
@@ -21,7 +24,11 @@ namespace Data
 		Pump,
 		Valve,
 		OilLevel,
-		Barometer
+		Barometer,
+		ProtectionCap,
+		Safety,
+		Ventilation,
+		ThreeWayValve
 	}
 
 	// Base class describing an action
