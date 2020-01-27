@@ -86,10 +86,11 @@ namespace UI
 		}
 
 		// Add another UI prefab to the end of the info panel
-		public void PushExtraObject(GameObject extraPrefab)
+		public GameObject PushExtraInfoPrefab(GameObject extraPrefab)
 		{
 			GameObject go = Instantiate(extraPrefab, _bodyLabel.transform.parent);
 			_temporaryObjects.Append(go);
+			return go;
 		}
 
 		public void Close()

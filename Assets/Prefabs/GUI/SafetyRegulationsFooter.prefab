@@ -289,6 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6898880693007975050}
   - component: {fileID: 6898880693007975053}
+  - component: {fileID: 95428437735699125}
   m_Layer: 5
   m_Name: SafetyRegulationsFooter
   m_TagString: Untagged
@@ -342,6 +343,22 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &95428437735699125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6898880693007975051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8607cc2cf69a64e84863465f62475a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _complianceCheckBox: {fileID: 6898880692702184223}
+  _continueButton: {fileID: 6898880694019840113}
+  _currentInfoPanel: {fileID: 0}
+  _stateMachine: {fileID: 0}
 --- !u!1 &6898880693119613371
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +468,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -480,7 +497,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 13
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -607,7 +624,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -636,7 +653,7 @@ MonoBehaviour:
     spaceCount: 8
     wordCount: 8
     linkCount: 0
-    lineCount: 1
+    lineCount: 60
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
