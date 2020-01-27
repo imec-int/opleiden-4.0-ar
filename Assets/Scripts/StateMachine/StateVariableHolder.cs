@@ -16,7 +16,8 @@ namespace StateMachine
 
 	public enum Component
 	{
-		TrackingController
+		TrackingController,
+		InfoPanel
 	}
 
 	public class StateVariableHolder : MonoBehaviour
