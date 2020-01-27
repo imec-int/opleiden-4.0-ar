@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: PumpSerialInfo
   m_EditorClassIdentifier: 
   _Header: Waar kan ik het nummer van de pomp vinden?
-  _Body: 'It''s here: 85P02'
+  _Body: Iedere pomp heeft een unieke nummering, deze wordt het tagnummer genoemd.
+    Dit tagnummer is een belangrijk herkenningspunt in het procesverloop. Het tagnummer
+    is een validatie dat je aan het juiste apparaat werkt. De bijhorende elektromotor
+    heeft een ander tagnummer. Het tagnummer van de pomp kan je vinden op (1) de kenplaat
+    van de behuizing van de pomp en (2) de beschrijving op de veiligheidsschakelaar.!(Part1)
