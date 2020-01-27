@@ -45,6 +45,8 @@ namespace UI
 
 		public void Show(string header, string body, bool showCloseBtn = true, bool tapToClose = false)
 		{
+			if (gameObject.activeSelf) while (_temporaryObjects.Count > 0) Destroy(_temporaryObjects.Pop());
+
 			_tapToClose = tapToClose;
 
 			OnOpen?.Invoke();
