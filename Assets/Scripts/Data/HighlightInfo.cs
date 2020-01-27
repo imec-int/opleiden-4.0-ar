@@ -8,7 +8,7 @@ namespace Data
 		[SerializeField]
 		private string _Header;
 
-		[SerializeField]
+		[SerializeField, MultilineAttribute(5)]
 		private string _Body;
 
 		public string Header { get => _Header; }
