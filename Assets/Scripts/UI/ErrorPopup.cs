@@ -32,5 +32,11 @@ namespace UI
 			this.gameObject.SetActive(false);
 			OnClosed?.Invoke();
 		}
+
+		protected void Update()
+		{
+			if(this.gameObject.activeSelf && Input.GetMouseButtonDown(0))
+				Close();
+		}
 	}
 }
