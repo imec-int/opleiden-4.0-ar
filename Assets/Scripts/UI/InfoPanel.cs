@@ -6,6 +6,7 @@ using Data;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.Assertions;
 
 namespace UI
 {
@@ -55,6 +56,7 @@ namespace UI
 
 					// Load the sprite from resources and add it as an image to the body
 					Sprite sprite = Resources.Load<Sprite>("Images/" + path);
+					Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
 					GameObject go = new GameObject("Image_" + path);
 					_temporaryObjects.Push(go);
 					go.transform.SetParent(bodyParent, false);
