@@ -25,7 +25,13 @@ namespace UI
 		[SerializeField]
 		private InfoPanel _infoPanel;
 
+		[SerializeField]
+		private ErrorPopup _errorPopup;
+
 		private TouchScreenKeyboard _touchScreenKeyboard;
+
+		[SerializeField]
+		private string _errorMessage = "Je staat niet aan de correcte pomp, voor meer info zie '?'";
 
 		protected void Awake()
 		{
@@ -44,7 +50,6 @@ namespace UI
 		protected void OnEnable()
 		{
 			// Focuses inputfield on activation inside coroutine because Unity still has to activate the inputfield.
-
 			StartCoroutine(FocusInputField());
 		}
 
@@ -58,13 +63,35 @@ namespace UI
 
 		public void OnValueChanged()
 		{
-			if (_inputField.text.ToLower() == _pumpAnchor.PumpID.ToLower())
+			if(_inputField.text.Length == _pumpAnchor.PumpID.Length)
 			{
-				_inputField.interactable = false;
-				_inputField.GetComponent<Image>().CrossFadeColor(Color.green, 0.5f, false, false);
-				_animator.SetTrigger("PumpTagged");
-				_touchScreenKeyboard.active = false;
+				if (string.Equals(_inputField.text, _pumpAnchor.PumpID, System.StringComparison.OrdinalIgnoreCase))
+				{
+					_inputField.interactable = false;
+					_inputField.GetComponent<Image>().CrossFadeColor(Color.green, 0.5f, false, false);
+					_animator.SetTrigger("PumpTagged");
+					_touchScreenKeyboard.active = false;
+				}
+				else
+				{
+					ShowErrorMessage();
+				}
 			}
+		}
+
+		public void ShowErrorMessage()
+		{
+			Reset();
+			_touchScreenKeyboard.active = false;
+			this.gameObject.SetActive(false);
+			_errorPopup.OnClosed += OnErrorPopupClosed;
+			_errorPopup.Show(_errorMessage.ToUnicodeForTMPro());
+		}
+
+		private void OnErrorPopupClosed()
+		{
+			this.gameObject.SetActive(true);
+			_errorPopup.OnClosed -= OnErrorPopupClosed;
 		}
 
 		public void ShowAdditionalInfo()
