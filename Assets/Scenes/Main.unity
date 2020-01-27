@@ -424,21 +424,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 646956856987558652, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 646956856987558652, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 646956856987558652, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 646956856987558652, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 646956856987558652, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 646956856987558652, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1813074382}
-    - target: {fileID: 2916047818327136973, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_text
-      value: Placeholder tekst
-      objectReference: {fileID: 0}
-    - target: {fileID: 3605062854060675185, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_text
-      value: Geef het nummer van de pomp in
-      objectReference: {fileID: 0}
     - target: {fileID: 4142869059531553064, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -454,11 +474,6 @@ PrefabInstance:
       propertyPath: _components._values.Array.data[0]
       value: 
       objectReference: {fileID: 1448185698}
-    - target: {fileID: 4673532654014851094, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_text
-      value: Titel
-      objectReference: {fileID: 0}
     - target: {fileID: 4912930635584232367, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: _trackingController
@@ -563,28 +578,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7237425207466318600, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_text
-      value: 'Vereiste acties <color=#FF0000> blala</color>
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7237425207466318600, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 23
-      objectReference: {fileID: 0}
-    - target: {fileID: 7237425207466318600, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7237425207466318600, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8695940863363037953, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}

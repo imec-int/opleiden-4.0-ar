@@ -690,7 +690,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MAH HEADER
+  m_text: Titel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -866,28 +866,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nam rutrum, ligula id rhoncus viverra, dui elit convallis ante, et scelerisque
-    augue sapien a erat. Duis congue orci orci, sit amet luctus ligula rhoncus vel.
-    Duis laoreet ante ac tempor vehicula. Duis mi sapien, condimentum et rutrum sed,
-    ullamcorper nec diam. Cras viverra lorem ac dui vehicula lacinia. Quisque placerat
-    bibendum urna, a commodo tortor ultricies sed. Phasellus varius fringilla magna,
-    at scelerisque sapien rutrum ut. Morbi molestie felis enim, dapibus mattis felis
-    suscipit sit amet. Morbi eu iaculis sapien. Etiam dictum ut velit sed eleifend.
-    Nullam nec nisl ac orci facilisis bibendum. Vivamus in tempor libero. Etiam sagittis
-    enim vitae felis porttitor bibendum. Aenean nec lacus nibh. Nunc finibus nisi
-    eros.  Donec vitae tortor pellentesque, consequat nisl porttitor, tincidunt nibh.
-    Aliquam interdum eu metus eget sodales. Aenean et laoreet velit. Etiam ipsum tortor,
-    luctus non elit non, blandit commodo quam. Mauris consequat libero non dui accumsan,
-    nec commodo nisi ultricies. Donec aliquet faucibus velit, ut gravida mauris varius
-    et. Mauris varius ullamcorper magna, sed dapibus enim euismod quis. In sed nisi
-    ut felis commodo sagittis. Nullam eu aliquet nibh. Fusce sed tempus lectus, a
-    dapibus tellus.  Pellentesque lacinia justo nec justo maximus mollis. Fusce feugiat
-    finibus mi, eget condimentum metus tempus ut. Ut non molestie leo. Quisque aliquam
-    dapibus arcu sit amet pulvinar. In non dolor ante. Donec condimentum, metus at
-    sodales ultrices, ante dui sodales odio, a dapibus enim sapien non diam. Interdum
-    et malesuada fames ac ante ipsum primis in faucibus. Nullam purus metus, sodales
-    ac euismod vel, vulputate non neque. Morbi luctus, erat vitae imperdiet auctor,
-    tortor sapien tempus nunc, ut iaculis enim mauris quis ex.
+  m_text: Placeholder tekst
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
