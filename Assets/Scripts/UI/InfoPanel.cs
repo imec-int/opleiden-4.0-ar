@@ -85,6 +85,13 @@ namespace UI
 			this.gameObject.SetActive(true);
 		}
 
+		// Add another UI prefab to the end of the info panel
+		public void PushExtraObject(GameObject extraPrefab)
+		{
+			GameObject go = Instantiate(extraPrefab, _bodyLabel.transform.parent);
+			_temporaryObjects.Append(go);
+		}
+
 		public void Close()
 		{
 			for (int i = 0; i < _temporaryObjects.Count; i++)
