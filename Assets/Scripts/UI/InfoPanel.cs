@@ -90,9 +90,8 @@ namespace UI
 					{
 						LayoutElement layout = go.AddComponent<LayoutElement>();
 						string[] dimensions = match.Value.Substring(2).Split('x');
-						int width, height;
-						int.TryParse(dimensions[0], out width);
-						int.TryParse(dimensions[1], out height);
+						int.TryParse(dimensions[0], out int width);
+						int.TryParse(dimensions[1], out int height);
 						if (width > 0) layout.preferredWidth = width;
 						if (height > 0) layout.preferredHeight = height;
 					}

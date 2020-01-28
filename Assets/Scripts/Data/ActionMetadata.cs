@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Data
 {
-	[Serializable] public class PartInfoDictionary : SerializableDictionaryBase<Part, ActionPartInfo> { }
+	[Serializable] public class PartInfoDictionary : SerializableDictionaryBase<PartType, ActionPartInfo> { }
 	[Serializable] public class OperationInfoDictionary : SerializableDictionaryBase<Operation, ActionOperationInfo> { }
 
 	[CreateAssetMenu(fileName = "ActionMetadata", menuName = "opleiden-4.0-ar/ActionMetadata", order = 0)]

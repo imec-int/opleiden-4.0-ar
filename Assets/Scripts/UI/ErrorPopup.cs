@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -35,7 +33,7 @@ namespace UI
 
 		protected void Update()
 		{
-			if(this.gameObject.activeSelf && Input.GetMouseButtonDown(0))
+			if (this.gameObject.activeSelf && Input.GetMouseButtonDown(0))
 				Close();
 		}
 	}

@@ -12,17 +12,17 @@ namespace UI.Highlighting
 		private HighlightInfo _Info;
 
 		[SerializeField]
-		private Part _HighlightedPart;
+		private PartType _HighlightedPart;
 
 		public Operation[] AvailableOperations { get => _AvailableOperations; }
 		public HighlightInfo Info { get => _Info; }
-		public Part HighlightedPart { get => _HighlightedPart; }
+		public PartType HighlightedPart { get => _HighlightedPart; }
 
 
 #if UNITY_EDITOR
 		private void Awake()
 		{
-			bool assertion = _Info != null && _HighlightedPart != Part.None;
+			bool assertion = _Info != null && _HighlightedPart != PartType.None;
 			Debug.Assert(assertion, $"HighlightAnchor: {this.name} is not set up correctly");
 		}
 #endif
