@@ -43,7 +43,7 @@ namespace UI
 
 		public void OnInfoPanelClosed()
 		{
-			this.gameObject.SetActive(false);
+			this.gameObject.SetActive(true);
 		}
 
 		protected void OnInfoRequested()

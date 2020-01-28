@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6538d8b4334d242869c652eb5c6bcb, type: 3}
+  m_Name: About
+  m_EditorClassIdentifier: 
+  _Header: 'Welkom bij de proeftuin '
+  _Body: 'Deze demonstrator werd ontwikkeld door imec en de consortiumpartners in
+    kader van de proeftuin Opleiden4.0. In deze toepassing demonstreren we hoe Augmented
+    Reality (AR) ingezet kan worden bij opleidingen in de chemie-, kunststof- en procesindustrie.
+    In deze toepassing worden beginnende studenten vertrouwd gemaakt met de onderdelen
+    van een pomp en de checks die nodig zijn om een pomp in gebruik te nemen.
+
+    !(CatalistiLogo =200x200)!(imecLogo =200x200)!(NxTMediaTechnologyLogo =200x200)!(VlaanderenIndustrie4Logo
+    =200x200)'
