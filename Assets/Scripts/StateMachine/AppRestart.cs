@@ -24,9 +24,8 @@ namespace StateMachine
 
 			animator.GetComponent<ActionController>().Reset();
 			animator.GetComponent<StateVariableHolder>().Widgets[Widget.PumpTag].GetComponent<PumpTagField>().Reset();
+			animator.GetComponent<StateVariableHolder>().Components[Component.InfoPanel].GetComponent<InfoPanel>().Reset();
 			animator.SetTrigger("ResetSuccessful");
-			// HACK for now, until the final logic is here
-			//animator.SetTrigger("CalibrationComplete");
 
 			_shouldRun = false;
 		}

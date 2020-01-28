@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using AR;
 using Data;
@@ -39,17 +37,36 @@ namespace UI
 			_planeTrackingButton.onClick.AddListener(OnPlaneTrackingClicked);
 			_infoButton.onClick.AddListener(OnInfoRequested);
 			_infoPanel.OnClose += OnInfoPanelClosed;
+			_infoPanel.OnOpen += OnInfoPanelOpened;
 		}
 
-		public void OnInfoPanelClosed()
+		private void OnInfoPanelOpened()
 		{
-			this.gameObject.SetActive(true);
+			if (this.gameObject.activeSelf)
+			{
+				SetGraphicVisibility(false);
+			}
+		}
+
+		private void SetGraphicVisibility(bool visible)
+		{
+			foreach (var graphic in GetComponentsInChildren<MaskableGraphic>(true))
+			{
+				graphic.enabled = visible;
+			}
+		}
+
+		private void OnInfoPanelClosed()
+		{
+			if (this.gameObject.activeSelf)
+			{
+				SetGraphicVisibility(true);
+			}
 		}
 
 		protected void OnInfoRequested()
 		{
 			_infoPanel.Show(_highlightInfo);
-			this.gameObject.SetActive(false);
 		}
 
 		protected void OnObjTrackingClicked()

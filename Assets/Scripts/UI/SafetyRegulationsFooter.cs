@@ -29,6 +29,7 @@ namespace UI
 		protected void OnButtonClicked()
 		{
 			StateMachine.SetTrigger("SafetyCheckComplete");
+			StateMachine.SetBool("FirstRun",false);
 			ParentPanel.Close();
 		}
 	}
