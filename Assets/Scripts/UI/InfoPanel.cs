@@ -26,6 +26,7 @@ namespace UI
 		private Button _closeButton;
 
 		private bool _tapToClose;
+		private int _infoHash;
 
 		private Stack<GameObject> _temporaryObjects = new Stack<GameObject>();
 
@@ -45,7 +46,10 @@ namespace UI
 
 		public void Show(string header, string body, bool showCloseBtn = true, bool tapToClose = false)
 		{
-			if (gameObject.activeSelf) while (_temporaryObjects.Count > 0) Destroy(_temporaryObjects.Pop());
+			// Check if the content has changed by doing a hash comparison. If unchanged do an early return
+			int infoHash = (header + body).GetHashCode();
+			if (infoHash == _infoHash) return;
+			_infoHash = infoHash;
 
 			_tapToClose = tapToClose;
 
