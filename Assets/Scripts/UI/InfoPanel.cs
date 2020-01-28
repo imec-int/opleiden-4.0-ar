@@ -7,10 +7,11 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 
 namespace UI
 {
-	public class InfoPanel : MonoBehaviour
+	public class InfoPanel : MonoBehaviour, IPointerClickHandler
 	{
 		public event Action OnOpen;
 		public event Action OnClose;
@@ -24,6 +25,9 @@ namespace UI
 		[SerializeField]
 		private Button _closeButton;
 
+		private bool _tapToClose;
+		private int _infoHash;
+
 		private Stack<GameObject> _temporaryObjects = new Stack<GameObject>();
 
 		public void Awake()
@@ -35,14 +39,25 @@ namespace UI
 		{
 			Show(info.Header, info.Body);
 		}
-
-		public void Show(string header, string body)
+		public void Show(HighlightInfo info, bool showCloseBtn = true, bool tapToClose = false)
 		{
+			Show(info.Header, info.Body, showCloseBtn, tapToClose);
+		}
+
+		public void Show(string header, string body, bool showCloseBtn = true, bool tapToClose = false)
+		{
+			// Check if the content has changed by doing a hash comparison. If unchanged do an early return
+			int infoHash = (header + body).GetHashCode();
+			if (infoHash == _infoHash) return;
+			_infoHash = infoHash;
+
+			_tapToClose = tapToClose;
+
 			OnOpen?.Invoke();
 			_headerLabel.text = header;
 
 			// Split body text into separate text parts and images
-			string[] bodyParts = Regex.Split(body, @"(!\(\w+\))", RegexOptions.IgnorePatternWhitespace).Where(s => s != string.Empty).ToArray();
+			string[] bodyParts = Regex.Split(body, @"(!\([\w= ]+\))", RegexOptions.IgnorePatternWhitespace).Where(s => s != string.Empty).ToArray();
 
 			bool firstTextBlock = true;
 			Transform bodyParent = _bodyLabel.transform.parent;
@@ -54,6 +69,13 @@ namespace UI
 					// Remove image prefix and suffix
 					string path = bodyParts[i].Substring(2, bodyParts[i].Length - 3);
 
+					// Check if the image has a specific resolution set
+					Match match = Regex.Match(path, " =\\w*x\\w*");
+					if (match.Success)
+					{
+						path = path.Substring(0, path.Length - match.Length);
+					}
+
 					// Load the sprite from resources and add it as an image to the body
 					Sprite sprite = Resources.Load<Sprite>("Images/" + path);
 					Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
@@ -63,6 +85,17 @@ namespace UI
 					Image image = go.AddComponent<Image>();
 					image.preserveAspect = true;
 					image.sprite = sprite;
+
+					if (match.Success)
+					{
+						LayoutElement layout = go.AddComponent<LayoutElement>();
+						string[] dimensions = match.Value.Substring(2).Split('x');
+						int width, height;
+						int.TryParse(dimensions[0], out width);
+						int.TryParse(dimensions[1], out height);
+						if (width > 0) layout.preferredWidth = width;
+						if (height > 0) layout.preferredHeight = height;
+					}
 				}
 				else
 				{
@@ -82,18 +115,21 @@ namespace UI
 				}
 			}
 
+			_closeButton.gameObject.SetActive(showCloseBtn);
+
 			this.gameObject.SetActive(true);
 		}
 
 		public void Close()
 		{
-			for (int i = 0; i < _temporaryObjects.Count; i++)
-			{
-				Destroy(_temporaryObjects.Pop());
-			}
-
+			while (_temporaryObjects.Count > 0) Destroy(_temporaryObjects.Pop());
 			OnClose?.Invoke();
 			this.gameObject.SetActive(false);
+		}
+
+		public void OnPointerClick(PointerEventData eventData)
+		{
+			if (_tapToClose) Close();
 		}
 	}
 }
