@@ -29,6 +29,8 @@ namespace AR
 
 		public TrackingType TrackingType { get; set; }
 
+		private GameObject _installation;
+
 		protected void Awake()
 		{
 			Assert.IsNotNull(_animator, "Animator is not filled in.");
@@ -108,8 +110,15 @@ namespace AR
 			_objectPlacement.enabled = false;
 			_arTrackedObjectManager.enabled = false;
 
-			Instantiate(_installationPrefab).name = _installationPrefab.name;
+			_installation = Instantiate(_installationPrefab);
+			_installation.name = _installationPrefab.name;
 			TrackingCompleted();
+		}
+
+		public void Reset()
+		{
+			if(!_installation) return;
+			Destroy(_installation.gameObject);
 		}
 
 		public void TrackingCompleted()

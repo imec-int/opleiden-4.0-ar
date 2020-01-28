@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
@@ -31,7 +30,6 @@ namespace AR
 
 		}
 
-
 		protected void Update()
 		{
 			if (Input.touchCount == 0)
@@ -52,6 +50,5 @@ namespace AR
 			_isPumpPlaced = true;
 			ObjectPlaced.Invoke();
 		}
-
 	}
 }

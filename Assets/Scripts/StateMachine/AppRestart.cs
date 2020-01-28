@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using AR;
 using Core;
 using UI;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
 namespace StateMachine
 {
@@ -24,7 +24,10 @@ namespace StateMachine
 
 			animator.GetComponent<ActionController>().Reset();
 			animator.GetComponent<StateVariableHolder>().Widgets[Widget.PumpTag].GetComponent<PumpTagField>().Reset();
+			animator.GetComponent<StateVariableHolder>().Widgets[Widget.PumpTag].GetComponent<PumpTagField>().Reset();
 			animator.GetComponent<StateVariableHolder>().Components[Component.InfoPanel].GetComponent<InfoPanel>().Reset();
+			animator.GetComponent<StateVariableHolder>().Components[Component.TrackingController].GetComponent<TrackingController>().Reset();
+			animator.GetComponent<StateVariableHolder>().Components[Component.ARSession].GetComponent<ARSession>().Reset();
 			animator.SetTrigger("ResetSuccessful");
 
 			_shouldRun = false;
