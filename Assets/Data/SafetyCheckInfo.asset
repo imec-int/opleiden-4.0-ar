@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6538d8b4334d242869c652eb5c6bcb, type: 3}
+  m_Name: SafetyCheckInfo
+  m_EditorClassIdentifier: 
+  _Header: Veiligheidsvoorschriften
+  _Body: 'In deze oefening willen we je leren welke checks nodig zijn voor de opstart
+    van een centrifugaalpomp. Straks worden via augmented reality onderdelen van de
+    pomp opgelicht. Het is de bedoeling dat je door het klikken op deze onderdelen
+    alle acties selecteert die nodig zijn als check voor het opstarten van de centrifugaalpomp.
+    Wanneer je alle nodige checks geselecteerd hebt en deze valideert, krijg je de
+    oplossing te zien.
+
+
+    Let op! Indien je deze oefening uitvoert bij een pomp, gelieve de acties enkel
+    uit te voeren in de POC en NIET aan de pomp zelf.
+
+
+    Let op! De checks die in dit proces voorkomen, kunnen afwijken van de procedure
+    in je bedrijf. Controleer dus zeker ook wat de procedure is in het bedrijf waar
+    je werkt.
+
+
+    Vooraleer we aan de oefening kunnen beginnnen, houd rekening met de volgende aspecten:
+
+    - Zorg ervoor dat je de juiste persoonlijke beschermingsmiddelen hebt aangetrokken
+
+    - Zorg ervoor dat er geen actieve alarmen meer zijn die een belemmering kunnen
+    vormen voor de opstart van de pomp
+
+    - De motor in deze oefening is niet elektrisch gesperd (veiligheidsschakelaar
+    aan)
+
+    - De pomp is gevuld en ontlucht
+
+    - De omgeving werd reeds gecontroleerd op lekkages
+
+'
+  _additionalPrefabs:
+  - {fileID: 6898880693007975051, guid: 6e6106ec0d1f3e1488159b066552029c, type: 3}

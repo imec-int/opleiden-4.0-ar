@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-	public class SafetyRegulationsFooter : MonoBehaviour
+	public class SafetyRegulationsFooter : InfoPanelFooter
 	{
 		// Checkbox
 		[SerializeField]
@@ -13,13 +11,6 @@ namespace UI
 		// Button
 		[SerializeField]
 		private Button _continueButton;
-		// Info panel
-		[SerializeField]
-		private InfoPanel _currentInfoPanel;
-
-		[SerializeField]
-		// State Machine
-		private Animator _stateMachine;
 
 		protected void Awake()
 		{
@@ -37,8 +28,8 @@ namespace UI
 		// Trigger animator change state
 		protected void OnButtonClicked()
 		{
-			_stateMachine.SetTrigger("EndSafetyCheck");
-			_currentInfoPanel.Close();
+			StateMachine.SetTrigger("SafetyCheckComplete");
+			ParentPanel.Close();
 		}
 	}
 }

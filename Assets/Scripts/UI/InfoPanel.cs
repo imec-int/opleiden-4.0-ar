@@ -35,10 +35,6 @@ namespace UI
 			_closeButton.onClick.AddListener(Close);
 		}
 
-		public void Show(HighlightInfo info)
-		{
-			Show(info.Header, info.Body);
-		}
 		public void Show(HighlightInfo info, bool showCloseBtn = true, bool tapToClose = false)
 		{
 			Show(info.Header, info.Body, showCloseBtn, tapToClose);
@@ -116,16 +112,16 @@ namespace UI
 			}
 
 			_closeButton.gameObject.SetActive(showCloseBtn);
-
 			this.gameObject.SetActive(true);
 		}
 
 		// Add another UI prefab to the end of the info panel
-		public GameObject PushExtraInfoPrefab(GameObject extraPrefab)
+		public InfoPanelFooter PushExtraInfoPrefab(InfoPanelFooter extraPrefab)
 		{
-			GameObject go = Instantiate(extraPrefab, _bodyLabel.transform.parent);
-			_temporaryObjects.Append(go);
-			return go;
+			InfoPanelFooter footer = Instantiate(extraPrefab, _bodyLabel.transform.parent);
+			footer.ParentPanel = this;
+			_temporaryObjects.Append(footer.gameObject);
+			return footer;
 		}
 
 		public void Close()
