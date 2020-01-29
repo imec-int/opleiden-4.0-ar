@@ -527,6 +527,7 @@ MonoBehaviour:
   _headerLabel: {fileID: 6186866196596691433}
   _bodyLabel: {fileID: 4427162830164976434}
   _closeButton: {fileID: 19278380}
+  _verticalScrollBar: {fileID: 1682858627621190585}
 --- !u!1 &2127505029042138745
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Data;
 using UI;
+using System.Collections.Generic;
 
 namespace StateMachine
 {
@@ -18,7 +19,11 @@ namespace StateMachine
 		[SerializeField]
 		private bool _tapToClose;
 
+		[SerializeField]
+		private List<InfoPanelFooter> _additionalPrefabs;
+
 		private InfoPanel _infoPanel;
+		private Animator _animator;
 
 		// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 		override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,7 +33,22 @@ namespace StateMachine
 			Debug.Assert(_infoPanel, $"{_component} component was not found");
 
 			_infoPanel.Show(_info, _showCloseBtn, _tapToClose);
-			_infoPanel.OnClose += () => animator.SetTrigger("InfoShownComplete");
+			foreach (var prefab in _additionalPrefabs)
+			{
+				InfoPanelFooter footer = _infoPanel.PushExtraInfoPrefab(prefab);
+				footer.StateMachine = animator;
+			}
+			if (_showCloseBtn || _tapToClose)
+			{
+				_animator = animator;
+				_infoPanel.OnClose += OnInfoPanelClosed;
+			}
+		}
+
+		private void OnInfoPanelClosed()
+		{
+			_infoPanel.OnClose -= OnInfoPanelClosed;
+			_animator.SetTrigger("InfoShownComplete");
 		}
 	}
 }

@@ -9,11 +9,15 @@ namespace UI
 	{
 		[SerializeField]
 		private Animator _stateMachine;
+
 		[SerializeField]
 		private GameObject _submenu;
 
 		[SerializeField]
 		private ColorScheme _colorScheme;
+
+		[SerializeField]
+		private InfoPanel _infoPanel;
 
 		private Button _button;
 		private bool _expanded;
@@ -29,22 +33,25 @@ namespace UI
 			{
 				btn.colors = _colorScheme.UIColorsDictionary[ColorStyleables.Button];
 			}
+
+			_infoPanel.OnClose += () => this.gameObject.SetActive(true);
+			_infoPanel.OnOpen += () => this.gameObject.SetActive(false);
 		}
 		#endregion
 
-		protected void ToggleSubmenu()
+		public void ToggleSubmenu()
 		{
 			_submenu.SetActive(!_submenu.activeSelf);
 			_expanded = !_expanded;
 		}
 
-		protected void ExpandSubmenu()
+		public void ExpandSubmenu()
 		{
 			_expanded = true;
 			_submenu.SetActive(true);
 		}
 
-		protected void CloseSubmenu()
+		public void CloseSubmenu()
 		{
 			_expanded = false;
 			_submenu.SetActive(false);
