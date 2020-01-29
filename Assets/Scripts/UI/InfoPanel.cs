@@ -25,6 +25,9 @@ namespace UI
 		[SerializeField]
 		private Button _closeButton;
 
+		[SerializeField]
+		private Scrollbar _verticalScrollBar;
+
 		private bool _tapToClose;
 		private int _infoHash;
 
@@ -35,10 +38,12 @@ namespace UI
 			_closeButton.onClick.AddListener(Close);
 		}
 
+		// This is necessary to call from Unity editor
 		public void Show(HighlightInfo info)
 		{
 			Show(info.Header, info.Body);
 		}
+
 		public void Show(HighlightInfo info, bool showCloseBtn = true, bool tapToClose = false)
 		{
 			Show(info.Header, info.Body, showCloseBtn, tapToClose);
@@ -116,15 +121,30 @@ namespace UI
 			}
 
 			_closeButton.gameObject.SetActive(showCloseBtn);
-
 			this.gameObject.SetActive(true);
+		}
+
+		// Add another UI prefab to the end of the info panel
+		public InfoPanelFooter PushExtraInfoPrefab(InfoPanelFooter extraPrefab)
+		{
+			InfoPanelFooter footer = Instantiate(extraPrefab, _bodyLabel.transform.parent);
+			footer.ParentPanel = this;
+			_temporaryObjects.Push(footer.gameObject);
+			return footer;
 		}
 
 		public void Close()
 		{
-			while (_temporaryObjects.Count > 0) Destroy(_temporaryObjects.Pop());
+			Reset();
 			OnClose?.Invoke();
 			this.gameObject.SetActive(false);
+		}
+
+		public void Reset()
+		{
+			while (_temporaryObjects.Count > 0) Destroy(_temporaryObjects.Pop());
+			_infoHash = 0;
+			_verticalScrollBar.value = 1;
 		}
 
 		public void OnPointerClick(PointerEventData eventData)

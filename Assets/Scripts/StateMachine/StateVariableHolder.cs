@@ -17,7 +17,8 @@ namespace StateMachine
 	public enum Component
 	{
 		TrackingController,
-		InfoPanel
+		InfoPanel,
+		ARSession
 	}
 
 	public class StateVariableHolder : MonoBehaviour
