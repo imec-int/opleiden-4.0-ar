@@ -19,6 +19,9 @@ namespace AR
 
 		private Transform _installation;
 
+		[SerializeField]
+		private float _arScale = 1;
+
 		private bool _isPumpPlaced;
 
 		protected void Awake()
@@ -44,6 +47,7 @@ namespace AR
 		private void PlacePump(List<ARRaycastHit> hits)
 		{
 			_installation = Instantiate(_installationPrefab).transform;
+			_sessionOrigin.transform.localScale = new Vector3(_arScale, _arScale, _arScale);
 			_sessionOrigin.MakeContentAppearAt(_installation, hits[0].pose.position);
 			_isPumpPlaced = true;
 			ObjectPlaced.Invoke();
