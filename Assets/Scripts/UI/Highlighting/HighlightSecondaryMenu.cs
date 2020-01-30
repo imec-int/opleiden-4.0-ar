@@ -22,7 +22,7 @@ namespace UI.Highlighting
 			_rectTransform = GetComponent<RectTransform>();
 		}
 
-		public void Setup(Operation[] operations, Part part, UnityAction infoButtonListener, ActionController controller, Highlight parent)
+		public void Setup(Operation[] operations, PartType partType, UnityAction infoButtonListener, ActionController controller, Highlight parent)
 		{
 			_actionController = controller;
 			_highlightParent = parent;
@@ -30,9 +30,9 @@ namespace UI.Highlighting
 			foreach (Operation op in operations)
 			{
 				ActionWidget elem = CreateNewActionElement();
-				elem.Setup(op, part);
+				elem.Setup(op, partType);
 				elem.AssociatedButton.onClick.AddListener(
-					() => OnOperationButtonClicked(new IndexedActionData { Operation = op, Part = part }));
+					() => OnOperationButtonClicked(new IndexedActionData { Operation = op, PartType = partType, Part = _highlightParent.gameObject }));
 			}
 
 			// info button

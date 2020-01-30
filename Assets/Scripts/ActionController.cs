@@ -9,10 +9,7 @@ namespace Core
 {
 	public class ActionController : MonoBehaviour
 	{
-		[SerializeField]
-		private ValidationRuleSet _validationRuleSet;
-
-		public ValidationInfo ValidationReport
+		public ValidationInfo[] ValidationReports
 		{
 			get; private set;
 		}
@@ -21,7 +18,7 @@ namespace Core
 
 		public event Action<IndexedActionData> ActionAdded, ActionUpdated, ActionDeleted;
 		public event Action<IndexedActionData, int> ActionMoved;
-		public event Action<ValidationInfo> ValidationCompleted;
+		public event Action<ValidationStageReport> ValidationCompleted;
 
 		public event Action PostReset;
 
@@ -30,15 +27,6 @@ namespace Core
 			Actions.Clear();
 			PostReset?.Invoke();
 		}
-
-		#region Monobehaviour
-		protected void Awake()
-		{
-			bool rulesetCorrect = _validationRuleSet.Initialize();
-			Debug.Assert(rulesetCorrect, "Current Validation Ruleset contains invalid substeps!!");
-			ValidationReport = new ValidationInfo();
-		}
-		#endregion
 
 		#region Action Manipulation
 		public void AddAction(IndexedActionData action)
@@ -92,12 +80,38 @@ namespace Core
 		#region Action Validation
 		public void ValidateActions()
 		{
-			_validationRuleSet.Validate(Actions.Select(action => action as ActionData).ToList(), out ValidationInfo reportCard);
-			// report on the report
-			ValidationReport = reportCard;
-			ValidationCompleted?.Invoke(ValidationReport);
-			//Debug.Log(ValidationReport);
+			ActionSequence[] actionSequences = FindObjectsOfType<ActionSequence>();
+			ValidationReports = new ValidationInfo[actionSequences.Length];
+			for (int i = 0; i < actionSequences.Length; i++)
+			{
+				List<ActionData> actions = Actions.Select(action => action as ActionData).ToList();
+				actionSequences[i].Validate(actions, out ValidationReports[i]);
+			}
+			ValidationCompleted?.Invoke(GenerateStageReport(ValidationReports));
 		}
 		#endregion
+
+		private ValidationStageReport GenerateStageReport(ValidationInfo[] validationReports)
+		{
+			ValidationStageReport report;
+			report.RequiredActions = 0;
+			report.PerformedActionsValidationResult = new List<ValidationResult>();
+			report.ForgottenActionsValidationResult = new List<ValidationResult>();
+			foreach (var validationInfo in validationReports)
+			{
+				report.RequiredActions += validationInfo.UsedRuleSet.ActionsCount;
+				report.PerformedActionsValidationResult.AddRange(validationInfo.PerformedActionsValidationResult);
+				report.ForgottenActionsValidationResult.AddRange(validationInfo.ForgottenActionsValidationResult);
+			}
+
+			return report;
+		}
+	}
+
+	public struct ValidationStageReport
+	{
+		public uint RequiredActions;
+		public List<ValidationResult> PerformedActionsValidationResult;
+		public List<ValidationResult> ForgottenActionsValidationResult;
 	}
 }

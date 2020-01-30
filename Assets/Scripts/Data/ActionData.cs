@@ -19,7 +19,7 @@ namespace Data
 	}
 
 	[Serializable]
-	public enum Part
+	public enum PartType
 	{
 		None,
 		Pump,
@@ -37,28 +37,32 @@ namespace Data
 	public class ActionData
 	{
 		[SerializeField]
-		private Part _Part;
+		private GameObject _part;
 
 		[SerializeField]
-		private Operation _Operation;
+		private PartType _partType;
 
-		public Operation Operation { get => _Operation; set => _Operation = value; }
-		public Part Part { get => _Part; set => _Part = value; }
+		[SerializeField]
+		private Operation _operation;
 
-		// because two different enum combinations can give the same numbers, we need to offset one
-		private const int magicoffset = 100;
+		public Operation Operation { get => _operation; set => _operation = value; }
+		public PartType PartType { get => _partType; set => _partType = value; }
+		public GameObject Part { get => _part; set => _part = value; }
 
-		public static int CalculateUID(Operation operation, Part part)
+		public override int GetHashCode()
 		{
-			return (operation.GetHashCode() * magicoffset) + part.GetHashCode();
+			// because two different enum combinations can give the same numbers, we need to offset one
+			return _operation.GetHashCode() + ((int)_partType + Enum.GetNames(typeof(Operation)).Length).GetHashCode() + _part.name.GetHashCode();
 		}
 
-		public int UID
+		public override bool Equals(object obj)
 		{
-			get
-			{
-				return CalculateUID(_Operation, _Part);
-			}
+			return GetHashCode() == (obj as ActionData)?.GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return $"{_part.name}: {_operation} was performed on {_partType}";
 		}
 	}
 
@@ -66,7 +70,7 @@ namespace Data
 	[Serializable]
 	public class IndexedActionData : ActionData
 	{
-		private int _Index;
-		public int Index { get => _Index; set => _Index = value; }
+		private int _index;
+		public int Index { get => _index; set => _index = value; }
 	}
 }

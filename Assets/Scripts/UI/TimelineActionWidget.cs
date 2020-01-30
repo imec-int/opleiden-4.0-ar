@@ -48,10 +48,10 @@ namespace UI
 			_actionController.ValidationCompleted -= VisualizeValidation;
 		}
 
-		private void VisualizeValidation(ValidationInfo info)
+		private void VisualizeValidation(ValidationStageReport report)
 		{
 			// Get result for this instance
-			ValidationResult result = info.ValidationResultList[_action.Index - 1];
+			Result result = report.PerformedActionsValidationResult[_action.Index - 1].Result;
 			bool valid = _colorScheme.ValidationColorDictionary.TryGetValue(result, out ColorBlock requiredColors);
 			Debug.Assert(valid, $"Missing a color in color scheme for {result}");
 			// Set the visuals
@@ -68,7 +68,7 @@ namespace UI
 		{
 			_index.text = _action.Index.ToString();
 			_orderMarker.color = Color.clear;
-			base.Setup(_action.Operation, _action.Part);
+			base.Setup(_action.Operation, _action.PartType);
 		}
 
 		protected void Update()

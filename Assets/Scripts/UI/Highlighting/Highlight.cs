@@ -7,6 +7,7 @@ using TimeLineValidation;
 using Data;
 using Utilities;
 using Core;
+using System.Linq;
 
 namespace UI.Highlighting
 {
@@ -40,13 +41,12 @@ namespace UI.Highlighting
 			get; private set;
 		}
 
-		private readonly List<int> _possibleUIDList = new List<int>();
-
 		private ActionController _actionController;
 
 		public void Setup(HighlightAnchor anchor, Action<HighlightInfo> showHighlightInfo, ActionController controller)
 		{
 			AssociatedAnchor = anchor;
+			gameObject.name = anchor.name;
 
 			_secondaryMenu.Setup(anchor.AvailableOperations, anchor.HighlightedPart,
 			() => showHighlightInfo?.Invoke(anchor.Info), controller, this);
@@ -54,11 +54,6 @@ namespace UI.Highlighting
 			_secondaryMenu.gameObject.SetActive(false);
 			_sphereButton.onClick.AddListener(OnButtonClicked);
 
-			// Get some possible UIDs we need to watch out for post validation
-			foreach (var operation in anchor.AvailableOperations)
-			{
-				_possibleUIDList.Add(ActionData.CalculateUID(operation, anchor.HighlightedPart));
-			}
 			_actionController = controller;
 			_actionController.ValidationCompleted += PostValidationVisualisation;
 		}
@@ -68,28 +63,31 @@ namespace UI.Highlighting
 			_actionController.ValidationCompleted -= PostValidationVisualisation;
 		}
 
-		private void PostValidationVisualisation(ValidationInfo info)
+		private void PostValidationVisualisation(ValidationStageReport report)
 		{
 			// default color
-			var worstResult = ValidationResult.None;
+			var worstResult = Result.None;
 
-			// Pick worst colour to display
-			for (int i = 0; i < info.ValidationResultList.Count; ++i)
+			IEnumerable<Result> performedActionResults = from rep in report.PerformedActionsValidationResult
+														 where rep.Action.Part.name == gameObject.name
+														 select rep.Result;
+
+			IEnumerable<Result> forgottenActionResults = from rep in report.ForgottenActionsValidationResult
+														 where rep.Action.Part.name == gameObject.name
+														 select rep.Result;
+
+			foreach (var result in performedActionResults.Concat(forgottenActionResults))
 			{
-				if (!_possibleUIDList.Contains(info.ValidatedUIDs[i]))
-					continue;
+				if ((int)result > (int)worstResult)
+					worstResult = result;
 
-				ValidationResult matchingResult = info.ValidationResultList[i];
-				if ((int)matchingResult > (int)worstResult)
-					worstResult = matchingResult;
-
-				if (worstResult == ValidationResult.Incorrect)
+				if (worstResult == Result.Incorrect)
 					break;
 			}
 
-			ColorBlock colors = _colorScheme.ValidationColorDictionary[worstResult];
-			_sphereButton.Colors = colors;
+			_sphereButton.Colors = _colorScheme.ValidationColorDictionary[worstResult];
 		}
+
 		#region Submenu handling
 		public void Collapse()
 		{
