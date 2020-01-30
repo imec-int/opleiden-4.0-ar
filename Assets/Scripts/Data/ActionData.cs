@@ -14,7 +14,8 @@ namespace Data
 		Start,
 		Stop,
 		TowardsPump,
-		TowardsBlind
+		TowardsBlind,
+		Label
 	}
 
 	[Serializable]

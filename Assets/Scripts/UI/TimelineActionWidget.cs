@@ -35,10 +35,10 @@ namespace UI
 			_bgImage = this.GetComponent<Image>();
 		}
 
-		public void Setup(IndexedActionData action, ActionController controller)
+		public void Setup(IndexedActionData action, ActionController controller, bool staticAction = false)
 		{
 			_actionController = controller;
-			_actionController.ValidationCompleted += VisualizeValidation;
+			if (!staticAction) _actionController.ValidationCompleted += VisualizeValidation;
 			_action = action;
 			UpdateState();
 		}
