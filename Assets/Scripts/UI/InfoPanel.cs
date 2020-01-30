@@ -61,77 +61,91 @@ namespace UI
 
 			OnOpen?.Invoke();
 			_headerLabel.text = header;
+			char[] markupChars = { '{', '}' };
 
 			// Split body text into separate text parts and images
-			string[] bodyParts = Regex.Split(body, @"(!\([\w= ]+\))", RegexOptions.IgnorePatternWhitespace).Where(s => s != string.Empty).ToArray();
+			string[] groups = Regex.Split(body, "({.+?})", RegexOptions.Multiline).Where(s => s != string.Empty).ToArray();
 
-			Transform bodyParent = _bodyLabel.transform.parent;
-			GameObject imageParent = null;
-
-			// If the text contains images, generate a for them to live on
-			int amountOfIconsPerRow = 5;
+			Transform contentParent = _bodyLabel.transform.parent;
+			// some 'magic' numbers
+			int maxColumnCount = 3;
 			Vector2 spacing = new Vector2(20, 5);
-			if (body.Contains('!'))
+			foreach (string group in groups)
 			{
-				imageParent = new GameObject("image_grid");
-				// Set up layouting
-				var layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
-				float defaultWidth = bodyParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
-				defaultWidth -= spacing.x*amountOfIconsPerRow;
-				layoutGroup.cellSize = new Vector2(defaultWidth, defaultWidth*0.5f);
-				layoutGroup.spacing = spacing;
-				layoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-				layoutGroup.constraintCount = amountOfIconsPerRow;
+				Debug.Log(group);
+				// Define parents, etc...
+				Transform groupParent = contentParent;
+				// split up for images and text
+				string[] groupParts = Regex.Split(group, @"(!\([\w= ]+\))", RegexOptions.IgnorePatternWhitespace).ToArray();
+				groupParts = groupParts.Where((part) => !string.IsNullOrEmpty(part.Trim(markupChars))).ToArray();
 
-				imageParent.transform.SetParent(bodyParent);
-				_temporaryObjects.Push(imageParent);
+				int amountOfIconsPerRow = Math.Min(groupParts.Length, maxColumnCount);
+				// Create a new parent if needed
+				if (group.StartsWith("{"))
+				{
+					// Set up the parent layout element
+					GameObject imageParent = new GameObject("layout_grid");
+					imageParent.transform.SetParent(contentParent);
+					_temporaryObjects.Push(imageParent);
+					// Set up layouting
+					var layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
+					float defaultWidth = groupParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
+					defaultWidth -= spacing.x * amountOfIconsPerRow;
+					layoutGroup.cellSize = new Vector2(defaultWidth, defaultWidth * 0.5f);
+					layoutGroup.spacing = spacing;
+					layoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+					layoutGroup.constraintCount = amountOfIconsPerRow;
+					// replace group parent
+					groupParent = imageParent.transform;
+				}
+				// Generate group content
+				for (int i = 0; i < groupParts.Length; i++)
+				{
+					Debug.Log(groupParts[i]);
+					// Images
+					if (groupParts[i].StartsWith("!("))
+					{
+						// Remove image prefix and suffix
+						string path = groupParts[i].Substring(2, groupParts[i].Length - 3);
+
+						// Check if the image has a specific resolution set
+						Match match = Regex.Match(path, " =\\w*x\\w*");
+						if (match.Success)
+						{
+							path = path.Substring(0, path.Length - match.Length);
+						}
+
+						// Load the sprite from resources and add it as an image to the body
+						Sprite sprite = Resources.Load<Sprite>("Images/" + path);
+						Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
+						GameObject go = new GameObject("Image_" + path);
+						_temporaryObjects.Push(go);
+						go.transform.SetParent(groupParent.transform, false);
+						Image image = go.AddComponent<Image>();
+						image.preserveAspect = true;
+						image.sprite = sprite;
+
+						if (match.Success)
+						{
+							LayoutElement layout = go.AddComponent<LayoutElement>();
+							string[] dimensions = match.Value.Substring(2).Split('x');
+							int.TryParse(dimensions[0], out int width);
+							int.TryParse(dimensions[1], out int height);
+							if (width > 0) layout.preferredWidth = width;
+							if (height > 0) layout.preferredHeight = height;
+						}
+					}
+					else // Text
+					{
+						TextMeshProUGUI bodyPart = Instantiate(_bodyLabel.gameObject, groupParent).GetComponent<TextMeshProUGUI>();
+						bodyPart.gameObject.SetActive(true);
+						_temporaryObjects.Push(bodyPart.gameObject);
+						bodyPart.text = groupParts[i];
+					}
+				}
 			}
 
-			for (int i = 0; i < bodyParts.Length; i++)
-			{
-				if (bodyParts[i].StartsWith("!("))
-				{
-					// Remove image prefix and suffix
-					string path = bodyParts[i].Substring(2, bodyParts[i].Length - 3);
-
-					// Check if the image has a specific resolution set
-					Match match = Regex.Match(path, " =\\w*x\\w*");
-					if (match.Success)
-					{
-						path = path.Substring(0, path.Length - match.Length);
-					}
-
-					// Load the sprite from resources and add it as an image to the body
-					Sprite sprite = Resources.Load<Sprite>("Images/" + path);
-					Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
-					GameObject go = new GameObject("Image_" + path);
-					_temporaryObjects.Push(go);
-					go.transform.SetParent(imageParent.transform, false);
-					Image image = go.AddComponent<Image>();
-					image.preserveAspect = true;
-					image.sprite = sprite;
-
-					if (match.Success)
-					{
-						LayoutElement layout = go.AddComponent<LayoutElement>();
-						string[] dimensions = match.Value.Substring(2).Split('x');
-						int.TryParse(dimensions[0], out int width);
-						int.TryParse(dimensions[1], out int height);
-						if (width > 0) layout.preferredWidth = width;
-						if (height > 0) layout.preferredHeight = height;
-					}
-
-					imageParent.transform.SetAsLastSibling();
-				}
-				else
-				{
-					TextMeshProUGUI bodyPart = Instantiate(_bodyLabel.gameObject, bodyParent).GetComponent<TextMeshProUGUI>();
-					bodyPart.gameObject.SetActive(true);
-					_temporaryObjects.Push(bodyPart.gameObject);
-					bodyPart.text = bodyParts[i];
-				}
-			}
-
+			// Finalize panel
 			_closeButton.gameObject.SetActive(showCloseBtn);
 			this.gameObject.SetActive(true);
 		}
