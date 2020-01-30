@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 namespace UI
 {
@@ -52,6 +53,10 @@ namespace UI
 
 		public void Show(string header, string body, bool showCloseBtn = true, bool tapToClose = false)
 		{
+			this.gameObject.SetActive(true);
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(this.GetComponent<RectTransform>());
+
 			// Check if the content has changed by doing a hash comparison. If unchanged do an early return
 			int infoHash = (header + body).GetHashCode();
 			if (infoHash == _infoHash) return;
@@ -84,7 +89,7 @@ namespace UI
 				{
 					// Set up the parent layout element
 					GameObject imageParent = new GameObject("layout_grid");
-					imageParent.transform.SetParent(contentParent);
+					imageParent.transform.SetParent(contentParent,false);
 					_temporaryObjects.Push(imageParent);
 					// Set up layouting
 					var layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
@@ -145,7 +150,6 @@ namespace UI
 
 			// Finalize panel
 			_closeButton.gameObject.SetActive(showCloseBtn);
-			this.gameObject.SetActive(true);
 		}
 
 		// Add another UI prefab to the end of the info panel
