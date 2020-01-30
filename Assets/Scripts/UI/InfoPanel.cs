@@ -36,6 +36,7 @@ namespace UI
 		public void Awake()
 		{
 			_closeButton.onClick.AddListener(Close);
+			_bodyLabel.gameObject.SetActive(false);
 		}
 
 		// This is necessary to call from Unity editor
@@ -64,8 +65,27 @@ namespace UI
 			// Split body text into separate text parts and images
 			string[] bodyParts = Regex.Split(body, @"(!\([\w= ]+\))", RegexOptions.IgnorePatternWhitespace).Where(s => s != string.Empty).ToArray();
 
-			bool firstTextBlock = true;
 			Transform bodyParent = _bodyLabel.transform.parent;
+			GameObject imageParent = null;
+
+			// If the text contains images, generate a for them to live on
+			int amountOfIconsPerRow = 5;
+			Vector2 spacing = new Vector2(20, 5);
+			if (body.Contains('!'))
+			{
+				imageParent = new GameObject("image_grid");
+				// Set up layouting
+				var layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
+				float defaultWidth = bodyParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
+				defaultWidth -= spacing.x*amountOfIconsPerRow;
+				layoutGroup.cellSize = new Vector2(defaultWidth, defaultWidth*0.5f);
+				layoutGroup.spacing = spacing;
+				layoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+				layoutGroup.constraintCount = amountOfIconsPerRow;
+
+				imageParent.transform.SetParent(bodyParent);
+				_temporaryObjects.Push(imageParent);
+			}
 
 			for (int i = 0; i < bodyParts.Length; i++)
 			{
@@ -86,7 +106,7 @@ namespace UI
 					Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
 					GameObject go = new GameObject("Image_" + path);
 					_temporaryObjects.Push(go);
-					go.transform.SetParent(bodyParent, false);
+					go.transform.SetParent(imageParent.transform, false);
 					Image image = go.AddComponent<Image>();
 					image.preserveAspect = true;
 					image.sprite = sprite;
@@ -100,22 +120,15 @@ namespace UI
 						if (width > 0) layout.preferredWidth = width;
 						if (height > 0) layout.preferredHeight = height;
 					}
+
+					imageParent.transform.SetAsLastSibling();
 				}
 				else
 				{
-					// When it is the first text block in the body use the default existing _BodyLabel or else instantiate it for additional text blocks
-					if (firstTextBlock)
-					{
-						_bodyLabel.text = bodyParts[i];
-						_bodyLabel.transform.SetAsLastSibling();
-						firstTextBlock = false;
-					}
-					else
-					{
-						TextMeshProUGUI bodyPart = Instantiate(_bodyLabel.gameObject, bodyParent).GetComponent<TextMeshProUGUI>();
-						_temporaryObjects.Push(bodyPart.gameObject);
-						bodyPart.text = bodyParts[i];
-					}
+					TextMeshProUGUI bodyPart = Instantiate(_bodyLabel.gameObject, bodyParent).GetComponent<TextMeshProUGUI>();
+					bodyPart.gameObject.SetActive(true);
+					_temporaryObjects.Push(bodyPart.gameObject);
+					bodyPart.text = bodyParts[i];
 				}
 			}
 
