@@ -283,7 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1b92f268f13b642ad7765bd48fc88b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _validationRuleSet: {fileID: 11400000, guid: fa4626eb1972f1f498dfb9a8982c0c52, type: 2}
 --- !u!1 &6721093374647068506
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,16 +580,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8562737215636637767, guid: 71b256af08621fdd38031d6396cb5c19,
         type: 2}
-    - target: {fileID: 6523489108647706430, guid: e25cedf0fc679b34dbc63ff3b2229aa0,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 6567157570096485080, guid: e25cedf0fc679b34dbc63ff3b2229aa0,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e25cedf0fc679b34dbc63ff3b2229aa0, type: 3}
 --- !u!224 &3385218391941731875 stripped
