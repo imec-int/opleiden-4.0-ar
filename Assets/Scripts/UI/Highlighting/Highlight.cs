@@ -68,19 +68,15 @@ namespace UI.Highlighting
 			// default color
 			var worstResult = Result.None;
 
-			Result[] performedActionResults = report.PerformedActionsValidationResult.Where(result => result.Action.Part.name.GetHashCode() == gameObject.name.GetHashCode()).Select(result => result.Result).ToArray();
-			Result[] forgottenActionResults = report.ForgottenActionsValidationResult.Where(result => result.Action.Part.name.GetHashCode() == gameObject.name.GetHashCode()).Select(result => result.Result).ToArray();
+			IEnumerable<Result> performedActionResults = from rep in report.PerformedActionsValidationResult
+														 where rep.Action.Part.name == gameObject.name
+														 select rep.Result;
 
-			foreach (var result in performedActionResults)
-			{
-				if ((int)result > (int)worstResult)
-					worstResult = result;
+			IEnumerable<Result> forgottenActionResults = from rep in report.ForgottenActionsValidationResult
+														 where rep.Action.Part.name == gameObject.name
+														 select rep.Result;
 
-				if (worstResult == Result.Incorrect)
-					break;
-			}
-
-			foreach (var result in forgottenActionResults)
+			foreach (var result in performedActionResults.Concat(forgottenActionResults))
 			{
 				if ((int)result > (int)worstResult)
 					worstResult = result;

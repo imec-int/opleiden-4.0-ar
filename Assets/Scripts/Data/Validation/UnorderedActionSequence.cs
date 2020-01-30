@@ -16,11 +16,15 @@ namespace TimeLineValidation
 			{
 				if (_actions.Contains(item))
 				{
-					if (!_allowDuplicateActions)
+					bool allow = true;
+					// Check if there are duplicate actions
+					if (timelineActions.Count(a => a.GetHashCode() == item.GetHashCode()) > 1)
 					{
-						ActionData firstOfType = timelineActions.First(y => y.GetHashCode() == item.GetHashCode());
-						outValidationInfo.PerformedActionsValidationResult.Add(new ValidationResult(timelineActions.Count(x => x.GetHashCode() == item.GetHashCode() && item != firstOfType) > 1 ? Result.Incorrect : Result.Correct, item));
+						// There are duplicates so only allow the first one, the rest will be marked incorrect
+						ActionData firstActionOfType = timelineActions.First(a => a.GetHashCode() == item.GetHashCode());
+						allow = firstActionOfType == item;
 					}
+					outValidationInfo.PerformedActionsValidationResult.Add(new ValidationResult(allow || _allowDuplicateActions ? Result.Correct : Result.Incorrect, item));
 				}
 				else
 				{
