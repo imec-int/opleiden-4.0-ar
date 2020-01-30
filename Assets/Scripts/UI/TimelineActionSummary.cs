@@ -3,6 +3,7 @@ using TMPro;
 using TimeLineValidation;
 using Data;
 using Core;
+using System.Linq;
 
 namespace UI
 {
@@ -22,17 +23,16 @@ namespace UI
 			_controller.ValidationCompleted += UpdateText;
 		}
 
-		private void UpdateText(ValidationInfo info)
+		private void UpdateText(ValidationStageReport report)
 		{
 			// Ensure visibility; It's turned on/off in reset state
 			this.gameObject.SetActive(true);
 
-			int placed = info.ValidationResultList.Count - info.AmountOfErrors;
-			uint needed = info.UsedRuleSet.TotalStepCount;
-			ValidationResult result = placed == needed ? ValidationResult.Correct : ValidationResult.Incorrect;
+			int placed = report.PerformedActionsValidationResult.Count - report.PerformedActionsValidationResult.Count(item => item.Result != Result.Correct);
+			Result result = placed == report.RequiredActions ? Result.Correct : Result.Incorrect;
 
 			string hex = ColorUtility.ToHtmlStringRGB(_colorScheme.ValidationColorDictionary[result].normalColor);
-			_actionText.text = $"Acties: <color=#{hex}>{placed}</color>/{needed}";
+			_actionText.text = $"Acties: <color=#{hex}>{placed}</color>/{report.RequiredActions}";
 		}
 	}
 }

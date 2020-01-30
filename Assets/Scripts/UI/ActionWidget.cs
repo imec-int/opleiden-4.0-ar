@@ -22,10 +22,10 @@ namespace UI
 			get { return _AssociatedButton; }
 		}
 
-		public void Setup(Operation operation, Part part)
+		public void Setup(Operation operation, PartType partType)
 		{
-			Setup(_ActionMetadata.ActionOperationsInfo[operation].Name + " " + _ActionMetadata.ActionPartsInfo[part].Name,
-			 _ActionMetadata.ActionPartsInfo[part].Icon);
+			Setup(_ActionMetadata.ActionOperationsInfo[operation].Name + " " + _ActionMetadata.ActionPartsInfo[partType].Name,
+			 _ActionMetadata.ActionPartsInfo[partType].Icon);
 		}
 
 		public void Setup(string label, string icon)

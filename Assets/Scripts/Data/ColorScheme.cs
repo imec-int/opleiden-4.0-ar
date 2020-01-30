@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Data
 {
-	[Serializable] public class ValidationColorsDictionary : SerializableDictionaryBase<ValidationResult, ColorBlock> { }
+	[Serializable] public class ValidationColorsDictionary : SerializableDictionaryBase<Result, ColorBlock> { }
 	[Serializable] public class UIColorsDictionary : SerializableDictionaryBase<ColorStyleables, ColorBlock> { };
 
 	public enum ColorStyleables
@@ -29,10 +29,11 @@ namespace Data
 		// Default constructor with some dummy data for validation results
 		public ColorScheme()
 		{
-			_validationColorDictionary.Add(ValidationResult.None, ColorBlock.defaultColorBlock);
-			_validationColorDictionary.Add(ValidationResult.Correct, new ColorBlock());
-			_validationColorDictionary.Add(ValidationResult.Incorrect, new ColorBlock());
-			_validationColorDictionary.Add(ValidationResult.IncorrectPosition, new ColorBlock());
+			_validationColorDictionary.Add(Result.None, ColorBlock.defaultColorBlock);
+			_validationColorDictionary.Add(Result.Correct, new ColorBlock());
+			_validationColorDictionary.Add(Result.IncorrectPosition, new ColorBlock());
+			_validationColorDictionary.Add(Result.Forgotten, new ColorBlock());
+			_validationColorDictionary.Add(Result.Incorrect, new ColorBlock());
 
 			_uiColorsDictionary.Add(ColorStyleables.Button, ColorBlock.defaultColorBlock);
 		}

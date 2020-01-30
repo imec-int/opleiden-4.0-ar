@@ -1,37 +1,51 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Data;
 
 namespace TimeLineValidation
 {
-	public enum ValidationResult
+	public enum Result
 	{
 		None = 0,
 		Correct,
 		IncorrectPosition,
-		Incorrect, // Not in the list of all validation steps 
+		Forgotten,
+		Incorrect // Not in the list of all validation steps 
 	}
 
-	public class ValidationInfo
+	public struct ValidationResult
+	{
+		public Result Result;
+		public ActionData Action;
+
+		public ValidationResult(Result result, ActionData action)
+		{
+			Result = result;
+			Action = action;
+		}
+	}
+
+	public struct ValidationInfo
 	{
 		public bool Succeeded { get; set; }
-		public List<ValidationResult> ValidationResultList { get; set; }
-		public List<int> ValidatedUIDs { get; set; }
-		public ValidationRuleSet UsedRuleSet { get; set; }
+		public List<ValidationResult> PerformedActionsValidationResult { get; set; }
+		public List<ValidationResult> ForgottenActionsValidationResult;
+		public ActionSequence UsedRuleSet { get; set; }
 
 		public int AmountOfErrors
 		{
 			get
 			{
-				return ValidationResultList.Count(result => result != ValidationResult.Correct);
+				return PerformedActionsValidationResult.Count(result => result.Result != Result.Correct);
 			}
 		}
 
 		public override string ToString()
 		{
-			IEnumerable<string> results = ValidationResultList.Select(result => Enum.GetName(typeof(ValidationResult), result));
+			IEnumerable<string> results = PerformedActionsValidationResult.Select(result => Enum.GetName(typeof(Result), result.Result));
 			string resultsAsString = string.Join(",", results);
-			return $"Actions: {ValidationResultList.Count}/{UsedRuleSet.TotalStepCount};Amount of errors: {AmountOfErrors}; Results list: {resultsAsString} ";
+			return $"Actions: {PerformedActionsValidationResult.Count}/{UsedRuleSet.ActionsCount};Amount of errors: {AmountOfErrors}; Results list: {resultsAsString} ";
 		}
 	}
 }
