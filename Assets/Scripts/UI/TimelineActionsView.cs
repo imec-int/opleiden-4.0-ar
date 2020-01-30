@@ -46,7 +46,7 @@ namespace UI
 			_btnTimelineValidation.onClick.AddListener(() => _actionController.ValidateActions());
 
 			IndexedActionData pumpTagAction = new IndexedActionData();
-			pumpTagAction.Part = Part.Pump;
+			pumpTagAction.PartType = PartType.Pump;
 			pumpTagAction.Operation = Operation.Label;
 			ActionAdded(pumpTagAction, true);
 		}
