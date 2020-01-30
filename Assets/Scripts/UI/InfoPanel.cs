@@ -72,7 +72,6 @@ namespace UI
 			Vector2 spacing = new Vector2(20, 5);
 			foreach (string group in groups)
 			{
-				Debug.Log(group);
 				// Define parents, etc...
 				Transform groupParent = contentParent;
 				// split up for images and text
@@ -101,7 +100,6 @@ namespace UI
 				// Generate group content
 				for (int i = 0; i < groupParts.Length; i++)
 				{
-					Debug.Log(groupParts[i]);
 					// Images
 					if (groupParts[i].StartsWith("!("))
 					{
