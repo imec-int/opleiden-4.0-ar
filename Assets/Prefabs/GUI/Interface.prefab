@@ -1298,28 +1298,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PumpTagField
       objectReference: {fileID: 0}
-    - target: {fileID: 7772856328671117558, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19,
-        type: 2}
-    - target: {fileID: 7772856328671117558, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8791538098090139485, guid: b6e83801d3ce97242ad351def9835d89,
         type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19,
         type: 2}
-    - target: {fileID: 8791538098090139485, guid: b6e83801d3ce97242ad351def9835d89,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6721093372950041154, guid: b6e83801d3ce97242ad351def9835d89, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b6e83801d3ce97242ad351def9835d89, type: 3}
