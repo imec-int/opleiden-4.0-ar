@@ -13,6 +13,8 @@ namespace AR
 
 		private ARRaycastManager _raycastManager;
 		private ARSessionOrigin _sessionOrigin;
+		private ARPlaneManager _planeManager;
+		private ARPointCloudManager _pointCloudManager;
 
 		[SerializeField]
 		private GameObject _installationPrefab;
@@ -28,6 +30,9 @@ namespace AR
 		{
 			_sessionOrigin = GetComponent<ARSessionOrigin>();
 			_raycastManager = GetComponent<ARRaycastManager>();
+
+			_planeManager = GetComponent<ARPlaneManager>();
+			_pointCloudManager = GetComponent<ARPointCloudManager>();
 		}
 
 		protected void Update()
@@ -51,6 +56,11 @@ namespace AR
 			_sessionOrigin.MakeContentAppearAt(_installation, hits[0].pose.position);
 			_isPumpPlaced = true;
 			ObjectPlaced.Invoke();
+
+			_planeManager.enabled = false;
+			_pointCloudManager.enabled = false;
+			_planeManager.SetTrackablesActive(false);
+			_pointCloudManager.SetTrackablesActive(false);
 		}
 	}
 }
