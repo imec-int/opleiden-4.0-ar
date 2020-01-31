@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: About
   m_EditorClassIdentifier: 
   _Header: 'Welkom bij de proeftuin '
-  _Body: 'Deze demonstrator werd ontwikkeld door imec en de consortiumpartners in
-    kader van de proeftuin Opleiden4.0. In deze toepassing demonstreren we hoe Augmented
+  _Body: '
+
+    Deze demonstrator werd ontwikkeld door imec en de consortiumpartners in kader
+    van de proeftuin Opleiden4.0. In deze toepassing demonstreren we hoe Augmented
     Reality (AR) ingezet kan worden bij opleidingen in de chemie-, kunststof- en procesindustrie.
     In deze toepassing worden beginnende studenten vertrouwd gemaakt met de onderdelen
     van een pomp en de checks die nodig zijn om een pomp in gebruik te nemen.
 
-    !(imecLogo =200x64)!(ActaLogo =200x110)!(CatalistiLogo =200x120)!(NxTMediaTechnologyLogo =200x200)!(VlaanderenIndustrie4Logo
-    =200x64)'
+    {!(imecLogo =200x64)!(ActaLogo =200x110)!(CatalistiLogo =200x120)}{!(NxTMediaTechnologyLogo
+    =200x200)!(VlaanderenIndustrie4Logo =200x64)}
+
+'
