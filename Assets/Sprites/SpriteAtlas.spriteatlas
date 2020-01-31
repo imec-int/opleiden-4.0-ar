@@ -43,14 +43,16 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cb169c84298978741aad78b58024ae4e, type: 3}
-    totalSpriteSurfaceArea: 36864
+    totalSpriteSurfaceArea: 40960
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 318083a324132b40488c07c343150a7c, type: 3}
   - {fileID: 21300000, guid: 529b74eac2b35cb44bd42f8649b18a9e, type: 3}
   - {fileID: 21300000, guid: d1aff94ca77dd744981dc3e2c0c1b7a1, type: 3}
   - {fileID: 21300000, guid: 67b46b1d56588dc46aaebd0e9c3ae717, type: 3}
   m_PackedSpriteNamesToIndex:
+  - RoundedRectangleRight
   - RoundedRectangleDashedOutline
   - RoundedRectangle
   - Triangle

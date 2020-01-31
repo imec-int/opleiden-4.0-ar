@@ -44,6 +44,11 @@ namespace UI
 			_actionController.PostReset += ActionsReset;
 
 			_btnTimelineValidation.onClick.AddListener(() => _actionController.ValidateActions());
+
+			IndexedActionData pumpTagAction = new IndexedActionData();
+			pumpTagAction.PartType = PartType.Pump;
+			pumpTagAction.Operation = Operation.Label;
+			ActionAdded(pumpTagAction, true, false);
 		}
 
 		private void ActionsReset()
@@ -58,6 +63,7 @@ namespace UI
 		private void OnEnable()
 		{
 			OnRectTransformChanged();
+
 		}
 
 		public void OnRectTransformChanged()
@@ -76,12 +82,16 @@ namespace UI
 
 		private void ActionAdded(IndexedActionData action)
 		{
+			ActionAdded(action, true, true);
+		}
+
+		private void ActionAdded(IndexedActionData action, bool staticAction = false, bool includeInValidation = true)
+		{
 			TimelineActionWidget timelineAction = GameObject.Instantiate(_buttonPrefab, _timelineScrollRect.content).GetComponent<TimelineActionWidget>();
 			timelineAction.gameObject.name = "TimelineActionWidget_" + _timelineActionWidgets.Count;
-			timelineAction.Setup(action, _actionController);
-			_timelineActionWidgets.Add(timelineAction);
-
-			timelineAction.GetComponent<LongPressDragAndDrop>()._OnDrag.AddListener(OnWidgetDrag);
+			timelineAction.Setup(action, _actionController, includeInValidation);
+			if (includeInValidation) _timelineActionWidgets.Add(timelineAction);
+			if (!staticAction) timelineAction.GetComponent<LongPressDragAndDrop>()._OnDrag.AddListener(OnWidgetDrag);
 
 			// Make sure the UI is fully up to date to avoid glitching caused by the layout updating the next frame
 			LayoutRebuilder.ForceRebuildLayoutImmediate(_timelineScrollRect.content);

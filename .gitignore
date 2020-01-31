@@ -56,3 +56,5 @@ ProjectSettings/ProBuilderSettings.json
 # Tests
 Assets/_Scenes/Tests*
 
+.DS_Store
+

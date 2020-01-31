@@ -24,6 +24,9 @@ namespace UI
 		[SerializeField]
 		private ColorScheme _colorScheme;
 
+		private TextMeshProUGUI[] _foregroundTextObjects;
+		private Color _defaultForegroundColor;
+
 		private IndexedActionData _action;
 		private ActionController _actionController;
 		private Button _btnObj;
@@ -33,12 +36,17 @@ namespace UI
 		{
 			_btnObj = this.GetComponent<Button>();
 			_bgImage = this.GetComponent<Image>();
+			_foregroundTextObjects = this.GetComponentsInChildren<TextMeshProUGUI>();
+			if (_foregroundTextObjects.Length > 0)
+			{
+				_defaultForegroundColor = _foregroundTextObjects[0].color;
+			}
 		}
 
-		public void Setup(IndexedActionData action, ActionController controller)
+		public void Setup(IndexedActionData action, ActionController controller, bool includeInValidation = true)
 		{
 			_actionController = controller;
-			_actionController.ValidationCompleted += VisualizeValidation;
+			if (includeInValidation) _actionController.ValidationCompleted += VisualizeValidation;
 			_action = action;
 			UpdateState();
 		}
@@ -56,12 +64,21 @@ namespace UI
 			Debug.Assert(valid, $"Missing a color in color scheme for {result}");
 			// Set the visuals
 			SetBGColor(requiredColors);
+			SetFGColor(result);
 		}
 
 		private void SetBGColor(ColorBlock requiredColors)
 		{
 			_btnObj.colors = requiredColors;
 			_bgImage.CrossFadeColor(requiredColors.normalColor, 0.5f, true, true);
+		}
+
+		private void SetFGColor(Result result)
+		{
+			foreach (var text in _foregroundTextObjects)
+			{
+				text.color = result == Result.None ? _defaultForegroundColor : Color.white;
+			}
 		}
 
 		public void UpdateState()
