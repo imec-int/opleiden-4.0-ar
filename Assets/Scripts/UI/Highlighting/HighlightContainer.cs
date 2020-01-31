@@ -51,7 +51,10 @@ namespace UI.Highlighting
 		// Enables/Disables visibility of all the highlights
 		public void SetHighlightsVisibility(bool visible)
 		{
-			gameObject.SetActive(visible);
+			for (int i = 0; i < transform.childCount; i++)
+			{
+				transform.GetChild(i).gameObject.SetActive(visible);
+			}
 		}
 		#endregion
 
