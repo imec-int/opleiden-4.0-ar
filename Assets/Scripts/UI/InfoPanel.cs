@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 namespace UI
 {
@@ -36,6 +37,7 @@ namespace UI
 		public void Awake()
 		{
 			_closeButton.onClick.AddListener(Close);
+			_bodyLabel.gameObject.SetActive(false);
 		}
 
 		// This is necessary to call from Unity editor
@@ -51,6 +53,10 @@ namespace UI
 
 		public void Show(string header, string body, bool showCloseBtn = true, bool tapToClose = false)
 		{
+			this.gameObject.SetActive(true);
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(this.GetComponent<RectTransform>());
+
 			// Check if the content has changed by doing a hash comparison. If unchanged do an early return
 			int infoHash = (header + body).GetHashCode();
 			if (infoHash == _infoHash) return;
@@ -60,67 +66,90 @@ namespace UI
 
 			OnOpen?.Invoke();
 			_headerLabel.text = header;
+			char[] markupChars = { '{', '}' };
 
 			// Split body text into separate text parts and images
-			string[] bodyParts = Regex.Split(body, @"(!\([\w= ]+\))", RegexOptions.IgnorePatternWhitespace).Where(s => s != string.Empty).ToArray();
+			string[] groups = Regex.Split(body, "({.+?})", RegexOptions.Multiline).Where(s => s != string.Empty).ToArray();
 
-			bool firstTextBlock = true;
-			Transform bodyParent = _bodyLabel.transform.parent;
-
-			for (int i = 0; i < bodyParts.Length; i++)
+			Transform contentParent = _bodyLabel.transform.parent;
+			// some 'magic' numbers
+			int maxColumnCount = 3;
+			Vector2 spacing = new Vector2(20, 5);
+			foreach (string group in groups)
 			{
-				if (bodyParts[i].StartsWith("!("))
+				// Define parents, etc...
+				Transform groupParent = contentParent;
+				// split up for images and text
+				string[] groupParts = Regex.Split(group, @"(!\([\w= ]+\))", RegexOptions.IgnorePatternWhitespace).ToArray();
+				groupParts = groupParts.Where((part) => !string.IsNullOrEmpty(part.Trim(markupChars))).ToArray();
+
+				int amountOfIconsPerRow = Math.Min(groupParts.Length, maxColumnCount);
+				// Create a new parent if needed
+				if (group.StartsWith("{"))
 				{
-					// Remove image prefix and suffix
-					string path = bodyParts[i].Substring(2, bodyParts[i].Length - 3);
-
-					// Check if the image has a specific resolution set
-					Match match = Regex.Match(path, " =\\w*x\\w*");
-					if (match.Success)
-					{
-						path = path.Substring(0, path.Length - match.Length);
-					}
-
-					// Load the sprite from resources and add it as an image to the body
-					Sprite sprite = Resources.Load<Sprite>("Images/" + path);
-					Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
-					GameObject go = new GameObject("Image_" + path);
-					_temporaryObjects.Push(go);
-					go.transform.SetParent(bodyParent, false);
-					Image image = go.AddComponent<Image>();
-					image.preserveAspect = true;
-					image.sprite = sprite;
-
-					if (match.Success)
-					{
-						LayoutElement layout = go.AddComponent<LayoutElement>();
-						string[] dimensions = match.Value.Substring(2).Split('x');
-						int.TryParse(dimensions[0], out int width);
-						int.TryParse(dimensions[1], out int height);
-						if (width > 0) layout.preferredWidth = width;
-						if (height > 0) layout.preferredHeight = height;
-					}
+					// Set up the parent layout element
+					GameObject imageParent = new GameObject("layout_grid");
+					imageParent.transform.SetParent(contentParent,false);
+					_temporaryObjects.Push(imageParent);
+					// Set up layouting
+					var layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
+					float defaultWidth = groupParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
+					defaultWidth -= spacing.x * amountOfIconsPerRow;
+					layoutGroup.cellSize = new Vector2(defaultWidth, defaultWidth * 0.5f);
+					layoutGroup.spacing = spacing;
+					layoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+					layoutGroup.constraintCount = amountOfIconsPerRow;
+					// replace group parent
+					groupParent = imageParent.transform;
 				}
-				else
+				// Generate group content
+				for (int i = 0; i < groupParts.Length; i++)
 				{
-					// When it is the first text block in the body use the default existing _BodyLabel or else instantiate it for additional text blocks
-					if (firstTextBlock)
+					// Images
+					if (groupParts[i].StartsWith("!("))
 					{
-						_bodyLabel.text = bodyParts[i];
-						_bodyLabel.transform.SetAsLastSibling();
-						firstTextBlock = false;
+						// Remove image prefix and suffix
+						string path = groupParts[i].Substring(2, groupParts[i].Length - 3);
+
+						// Check if the image has a specific resolution set
+						Match match = Regex.Match(path, " =\\w*x\\w*");
+						if (match.Success)
+						{
+							path = path.Substring(0, path.Length - match.Length);
+						}
+
+						// Load the sprite from resources and add it as an image to the body
+						Sprite sprite = Resources.Load<Sprite>("Images/" + path);
+						Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
+						GameObject go = new GameObject("Image_" + path);
+						_temporaryObjects.Push(go);
+						go.transform.SetParent(groupParent.transform, false);
+						Image image = go.AddComponent<Image>();
+						image.preserveAspect = true;
+						image.sprite = sprite;
+
+						if (match.Success)
+						{
+							LayoutElement layout = go.AddComponent<LayoutElement>();
+							string[] dimensions = match.Value.Substring(2).Split('x');
+							int.TryParse(dimensions[0], out int width);
+							int.TryParse(dimensions[1], out int height);
+							if (width > 0) layout.preferredWidth = width;
+							if (height > 0) layout.preferredHeight = height;
+						}
 					}
-					else
+					else // Text
 					{
-						TextMeshProUGUI bodyPart = Instantiate(_bodyLabel.gameObject, bodyParent).GetComponent<TextMeshProUGUI>();
+						TextMeshProUGUI bodyPart = Instantiate(_bodyLabel.gameObject, groupParent).GetComponent<TextMeshProUGUI>();
+						bodyPart.gameObject.SetActive(true);
 						_temporaryObjects.Push(bodyPart.gameObject);
-						bodyPart.text = bodyParts[i];
+						bodyPart.text = groupParts[i];
 					}
 				}
 			}
 
+			// Finalize panel
 			_closeButton.gameObject.SetActive(showCloseBtn);
-			this.gameObject.SetActive(true);
 		}
 
 		// Add another UI prefab to the end of the info panel
