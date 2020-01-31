@@ -2,6 +2,7 @@
 {
     Properties
     {
+        _Strength ("Shadow Strength", Range(0,1))=0
     }
 
     SubShader
@@ -59,6 +60,8 @@
             #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.lightweight/ShaderLibrary/Lighting.hlsl"
 
+            float _Strength;
+
             struct Attributes
             {
                 UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -92,7 +95,7 @@
 
                 half s = MainLightRealtimeShadow(input.shadowCoord);
 
-                return half4(0, 0, 0, 1 - s);
+                return half4(0, 0, 0, clamp(1 - s- _Strength, 0,1));
             }
             ENDHLSL
         }
