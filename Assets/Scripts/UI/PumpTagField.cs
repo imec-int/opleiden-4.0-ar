@@ -96,6 +96,7 @@ namespace UI
 
 		public void ShowAdditionalInfo()
 		{
+			if (!_inputField.interactable) return;
 			this.gameObject.SetActive(false);
 			_infoPanel.Show(_serialInfo);
 			_infoPanel.OnClose += OnInfoPanelClosed;
