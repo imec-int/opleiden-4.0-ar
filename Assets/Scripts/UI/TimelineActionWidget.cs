@@ -43,10 +43,10 @@ namespace UI
 			}
 		}
 
-		public void Setup(IndexedActionData action, ActionController controller, bool staticAction = false)
+		public void Setup(IndexedActionData action, ActionController controller, bool includeInValidation = true)
 		{
 			_actionController = controller;
-			if (!staticAction) _actionController.ValidationCompleted += VisualizeValidation;
+			if (includeInValidation) _actionController.ValidationCompleted += VisualizeValidation;
 			_action = action;
 			UpdateState();
 		}
