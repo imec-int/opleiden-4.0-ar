@@ -117,6 +117,7 @@ namespace AR
 
 		public void Reset()
 		{
+			if(_objectPlacement.Reset()) return;
 			if(!_installation) return;
 			Destroy(_installation.gameObject);
 		}

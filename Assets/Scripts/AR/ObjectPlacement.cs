@@ -49,6 +49,14 @@ namespace AR
 			}
 		}
 
+		public bool Reset()
+		{
+			if(!_installation) return false;
+			Destroy(_installation.gameObject);
+			_isPumpPlaced = false;
+			return true;
+		}
+
 		private void PlacePump(List<ARRaycastHit> hits)
 		{
 			_installation = Instantiate(_installationPrefab).transform;
