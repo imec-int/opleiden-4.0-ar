@@ -30,8 +30,8 @@ namespace UI
 		private HighlightInfo _highlightInfo;
 
 		protected readonly static string _stateTrigger = "StartCalibration";
-		protected readonly static string _objectTrackingInfo = "Mik de ipad naar de pomp-installatie";
-		protected readonly static string _planeTrackingInfo = "Tik om een pomp te plaatsen";
+		protected readonly static string _objectTrackingInfo = "Mik de iPad® naar de pomp-installatie";
+		protected readonly static string _planeTrackingInfo = "Klik in het gearceerde gebied om een pomp te plaatsen";
 
 		protected void Awake()
 		{
