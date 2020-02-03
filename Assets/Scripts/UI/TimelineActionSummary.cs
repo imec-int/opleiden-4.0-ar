@@ -29,9 +29,8 @@ namespace UI
 			this.gameObject.SetActive(true);
 
 			int placed = report.PerformedActionsValidationResult.Count - report.PerformedActionsValidationResult.Count(item => item.Result != Result.Correct);
-			Result result = placed == report.RequiredActions ? Result.Correct : Result.Incorrect;
 
-			string hex = ColorUtility.ToHtmlStringRGB(_colorScheme.ValidationColorDictionary[result].normalColor);
+			string hex = ColorUtility.ToHtmlStringRGB(_colorScheme.ValidationColorDictionary[Result.Correct].normalColor);
 			_actionText.text = $"Acties: <color=#{hex}>{placed}</color>/{report.RequiredActions}";
 		}
 	}
