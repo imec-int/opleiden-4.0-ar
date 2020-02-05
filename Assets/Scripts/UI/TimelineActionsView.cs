@@ -8,6 +8,7 @@ using UI.Utilities;
 using Utilities;
 using Core;
 using System;
+using TMPro;
 
 namespace UI
 {
@@ -28,6 +29,14 @@ namespace UI
 		[SerializeField]
 		private Button _btnTimelineValidation;
 
+		[SerializeField]
+		private TextMeshProUGUI _lblButtonText;
+
+		private const string _validationButtonText = "Valideer Inspectie";
+		private const string _validationButtonRetryText = "Valideer opnieuw";
+		private const string _infoRibbonText = "Selecteer alle acties die nodig zijn bij inspectie van de pomp voor opstart";
+		private const string _infoRibbonRetryText = "Klik op de rode highlights voor meer info over je fouten<br>Probeer het daarna opnieuw";
+
 		private ScrollRect _timelineScrollRect;
 		private Rect _timelineRect;
 
@@ -44,11 +53,18 @@ namespace UI
 			_actionController.PostReset += ActionsReset;
 
 			_btnTimelineValidation.onClick.AddListener(() => _actionController.ValidateActions());
+			_btnTimelineValidation.onClick.AddListener(PostValidationLabelUpdate);
 
 			IndexedActionData pumpTagAction = new IndexedActionData();
 			pumpTagAction.PartType = PartType.Pump;
 			pumpTagAction.Operation = Operation.Label;
 			ActionAdded(pumpTagAction, true, false);
+		}
+
+		private void PostValidationLabelUpdate()
+		{
+			TopInfoRibbon.Instance.SetLabelText(_infoRibbonRetryText);
+			_lblButtonText.text = _validationButtonRetryText;
 		}
 
 		private void ActionsReset()
@@ -58,12 +74,13 @@ namespace UI
 				Destroy(widget.gameObject);
 			}
 			_timelineActionWidgets.Clear();
+			_lblButtonText.text = _validationButtonText;
 		}
 
 		private void OnEnable()
 		{
 			OnRectTransformChanged();
-			TopInfoRibbon.Instance.SetLabelText("Selecteer alle acties die nodig zijn bij inspectie van de pomp voor opstart");
+			TopInfoRibbon.Instance?.SetLabelText(_infoRibbonText);
 		}
 
 		public void OnRectTransformChanged()
