@@ -86,6 +86,7 @@ namespace UI
 				int amountOfIconsPerRow = Math.Min(groupParts.Length, maxColumnCount);
 
 				float largestAspectRatio = .5f;
+				bool userAspectRatio = false;
 				float defaultWidth = 0;
 
 				GridLayoutGroup layoutGroup = null;
@@ -106,6 +107,16 @@ namespace UI
 					layoutGroup.constraintCount = amountOfIconsPerRow;
 					// replace group parent
 					groupParent = imageParent.transform;
+
+					Match matchAspectRatio = Regex.Match(group, " =[\\w.]*");
+					if (matchAspectRatio.Success)
+					{
+						userAspectRatio = true;
+						float.TryParse(matchAspectRatio.Value.Substring(2), out largestAspectRatio);
+						string lastGroupPart = groupParts[groupParts.Length - 1];
+						groupParts[groupParts.Length - 1] = lastGroupPart.Substring(0, lastGroupPart.Length - matchAspectRatio.Value.Length);
+					}
+
 				}
 				// Generate group content
 				for (int i = 0; i < groupParts.Length; i++)
@@ -127,8 +138,11 @@ namespace UI
 						Sprite sprite = Resources.Load<Sprite>("Images/" + path);
 						Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
 
-						float aspectRatio = sprite.rect.height / sprite.rect.width;
-						if (largestAspectRatio < aspectRatio) largestAspectRatio = aspectRatio;
+						if (!userAspectRatio)
+						{
+							float aspectRatio = sprite.rect.height / sprite.rect.width;
+							if (largestAspectRatio < aspectRatio) largestAspectRatio = aspectRatio;
+						}
 
 						GameObject go = new GameObject("Image_" + path);
 						_temporaryObjects.Push(go);
