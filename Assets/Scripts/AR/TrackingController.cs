@@ -117,6 +117,9 @@ namespace AR
 
 		public void Reset()
 		{
+			_arPlaneManager.SetTrackablesActive(false);
+			_arPointCloudManager.SetTrackablesActive(false);
+			_arTrackedObjectManager.SetTrackablesActive(false);
 			if(_objectPlacement.Reset()) return;
 			if(!_installation) return;
 			Destroy(_installation.gameObject);
