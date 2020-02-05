@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: TrackingOptionsInfo
   m_EditorClassIdentifier: 
   _Header: Wat betekenen deze opties
-  _Body: <b><size=25>Ik ben bij ACTA:</size></b> Kies deze optie als je bij de pomp
+  _Body: '<b><size=17>Ik ben bij ACTA:</size></b> Kies deze optie als je bij de pomp
     installatie bij ACTA staat. De applicatie zal object tracking gebruiken. Dit betekent
     dat informatie op de echte pomp geplaatst zal worden op de contextueel juiste
-    plaatsen.<br><b><size=25>Ik ben elders:</size></b> Kies deze optie als je geen
-    toegang hebt tot de pomp in ACTA. Je zal in je huidige ruimte zelf een virtuele,
-    driedimensionele miniatuur versie van de pomp moeten plaatsen<br><br>Beide opties
-    geven je dezelfde pomp, contextuele informatie en oefening omtrent de opstartprocedure.
+    plaatsen.
+
+    <b><size=17>Ik ben elders:</size></b> Kies deze optie als je geen toegang hebt
+    tot de pomp in ACTA. Je zal in je huidige ruimte zelf een virtuele, driedimensionele
+    miniatuur versie van de pomp moeten plaatsen
+
+
+    Beide opties geven je dezelfde pomp, contextuele informatie en oefening omtrent
+    de opstartprocedure.'
