@@ -18,6 +18,7 @@ namespace UI
 		private void OnButtonClicked()
 		{
 			StateMachine.SetTrigger("ResetRequested");
+			_closeButton.onClick.RemoveListener(OnButtonClicked);
 		}
 	}
 }

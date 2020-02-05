@@ -22,5 +22,9 @@ namespace Core
 				_stateMachine.SetTrigger("ValidationSuccessfull");
 			}
 		}
+
+		private void OnDestroy(){
+			_actionController.ValidationCompleted -= CheckReport;
+		}
 	}
 }
