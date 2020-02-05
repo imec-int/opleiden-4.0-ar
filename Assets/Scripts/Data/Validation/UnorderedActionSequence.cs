@@ -23,6 +23,7 @@ namespace TimeLineValidation
 						// There are duplicates so only allow the first one, the rest will be marked incorrect
 						ActionData firstActionOfType = timelineActions.First(a => a.GetHashCode() == item.GetHashCode());
 						allow = firstActionOfType == item;
+						outValidationInfo.Succeeded = false;
 					}
 					outValidationInfo.PerformedActionsValidationResult.Add(new ValidationResult(allow || _allowDuplicateActions ? Result.Correct : Result.Incorrect, item));
 				}
@@ -37,6 +38,7 @@ namespace TimeLineValidation
 				if (!timelineActions.Contains(item))
 				{
 					outValidationInfo.ForgottenActionsValidationResult.Add(new ValidationResult(Result.Forgotten, item));
+					outValidationInfo.Succeeded = false;
 				}
 			}
 		}

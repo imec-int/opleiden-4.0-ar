@@ -97,11 +97,13 @@ namespace Core
 			report.RequiredActions = 0;
 			report.PerformedActionsValidationResult = new List<ValidationResult>();
 			report.ForgottenActionsValidationResult = new List<ValidationResult>();
+			report.Succeeded = true;
 			foreach (var validationInfo in validationReports)
 			{
 				report.RequiredActions += validationInfo.UsedRuleSet.ActionsCount;
 				report.PerformedActionsValidationResult.AddRange(validationInfo.PerformedActionsValidationResult);
 				report.ForgottenActionsValidationResult.AddRange(validationInfo.ForgottenActionsValidationResult);
+				report.Succeeded &= validationInfo.Succeeded;
 			}
 
 			return report;
@@ -110,6 +112,7 @@ namespace Core
 
 	public struct ValidationStageReport
 	{
+		public bool Succeeded;
 		public uint RequiredActions;
 		public List<ValidationResult> PerformedActionsValidationResult;
 		public List<ValidationResult> ForgottenActionsValidationResult;
