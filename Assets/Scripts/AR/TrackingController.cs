@@ -92,6 +92,7 @@ namespace AR
 			_objectPlacement.enabled = true;
 			_arPlaneManager.enabled = true;
 			_arPointCloudManager.enabled = true;
+			_arPointCloudManager.SetTrackablesActive(true);
 		}
 
 		private void EnableObjectTracking()
