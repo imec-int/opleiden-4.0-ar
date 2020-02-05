@@ -84,18 +84,23 @@ namespace UI
 				groupParts = groupParts.Where((part) => !string.IsNullOrEmpty(part.Trim(markupChars))).ToArray();
 
 				int amountOfIconsPerRow = Math.Min(groupParts.Length, maxColumnCount);
+
+				float largestAspectRatio = .5f;
+				float defaultWidth = 0;
+
+				GridLayoutGroup layoutGroup = null;
 				// Create a new parent if needed
 				if (group.StartsWith("{"))
 				{
 					// Set up the parent layout element
 					GameObject imageParent = new GameObject("layout_grid");
-					imageParent.transform.SetParent(contentParent,false);
+					imageParent.transform.SetParent(contentParent, false);
 					_temporaryObjects.Push(imageParent);
 					// Set up layouting
-					var layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
-					float defaultWidth = groupParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
+					layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
+
+					defaultWidth = groupParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
 					defaultWidth -= spacing.x * amountOfIconsPerRow;
-					layoutGroup.cellSize = new Vector2(defaultWidth, defaultWidth * 0.5f);
 					layoutGroup.spacing = spacing;
 					layoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
 					layoutGroup.constraintCount = amountOfIconsPerRow;
@@ -121,6 +126,10 @@ namespace UI
 						// Load the sprite from resources and add it as an image to the body
 						Sprite sprite = Resources.Load<Sprite>("Images/" + path);
 						Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
+
+						float aspectRatio = sprite.rect.height / sprite.rect.width;
+						if (largestAspectRatio < aspectRatio) largestAspectRatio = aspectRatio;
+
 						GameObject go = new GameObject("Image_" + path);
 						_temporaryObjects.Push(go);
 						go.transform.SetParent(groupParent.transform, false);
@@ -145,6 +154,10 @@ namespace UI
 						_temporaryObjects.Push(bodyPart.gameObject);
 						bodyPart.text = groupParts[i];
 					}
+				}
+				if (layoutGroup != null)
+				{
+					layoutGroup.cellSize = new Vector2(defaultWidth, defaultWidth * largestAspectRatio);
 				}
 			}
 
