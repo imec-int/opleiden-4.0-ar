@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-	public class ValidationComplete : InfoPanelFooter
+	public class ReportFooter : InfoPanelFooter
 	{
 		[SerializeField]
 		private Button _closeButton;

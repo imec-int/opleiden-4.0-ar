@@ -1297,4 +1297,4 @@ MonoBehaviour:
   _showCloseBtn: 0
   _tapToClose: 0
   _additionalPrefabs:
-  - {fileID: 7229694482017413394, guid: c2d926b7b9e7abfdab7a11e0892890dc, type: 3}
+  - {fileID: 6340087525891204067, guid: 8e18847faf88f40dbb5fa8697d234858, type: 3}

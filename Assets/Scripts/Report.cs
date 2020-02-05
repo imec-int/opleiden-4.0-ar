@@ -17,7 +17,7 @@ namespace Core
 
 		private void CheckReport(ValidationStageReport stageReport)
 		{
-			if (!stageReport.Succeeded)
+			if (stageReport.Succeeded)
 			{
 				_stateMachine.SetTrigger("ValidationSuccessfull");
 			}
