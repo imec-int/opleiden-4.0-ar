@@ -23,7 +23,8 @@ namespace TimeLineValidation
 			{
 				PerformedActionsValidationResult = new List<ValidationResult>(),
 				ForgottenActionsValidationResult = new List<ValidationResult>(),
-				UsedRuleSet = this
+				UsedRuleSet = this,
+				Succeeded = true
 			};
 		}
 

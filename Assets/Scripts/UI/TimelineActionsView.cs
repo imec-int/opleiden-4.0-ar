@@ -63,7 +63,7 @@ namespace UI
 		private void OnEnable()
 		{
 			OnRectTransformChanged();
-
+			TopInfoRibbon.Instance.SetLabelText("Selecteer alle acties die nodig zijn bij inspectie van de pomp voor opstart");
 		}
 
 		public void OnRectTransformChanged()
