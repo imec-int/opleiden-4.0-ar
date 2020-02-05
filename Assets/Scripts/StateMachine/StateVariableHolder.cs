@@ -12,7 +12,8 @@ namespace StateMachine
 		HighlightContainer,
 		TimelineTopper,
 		ARModeSelectionMenu,
-		TopInfoRibbon
+		TopInfoRibbon,
+		BackButton,
 	}
 
 	public enum Component
