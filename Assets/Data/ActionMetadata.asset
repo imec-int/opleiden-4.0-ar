@@ -87,7 +87,7 @@ MonoBehaviour:
     - Name: Open
       Icon: 
     - Name: Sluit
-      Icon: 
+      Icon: \ue903
     - Name: Check
       Icon: 
     - Name: Check Blindflens
