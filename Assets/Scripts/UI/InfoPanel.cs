@@ -74,7 +74,7 @@ namespace UI
 			Transform contentParent = _bodyLabel.transform.parent;
 			// some 'magic' numbers
 			int maxColumnCount = 3;
-			Vector2 spacing = new Vector2(20, 5);
+			Vector2 spacing = new Vector2(20, 20);
 			foreach (string group in groups)
 			{
 				// Define parents, etc...
@@ -101,7 +101,7 @@ namespace UI
 					layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
 
 					defaultWidth = groupParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
-					defaultWidth -= spacing.x * amountOfIconsPerRow;
+					defaultWidth -= spacing.x;
 					layoutGroup.spacing = spacing;
 					layoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
 					layoutGroup.constraintCount = amountOfIconsPerRow;
@@ -114,7 +114,7 @@ namespace UI
 						userAspectRatio = true;
 						float.TryParse(matchAspectRatio.Value.Substring(2), out largestAspectRatio);
 						string lastGroupPart = groupParts[groupParts.Length - 1];
-						groupParts[groupParts.Length - 1] = lastGroupPart.Substring(0, lastGroupPart.Length - matchAspectRatio.Value.Length);
+						groupParts[groupParts.Length - 1] = lastGroupPart.Substring(0, lastGroupPart.Length - matchAspectRatio.Value.Length -1);
 					}
 
 				}
@@ -161,7 +161,7 @@ namespace UI
 							if (height > 0) layout.preferredHeight = height;
 						}
 					}
-					else // Text
+					else if(groupParts[i] != "")// Text
 					{
 						TextMeshProUGUI bodyPart = Instantiate(_bodyLabel.gameObject, groupParent).GetComponent<TextMeshProUGUI>();
 						bodyPart.gameObject.SetActive(true);
