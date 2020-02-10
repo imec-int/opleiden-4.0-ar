@@ -41,21 +41,21 @@ MonoBehaviour:
     - Name: Error
       Icon: E037
     - Name: Pomp
-      Icon: E039
+      Icon: F1FA
     - Name: Ventiel
-      Icon: E40D
+      Icon: e901
     - Name: Oliepeil
-      Icon: E412
+      Icon: F3C7
     - Name: Drukmeter
-      Icon: E406
+      Icon: F873
     - Name: Beschermingskap
-      Icon: E406
+      Icon: FA82
     - Name: Veiligheidsschakelaar
-      Icon: E406
+      Icon: F97D
     - Name: Ventilatierooster
-      Icon: E406
+      Icon: F210
     - Name: Driewegklep
-      Icon: E406
+      Icon: e902
   _ActionOperationsInfo:
     reorderableList:
       canAdd: 1
@@ -83,12 +83,22 @@ MonoBehaviour:
     _keys: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
     _values:
     - Name: Richting Blind
+      Icon: 
     - Name: Open
+      Icon: 
     - Name: Sluit
+      Icon: 
     - Name: Check
+      Icon: 
     - Name: Check Blindflens
+      Icon: \ue900
     - Name: Aan
+      Icon: 
     - Name: Uit
+      Icon: 
     - Name: Richting Pomp
+      Icon: 
     - Name: Richting Blind
+      Icon: 
     - Name: Identificeer
+      Icon: 

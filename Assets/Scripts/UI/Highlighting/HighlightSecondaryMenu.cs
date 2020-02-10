@@ -37,7 +37,7 @@ namespace UI.Highlighting
 
 			// info button
 			ActionWidget infoElem = CreateNewActionElement();
-			infoElem.Setup("Info", "\uE887");
+			infoElem.Setup("Info", "\uF2D7");
 			infoElem.AssociatedButton.onClick.AddListener(infoButtonListener);
 		}
 

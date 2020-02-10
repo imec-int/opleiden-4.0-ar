@@ -24,8 +24,11 @@ namespace UI
 
 		public void Setup(Operation operation, PartType partType)
 		{
+			string actionIcon = _ActionMetadata.ActionOperationsInfo[operation].Icon;
+			actionIcon = actionIcon != "" ? actionIcon : _ActionMetadata.ActionPartsInfo[partType].Icon;
 			Setup(_ActionMetadata.ActionOperationsInfo[operation].Name + " " + _ActionMetadata.ActionPartsInfo[partType].Name,
-			 _ActionMetadata.ActionPartsInfo[partType].Icon);
+			actionIcon);
+
 		}
 
 		public void Setup(string label, string icon)
