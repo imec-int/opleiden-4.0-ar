@@ -2,6 +2,7 @@
 using UnityEngine;
 using Data;
 using Core;
+using System.Text;
 
 namespace UI.Highlighting
 {
@@ -90,13 +91,13 @@ namespace UI.Highlighting
 			_consequenceObjects.Clear();
 		}
 
-		private void SpawnConsequence(Transform transform, GameObject prefab)
+		private void SpawnConsequenceVisualisation(Transform transform, GameObject prefab)
 		{
 			if(!prefab) return;
 			_consequenceObjects.Add(Instantiate(prefab,transform,true));
 		}
 
-		private void TriggerConsequences(ValidationStageReport report)
+		private void HandleConsequences(ValidationStageReport report)
 		{
 			foreach (var validationResult in report.ForgottenActionsValidationResult)
 			{
@@ -105,26 +106,25 @@ namespace UI.Highlighting
 				{
 					if(consequenceData.AssociatedOperation == Operation.None || consequenceData.AssociatedOperation == validationResult.Action.Operation)
 					{
-						SpawnConsequence(anchor.transform, consequenceData.VisualizationPrefab);
+						SpawnConsequenceVisualisation(anchor.transform, consequenceData.VisualizationPrefab);
 					}
 				}
 			}
 		}
 
-		/*
 		private void GetHighlightInfo(HighlightAnchor anchor, out string header, out string body)
 		{
-			header = anchor.Info.Header;
+			StringBuilder strBuilder = new StringBuilder(anchor.Info.Body);
 			if(_handlingConsequences)
 			{
-				// body = anchor.Info.Body + anchor.Consequences
+				foreach (ConsequenceData item in anchor.Consequences)
+				{
+					strBuilder.AppendFormat("<br>{0}", item.Body);
+				}
 			}
-			else
-			{
-				body = anchor.Info.Body;
-			}
+			header = anchor.Info.Header;
+			body = strBuilder.ToString();
 		}
-		*/
 		#endregion
 
 		#region Callbacks
@@ -143,8 +143,8 @@ namespace UI.Highlighting
 		private void OnInfoPanelRequested(HighlightAnchor anchor)
 		{
 			SetHighlightsVisibility(false);
-			_uiInfoPanel.Show(anchor.Info);
-			// TODO: append consequence info
+			GetHighlightInfo(anchor, out string header, out string body);
+			_uiInfoPanel.Show(header,body);
 			_uiInfoPanel.OnClose += OnInfoPanelClosed;
 		}
 
@@ -158,7 +158,7 @@ namespace UI.Highlighting
 		{
 			_handlingConsequences = true;
 			ClearConsequences();
-			TriggerConsequences(report);
+			HandleConsequences(report);
 		}
 		#endregion
 
