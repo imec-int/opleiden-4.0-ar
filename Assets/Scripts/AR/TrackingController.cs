@@ -27,6 +27,10 @@ namespace AR
 		[SerializeField]
 		private GameObject _installationPrefab;
 
+		[SerializeField]
+		private ARSession _arSession;
+
+
 		public TrackingType TrackingType { get; set; }
 
 		private GameObject _installation;
@@ -34,6 +38,7 @@ namespace AR
 		protected void Awake()
 		{
 			Assert.IsNotNull(_animator, "Animator is not filled in.");
+			Assert.IsNotNull(_arSession, "AR Session is not filled in");
 
 			_arPlaneManager = GetComponent<ARPlaneManager>();
 			_arPointCloudManager = GetComponent<ARPointCloudManager>();
@@ -123,6 +128,7 @@ namespace AR
 			_arPlaneManager.SetTrackablesActive(false);
 			_arPointCloudManager.SetTrackablesActive(false);
 			_arTrackedObjectManager.SetTrackablesActive(false);
+			_arSession.Reset();
 			if(_objectPlacement.Reset()) return;
 			if(!_installation) return;
 			Destroy(_installation.gameObject);
