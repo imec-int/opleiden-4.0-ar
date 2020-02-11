@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -35,9 +36,22 @@ namespace AR
 			_pointCloudManager = GetComponent<ARPointCloudManager>();
 		}
 
+		private bool PointingAtGameobject()
+		{
+			foreach (Touch item in Input.touches)
+			{
+				if (EventSystem.current.IsPointerOverGameObject(item.fingerId))
+					return true;
+			}
+			return false;
+		}
+
 		protected void Update()
 		{
-			if (Input.touchCount == 0)
+			if (Input.touchCount == 0 || PointingAtGameobject())
+				return;
+
+				if (Input.GetTouch(0).phase != TouchPhase.Began )
 				return;
 
 			List<ARRaycastHit> hits = new List<ARRaycastHit>();
