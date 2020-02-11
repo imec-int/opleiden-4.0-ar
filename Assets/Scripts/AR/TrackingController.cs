@@ -71,6 +71,8 @@ namespace AR
 		{
 			_arTrackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
 
+			Reset();
+
 			_arTrackedObjectManager.enabled = false;
 			_objectPlacement.enabled = false;
 			_arPlaneManager.enabled = false;
