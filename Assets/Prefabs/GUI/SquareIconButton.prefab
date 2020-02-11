@@ -291,34 +291,28 @@ PrefabInstance:
     - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 9df9c1df493303140a571bc29573f4e1,
-        type: 2}
     - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -4574801101015592294, guid: 9df9c1df493303140a571bc29573f4e1,
+      objectReference: {fileID: 7147056259915160368, guid: 24232d786b58b7020b99a0535846f96b,
         type: 2}
     - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
@@ -380,6 +374,12 @@ PrefabInstance:
       propertyPath: m_enableAutoSizing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1932657254955673187, guid: c503c050ea11e4749af64da76a240371,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 24232d786b58b7020b99a0535846f96b,
+        type: 2}
     - target: {fileID: 2052182125791454552, guid: c503c050ea11e4749af64da76a240371,
         type: 3}
       propertyPath: m_CullTransparentMesh
