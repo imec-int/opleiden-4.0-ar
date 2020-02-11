@@ -74,7 +74,7 @@ namespace UI
 			Transform contentParent = _bodyLabel.transform.parent;
 			// some 'magic' numbers
 			int maxColumnCount = 3;
-			Vector2 spacing = new Vector2(20, 5);
+			Vector2 spacing = new Vector2(20, 20);
 			foreach (string group in groups)
 			{
 				// Define parents, etc...
@@ -84,23 +84,39 @@ namespace UI
 				groupParts = groupParts.Where((part) => !string.IsNullOrEmpty(part.Trim(markupChars))).ToArray();
 
 				int amountOfIconsPerRow = Math.Min(groupParts.Length, maxColumnCount);
+
+				float largestAspectRatio = .5f;
+				bool userAspectRatio = false;
+				float defaultWidth = 0;
+
+				GridLayoutGroup layoutGroup = null;
 				// Create a new parent if needed
 				if (group.StartsWith("{"))
 				{
 					// Set up the parent layout element
 					GameObject imageParent = new GameObject("layout_grid");
-					imageParent.transform.SetParent(contentParent,false);
+					imageParent.transform.SetParent(contentParent, false);
 					_temporaryObjects.Push(imageParent);
 					// Set up layouting
-					var layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
-					float defaultWidth = groupParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
-					defaultWidth -= spacing.x * amountOfIconsPerRow;
-					layoutGroup.cellSize = new Vector2(defaultWidth, defaultWidth * 0.5f);
+					layoutGroup = imageParent.AddComponent<GridLayoutGroup>();
+
+					defaultWidth = groupParent.GetComponent<RectTransform>().rect.width / amountOfIconsPerRow;
+					defaultWidth -= spacing.x;
 					layoutGroup.spacing = spacing;
 					layoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
 					layoutGroup.constraintCount = amountOfIconsPerRow;
 					// replace group parent
 					groupParent = imageParent.transform;
+
+					Match matchAspectRatio = Regex.Match(group, " =[\\w.]*");
+					if (matchAspectRatio.Success)
+					{
+						userAspectRatio = true;
+						float.TryParse(matchAspectRatio.Value.Substring(2), out largestAspectRatio);
+						string lastGroupPart = groupParts[groupParts.Length - 1];
+						groupParts[groupParts.Length - 1] = lastGroupPart.Substring(0, lastGroupPart.Length - matchAspectRatio.Value.Length -1);
+					}
+
 				}
 				// Generate group content
 				for (int i = 0; i < groupParts.Length; i++)
@@ -121,6 +137,13 @@ namespace UI
 						// Load the sprite from resources and add it as an image to the body
 						Sprite sprite = Resources.Load<Sprite>("Images/" + path);
 						Assert.IsNotNull(sprite, $"Sprite at {path} was not found ");
+
+						if (!userAspectRatio)
+						{
+							float aspectRatio = sprite.rect.height / sprite.rect.width;
+							if (largestAspectRatio < aspectRatio) largestAspectRatio = aspectRatio;
+						}
+
 						GameObject go = new GameObject("Image_" + path);
 						_temporaryObjects.Push(go);
 						go.transform.SetParent(groupParent.transform, false);
@@ -138,13 +161,17 @@ namespace UI
 							if (height > 0) layout.preferredHeight = height;
 						}
 					}
-					else // Text
+					else if(groupParts[i] != "")// Text
 					{
 						TextMeshProUGUI bodyPart = Instantiate(_bodyLabel.gameObject, groupParent).GetComponent<TextMeshProUGUI>();
 						bodyPart.gameObject.SetActive(true);
 						_temporaryObjects.Push(bodyPart.gameObject);
 						bodyPart.text = groupParts[i];
 					}
+				}
+				if (layoutGroup != null)
+				{
+					layoutGroup.cellSize = new Vector2(defaultWidth, defaultWidth * largestAspectRatio);
 				}
 			}
 
