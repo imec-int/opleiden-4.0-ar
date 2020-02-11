@@ -19,8 +19,16 @@ namespace UI.Highlighting
 		private ActionController _actionController = null;
 
 		private List<Highlight> _uiHighlightInstanceList = new List<Highlight>();
+		private HighlightAnchor[] _anchors = null;
+		private List<GameObject> _consequenceObjects = new List<GameObject>();
+
+		private bool _handlingConsequences = false;
 
 		#region Monobehaviour
+		protected void Awake()
+		{
+			_actionController.ValidationCompleted += OnValidationCompleted;
+		}
 		protected void OnEnable()
 		{
 			_3DModel = GameObject.FindGameObjectWithTag("Installation");
@@ -29,23 +37,12 @@ namespace UI.Highlighting
 		#endregion
 
 		#region Interface
-		public void Reset(GameObject newmodel = null)
+		public void Reset()
 		{
-			// Clean up
-			foreach (Highlight highlight in _uiHighlightInstanceList)
-			{
-				highlight.OnExpanded -= OnHighlightSelected;
-				Destroy(highlight.gameObject);
-			}
-			_uiHighlightInstanceList.Clear();
-
-			if (newmodel)
-			{
-				PlaceHighlights(newmodel);
-				_3DModel = newmodel;
-			}
-			else
-				PlaceHighlights(_3DModel);
+			ClearHighlights();
+			ClearConsequences();
+			_handlingConsequences = false;
+			PlaceHighlights(_3DModel);
 		}
 
 		// Enables/Disables visibility of all the highlights
@@ -59,12 +56,22 @@ namespace UI.Highlighting
 		#endregion
 
 		#region Methods
+		private void ClearHighlights()
+		{
+			foreach (Highlight highlight in _uiHighlightInstanceList)
+			{
+				highlight.OnExpanded -= OnHighlightSelected;
+				Destroy(highlight.gameObject);
+			}
+			_uiHighlightInstanceList.Clear();
+		}
+
 		private void PlaceHighlights(GameObject model)
 		{
-			HighlightAnchor[] anchors = model.GetComponentsInChildren<HighlightAnchor>();
-			Debug.Assert(anchors.Length > 0, $"Failed to retrieve anchors for the provided gameobject {model.name}");
+			_anchors = model.GetComponentsInChildren<HighlightAnchor>();
+			Debug.Assert(_anchors.Length > 0, $"Failed to retrieve anchors for the provided gameobject {model.name}");
 
-			foreach (HighlightAnchor anchor in anchors)
+			foreach (HighlightAnchor anchor in _anchors)
 			{
 				Highlight newObj = Instantiate(_uiHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0), this.transform);
 				newObj.Setup(anchor, OnInfoPanelRequested, _actionController);
@@ -73,6 +80,51 @@ namespace UI.Highlighting
 				newObj.OnExpanded += OnHighlightSelected;
 			}
 		}
+
+		private void ClearConsequences()
+		{
+			foreach (GameObject consequence in _consequenceObjects)
+			{
+					Destroy(consequence);
+			}
+			_consequenceObjects.Clear();
+		}
+
+		private void SpawnConsequence(Transform transform, GameObject prefab)
+		{
+			if(!prefab) return;
+			_consequenceObjects.Add(Instantiate(prefab,transform,true));
+		}
+
+		private void TriggerConsequences(ValidationStageReport report)
+		{
+			foreach (var validationResult in report.ForgottenActionsValidationResult)
+			{
+				HighlightAnchor anchor = validationResult.Action.Part.GetComponent<HighlightAnchor>();
+				foreach (ConsequenceData consequenceData in anchor.Consequences)
+				{
+					if(consequenceData.AssociatedOperation == Operation.None || consequenceData.AssociatedOperation == validationResult.Action.Operation)
+					{
+						SpawnConsequence(anchor.transform, consequenceData.VisualizationPrefab);
+					}
+				}
+			}
+		}
+
+		/*
+		private void GetHighlightInfo(HighlightAnchor anchor, out string header, out string body)
+		{
+			header = anchor.Info.Header;
+			if(_handlingConsequences)
+			{
+				// body = anchor.Info.Body + anchor.Consequences
+			}
+			else
+			{
+				body = anchor.Info.Body;
+			}
+		}
+		*/
 		#endregion
 
 		#region Callbacks
@@ -88,10 +140,11 @@ namespace UI.Highlighting
 			}
 		}
 
-		private void OnInfoPanelRequested(HighlightInfo info)
+		private void OnInfoPanelRequested(HighlightAnchor anchor)
 		{
 			SetHighlightsVisibility(false);
-			_uiInfoPanel.Show(info);
+			_uiInfoPanel.Show(anchor.Info);
+			// TODO: append consequence info
 			_uiInfoPanel.OnClose += OnInfoPanelClosed;
 		}
 
@@ -99,6 +152,13 @@ namespace UI.Highlighting
 		{
 			SetHighlightsVisibility(true);
 			_uiInfoPanel.OnClose -= OnInfoPanelClosed;
+		}
+
+		private void OnValidationCompleted(ValidationStageReport report)
+		{
+			_handlingConsequences = true;
+			ClearConsequences();
+			TriggerConsequences(report);
 		}
 		#endregion
 
