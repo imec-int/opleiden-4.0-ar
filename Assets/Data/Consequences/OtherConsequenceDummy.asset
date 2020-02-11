@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba7ae4eae58134c9cb0a028451a82f, type: 3}
   m_Name: OtherConsequenceDummy
   m_EditorClassIdentifier: 
-  _extraInfo: 
+  _extraInfo: Oh no, you forgot to start
   _visualizationPrefab: {fileID: 0}
-  _associatedOperation: 0
+  _associatedOperation: 5

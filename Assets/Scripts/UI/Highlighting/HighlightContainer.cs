@@ -102,7 +102,7 @@ namespace UI.Highlighting
 			foreach (var validationResult in report.ForgottenActionsValidationResult)
 			{
 				HighlightAnchor anchor = validationResult.Action.Part.GetComponent<HighlightAnchor>();
-				foreach (ConsequenceData consequenceData in anchor.Consequences)
+				foreach (ConsequenceData consequenceData in anchor?.Consequences)
 				{
 					if(consequenceData.AssociatedOperation == Operation.None || consequenceData.AssociatedOperation == validationResult.Action.Operation)
 					{
