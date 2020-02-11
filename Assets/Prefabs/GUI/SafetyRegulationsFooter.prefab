@@ -269,10 +269,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \ue876
+  m_text: \uF12C
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9df9c1df493303140a571bc29573f4e1, type: 2}
-  m_sharedMaterial: {fileID: -4574801101015592294, guid: 9df9c1df493303140a571bc29573f4e1,
+  m_fontAsset: {fileID: 11400000, guid: 24232d786b58b7020b99a0535846f96b, type: 2}
+  m_sharedMaterial: {fileID: 7147056259915160368, guid: 24232d786b58b7020b99a0535846f96b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
