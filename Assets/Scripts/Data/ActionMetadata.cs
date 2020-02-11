@@ -29,6 +29,6 @@ namespace Data
 	[Serializable]
 	public struct ActionOperationInfo
 	{
-		public string Name;
+		public string Name, Icon;
 	}
 }

@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 5938141914297215837}
   - component: {fileID: 4490747427049819338}
   - component: {fileID: 3139981916283351967}
+  - component: {fileID: 1528003607}
   m_Layer: 5
   m_Name: ThreeDotsWidget
   m_TagString: Untagged
@@ -197,10 +198,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uE5D4
+  m_text: \uF1D9
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9df9c1df493303140a571bc29573f4e1, type: 2}
-  m_sharedMaterial: {fileID: -4574801101015592294, guid: 9df9c1df493303140a571bc29573f4e1,
+  m_fontAsset: {fileID: 11400000, guid: 24232d786b58b7020b99a0535846f96b, type: 2}
+  m_sharedMaterial: {fileID: 7147056259915160368, guid: 24232d786b58b7020b99a0535846f96b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -377,6 +378,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &1528003607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824291131418954440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 1
 --- !u!1 &3529525427207247796
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4f64593dcb7db0f409664c5f58eeae41
+guid: a4928843135a5154eb947c3f606d160b
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Material Icons
+  fontName: icomoon
   fontNames:
-  - Material Icons
+  - icomoon
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
