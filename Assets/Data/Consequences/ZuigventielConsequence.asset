@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42ba7ae4eae58134c9cb0a028451a82f, type: 3}
+  m_Name: ZuigventielConsequence
+  m_EditorClassIdentifier: 
+  _extraInfo: Opgelet! Controleer voor het opstarten van de pomp er zeker voor dat
+    het zuigventiel geopend is. Pompen dienen gestart te worden met geopend zuigzijdeventiel
+    omdat ze niet droog (= zonder vloeistof) mogen werken. Een pomp die gestart wordt
+    met gesloten zuigzijde, zal na openen van de perszijde beginnen caviteren, wat
+    schade aan de pomp veroorzaakt.
+  _visualizationPrefab: {fileID: 0}
+  _associatedOperation: 0
