@@ -94,7 +94,7 @@ namespace UI.Highlighting
 		private void SpawnConsequenceVisualisation(Transform transform, GameObject prefab)
 		{
 			if(!prefab) return;
-			_consequenceObjects.Add(Instantiate(prefab,transform,true));
+			_consequenceObjects.Add(Instantiate(prefab,transform));
 		}
 
 		private void HandleConsequences(ValidationStageReport report)
