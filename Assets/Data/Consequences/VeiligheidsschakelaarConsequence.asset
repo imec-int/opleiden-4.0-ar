@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba7ae4eae58134c9cb0a028451a82f, type: 3}
   m_Name: VeiligheidsschakelaarConsequence
   m_EditorClassIdentifier: 
-  _extraInfo: Opgelet! Controleer zeker of de veiligheidsschakelaar aan staat.<br>De
-    veiligheidsschakelaar zorgt voor een minimale beveiliging dat de pomp niet ongewild
-    aanzet. Bij werken aan de pomp wordt hij afgezet (stand 0) en op veel bedrijven
-    zelfs gelockt met (een) hangslot(en) = Lock Out, Tag Out of LOTO. Schakelaar staat
-    op 1 terwijl iemand bezig is aan de persleiding verderop. Iemand kan de pomp starten
-    in het idee dat alles in orde is. De persoon verderop kan vergiftigd of verbrand
-    worden door product dat dan ongewild uitstroomt. Schakelaar uit, dan start te
-    pomp niet
+  _extraInfo: <b><size=16>Opgelet!</size></b><br>Controleer zeker of de veiligheidsschakelaar
+    aan staat.<br>De veiligheidsschakelaar zorgt voor een minimale beveiliging dat
+    de pomp niet ongewild aanzet. Bij werken aan de pomp wordt hij afgezet (stand
+    0) en op veel bedrijven zelfs gelockt met (een) hangslot(en) = Lock Out, Tag Out
+    of LOTO. Schakelaar staat op 1 terwijl iemand bezig is aan de persleiding verderop.
+    Iemand kan de pomp starten in het idee dat alles in orde is. De persoon verderop
+    kan vergiftigd of verbrand worden door product dat dan ongewild uitstroomt. Schakelaar
+    uit, dan start te pomp niet
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0

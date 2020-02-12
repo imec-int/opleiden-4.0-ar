@@ -119,7 +119,7 @@ namespace UI.Highlighting
 			{
 				foreach (ConsequenceData item in anchor.Consequences)
 				{
-					strBuilder.AppendFormat("<br>{0}", item.Body);
+					strBuilder.AppendFormat("<br><br>{0}", item.Body);
 				}
 			}
 			header = anchor.Info.Header;

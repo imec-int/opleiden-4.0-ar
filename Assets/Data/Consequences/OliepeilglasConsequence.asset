@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba7ae4eae58134c9cb0a028451a82f, type: 3}
   m_Name: OliepeilglasConsequence
   m_EditorClassIdentifier: 
-  _extraInfo: Opgelet! Je bent het oliepeil vergeten controleren! Indien de lagers
-    geen of onvoldoende smering krijgen geraken ze oververhit waardoor de lagers onherstelbaar
-    beschadigd kunnen worden.
+  _extraInfo: <b><size=16>Opgelet!</size></b><br>Je bent het oliepeil vergeten controleren!
+    Indien de lagers geen of onvoldoende smering krijgen geraken ze oververhit waardoor
+    de lagers onherstelbaar beschadigd kunnen worden.
   _visualizationPrefab: {fileID: 7186871971783637161, guid: 1b6f1d2e96d1ad94180d055a5ec48e2a,
     type: 3}
   _associatedOperation: 0

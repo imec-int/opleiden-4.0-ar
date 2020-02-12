@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba7ae4eae58134c9cb0a028451a82f, type: 3}
   m_Name: ZuigventielConsequence
   m_EditorClassIdentifier: 
-  _extraInfo: Opgelet! Controleer voor het opstarten van de pomp er zeker voor dat
-    het zuigventiel geopend is. Pompen dienen gestart te worden met geopend zuigzijdeventiel
-    omdat ze niet droog (= zonder vloeistof) mogen werken. Een pomp die gestart wordt
-    met gesloten zuigzijde, zal na openen van de perszijde beginnen caviteren, wat
-    schade aan de pomp veroorzaakt.
+  _extraInfo: <b><size=16>Opgelet!</size></b><br>Controleer voor het opstarten van
+    de pomp er zeker voor dat het zuigventiel geopend is. Pompen dienen gestart te
+    worden met geopend zuigzijdeventiel omdat ze niet droog (= zonder vloeistof) mogen
+    werken. Een pomp die gestart wordt met gesloten zuigzijde, zal na openen van de
+    perszijde beginnen caviteren, wat schade aan de pomp veroorzaakt.
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0

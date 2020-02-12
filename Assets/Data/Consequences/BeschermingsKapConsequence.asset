@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba7ae4eae58134c9cb0a028451a82f, type: 3}
   m_Name: BeschermingsKapConsequence
   m_EditorClassIdentifier: 
-  _extraInfo: "Opgelet! Vergeet niet de montage van de beschermingskap te controleren.
-    De asverbinding tussen de motor en de pomp is een draaiend onderdeel dat moet
-    afgeschermd zijn tegen aanraking. Het grootste gevaar hierbij is dat lichaamsdelen
-    of kledij (mouwen, broekspijpen,...) kunnen gegrepen worden, waardoor ernstige
-    kwetsuren kunnen opgelopen worden.\r\n<br><foto van een niet afgedekte pomp>"
+  _extraInfo: "<b><size=16>Opgelet!</size></b><br>Vergeet niet de montage van de beschermingskap
+    te controleren. De asverbinding tussen de motor en de pomp is een draaiend onderdeel
+    dat moet afgeschermd zijn tegen aanraking. Het grootste gevaar hierbij is dat
+    lichaamsdelen of kledij (mouwen, broekspijpen,...) kunnen gegrepen worden, waardoor
+    ernstige kwetsuren kunnen opgelopen worden.\r\n<br><foto van een niet afgedekte
+    pomp>"
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0

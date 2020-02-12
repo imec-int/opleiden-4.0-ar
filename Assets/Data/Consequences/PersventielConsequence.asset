@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba7ae4eae58134c9cb0a028451a82f, type: 3}
   m_Name: PersventielConsequence
   m_EditorClassIdentifier: 
-  _extraInfo: "Opgelet! De standaardprocedure is dat een centrifugaalpomp gestart
-    wordt met gesloten perszijde. Vergeet dus zeker niet te controleren of deze gesloten
-    is. Reden is dat de motor<br>(1) meer stroom trekt zoveel te meer debiet er door
-    de pomp gaat<br>(2) dat bij het starten een korte tijd een piekstroom optreedt,
-    4 tot 5 maal de normale stroom.<br>Beide fenomenen gecombineerd zorgen voor een
-    veel te hoge stroom door de motor. Bij het starten met geopende perszijde kan
-    de pomp uitvallen over de temperatuurbeveiliging van de motor.<br>\r\nVergeet
-    wel na het opstarten van de pomp het persventiel niet terug open te zetten"
+  _extraInfo: "<b><size=16>Opgelet!</size></b><br>De standaardprocedure is dat een
+    centrifugaalpomp gestart wordt met gesloten perszijde. Vergeet dus zeker niet
+    te controleren of deze gesloten is. Reden is dat de motor<br>(1) meer stroom trekt
+    zoveel te meer debiet er door de pomp gaat<br>(2) dat bij het starten een korte
+    tijd een piekstroom optreedt, 4 tot 5 maal de normale stroom.<br>Beide fenomenen
+    gecombineerd zorgen voor een veel te hoge stroom door de motor. Bij het starten
+    met geopende perszijde kan de pomp uitvallen over de temperatuurbeveiliging van
+    de motor.<br>\r\nVergeet wel na het opstarten van de pomp het persventiel niet
+    terug open te zetten"
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0
