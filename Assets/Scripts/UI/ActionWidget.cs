@@ -34,6 +34,11 @@ namespace UI
 		public void Setup(string label, string icon)
 		{
 			_Label.text = label;
+			SetIcon(icon);
+		}
+
+		public void SetIcon(string icon)
+		{
 			_Icon.text = icon.ToUnicodeForTMPro();
 		}
 	}

@@ -2,6 +2,9 @@
 using UnityEngine;
 using Data;
 using Core;
+using System.Text;
+using System.Linq;
+using TimeLineValidation;
 
 namespace UI.Highlighting
 {
@@ -19,8 +22,16 @@ namespace UI.Highlighting
 		private ActionController _actionController = null;
 
 		private List<Highlight> _uiHighlightInstanceList = new List<Highlight>();
+		private HighlightAnchor[] _anchors = null;
+		private List<GameObject> _consequenceObjects = new List<GameObject>();
+
+		private bool _handlingConsequences = false;
 
 		#region Monobehaviour
+		protected void Awake()
+		{
+			_actionController.ValidationCompleted += OnValidationCompleted;
+		}
 		protected void OnEnable()
 		{
 			_3DModel = GameObject.FindGameObjectWithTag("Installation");
@@ -29,23 +40,12 @@ namespace UI.Highlighting
 		#endregion
 
 		#region Interface
-		public void Reset(GameObject newmodel = null)
+		public void Reset()
 		{
-			// Clean up
-			foreach (Highlight highlight in _uiHighlightInstanceList)
-			{
-				highlight.OnExpanded -= OnHighlightSelected;
-				Destroy(highlight.gameObject);
-			}
-			_uiHighlightInstanceList.Clear();
-
-			if (newmodel)
-			{
-				PlaceHighlights(newmodel);
-				_3DModel = newmodel;
-			}
-			else
-				PlaceHighlights(_3DModel);
+			ClearHighlights();
+			ClearConsequences();
+			_handlingConsequences = false;
+			PlaceHighlights(_3DModel);
 		}
 
 		// Enables/Disables visibility of all the highlights
@@ -59,12 +59,22 @@ namespace UI.Highlighting
 		#endregion
 
 		#region Methods
+		private void ClearHighlights()
+		{
+			foreach (Highlight highlight in _uiHighlightInstanceList)
+			{
+				highlight.OnExpanded -= OnHighlightSelected;
+				Destroy(highlight.gameObject);
+			}
+			_uiHighlightInstanceList.Clear();
+		}
+
 		private void PlaceHighlights(GameObject model)
 		{
-			HighlightAnchor[] anchors = model.GetComponentsInChildren<HighlightAnchor>();
-			Debug.Assert(anchors.Length > 0, $"Failed to retrieve anchors for the provided gameobject {model.name}");
+			_anchors = model.GetComponentsInChildren<HighlightAnchor>();
+			Debug.Assert(_anchors.Length > 0, $"Failed to retrieve anchors for the provided gameobject {model.name}");
 
-			foreach (HighlightAnchor anchor in anchors)
+			foreach (HighlightAnchor anchor in _anchors)
 			{
 				Highlight newObj = Instantiate(_uiHighlightPrefab, anchor.transform.position, Quaternion.Euler(0, 0, 0), this.transform);
 				newObj.Setup(anchor, OnInfoPanelRequested, _actionController);
@@ -72,6 +82,69 @@ namespace UI.Highlighting
 				// Set up new object
 				newObj.OnExpanded += OnHighlightSelected;
 			}
+		}
+
+		private void ClearConsequences()
+		{
+			foreach (GameObject consequence in _consequenceObjects)
+			{
+					Destroy(consequence);
+			}
+			_consequenceObjects.Clear();
+		}
+
+		private void SpawnConsequenceVisualisation(Transform transform, GameObject prefab)
+		{
+			if(!prefab) return;
+			_consequenceObjects.Add(Instantiate(prefab,transform));
+		}
+
+		private void HandleConsequences(ValidationStageReport report)
+		{
+			Dictionary<HighlightAnchor, List<Operation>> anchorsFailedOpsDict = CollateAnchorsWithFailedOperations(report);
+			var spawnedPrefabs = new List<GameObject>();
+			foreach (HighlightAnchor anchor in anchorsFailedOpsDict.Keys)
+			{
+				foreach (ConsequenceData data in anchor.Consequences)
+				{
+					if(data.AssociatedOperation == Operation.None || anchorsFailedOpsDict[anchor].Contains(data.AssociatedOperation))
+					{
+						if (spawnedPrefabs.Contains(data.VisualizationPrefab))
+							continue;
+						SpawnConsequenceVisualisation(anchor.transform,data.VisualizationPrefab);
+						spawnedPrefabs.Add(data.VisualizationPrefab);
+					}
+				}
+				spawnedPrefabs.Clear();
+			}
+		}
+
+		private static Dictionary<HighlightAnchor, List<Operation>> CollateAnchorsWithFailedOperations(ValidationStageReport report)
+		{
+			// Associate a part with its results
+			var anchorsResultsDict = new Dictionary<HighlightAnchor, List<Operation>>();
+			foreach (var result in report.ForgottenActionsValidationResult)
+			{
+				HighlightAnchor anchor = result.Action.Part.GetComponent<HighlightAnchor>();
+				if (!anchorsResultsDict.ContainsKey(anchor))
+					anchorsResultsDict.Add(anchor, new List<Operation>());
+				anchorsResultsDict[anchor].Add(result.Action.Operation);
+			}
+			return anchorsResultsDict;
+		}
+
+		private void GetHighlightInfo(HighlightAnchor anchor, out string header, out string body)
+		{
+			StringBuilder strBuilder = new StringBuilder(anchor.Info.Body);
+			if(_handlingConsequences)
+			{
+				foreach (ConsequenceData item in anchor.Consequences)
+				{
+					strBuilder.AppendFormat("<br><br>{0}", item.Body);
+				}
+			}
+			header = anchor.Info.Header;
+			body = strBuilder.ToString();
 		}
 		#endregion
 
@@ -88,10 +161,11 @@ namespace UI.Highlighting
 			}
 		}
 
-		private void OnInfoPanelRequested(HighlightInfo info)
+		private void OnInfoPanelRequested(HighlightAnchor anchor)
 		{
 			SetHighlightsVisibility(false);
-			_uiInfoPanel.Show(info);
+			GetHighlightInfo(anchor, out string header, out string body);
+			_uiInfoPanel.Show(header,body);
 			_uiInfoPanel.OnClose += OnInfoPanelClosed;
 		}
 
@@ -99,6 +173,13 @@ namespace UI.Highlighting
 		{
 			SetHighlightsVisibility(true);
 			_uiInfoPanel.OnClose -= OnInfoPanelClosed;
+		}
+
+		private void OnValidationCompleted(ValidationStageReport report)
+		{
+			_handlingConsequences = true;
+			ClearConsequences();
+			HandleConsequences(report);
 		}
 		#endregion
 
