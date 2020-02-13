@@ -3,6 +3,8 @@ using UnityEngine;
 using Data;
 using Core;
 using System.Text;
+using System.Linq;
+using TimeLineValidation;
 
 namespace UI.Highlighting
 {
@@ -99,17 +101,36 @@ namespace UI.Highlighting
 
 		private void HandleConsequences(ValidationStageReport report)
 		{
-			foreach (var validationResult in report.ForgottenActionsValidationResult)
+			Dictionary<HighlightAnchor, List<Operation>> anchorsFailedOpsDict = CollateAnchorsWithFailedOperations(report);
+			var spawnedPrefabs = new List<GameObject>();
+			foreach (HighlightAnchor anchor in anchorsFailedOpsDict.Keys)
 			{
-				HighlightAnchor anchor = validationResult.Action.Part.GetComponent<HighlightAnchor>();
-				foreach (ConsequenceData consequenceData in anchor?.Consequences)
+				foreach (ConsequenceData data in anchor.Consequences)
 				{
-					if(consequenceData.AssociatedOperation == Operation.None || consequenceData.AssociatedOperation == validationResult.Action.Operation)
+					if(data.AssociatedOperation == Operation.None || anchorsFailedOpsDict[anchor].Contains(data.AssociatedOperation))
 					{
-						SpawnConsequenceVisualisation(anchor.transform, consequenceData.VisualizationPrefab);
+						if (spawnedPrefabs.Contains(data.VisualizationPrefab))
+							continue;
+						SpawnConsequenceVisualisation(anchor.transform,data.VisualizationPrefab);
+						spawnedPrefabs.Add(data.VisualizationPrefab);
 					}
 				}
+				spawnedPrefabs.Clear();
 			}
+		}
+
+		private static Dictionary<HighlightAnchor, List<Operation>> CollateAnchorsWithFailedOperations(ValidationStageReport report)
+		{
+			// Associate a part with its results
+			var anchorsResultsDict = new Dictionary<HighlightAnchor, List<Operation>>();
+			foreach (var result in report.ForgottenActionsValidationResult)
+			{
+				HighlightAnchor anchor = result.Action.Part.GetComponent<HighlightAnchor>();
+				if (!anchorsResultsDict.ContainsKey(anchor))
+					anchorsResultsDict.Add(anchor, new List<Operation>());
+				anchorsResultsDict[anchor].Add(result.Action.Operation);
+			}
+			return anchorsResultsDict;
 		}
 
 		private void GetHighlightInfo(HighlightAnchor anchor, out string header, out string body)
