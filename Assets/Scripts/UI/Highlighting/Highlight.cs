@@ -43,13 +43,13 @@ namespace UI.Highlighting
 
 		private ActionController _actionController;
 
-		public void Setup(HighlightAnchor anchor, Action<HighlightInfo> showHighlightInfo, ActionController controller)
+		public void Setup(HighlightAnchor anchor, Action<HighlightAnchor> showHighlightInfo, ActionController controller)
 		{
 			AssociatedAnchor = anchor;
 			gameObject.name = anchor.name;
 
 			_secondaryMenu.Setup(anchor.AvailableOperations, anchor.HighlightedPart,
-			() => showHighlightInfo?.Invoke(anchor.Info), controller, this);
+			() => showHighlightInfo?.Invoke(anchor), controller, this);
 
 			_secondaryMenu.gameObject.SetActive(false);
 			_sphereButton.onClick.AddListener(OnButtonClicked);

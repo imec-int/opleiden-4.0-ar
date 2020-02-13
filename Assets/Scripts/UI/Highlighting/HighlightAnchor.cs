@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System.Collections.Generic;
+using Data;
 using UnityEngine;
 
 namespace UI.Highlighting
@@ -14,10 +15,14 @@ namespace UI.Highlighting
 		[SerializeField]
 		private PartType _HighlightedPart;
 
+		[SerializeField, Tooltip("Optional list of consequences")]
+		private List<ConsequenceData> _consequences;
+
 		public Operation[] AvailableOperations { get => _AvailableOperations; }
 		public HighlightInfo Info { get => _Info; }
 		public PartType HighlightedPart { get => _HighlightedPart; }
 
+		public List<ConsequenceData> Consequences {get => _consequences;}
 
 #if UNITY_EDITOR
 		private void Awake()

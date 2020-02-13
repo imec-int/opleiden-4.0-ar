@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using Data;
 using Core;
+using System.Linq;
 
 namespace UI.Highlighting
 {
@@ -15,6 +16,7 @@ namespace UI.Highlighting
 		private HighlightInfo _highlightInfo = null;
 		private ActionController _actionController = null;
 		private Highlight _highlightParent = null;
+		private ActionWidget _infoActionWidget = null;
 		#endregion
 
 		private void Awake()
@@ -22,9 +24,15 @@ namespace UI.Highlighting
 			_rectTransform = GetComponent<RectTransform>();
 		}
 
+		protected void OnDestroy()
+		{
+			_actionController.ValidationCompleted -= HandleConsequences;
+		}
+
 		public void Setup(Operation[] operations, PartType partType, UnityAction infoButtonListener, ActionController controller, Highlight parent)
 		{
 			_actionController = controller;
+			_actionController.ValidationCompleted += HandleConsequences;
 			_highlightParent = parent;
 			// operation buttons
 			foreach (Operation op in operations)
@@ -36,9 +44,9 @@ namespace UI.Highlighting
 			}
 
 			// info button
-			ActionWidget infoElem = CreateNewActionElement();
-			infoElem.Setup("Info", "\uF2D7");
-			infoElem.AssociatedButton.onClick.AddListener(infoButtonListener);
+			_infoActionWidget = CreateNewActionElement();
+			_infoActionWidget.Setup("Info", "\uF2D7");
+			_infoActionWidget.AssociatedButton.onClick.AddListener(infoButtonListener);
 		}
 
 		private ActionWidget CreateNewActionElement()
@@ -53,6 +61,14 @@ namespace UI.Highlighting
 			// Debug.Log($"Clicked {action.Operation}, {action.Part}");
 			_actionController.AddAction(action);
 			_highlightParent.Collapse();
+		}
+
+		private void HandleConsequences(ValidationStageReport report)
+		{
+			if(_highlightParent.AssociatedAnchor.Consequences.Exists(data => !string.IsNullOrEmpty(data.Body)))
+			{
+				_infoActionWidget.SetIcon("\uF026");
+			}
 		}
 	}
 }
