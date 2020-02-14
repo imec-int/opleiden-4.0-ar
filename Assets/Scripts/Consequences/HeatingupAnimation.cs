@@ -13,7 +13,7 @@ namespace Consequences
 		private float _minIntensity;
 
 		[SerializeField]
-		private float _duration = 2;
+		private float _rampUpDuration = 2;
 
 		private float _startTime = 0;
 
@@ -30,11 +30,11 @@ namespace Consequences
 		// Update is called once per frame
 		void Update()
 		{
-			float progress = Mathf.Clamp01((Time.time - _startTime) / _duration);
-			_attachedLight.intensity = ((_maxIntensity-_minIntensity) * Mathf.Clamp01(sinwave(0.5f, progress))) + (_minIntensity * progress);
+			float progress = Mathf.Clamp01((Time.time - _startTime) / _rampUpDuration);
+			_attachedLight.intensity = ((_maxIntensity-_minIntensity) * Mathf.Clamp01(Sinwave(0.5f, progress))) + (_minIntensity * progress);
 		}
 
-		private float sinwave(float speed = 0.5f, float offset = 0)
+		private float Sinwave(float speed = 0.5f, float offset = 0)
 		{
 			return (Mathf.Sin(Time.time - _startTime)*speed) + offset;
 		}
