@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: DriewegKlepZuigzijdeConsequence
   m_EditorClassIdentifier: 
   _extraInfo: <b><size=16>Opgelet!</size></b><br>Controleer zeker of de driewegklep
-    aangesloten is richting pomp en niet richting blind.
+    aangesloten is richting pomp en niet richting blind. Als de driewegklep richting
+    blind staat, dan is de zuigzijde van de pomp niet verbonden. De pomp die gestart
+    wordt met een niet verbonden zuig zal na openen van de perszijde beginnen caviteren,
+    wat schade aan de pomp veroorzaakt
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0
