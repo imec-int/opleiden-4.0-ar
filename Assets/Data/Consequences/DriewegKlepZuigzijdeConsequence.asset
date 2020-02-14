@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ba7ae4eae58134c9cb0a028451a82f, type: 3}
   m_Name: DriewegKlepZuigzijdeConsequence
   m_EditorClassIdentifier: 
-  _extraInfo: <b><size=16>Opgelet!</size></b><br>Controleer zeker of de veiligheidsschakelaar
-    aan staat. De veiligheidsschakelaar zorgt voor een minimale beveiliging dat de
-    pomp niet ongewild aanzet. Bij werken aan de pomp wordt hij afgezet (stand 0)
-    en op veel bedrijven zelfs gelockt met (een) hangslot(en) = Lock Out, Tag Out
-    of LOTO. Indien de veiligheidsschakelaar op 1 staat kan de pomp ongewild gestart
-    worden wat kan leiden tot mechanische schade en/of tot productuitbraak met schade
-    aan mens en milieu tot gevolg
+  _extraInfo: <b><size=16>Opgelet!</size></b><br>Controleer zeker of de driewegklep
+    aangesloten is richting pomp en niet richting blind. Als de driewegklep richting
+    blind staat, dan is de zuigzijde van de pomp niet verbonden. De pomp die gestart
+    wordt met een niet verbonden zuig zal na openen van de perszijde beginnen caviteren,
+    wat schade aan de pomp veroorzaakt
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0
