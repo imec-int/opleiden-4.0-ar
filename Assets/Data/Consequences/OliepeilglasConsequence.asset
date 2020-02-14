@@ -15,6 +15,6 @@ MonoBehaviour:
   _extraInfo: <b><size=16>Opgelet!</size></b><br>Je bent het oliepeil vergeten controleren!
     Indien de lagers geen of onvoldoende smering krijgen geraken ze oververhit waardoor
     de lagers onherstelbaar beschadigd kunnen worden.
-  _visualizationPrefab: {fileID: 7186871971783637161, guid: 1b6f1d2e96d1ad94180d055a5ec48e2a,
+  _visualizationPrefab: {fileID: 6417546889983917095, guid: f2fe2fed24095a74da46d94bad7ba4a8,
     type: 3}
   _associatedOperation: 0
