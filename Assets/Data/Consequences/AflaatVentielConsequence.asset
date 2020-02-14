@@ -20,6 +20,6 @@ MonoBehaviour:
     en niet afgeblind is stroomt er product uit zodra zuig- of persventiel wordt geopend.
     Dit kan gezondheid en/of milieu schaden. Controleer dus zeker ook de montage van
     de blindflens."
-  _visualizationPrefab: {fileID: 7186871971783637161, guid: 1b6f1d2e96d1ad94180d055a5ec48e2a,
+  _visualizationPrefab: {fileID: 8748788644930265105, guid: af7416823b224ea579ec08e66e393262,
     type: 3}
   _associatedOperation: 0

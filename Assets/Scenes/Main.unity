@@ -436,6 +436,16 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2126826049, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19,
+        type: 2}
+    - target: {fileID: 2126826049, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8562737215636637767, guid: 71b256af08621fdd38031d6396cb5c19,
+        type: 2}
     - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_Camera
@@ -636,6 +646,18 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8283146137914496925, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19,
+        type: 2}
+    - target: {fileID: 8283146137914496925, guid: 37f3ea2b309ce0f4595440007830facd,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8562737215636637767, guid: 71b256af08621fdd38031d6396cb5c19,
+        type: 2}
     - target: {fileID: 8695940863363037953, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_SizeDelta.x

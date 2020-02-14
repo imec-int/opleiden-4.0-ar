@@ -58,3 +58,9 @@ Assets/_Scenes/Tests*
 
 .DS_Store
 
+
+# Blender
+cache_fluid
+
+*.blend*
+!*.blend
