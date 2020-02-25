@@ -2,7 +2,8 @@
 using UnityEngine.Events;
 using Data;
 using Core;
-using System.Linq;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace UI.Highlighting
 {
@@ -16,6 +17,7 @@ namespace UI.Highlighting
 		private HighlightInfo _highlightInfo = null;
 		private ActionController _actionController = null;
 		private Highlight _highlightParent = null;
+		private Dictionary<IndexedActionData, ActionWidget> _actionWidgetDictionary = new Dictionary<IndexedActionData, ActionWidget>();
 		private ActionWidget _infoActionWidget = null;
 		#endregion
 
@@ -33,14 +35,17 @@ namespace UI.Highlighting
 		{
 			_actionController = controller;
 			_actionController.ValidationCompleted += HandleConsequences;
+			_actionController.ActionDeleted += ReenableAction;
 			_highlightParent = parent;
 			// operation buttons
 			foreach (Operation op in operations)
 			{
+				IndexedActionData indexedActionData = new IndexedActionData { Operation = op, PartType = partType, Part = _highlightParent.gameObject };
 				ActionWidget elem = CreateNewActionElement();
+				_actionWidgetDictionary.Add(indexedActionData, elem);
 				elem.Setup(op, partType);
 				elem.AssociatedButton.onClick.AddListener(
-					() => OnOperationButtonClicked(new IndexedActionData { Operation = op, PartType = partType, Part = _highlightParent.gameObject }));
+					() => OnOperationButtonClicked(elem.AssociatedButton, indexedActionData));
 			}
 
 			// info button
@@ -56,16 +61,25 @@ namespace UI.Highlighting
 			return newObj;
 		}
 
-		private void OnOperationButtonClicked(IndexedActionData action)
+		private void OnOperationButtonClicked(Button button, IndexedActionData action)
 		{
 			// Debug.Log($"Clicked {action.Operation}, {action.Part}");
 			_actionController.AddAction(action);
 			_highlightParent.Collapse();
+			button.interactable = false;
+		}
+
+		private void ReenableAction(IndexedActionData obj)
+		{
+			if (_actionWidgetDictionary.TryGetValue(obj, out ActionWidget widget))
+			{
+				widget.AssociatedButton.interactable = true;
+			}
 		}
 
 		private void HandleConsequences(ValidationStageReport report)
 		{
-			if(_highlightParent.AssociatedAnchor.Consequences.Exists(data => !string.IsNullOrEmpty(data.Body)))
+			if (_highlightParent.AssociatedAnchor.Consequences.Exists(data => !string.IsNullOrEmpty(data.Body)))
 			{
 				_infoActionWidget.SetIcon("\uF026");
 			}
