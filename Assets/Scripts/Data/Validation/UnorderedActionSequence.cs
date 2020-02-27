@@ -30,6 +30,7 @@ namespace TimeLineValidation
 				else
 				{
 					outValidationInfo.PerformedActionsValidationResult.Add(new ValidationResult(Result.Incorrect, item));
+					outValidationInfo.Succeeded = false;
 				}
 			}
 
