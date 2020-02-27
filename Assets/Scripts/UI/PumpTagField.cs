@@ -3,6 +3,7 @@ using Data;
 using Develop;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 using Utilities;
 
@@ -37,6 +38,13 @@ namespace UI
 		{
 			_pumpAnchor = GameObject.FindGameObjectWithTag("Installation").GetComponentInChildren<PumpAnchor>();
 			transform.position = _pumpAnchor.transform.position;
+			PositionConstraint constraint = gameObject.AddComponent<PositionConstraint>();
+			ConstraintSource constraintSrc = new ConstraintSource();
+			constraintSrc.sourceTransform = _pumpAnchor.transform;
+		
+			constraint.AddSource(constraintSrc);
+			constraint.constraintActive = true;
+		
 			_inputField.characterLimit = _pumpAnchor.PumpID.Length;
 			_touchScreenKeyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.ASCIICapable, false, false, false, false, "Pump ID", 20);
 		}
