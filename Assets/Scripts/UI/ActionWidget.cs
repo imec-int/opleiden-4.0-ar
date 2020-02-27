@@ -51,15 +51,11 @@ namespace UI
 			_Icon.color = _iconColor;
 		}
 
-		protected void Awake()
-		{
-			_iconColor = _Icon.color;
-			_iconStartAlpha = _iconColor.a;
-		}
-
 		public void Setup(string label, string icon)
 		{
 			_Label.text = label;
+			_iconColor = _Icon.color;
+			_iconStartAlpha = _iconColor.a;
 			SetIcon(icon);
 		}
 
