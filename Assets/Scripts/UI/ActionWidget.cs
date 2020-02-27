@@ -64,7 +64,7 @@ namespace UI
 			_Icon.text = icon.ToUnicodeForTMPro();
 		}
 
-		protected void Update()
+		protected virtual void Update()
 		{
 			if (IconFlickering)
 			{

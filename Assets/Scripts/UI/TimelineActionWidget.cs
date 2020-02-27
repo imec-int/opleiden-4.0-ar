@@ -88,13 +88,14 @@ namespace UI
 			base.Setup(_action.Operation, _action.PartType);
 		}
 
-		protected void Update()
+		protected override void Update()
 		{
 			// TODO: Input.GetMouseButtonDown(0) does this work on mobile?
 			if (_closeBtn.activeSelf && Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != _closeBtn)
 			{
 				SetDeleteBtnActive(false);
 			}
+			base.Update();
 		}
 
 		public void SetDeleteBtnActive(bool state)
