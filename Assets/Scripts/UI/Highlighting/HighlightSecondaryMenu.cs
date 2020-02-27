@@ -68,6 +68,7 @@ namespace UI.Highlighting
 			if(_highlightParent.AssociatedAnchor.Consequences.Exists(data => !string.IsNullOrEmpty(data.Body)))
 			{
 				_infoActionWidget.SetIcon("\uF026");
+				_infoActionWidget.IconFlickering  = true;
 			}
 		}
 	}
