@@ -5,6 +5,7 @@ using Core;
 using System.Text;
 using System.Linq;
 using TimeLineValidation;
+using UnityEngine.Animations;
 
 namespace UI.Highlighting
 {
@@ -81,6 +82,13 @@ namespace UI.Highlighting
 				_uiHighlightInstanceList.Add(newObj);
 				// Set up new object
 				newObj.OnExpanded += OnHighlightSelected;
+
+				PositionConstraint constraint = newObj.gameObject.AddComponent<PositionConstraint>();
+				ConstraintSource constraintSrc = new ConstraintSource();
+				constraintSrc.sourceTransform = anchor.transform;
+			
+				constraint.AddSource(constraintSrc);
+				constraint.constraintActive = true;
 			}
 		}
 

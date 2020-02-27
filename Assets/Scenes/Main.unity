@@ -341,6 +341,11 @@ PrefabInstance:
       propertyPath: _arSession
       value: 
       objectReference: {fileID: 421041199}
+    - target: {fileID: 1434262471, guid: 647cbf57d4ef0bf4fbadff1479910081, type: 3}
+      propertyPath: _installationPrefab
+      value: 
+      objectReference: {fileID: 5652833723574076175, guid: 3e729d79c03d3994f84029cd15c7c8e9,
+        type: 3}
     - target: {fileID: 2459947032632425698, guid: 647cbf57d4ef0bf4fbadff1479910081,
         type: 3}
       propertyPath: m_Name
