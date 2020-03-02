@@ -25,15 +25,14 @@ namespace AR
 		private Animator _animator;
 
 		[SerializeField]
-		private GameObject _installationPrefab;
+		private ARPlacedObject _installationPrefab;
 
 		[SerializeField]
 		private ARSession _arSession;
 
-
 		public TrackingType TrackingType { get; set; }
 
-		private GameObject _installation;
+		private ARPlacedObject _installation;
 
 		protected void Awake()
 		{
@@ -88,6 +87,10 @@ namespace AR
 		{
 			if (changedTrackedObjects.added.Count > 0)
 			{
+				for (int i = 0; i < changedTrackedObjects.added.Count; i++)
+				{
+					changedTrackedObjects.added[i].GetComponent<ARPlacedObject>()?.ShowModel(false);
+				}
 				TrackingCompleted();
 			}
 		}
