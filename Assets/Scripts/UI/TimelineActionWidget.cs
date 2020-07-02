@@ -65,6 +65,11 @@ namespace UI
 			// Set the visuals
 			SetBGColor(requiredColors);
 			SetFGColor(result);
+
+			if (result == Result.Correct)
+			{
+				SetDeleteBtnActive(false);
+			}
 		}
 
 		private void SetBGColor(ColorBlock requiredColors)
@@ -86,16 +91,6 @@ namespace UI
 			_index.text = _action.Index.ToString();
 			_orderMarker.color = Color.clear;
 			base.Setup(_action.Operation, _action.PartType);
-		}
-
-		protected override void Update()
-		{
-			// TODO: Input.GetMouseButtonDown(0) does this work on mobile?
-			if (_closeBtn.activeSelf && Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject != _closeBtn)
-			{
-				SetDeleteBtnActive(false);
-			}
-			base.Update();
 		}
 
 		public void SetDeleteBtnActive(bool state)
