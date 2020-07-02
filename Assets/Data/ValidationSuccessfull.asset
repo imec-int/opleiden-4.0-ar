@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ValidationSuccessfull
   m_EditorClassIdentifier: 
   _Header: Proficiat
-  _Body: "In deze POC hebben we je kennis laten maken met de stappen die nodig zijn
-    vooraleer een pomp in gebruik te nemen. Vergeet in de toekomst bij het in gebruik
-    nemen van de pomp zeker niet volgende stappen te nemen:<br>\r\n-\tControleren
+  _Body: "In deze applicatie hebben we je kennis laten maken met de stappen die nodig
+    zijn vooraleer een pomp in gebruik te nemen. Vergeet in de toekomst bij het in
+    gebruik nemen van de pomp zeker niet volgende stappen te nemen:<br>\r\n-\tControleren
     van de druk in de pers en de zuig van de pomp<br>\r\n-\tHet openzetten van de
     perszijde<br>\r\nIndien je meer vragen hebt rond de procedure van het opstarten
     van een pomp, aarzel zeker niet om contact op te nemen met je lesgever of de verantwoordelijke

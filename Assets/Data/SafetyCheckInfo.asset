@@ -22,7 +22,7 @@ MonoBehaviour:
 
 
     Let op! Indien je deze oefening uitvoert bij een pomp, gelieve de acties enkel
-    uit te voeren in de POC en NIET aan de pomp zelf.
+    uit te voeren in deze applicatie en NIET aan de pomp zelf.
 
 
     Let op! De checks die in dit proces voorkomen, kunnen afwijken van de procedure
@@ -43,7 +43,4 @@ MonoBehaviour:
     - De pomp is gevuld en ontlucht
 
     - De omgeving werd reeds gecontroleerd op lekkages
-
 '
-  _additionalPrefabs:
-  - {fileID: 6898880693007975051, guid: 6e6106ec0d1f3e1488159b066552029c, type: 3}
