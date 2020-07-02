@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 112000000, guid: facdb477bd19dda46bbde520de330993,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -433,24 +433,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 224065414, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 224065414, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2126826049, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19,
-        type: 2}
-    - target: {fileID: 2126826049, guid: 37f3ea2b309ce0f4595440007830facd, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -8562737215636637767, guid: 71b256af08621fdd38031d6396cb5c19,
-        type: 2}
     - target: {fileID: 1817796479686687741, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_Camera
@@ -470,11 +452,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4142869059531553064, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -1163
       objectReference: {fileID: 0}
     - target: {fileID: 4198015029646532059, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
@@ -543,12 +520,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5746055179788720871, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
-      propertyPath: m_SizeDelta.y
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5746055179788720871, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
-      propertyPath: m_SizeDelta.x
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6081589879738999864, guid: 37f3ea2b309ce0f4595440007830facd,
@@ -641,28 +618,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7223986550851945642, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7223986550851945642, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8283146137914496925, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 71b256af08621fdd38031d6396cb5c19,
-        type: 2}
-    - target: {fileID: 8283146137914496925, guid: 37f3ea2b309ce0f4595440007830facd,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -8562737215636637767, guid: 71b256af08621fdd38031d6396cb5c19,
-        type: 2}
     - target: {fileID: 8695940863363037953, guid: 37f3ea2b309ce0f4595440007830facd,
         type: 3}
       propertyPath: m_SizeDelta.x
