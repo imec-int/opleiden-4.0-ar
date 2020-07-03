@@ -17,7 +17,7 @@ namespace UI
 		void Start()
 		{
 			_lineRenderer.enabled = false;
-			_lineRenderer.useWorldSpace = false;
+			_lineRenderer.useWorldSpace = true;
 		}
 
 		// Update is called once per frame
@@ -40,16 +40,7 @@ namespace UI
 
 		public void ShowArrow(TimelineActionWidget widget, GameObject highlightAnchor)
 		{
-			// var corners = new Vector3[4];
-			// // This actually returns points in screen space... 
-			// widget.GetComponent<RectTransform>().GetWorldCorners(corners);
-			var screenCoords = GetScreenCoordinates(widget.GetComponent<RectTransform>());
-			Debug.Log(screenCoords.center + " -- height: " + Screen.height);
-			var centerpt = new Vector2(0, Screen.height) - screenCoords.center;
-			Debug.Log(centerpt);
-			var startPosition = Camera.main.ScreenToWorldPoint(centerpt);
-			startPosition += Camera.main.transform.forward * Camera.main.nearClipPlane;
-			ShowArrow(startPosition, highlightAnchor.transform.position);
+			ShowArrow(widget.transform.position, highlightAnchor.transform.position);
 		}
 
 		public void ShowArrow(Vector3 start, Vector3 end)
