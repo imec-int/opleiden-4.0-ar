@@ -110,8 +110,13 @@ namespace UI
 			TimelineActionWidget timelineAction = GameObject.Instantiate(_buttonPrefab, _timelineScrollRect.content).GetComponent<TimelineActionWidget>();
 			timelineAction.gameObject.name = "TimelineActionWidget_" + _timelineActionWidgets.Count;
 			timelineAction.Setup(action, _actionController, includeInValidation);
-			if (includeInValidation) timelineAction.OnClick += LinkActionToHiglight;
-			if (includeInValidation) _timelineActionWidgets.Add(timelineAction);
+			if (includeInValidation)
+			{
+				// Timeline actions that are included in validation should be removable
+				timelineAction.SetDeleteBtnActive(true);
+				_timelineActionWidgets.Add(timelineAction);
+				timelineAction.OnClick += LinkActionToHiglight;
+			}
 			if (!staticAction) timelineAction.GetComponent<LongPressDragAndDrop>()._OnDrag.AddListener(OnWidgetDrag);
 
 			// Make sure the UI is fully up to date to avoid glitching caused by the layout updating the next frame
