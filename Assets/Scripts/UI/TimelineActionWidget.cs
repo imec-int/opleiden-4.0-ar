@@ -52,7 +52,7 @@ namespace UI
 				_defaultForegroundColor = _foregroundTextObjects[0].color;
 			}
 			// when the button is clicked, bubble the event
-			_btnObj.onClick.AddListener(() => OnClick.Invoke(this, new EventArgs()));
+			_btnObj.onClick.AddListener(() => OnClick?.Invoke(this, new EventArgs()));
 		}
 
 		public void Setup(IndexedActionData action, ActionController controller, bool includeInValidation = true)
