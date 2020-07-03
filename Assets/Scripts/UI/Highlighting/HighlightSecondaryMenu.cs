@@ -29,7 +29,6 @@ namespace UI.Highlighting
 		protected void OnDestroy()
 		{
 			_actionController.ValidationCompleted -= HandleConsequences;
-			_actionController.ActionDeleted -= ReenableAction;
 		}
 
 		public void Setup(Operation[] operations, PartType partType, UnityAction infoButtonListener, ActionController controller, Highlight parent)
