@@ -8,7 +8,12 @@ namespace UI
 		float _width = 3.0f;
 
 		[SerializeField]
-		float visibleTime = 0.5f;
+		float _visibilityDuration = 1.5f;
+
+		[SerializeField]
+		AnimationCurve _alphaCurve;
+		[SerializeField]
+		AnimationCurve _scalingCurve;
 
 		[SerializeField]
 		private Texture _texture;
@@ -17,26 +22,51 @@ namespace UI
 		private GameObject _anchor;
 
 		private bool _showing;
+		private float _timerStart;
+		private float _animationProgress;
+
+		// Lerps between two vector values
+		Vector2 Vector2Lerp(Vector2 vecA, Vector2 vecB, float lerp)
+		{
+			var x = Mathf.Lerp(vecA.x, vecB.x, lerp);
+			var y = Mathf.Lerp(vecA.y, vecB.y, lerp);
+
+			return new Vector2(x, y);
+		}
 
 		void OnGUI()
 		{
-			if (_widget != null && _anchor != null)
-			{
-				// Create a rect, with its pivot at the top of the widget
-				// It's as long as the distance between the widget and the anchor in screen space (pixels)
-				Vector2 widgetScreenPos = GetScreenPositionFromTransform(_widget.GetComponent<RectTransform>());
-				Vector2 anchorScreenPos = CalculateScreenPosFromWorldPos(_anchor.transform.position);
-				Vector2 fromWidgetToAnchorDir = widgetScreenPos - anchorScreenPos;
+			if (!_showing || _widget == null || _anchor == null) return;
 
-				// Rotate to face the end point
-				var rotAngle = CalculateAngleToYAxis(fromWidgetToAnchorDir.normalized);
-				GUIUtility.RotateAroundPivot(rotAngle, widgetScreenPos);
+			// Create a rect, with its pivot at the top of the widget
+			// It's as long as the distance between the widget and the anchor in screen space (pixels)
+			Vector2 widgetScreenPos = GetScreenPositionFromTransform(_widget.GetComponent<RectTransform>());
+			Vector2 anchorScreenPos = CalculateScreenPosFromWorldPos(_anchor.transform.position);
+			Vector2 endPos = Vector2Lerp(widgetScreenPos, anchorScreenPos, _scalingCurve.Evaluate(_animationProgress));
+			Vector2 fromWidgetToEnd = widgetScreenPos - endPos;
 
-				// Scale and draw
-				float length = fromWidgetToAnchorDir.magnitude;
-				Rect drawRect = new Rect(widgetScreenPos, new Vector2(_width, length * -1));
-				GUI.DrawTexture(drawRect, _texture);
-			}
+			// Rotate to face the end point
+			var rotAngle = CalculateAngleToYAxis(fromWidgetToEnd.normalized);
+			GUIUtility.RotateAroundPivot(rotAngle, widgetScreenPos);
+
+			// Scale and draw
+			float length = fromWidgetToEnd.magnitude;
+			Rect drawRect = new Rect(widgetScreenPos, new Vector2(_width, length * -1));
+
+			var color = _widget.UsedColors.normalColor;
+			color.a = _alphaCurve.Evaluate(_animationProgress);
+			Debug.Log("Progress:" + _animationProgress + "\nAlpha" + _alphaCurve.Evaluate(_animationProgress));
+			GUI.DrawTexture(drawRect, _texture, ScaleMode.StretchToFill, true, 0, color, 0, 0);
+		}
+
+		void Update()
+		{
+			if (!_showing)
+				return;
+			_animationProgress = (Time.time - _timerStart) / _visibilityDuration;
+			// Auto-hide the arrow after {visibletime}
+			if (_animationProgress >= 1)
+				_showing = false;
 		}
 
 		#region  OnGUI Helpers
@@ -57,6 +87,8 @@ namespace UI
 		{
 			Vector2 screenPoint = Camera.main.WorldToScreenPoint(position);
 			screenPoint.y = Screen.height - screenPoint.y;
+			// because we offset the bottom, we need to offset the top
+			screenPoint.x -= _width * 0.5f;
 			return screenPoint;
 		}
 		float CalculateAngleToYAxis(Vector2 normalizedDirVec)
@@ -68,8 +100,8 @@ namespace UI
 		{
 			_widget = widget;
 			_anchor = highlightAnchor;
-			// ShowArrow(widget.transform.position, highlightAnchor.transform.position);
-			// _showing = true;
+			_showing = true;
+			_timerStart = Time.time;
 		}
 
 		public void Hide()

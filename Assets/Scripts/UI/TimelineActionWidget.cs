@@ -42,6 +42,14 @@ namespace UI
 			}
 		}
 
+		public ColorBlock UsedColors
+		{
+			get
+			{
+				return _btnObj.colors;
+			}
+		}
+
 		protected void Awake()
 		{
 			_btnObj = this.GetComponent<Button>();

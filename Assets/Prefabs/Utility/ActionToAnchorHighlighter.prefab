@@ -44,4 +44,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _width: 3
-  _texture: {fileID: 0}
+  _visibilityDuration: 1.5
+  _alphaCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0041656494
+      value: 0.3952942
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.90008444
+      value: 0.98372054
+      inSlope: -0.012418669
+      outSlope: -0.012418669
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.52776515
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.011764706
+      inSlope: -13.364718
+      outSlope: -13.364718
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.107139
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _scalingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.0535643
+      outSlope: 1.0535643
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07308942
+    - serializedVersion: 3
+      time: 0.4590261
+      value: 0.9963837
+      inSlope: 5.1497507
+      outSlope: 0.011342311
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.040701296
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9100425
+      value: 1.0014993
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _texture: {fileID: 2800000, guid: 67b46b1d56588dc46aaebd0e9c3ae717, type: 3}
