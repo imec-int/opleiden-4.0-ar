@@ -1224,7 +1224,7 @@ PrefabInstance:
     - target: {fileID: 3385212154187210816, guid: e25cedf0fc679b34dbc63ff3b2229aa0,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3385212154187210816, guid: e25cedf0fc679b34dbc63ff3b2229aa0,
         type: 3}
@@ -2236,7 +2236,7 @@ PrefabInstance:
     - target: {fileID: 7860179805642609512, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -267.2
+      value: -369.8
       objectReference: {fileID: 0}
     - target: {fileID: 7860179805642609512, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
@@ -2445,6 +2445,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActionToAnchorHighlighter
       objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _width
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 67b46b1d56588dc46aaebd0e9c3ae717, type: 3}
     - target: {fileID: 1361312301789996644, guid: 0e5654b5aa9b93140a75bf650986b171,
         type: 3}
       propertyPath: m_LocalPosition.x
