@@ -2236,7 +2236,7 @@ PrefabInstance:
     - target: {fileID: 7860179805642609512, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -533.60016
+      value: -416.00015
       objectReference: {fileID: 0}
     - target: {fileID: 7860179805642609512, guid: 1e331d67ffd9fbc41a153a18d637eb6f,
         type: 3}
@@ -2454,7 +2454,47 @@ PrefabInstance:
         type: 3}
       propertyPath: _texture
       value: 
-      objectReference: {fileID: 2800000, guid: 67b46b1d56588dc46aaebd0e9c3ae717, type: 3}
+      objectReference: {fileID: 2800000, guid: c2cafda8a26047340894f58df3714567, type: 3}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _scalingCurve.m_Curve.Array.data[0].inSlope
+      value: 11.20876
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _scalingCurve.m_Curve.Array.data[0].outSlope
+      value: 11.20876
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _scalingCurve.m_Curve.Array.data[0].outWeight
+      value: 0.056160677
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _scalingCurve.m_Curve.Array.data[1].time
+      value: 0.18224135
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _scalingCurve.m_Curve.Array.data[1].value
+      value: 0.99636924
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _scalingCurve.m_Curve.Array.data[1].inSlope
+      value: -0.0039264574
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _scalingCurve.m_Curve.Array.data[1].outSlope
+      value: 0.0070487005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361312301789996642, guid: 0e5654b5aa9b93140a75bf650986b171,
+        type: 3}
+      propertyPath: _scalingCurve.m_Curve.Array.data[1].inWeight
+      value: 0.22342485
+      objectReference: {fileID: 0}
     - target: {fileID: 1361312301789996644, guid: 0e5654b5aa9b93140a75bf650986b171,
         type: 3}
       propertyPath: m_LocalPosition.x
