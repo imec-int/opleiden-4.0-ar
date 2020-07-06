@@ -32,6 +32,9 @@ namespace UI
 		[SerializeField]
 		private TextMeshProUGUI _lblButtonText;
 
+		[SerializeField]
+		private ActionToAnchorHighlighter _actionToAnchorHighlighter;
+
 		private const string _validationButtonText = "Valideer Inspectie";
 		private const string _validationButtonRetryText = "Valideer opnieuw";
 		private const string _infoRibbonText = "Selecteer alle acties die nodig zijn bij inspectie van de pomp voor opstart";
@@ -112,6 +115,7 @@ namespace UI
 				// Timeline actions that are included in validation should be removable
 				timelineAction.SetDeleteBtnActive(true);
 				_timelineActionWidgets.Add(timelineAction);
+				timelineAction.OnClick += LinkActionToHiglight;
 			}
 			if (!staticAction) timelineAction.GetComponent<LongPressDragAndDrop>()._OnDrag.AddListener(OnWidgetDrag);
 
@@ -123,6 +127,13 @@ namespace UI
 			_timelineScrollRect.horizontalNormalizedPosition = 1;
 		}
 
+		private void LinkActionToHiglight(object sender, EventArgs e)
+		{
+			var widget = sender as TimelineActionWidget;
+			// Show the arrow
+			_actionToAnchorHighlighter.ShowArrow(widget, widget.AssociatedActionData.Part);
+		}
+
 		private void ActionUpdated(IndexedActionData action)
 		{
 			_timelineActionWidgets[action.Index - 1].UpdateState();
@@ -130,6 +141,7 @@ namespace UI
 
 		private void ActionDeleted(IndexedActionData action)
 		{
+			_timelineActionWidgets[action.Index - 1].OnClick -= LinkActionToHiglight;
 			Destroy(_timelineActionWidgets[action.Index - 1].gameObject);
 			_timelineActionWidgets.RemoveAt(action.Index - 1);
 		}

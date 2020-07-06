@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using System;
+using Core;
 using Data;
 using TimeLineValidation;
 using TMPro;
@@ -32,6 +33,23 @@ namespace UI
 		private Button _btnObj;
 		private Image _bgImage;
 
+		public event EventHandler OnClick;
+		public IndexedActionData AssociatedActionData
+		{
+			get
+			{
+				return _action;
+			}
+		}
+
+		public ColorBlock UsedColors
+		{
+			get
+			{
+				return _btnObj.colors;
+			}
+		}
+
 		protected void Awake()
 		{
 			_btnObj = this.GetComponent<Button>();
@@ -41,6 +59,8 @@ namespace UI
 			{
 				_defaultForegroundColor = _foregroundTextObjects[0].color;
 			}
+			// when the button is clicked, bubble the event
+			_btnObj.onClick.AddListener(() => OnClick?.Invoke(this, new EventArgs()));
 		}
 
 		public void Setup(IndexedActionData action, ActionController controller, bool includeInValidation = true)
