@@ -89,6 +89,13 @@ namespace UI
 			screenPoint.y = Screen.height - screenPoint.y;
 			// because we offset the bottom, we need to offset the top
 			screenPoint.x -= _width * 0.5f;
+
+			Vector3 heading = position - Camera.main.transform.position;
+			if (Vector3.Dot(Camera.main.transform.forward, heading) < 0)
+			{
+				screenPoint = -screenPoint;
+			}
+
 			return screenPoint;
 		}
 		float CalculateAngleToYAxis(Vector2 normalizedDirVec)
