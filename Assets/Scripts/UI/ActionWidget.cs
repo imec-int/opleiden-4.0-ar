@@ -32,6 +32,12 @@ namespace UI
 			get { return _AssociatedButton; }
 		}
 
+		public void Awake()
+		{
+			_iconColor = _Icon.color;
+			_iconStartAlpha = _iconColor.a;
+		}
+
 		public void Setup(Operation operation, PartType partType)
 		{
 			string actionIcon = _ActionMetadata.ActionOperationsInfo[operation].Icon;
@@ -54,8 +60,6 @@ namespace UI
 		public void Setup(string label, string icon)
 		{
 			_Label.text = label;
-			_iconColor = _Icon.color;
-			_iconStartAlpha = _iconColor.a;
 			SetIcon(icon);
 		}
 
@@ -68,8 +72,8 @@ namespace UI
 		{
 			if (IconFlickering)
 			{
-			_iconColor.a = Mathf.Lerp(0.33f, 1, Mathf.Cos((_startTime-Time.time)*5)+1 * 0.5f);
-			_Icon.color = _iconColor;
+				_iconColor.a = Mathf.Lerp(0.33f, 1, Mathf.Cos((_startTime - Time.time) * 5) + 1 * 0.5f);
+				_Icon.color = _iconColor;
 			}
 		}
 	}
