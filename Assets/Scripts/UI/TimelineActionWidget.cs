@@ -50,7 +50,7 @@ namespace UI
 			}
 		}
 
-		protected void Awake()
+		public override void Awake()
 		{
 			_btnObj = this.GetComponent<Button>();
 			_bgImage = this.GetComponent<Image>();
@@ -61,6 +61,7 @@ namespace UI
 			}
 			// when the button is clicked, bubble the event
 			_btnObj.onClick.AddListener(() => OnClick?.Invoke(this, new EventArgs()));
+			base.Awake();
 		}
 
 		public void Setup(IndexedActionData action, ActionController controller, bool includeInValidation = true)

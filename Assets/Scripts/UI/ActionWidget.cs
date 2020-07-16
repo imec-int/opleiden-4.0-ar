@@ -32,7 +32,7 @@ namespace UI
 			get { return _AssociatedButton; }
 		}
 
-		public void Awake()
+		public virtual void Awake()
 		{
 			_iconColor = _Icon.color;
 			_iconStartAlpha = _iconColor.a;
@@ -53,6 +53,7 @@ namespace UI
 
 		protected void OnDisable()
 		{
+			Debug.Log("disabling " + _Label.text);
 			_iconColor.a = _iconStartAlpha;
 			_Icon.color = _iconColor;
 		}
