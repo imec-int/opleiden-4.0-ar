@@ -32,7 +32,7 @@ namespace UI
 			get { return _AssociatedButton; }
 		}
 
-		public void Awake()
+		public virtual void Awake()
 		{
 			_iconColor = _Icon.color;
 			_iconStartAlpha = _iconColor.a;

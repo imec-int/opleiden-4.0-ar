@@ -55,7 +55,7 @@ namespace UI
 
 			var color = _widget.UsedColors.normalColor;
 			color.a = _alphaCurve.Evaluate(_animationProgress);
-			Debug.Log("Progress:" + _animationProgress + "\nAlpha" + _alphaCurve.Evaluate(_animationProgress));
+			// Debug.Log("Progress:" + _animationProgress + "\nAlpha" + _alphaCurve.Evaluate(_animationProgress));
 			GUI.DrawTexture(drawRect, _texture, ScaleMode.StretchToFill, true, 0, color, 0, 0);
 		}
 
