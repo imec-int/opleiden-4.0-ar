@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StartStopKnop
   m_EditorClassIdentifier: 
   _Header: Start/Stop-knop
-  _Body: Deze knop dient om de motor van de pomp te starten
+  _Body: Deze knop dient om de motor van de pomp te starten.
