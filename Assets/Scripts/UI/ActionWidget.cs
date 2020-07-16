@@ -53,7 +53,6 @@ namespace UI
 
 		protected void OnDisable()
 		{
-			Debug.Log("disabling " + _Label.text);
 			_iconColor.a = _iconStartAlpha;
 			_Icon.color = _iconColor;
 		}
