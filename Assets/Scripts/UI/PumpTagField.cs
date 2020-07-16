@@ -37,10 +37,9 @@ namespace UI
 		protected void Awake()
 		{
 			_pumpAnchor = GameObject.FindGameObjectWithTag("Installation").GetComponentInChildren<PumpAnchor>();
-			transform.position = _pumpAnchor.transform.position;
 			PositionConstraint constraint = gameObject.AddComponent<PositionConstraint>();
 			ConstraintSource constraintSrc = new ConstraintSource();
-			constraintSrc.sourceTransform = _pumpAnchor.transform;
+			constraintSrc.weight = 1;
 		
 			constraint.AddSource(constraintSrc);
 			constraint.constraintActive = true;
@@ -57,6 +56,14 @@ namespace UI
 
 		protected void OnEnable()
 		{
+			_pumpAnchor = GameObject.FindGameObjectWithTag("Installation").GetComponentInChildren<PumpAnchor>();
+
+			transform.position = _pumpAnchor.transform.position;
+			PositionConstraint constraint = gameObject.GetComponent<PositionConstraint>();
+			ConstraintSource constraintSrc = constraint.GetSource(0);
+			constraintSrc.sourceTransform = _pumpAnchor.transform;
+			constraint.SetSource(0, constraintSrc);
+
 			// Focuses inputfield on activation inside coroutine because Unity still has to activate the inputfield.
 			StartCoroutine(FocusInputField());
 		}

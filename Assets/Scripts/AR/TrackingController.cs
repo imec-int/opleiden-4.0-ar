@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 namespace AR
 {
@@ -13,7 +14,7 @@ namespace AR
 	}
 
 	[RequireComponent(typeof(ARPlaneManager), typeof(ARPointCloudManager), typeof(ObjectPlacement))]
-	[RequireComponent(typeof(ARTrackedObjectManager))]
+	// [RequireComponent(typeof(ARTrackedObjectManager))]
 	public class TrackingController : MonoBehaviour
 	{
 		private ARPlaneManager _arPlaneManager;
@@ -30,6 +31,9 @@ namespace AR
 		[SerializeField]
 		private ARSession _arSession;
 
+		[SerializeField]
+		private XRReferenceObjectLibrary _referenceLibrary;
+
 		public TrackingType TrackingType { get; set; }
 
 		private ARPlacedObject _installation;
@@ -42,13 +46,11 @@ namespace AR
 			_arPlaneManager = GetComponent<ARPlaneManager>();
 			_arPointCloudManager = GetComponent<ARPointCloudManager>();
 			_objectPlacement = GetComponent<ObjectPlacement>();
-			_arTrackedObjectManager = GetComponent<ARTrackedObjectManager>();
+			// _arTrackedObjectManager = GetComponent<ARTrackedObjectManager>();
 		}
 
 		protected void OnEnable()
 		{
-			_arTrackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
-
 			switch (Application.platform)
 			{
 				case RuntimePlatform.Android:
@@ -73,11 +75,14 @@ namespace AR
 
 		protected void OnDisable()
 		{
-			_arTrackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
-
 			Reset();
 
-			_arTrackedObjectManager.enabled = false;
+			// _arTrackedObjectManager.enabled = false;
+			if (_arTrackedObjectManager)
+			{
+				_arTrackedObjectManager.trackedObjectsChanged -= OnTrackedObjectsChanged;
+				Destroy(_arTrackedObjectManager);
+			}
 			_objectPlacement.enabled = false;
 			_arPlaneManager.enabled = false;
 			_arPointCloudManager.enabled = false;
@@ -97,8 +102,6 @@ namespace AR
 
 		private void EnablePlaneTracking()
 		{
-			_arTrackedObjectManager.enabled = false;
-
 			_objectPlacement.enabled = true;
 			_arPlaneManager.enabled = true;
 			_arPointCloudManager.enabled = true;
@@ -111,6 +114,11 @@ namespace AR
 			_arPlaneManager.enabled = false;
 			_arPointCloudManager.enabled = false;
 
+			// _arTrackedObjectManager.enabled = true;
+			_arTrackedObjectManager = gameObject.AddComponent<ARTrackedObjectManager>();
+			_arTrackedObjectManager.referenceLibrary = _referenceLibrary;
+			_arTrackedObjectManager.trackedObjectPrefab = _installationPrefab.gameObject;
+			_arTrackedObjectManager.trackedObjectsChanged += OnTrackedObjectsChanged;
 			_arTrackedObjectManager.enabled = true;
 		}
 
@@ -119,7 +127,6 @@ namespace AR
 			_arPlaneManager.enabled = false;
 			_arPointCloudManager.enabled = false;
 			_objectPlacement.enabled = false;
-			_arTrackedObjectManager.enabled = false;
 
 			_installation = Instantiate(_installationPrefab);
 			_installation.name = _installationPrefab.name;
@@ -130,10 +137,11 @@ namespace AR
 		{
 			_arPlaneManager.SetTrackablesActive(false);
 			_arPointCloudManager.SetTrackablesActive(false);
-			_arTrackedObjectManager.SetTrackablesActive(false);
+			if (_arTrackedObjectManager)
+				_arTrackedObjectManager.SetTrackablesActive(false);
 			_arSession.Reset();
-			if(_objectPlacement.Reset()) return;
-			if(!_installation) return;
+			if (_objectPlacement.Reset()) return;
+			if (!_installation) return;
 			Destroy(_installation.gameObject);
 		}
 
