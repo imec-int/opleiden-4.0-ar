@@ -26,7 +26,7 @@ namespace StateMachine
 			animator.GetComponent<StateVariableHolder>().Widgets[Widget.PumpTag].GetComponent<PumpTagField>().Reset();
 			animator.GetComponent<StateVariableHolder>().Widgets[Widget.PumpTag].GetComponent<PumpTagField>().Reset();
 			animator.GetComponent<StateVariableHolder>().Components[Component.InfoPanel].GetComponent<InfoPanel>().Reset();
-			animator.GetComponent<StateVariableHolder>().Components[Component.TrackingController].GetComponent<TrackingController>().Reset();
+			//animator.GetComponent<StateVariableHolder>().Components[Component.TrackingController].GetComponent<TrackingController>().Reset();
 			animator.SetTrigger("ResetSuccessful");
 
 			_shouldRun = false;

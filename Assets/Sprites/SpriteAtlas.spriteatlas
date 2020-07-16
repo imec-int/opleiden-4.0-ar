@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cb169c84298978741aad78b58024ae4e, type: 3}
-    totalSpriteSurfaceArea: 742564
+    totalSpriteSurfaceArea: 741540
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -65,6 +65,6 @@ SpriteAtlas:
   - RoundedRectangleDashedOutline
   - FluidParticle
   - Triangle
-  - ActaLogoTest
+  - ActaAppIcon
   m_Tag: SpriteAtlas
   m_IsVariant: 0
