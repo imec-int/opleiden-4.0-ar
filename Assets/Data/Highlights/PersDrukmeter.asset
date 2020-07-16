@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PersDrukmeter
   m_EditorClassIdentifier: 
   _Header: Drukmeter in pers van de pomp
-  _Body: Dient om de druk te meten in de perszijde van de pomp
+  _Body: Dient om de druk te meten in de perszijde van de pomp.

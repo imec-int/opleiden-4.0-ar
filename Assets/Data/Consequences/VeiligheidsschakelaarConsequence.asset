@@ -18,6 +18,6 @@ MonoBehaviour:
     en op veel bedrijven zelfs gelockt met (een) hangslot(en) = Lock Out, Tag Out
     of LOTO. Indien de veiligheidsschakelaar op 1 staat kan de pomp ongewild gestart
     worden wat kan leiden tot mechanische schade en/of tot productuitbraak met schade
-    aan mens en milieu tot gevolg
+    aan mens en milieu tot gevolg.
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0

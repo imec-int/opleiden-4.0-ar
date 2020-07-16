@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DrukmeterZuigConsequence
   m_EditorClassIdentifier: 
   _extraInfo: Het controleren van de zuigdruk is niet nodig bij de inspectie van de
-    pomp
+    pomp.
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0

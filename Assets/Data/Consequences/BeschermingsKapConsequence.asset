@@ -16,7 +16,6 @@ MonoBehaviour:
     te controleren. De asverbinding tussen de motor en de pomp is een draaiend onderdeel
     dat moet afgeschermd zijn tegen aanraking. Het grootste gevaar hierbij is dat
     lichaamsdelen of kledij (mouwen, broekspijpen,...) kunnen gegrepen worden, waardoor
-    ernstige kwetsuren kunnen opgelopen worden.\r\n<br><foto van een niet afgedekte
-    pomp>"
+    ernstige kwetsuren kunnen opgelopen worden."
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0

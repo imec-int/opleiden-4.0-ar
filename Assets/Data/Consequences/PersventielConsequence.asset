@@ -20,6 +20,6 @@ MonoBehaviour:
     gecombineerd zorgen voor een veel te hoge stroom door de motor. Bij het starten
     met geopende perszijde kan de pomp uitvallen over de temperatuurbeveiliging van
     de motor.<br>\r\nVergeet wel na het opstarten van de pomp het persventiel niet
-    terug open te zetten"
+    terug open te zetten."
   _visualizationPrefab: {fileID: 0}
   _associatedOperation: 0

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ZuigDrukmeter
   m_EditorClassIdentifier: 
   _Header: Drukmeter in zuig van de pomp
-  _Body: Dient om de druk te meten in de zuigzijde van de pomp
+  _Body: Dient om de druk te meten in de zuigzijde van de pomp.
