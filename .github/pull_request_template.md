@@ -3,11 +3,11 @@
 - 
 
 ## Good to know :loudspeaker:
-<!--- Did something special or newsworthy? Let everyone know -->
+<!--- Changed something special or newsworthy? Let everyone know -->
 - 
 
 ## How do I test this? :hammer:
-<!--- What does the reviewer need to know to test your pull request -->
+<!--- What does the reviewer need to know to test your pull request? -->
 
 ## Image :sunrise_over_mountains:
 <!--- Is the change something visual? If not you can remove this section -->
