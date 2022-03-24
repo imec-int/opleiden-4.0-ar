@@ -52,7 +52,7 @@
     },
     "com.unity.render-pipelines.core": {
       "version": "7.7.1",
-      "depth": 0,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
