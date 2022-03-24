@@ -65,6 +65,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
         {
             GetReferences(property);
 
+            if (list == null)
+                return 0;
+            
             //Default header height
             float height = EditorGUIUtility.singleLineHeight;
             //Default space between entires
@@ -335,6 +338,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
                     SetTargetObjectOfProperty(listProp, list);
                 }
 
+                list.List = KeysProp;
                 list.isExpanded = isExpanded.boolValue;
 
                 list.DoList(new Rect(nextRect.x, nextRect.y, nextRect.width, GetPropertyHeight(property, label) - offset), label, Constants.ShowPages, Constants.PageCount);
@@ -364,6 +368,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
             rect.x += 6;
 
             isExpanded.boolValue = EditorGUI.Foldout(rect, isExpanded.boolValue, "", true);
+            isExpanded.serializedObject.ApplyModifiedProperties();
             EditorGUI.LabelField(rect, title + (Constants.ShowSize ? " [" + KeysValues.arraySize + "]" : ""));
         }
 
@@ -458,6 +463,12 @@ namespace RotaryHeart.Lib.SerializableDictionary
 
                 case SerializedPropertyType.Enum:
                     string[] names = keyToUse.enumDisplayNames;
+                    if (names.Length <= keyToUse.enumValueIndex || keyToUse.enumValueIndex < 0)
+                    {
+                        list.Selected = new[] {index};
+                        List_onRemoveCallback(list);
+                        return;
+                    }
                     var selectedVal = names[keyToUse.enumValueIndex];
 
                     //Draw button with dropdown style
@@ -486,7 +497,8 @@ namespace RotaryHeart.Lib.SerializableDictionary
                             {
                                 menu.AddItem(new GUIContent(names[nameIndex]), selectedVal == names[nameIndex], () =>
                                 {
-                                    keyToUse.enumValueIndex = nameIndex;
+                                    keyValueProp.enumValueIndex = nameIndex;
+                                    keyProp.enumValueIndex = nameIndex;
                                     keyToUse.serializedObject.ApplyModifiedProperties();
                                 });
                             }
@@ -641,12 +653,13 @@ namespace RotaryHeart.Lib.SerializableDictionary
         {
             KeysValues.arraySize = ValuesProp.arraySize = ++KeysProp.arraySize;
 
+            SetPropertyDefault(KeysValues.GetArrayElementAtIndex(KeysValues.arraySize - 1), KeysValues);
+            SetPropertyDefault(KeysProp.GetArrayElementAtIndex(KeysProp.arraySize - 1), KeysProp);
+            
             KeysValues.serializedObject.ApplyModifiedProperties();
             ValuesProp.serializedObject.ApplyModifiedProperties();
             KeysProp.serializedObject.ApplyModifiedProperties();
 
-            SetPropertyDefault(KeysValues.GetArrayElementAtIndex(KeysValues.arraySize - 1), KeysValues);
-            SetPropertyDefault(KeysProp.GetArrayElementAtIndex(KeysProp.arraySize - 1), KeysProp);
             //SetPropertyDefault(ValuesProp.GetArrayElementAtIndex(ValuesProp.arraySize - 1), null);
         }
 
