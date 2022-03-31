@@ -19,6 +19,7 @@ We rely on the built-in Unity functionality of which some are Unity Packages. Th
 ## Components
 ### Highlights
 Highlights are the floating orbs that can be clicked on. Each highlight has at least an information button, most have one or more actions that can be performed. The highlights are linked to specific parts of the pump.
+
 ![highlight in the app](./Images/Highlight.png)
 
 A highlightAnchor script will control the behavior.
@@ -60,7 +61,6 @@ Scripts on the various states will trigger the changes in the UI state. Once a t
 
 The full flow of the app is as follows:
 ![State machine](./Images/StateMachine.png)
-![Parameters in the state machine](./Images/Parameters.png)
 
 ## UI
 Most of the UI is made up of basic Unity UI components. However, the action toolbar is a bit more unique. Every action that a user takes is added sequentially to this toolbar as a history of actions. After pressing the `Valideer inspectie` button each action is evaluated. Invalid actions will trigger a consequence and add the mistake info to each highlight.
