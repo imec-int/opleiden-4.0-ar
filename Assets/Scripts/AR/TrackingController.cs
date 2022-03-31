@@ -23,6 +23,12 @@ namespace AR
 		private ARTrackedObjectManager _arTrackedObjectManager;
 
 		[SerializeField]
+		private Vector3 _objectTrackingOffset;
+
+		[SerializeField]
+		private Vector3 _objectTrackingOffsetRotation;
+
+		[SerializeField]
 		private Animator _animator;
 
 		[SerializeField]
@@ -95,6 +101,9 @@ namespace AR
 				for (int i = 0; i < changedTrackedObjects.added.Count; i++)
 				{
 					changedTrackedObjects.added[i].GetComponent<ARPlacedObject>()?.ShowModel(false);
+					
+					changedTrackedObjects.added[i].transform.GetChild(0).localPosition = _objectTrackingOffset;
+					changedTrackedObjects.added[i].transform.GetChild(0).localRotation = Quaternion.Euler(_objectTrackingOffsetRotation);
 				}
 				TrackingCompleted();
 			}
