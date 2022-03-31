@@ -18,6 +18,9 @@ The project supports two types of AR experiences:
 
 At the start of the app the user can choose between both options. Based on the option different AR components are enabled.
 
+## Development
+
+You can find more about developing the app [here](./Documentation/Development.md).
 
 ## Licensing
 
